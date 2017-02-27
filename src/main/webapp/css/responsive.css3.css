@@ -43,12 +43,42 @@
         font-size: 60%;
         letter-spacing: 0;
         text-indent: 0;
+        /*padding-bottom: .2rem;*/
+    }
+    .md-down-img-thumbnail {
+        display: inline-block;
+        max-width: 100%;
+        height: auto;
+        padding: .25rem;
+        line-height: 1.5;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: .25rem;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
     }
     .md-down-no-padding-left{
         padding-left: 0;
     }
     .md-down-no-padding-right{
         padding-right: 0;
+    }
+    .md-down-margin-1{
+        margin: 1px;
+    }
+    .md-down-padding-left-right-0{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .md-down-padding-left-right-1{
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+    .md-down-with-border-background-1{
+        border:solid #e3e3e3 1px;
+        background-color: #e3e3e3;
+        border-radius:0 0 .75rem .75rem;
     }
     .sticker-bottom{
         left: 20%;

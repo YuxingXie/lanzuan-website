@@ -8,7 +8,6 @@ import com.lanzuan.common.util.MD5;
 import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.common.support.Pair;
-import com.lanzuan.support.yexin.DirectSalePairTouchMode;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,8 +35,7 @@ public class UserDao extends BaseMongoDao<User>  {
     //单个插入
     @Resource
     private MongoOperations mongoTemplate;
-    @Resource
-    private DirectSalePairTouchMode directSalePairTouchMode;
+
 
     /**
      * 获得所有的user
@@ -396,38 +394,7 @@ public class UserDao extends BaseMongoDao<User>  {
     }
 
     public void updateUserAfterOrder(Order order)     {
-        Assert.notNull(order);
-        User user=order.getUser();
-        Assert.notNull(user);
-        List<Notify> notifies=new ArrayList<Notify>();
-        Notify notify=new Notify();
-        notify.setRead(false);
-        notify.setToUser(user);
-        notify.setContent("您的订单号为 "+order.getId()+" 的订单付款成功！");
-        notify.setDate(new Date());
-        notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
-        notify.setTitle("系统消息");
-        notifies.add(notify);
-        if (!user.isDirectSaleMember()){
-            List<Order> orders=ServiceManager.orderService.findOrdersByUserId(user.getId());
-            double totalOrderPrice=0d;
-            for(Order userOrder:orders){
-                totalOrderPrice+=userOrder.getTotalPrice();
-            }
-            if (totalOrderPrice>=directSalePairTouchMode.getMembershipLine()){
-                user.setDirectSaleMember(true);
-                user.setBecomeMemberDate(new Date());
-                Notify notify2=new Notify();
-                notify2.setToUser(user);
-                notify2.setContent("恭喜您成为正式会员，您将获得每日红包和系统佣金奖励！");
-                notify2.setDate(new Date());
-                notify2.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
-                notify2.setTitle("系统消息");
-                notifies.add(notify2);
-                upsert(user);
-            }
-        }
-        ServiceManager.notifyService.insertAll(notifies);
+
     }
 
     public User findDirectUpperUser(User memberUser) {

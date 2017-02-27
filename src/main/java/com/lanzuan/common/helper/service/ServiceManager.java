@@ -33,7 +33,6 @@ public class ServiceManager implements InitializingBean{
     public static ISalesCampaignService salesCampaignService;
     public static IAuthorizeInfoService authorizeInfoService;
     public static IUserPointsService userPointsService;
-    public static IUserMeasureService userMeasureService;
     public static IAlipayTransService alipayTransService;
 
     public void setAlipayBatchTransService(IAlipayBatchTransService alipayBatchTransService) {
@@ -48,9 +47,6 @@ public class ServiceManager implements InitializingBean{
         ServiceManager.userPointsService = userPointsService;
     }
 
-    public void setUserMeasureService(IUserMeasureService userMeasureService) {
-        ServiceManager.userMeasureService = userMeasureService;
-    }
 
     public void setSalesCampaignService(ISalesCampaignService salesCampaignService) {
         ServiceManager.salesCampaignService = salesCampaignService;

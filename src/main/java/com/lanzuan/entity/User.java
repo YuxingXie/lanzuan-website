@@ -1,7 +1,6 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.common.support.Pair;
-import com.lanzuan.support.yexin.PairTouchModeMemberRank;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
@@ -70,8 +69,7 @@ public class User {
     private String registerInviteCode;
     @Field
     private boolean directSaleMember;
-    @Field
-    private PairTouchModeMemberRank rank;
+
     @Field
     private Boolean activated;//激活
     @Field
@@ -123,9 +121,7 @@ public class User {
         this.membershipPath = membershipPath;
     }
 
-    public PairTouchModeMemberRank getRank() {
-        return rank;
-    }
+
 
     public Pair<User> getDirectLowerUsers() {
         return directLowerUsers;
@@ -133,10 +129,6 @@ public class User {
 
     public void setDirectLowerUsers(Pair<User> directLowerUsers) {
         this.directLowerUsers = directLowerUsers;
-    }
-
-    public void setRank(PairTouchModeMemberRank rank) {
-        this.rank = rank;
     }
 
 //    public AuthorizeInfo getAuthorizeInfo() {

@@ -473,15 +473,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
     @RequestMapping(value="/measures")
     public ResponseEntity<Message> userMeasures(HttpSession session) throws ParseException {
         Message message=new Message();
-        User user=getLoginUser(session);
-        if (user==null){
-            message.setSuccess(false);
-            message.setMessage("请先登录!");
-        }else{
-            List<UserMeasure> userMeasures=ServiceManager.userMeasureService.findByUser(user.getId());
-            message.setData(userMeasures);
-            message.setSuccess(true);
-        }
+
 
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }

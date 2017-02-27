@@ -1,6 +1,5 @@
 package com.lanzuan.task;
 
-import com.lanzuan.website.service.impl.UserMeasureService;
 import com.lanzuan.website.service.impl.UserPointsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,8 +17,6 @@ public class TimerTask {
 
     @Resource
     private UserPointsService userPointsService;
-    @Resource
-    private UserMeasureService userMeasureService;
 //    @Value(value = "${app.yexin.pointsPerDay}")
 //    @Value(value = "#{configProperties ['app.yexin.pointsPerDay']}")
 
@@ -44,13 +41,7 @@ public class TimerTask {
     }
 
     public void doTask(){
-        logger.info("每日任务开始......");
-        printTimeStamp();
-        logger.info("开始发放每日红包......");
-        userPointsService.addPointsToAllUser(pointsPerDay);
-        printTimeStamp();
-        logger.info("开始每日结算佣金......");
-        userMeasureService.measureSettlementPerDay();
+
     }
     public static void main(String[] args){
         String longStr="1000*60*60*24*7";

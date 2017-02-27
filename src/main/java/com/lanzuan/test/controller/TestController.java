@@ -7,7 +7,6 @@ import com.lanzuan.entity.AlipayTrans;
 import com.lanzuan.entity.User;
 import com.lanzuan.website.dao.TestUser;
 import com.lanzuan.website.service.IProductSeriesService;
-import com.lanzuan.website.service.IUserMeasureService;
 import com.lanzuan.website.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,8 +31,6 @@ public class TestController extends BaseRestSpringController {
     @Resource private IProductSeriesService productSeriesService;
     @Resource(name = "userService")
     UserService userService;
-    @Resource
-    IUserMeasureService userMeasureService;
     @InitBinder("productSeries")
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -56,7 +53,6 @@ public class TestController extends BaseRestSpringController {
         List<TestUser> levelUsers=new ArrayList<TestUser>();
         levelUsers.add(user);
         levelUsersMap.put(1,levelUsers);
-        userMeasureService.testMode(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap);
         return "forward:/indexsss";
     }
     @RequestMapping(value="/trans")
@@ -82,7 +78,6 @@ public class TestController extends BaseRestSpringController {
         ServiceManager.notifyService.removeAll();
         ServiceManager.orderService.removeAll();
         ServiceManager.userService.removeAll();
-        ServiceManager.userMeasureService.removeAll();
         ServiceManager.userPointsService.removeAll();
     }
 }

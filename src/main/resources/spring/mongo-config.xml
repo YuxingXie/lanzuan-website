@@ -26,8 +26,8 @@
         <!--<constructor-arg name="userCredentials" ref="userCredentials" />-->
     </bean>
 
-    <!--<bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">-->
-        <!--<constructor-arg name="username" value="${mongo.db.username}"/>-->
-        <!--<constructor-arg name="password" value="${mongo.db.password}"/>-->
-    <!--</bean>-->
+    <bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">
+        <constructor-arg name="username" value="${mongo.db.username}"/>
+        <constructor-arg name="password" value="${mongo.db.password}"/>
+    </bean>
 </beans>
