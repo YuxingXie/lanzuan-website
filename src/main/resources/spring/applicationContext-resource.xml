@@ -10,7 +10,7 @@
        default-autowire="byName" default-lazy-init="false">
 	<!--<mvc:default-servlet-handler />-->
 
-    <mvc:resources mapping="/statics/**" location="/statics/"/>
+    <mvc:resources mapping="/**" location="/"/>
 
 
     <!-- 国际化,并且可以批定文件编码,可以使用classpath: 或者WEB-INF/ 前缀 

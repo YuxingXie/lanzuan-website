@@ -25,10 +25,31 @@
         margin-right: 5em;
     }
 }
+@media (max-width: 33.9em) {
+
+    .navbar-md-down-fix-bottom{
+        font-size: 20%;
+    }
+}
 @media (min-width: 48em) {
 
+    .md-up-padding-left-right-4em{
+        padding-left: 4em;
+        padding-right: 4em;
+    }
 }
 @media (max-width: 47.9em) {
+    .img-title{
+        font-size: 60%;
+        letter-spacing: 0;
+        text-indent: 0;
+    }
+    .md-down-no-padding-left{
+        padding-left: 0;
+    }
+    .md-down-no-padding-right{
+        padding-right: 0;
+    }
     .sticker-bottom{
         left: 20%;
         font-size: 90%;
@@ -40,7 +61,7 @@
         left: 0;
     }
 
-    .navbar-sm-down-fix-bottom{
+    .navbar-md-down-fix-bottom{
         position: fixed;
         right: 0;
         left: 0;
@@ -49,30 +70,32 @@
         margin-bottom: 0;
         padding-top: 0;
         color: #ffffff;
-        background-color: #FFFFFF;
+        background-color: #b2b2b2;
         font-size: 90%;
-        border-radius: .25rem;
+
+        border-radius: .45rem .45rem 0 0;
         opacity: 1;
     }
-    .navbar-sm-down-fix-bottom .nav-item .nav-link{
+    .navbar-md-down-fix-bottom .nav-item .nav-link{
         padding:0.2em .6em 0.2em .6em  ;
         margin: .1em;
-        background-color: #5bc0de;
-        border-radius: 1rem;
+        background-color: #5a5a5a;
+        border: solid #000000 1px;
+        border-radius:30% 30% 0 0;
     }
-    .navbar-sm-down-fix-bottom a,
-    .navbar-sm-down-fix-bottom a:link{
+    .navbar-md-down-fix-bottom a,
+    .navbar-md-down-fix-bottom a:link{
         color: #ffffff;
     }
-    .navbar-sm-down-fix-bottom .navbar-nav .nav-item + .nav-item {
+    .navbar-md-down-fix-bottom .navbar-nav .nav-item + .nav-item {
         /*border-right: solid #c0c0c0 1px;*/
         margin-left: 0;
     }
-    /*.navbar-sm-down-fix-bottom .nav-link{*/
+    /*.navbar-md-down-fix-bottom .nav-link{*/
         /*padding-top: 0;*/
         /*padding-bottom: 0;*/
     /*}*/
-    .navbar-sm-down-fix-bottom.divider {
+    .navbar-md-down-fix-bottom.divider {
         padding-top:0;
         padding-bottom: 0;
         margin-left:0;
