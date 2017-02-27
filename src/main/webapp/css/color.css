@@ -1,0 +1,36 @@
+.bg-red { background-color: #e02222;}
+.bg-blue { background-color: #0da3e2;}
+.bg-grey { background-color: #555555;}
+.bg-medium-grey { background-color: #eeecec;}
+.bg-light-grey { background-color: #faf1f3;}
+.bg-green { background-color: #35aa47;}
+.bg-yellow { background-color: #ffb848;}
+.bg-light-yellow { background-color: #f2ff09;}
+.bg-purple { background-color: #852b99;}
+.bg-light-red { background-color: #ff5400;}
+.bg-light-blue { background-color: #bfd5fa;}
+.bg-light-green { background-color: #78df1d;}
+.bg-light-primary { background-color: #a4c5ca;}
+.bg-black{background-color: #000000}
+.bg-black-2{background-color: #292a2c;}
+
+/*********************
+ GENERAL UI COLORS
+*********************/
+
+/***
+Colors
+***/
+.color-red { color: #e02222;}
+.color-blue { color: #0da3e2;}
+.color-white { color: #ffffff;}
+.color-black { color: #000;}
+.color-grey { color: #555555;}
+.color-green { color: #35aa47;}
+.color-yellow { color: #ffb848;}
+.color-purple { color: #852b99;}
+.color-light-red { color: #ff5400;}
+.color-light-blue { color: #bfd5fa;}
+.color-light-grey { color: #fafafa;}
+.color-light-grey-2 {color:#D5D0C9;}
+.color-light-green { color: #78df1d;}
