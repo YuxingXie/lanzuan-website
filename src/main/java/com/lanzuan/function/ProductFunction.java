@@ -4,9 +4,9 @@ import com.lanzuan.common.helper.service.ProjectContext;
 import com.lanzuan.entity.ProductCategory;
 import com.lanzuan.entity.ProductProperty;
 import com.lanzuan.entity.ProductSubCategory;
-import com.lanzuan.mall.service.IProductCategoryService;
-import com.lanzuan.mall.service.IProductSubCategoryService;
-import com.lanzuan.mall.service.impl.ProductPropertyService;
+import com.lanzuan.website.service.IProductCategoryService;
+import com.lanzuan.website.service.IProductSubCategoryService;
+import com.lanzuan.website.service.impl.ProductPropertyService;
 
 import java.util.List;
 

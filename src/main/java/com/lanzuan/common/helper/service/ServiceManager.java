@@ -1,7 +1,7 @@
 package com.lanzuan.common.helper.service;
-import com.lanzuan.mall.service.*;
-import com.lanzuan.mall.service.impl.INotifyService;
-import com.lanzuan.mall.service.impl.IProductEvaluateService;
+import com.lanzuan.website.service.*;
+import com.lanzuan.website.service.impl.INotifyService;
+import com.lanzuan.website.service.impl.IProductEvaluateService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 @Component

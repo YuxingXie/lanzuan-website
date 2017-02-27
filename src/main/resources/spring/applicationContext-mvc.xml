@@ -17,12 +17,12 @@
        default-autowire="byName">
     <mvc:annotation-driven/>
     <!--<mvc:interceptors>-->
-        <!--<bean class="com.lanzuan.mall.interceptor.CommonInterceptor" />-->
+        <!--<bean class="com.lanzuan.websiteite.interceptor.CommonInterceptor" />-->
         <!--<mvc:interceptor>-->
             <!--<mvc:mapping path="/admin/**"/>-->
             <!--<mvc:exclude-mapping path="/admin"/>-->
             <!--<mvc:exclude-mapping path="/admin/login"/>-->
-            <!--<bean class="com.lanzuan.mall.interceptor.AuthorizedInterceptor"/>-->
+            <!--<bean class="com.lanzuan.websiteite.interceptor.AuthorizedInterceptor"/>-->
         <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
     <!-- Loads MongoDB configuraton -->

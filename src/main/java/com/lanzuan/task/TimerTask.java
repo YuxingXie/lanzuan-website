@@ -1,7 +1,7 @@
 package com.lanzuan.task;
 
-import com.lanzuan.mall.service.impl.UserMeasureService;
-import com.lanzuan.mall.service.impl.UserPointsService;
+import com.lanzuan.website.service.impl.UserMeasureService;
+import com.lanzuan.website.service.impl.UserPointsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

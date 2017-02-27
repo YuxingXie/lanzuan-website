@@ -115,7 +115,7 @@ public class OuterRequestUtil {
      */
     public static String sendPost(String url, Map<String,String[]> params) throws IOException {
         // Post请求的url，与get不同的是不需要带参数
-//        URL postUrl = new URL("http://127.0.0.1:8088/mall/user/test");
+//        URL postUrl = new URL("http://127.0.0.1:8088/website/user/test");
         String result = "";
         URL postUrl = new URL(url);
         // 打开连接
@@ -176,6 +176,6 @@ public class OuterRequestUtil {
         Map<String,String[]> params=new LinkedHashMap<String, String[]>();
         params.put("names",new String[]{"John","Tom","Luis"});
         params.put("country",new String[]{"USA"});
-        sendPost("http://127.0.0.1:8088/mall/tttt",params);
+        sendPost("http://127.0.0.1:8088/website/tttt",params);
     }
 }

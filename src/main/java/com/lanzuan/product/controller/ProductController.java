@@ -7,7 +7,7 @@ import com.lanzuan.common.helper.service.ServiceManager;
 import com.lanzuan.common.util.IconCompressUtil;
 import com.lanzuan.common.util.MongoDbUtil;
 import com.lanzuan.entity.*;
-import com.lanzuan.mall.service.IProductSeriesService;
+import com.lanzuan.website.service.IProductSeriesService;
 import com.lanzuan.support.vo.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -104,6 +104,6 @@ log4j.logger.org.springframework=ERROR,stdout
 log4j.logger.org.springframework.jdbc.core.JdbcTemplate=DEBUG,common-dao
 ############handler################
 log4j.logger.com.lanzuan.admin.controller=DEBUG
-log4j.appender.com.lanzuan.mall.controller=org.apache.log4j.ConsoleAppender
+log4j.appender.com.lanzuan.website.controller=org.apache.log4j.ConsoleAppender
 ######################################
 log4j.logger.org.dbunit=INFO,stdout
