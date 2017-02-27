@@ -395,9 +395,9 @@ Misc tools
 .padding-left-right-4em{padding:0 4em}
 
 .height-50px{height:50px;}
-.height-50px{height:260px;}
-.height-50px{height:265px;}
-.height-50px{height:290px;}
+.height-260px{height:260px;}
+.height-265px{height:265px;}
+.height-290px{height:290px;}
 
 .height-2em{height:2em;}
 .height-2-5em{height:2.5em;}
@@ -405,7 +405,12 @@ Misc tools
 .height-4em{height:4em;}
 .height-5em{height:5em;}
 .height-10em{height:10em;}
+.height-20em{height:20em;}
 
+.max-height-50px{max-height:50px;}
+.max-height-260px{max-height:260px;}
+.max-height-265px{max-height:265px;}
+.max-height-290px{max-height:290px;}
 /*font*/
 .font-weight-300 {
     font-weight: 300;
