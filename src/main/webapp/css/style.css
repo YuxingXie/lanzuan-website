@@ -45,12 +45,10 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 /* General body settings */
 
 .btn-padding-little {
-
     padding:0.125rem .225rem 0 .225rem;
     font-size: 1rem;
     font-weight: normal;
     line-height: 1.5;
-
 }
 
 
@@ -180,6 +178,9 @@ Misc tools
 }
 .padding-30 {
     padding:30px;
+}
+.padding-top-0 {
+    padding-top:0;
 }
 .padding-top-05em {
     padding-top:0.5em;
@@ -424,6 +425,9 @@ Misc tools
 }
 .padding-bottom-40{
     padding-bottom: 40px;
+}
+.padding-bottom-0{
+    padding-bottom:0;
 }
 .padding-bottom-05em{
     padding-bottom:.5em;

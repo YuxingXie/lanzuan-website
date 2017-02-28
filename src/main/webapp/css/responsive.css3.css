@@ -21,8 +21,20 @@
     .lg-padding-right-5em{
         padding-right: 5em;
     }
+    .lg-padding-right-10em{
+        padding-right: 10em;
+    }
+    .lg-padding-right-15em{
+        padding-right: 15em;
+    }
     .lg-margin-right-5em{
         margin-right: 5em;
+    }
+    .lg-margin-right-10em{
+        margin-right: 10em;
+    }
+    .lg-margin-right-15em{
+        margin-right: 15em;
     }
 }
 @media (max-width: 33.9em) {
@@ -46,6 +58,9 @@
         text-align: center;
         /*padding-bottom: .2rem;*/
     }
+    .md-down-text-small-70{
+        font-size: 70%;
+    }
     .md-down-img-thumbnail {
         display: inline-block;
         max-width: 100%;
@@ -64,6 +79,18 @@
     }
     .md-down-no-padding-right{
         padding-right: 0;
+    }
+    .md-down-margin-bottom-1em{
+        margin-bottom: 1em;
+    }
+    .md-down-margin-bottom-1-7em{
+        margin-bottom: 1.7em;
+    }
+    .md-down-margin-bottom-1-8em{
+        margin-bottom: 1.8em;
+    }
+    .md-down-margin-bottom-2em{
+        margin-bottom: 2em;
     }
     .md-down-margin-1{
         margin: 1px;

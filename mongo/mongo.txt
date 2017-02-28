@@ -1,4 +1,4 @@
-mongod --dbpath D:\MongoDB\data\db
+mongod --dbpath D:\develop\MongoDB\db\lanzuan_website
 
 >use admin
 >db.system.version.remove({}) <== removing current version
@@ -13,7 +13,7 @@ mongod --dbpath D:\MongoDB\data\db
 )
 >db.shutdownServer()
 
-mongod --dbpath D:\MongoDB\data\db --auth
+mongod --dbpath D:\develop\MongoDB\db\lanzuan_website --auth
 > use admin
 > db.auth("admin","admin")
 >use dabast
