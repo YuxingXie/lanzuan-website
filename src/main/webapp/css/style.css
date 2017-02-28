@@ -44,6 +44,14 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 
 /* General body settings */
 
+.btn-padding-little {
+
+    padding:0.125rem .225rem 0 .225rem;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+
+}
 
 
 .img-ico-sm{
@@ -80,12 +88,14 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 
 a:link {color: #666666}
 a:visited{color: #666666}
-/*a, a:focus, a:hover, a:active {*/
+.green-link:visited{color: #666666}
+a, a:focus, a:hover, a:active {
     /*outline: 0;*/
-    /*text-decoration: none;*/
+    text-decoration: none;
     /*color: #314c97;*/
-/*}*/
-.green-link:link {color: green}
+}
+.green-link:link {color: rgba(0, 171, 0, 0.53)
+}
 .grey-link:link {color: #969696
 }
 .black-link:link {color: #000000}
@@ -123,6 +133,10 @@ a:visited{color: #666666}
 }
 .large-120 {
     font-size: 120%;
+    font-weight: normal;
+}
+.large-150 {
+    font-size: 150%;
     font-weight: normal;
 }
 .large-180 {
@@ -172,6 +186,9 @@ Misc tools
 }
 .padding-top-1em {
     padding-top: 1em;
+}
+.padding-top-1-5em {
+    padding-top: 1.5em;
 }
 .padding-top-2em {
     padding-top: 2em;
@@ -247,6 +264,15 @@ Misc tools
 .margin-bottom-60 {
     margin-bottom: 60px;
 }
+.margin-bottom-1-6em {
+    margin-bottom: 1.6em;
+}
+.margin-bottom-1em {
+    margin-bottom: 1em;
+}
+.margin-bottom-2em {
+    margin-bottom: 2em;
+}
 .margin-top-10 {
     margin-top: 10px;
 }
@@ -268,6 +294,12 @@ Misc tools
 }
 .margin-top-2em {
     margin-top: 2em;
+}
+.margin-top-2-4em {
+    margin-top: 2.4em;
+}
+.margin-top-3em {
+    margin-top: 3em;
 }
 .margin-top-4em {
     margin-top: 4em;
@@ -342,6 +374,12 @@ Misc tools
 .padding-left-0 {
     padding-left: 0;
 }
+.padding-left-2 {
+    padding-left: 2px;
+}
+.padding-left-3 {
+    padding-left: 3px;
+}
 .padding-left-5 {
     padding-left: 5px;
 }
@@ -357,6 +395,9 @@ Misc tools
 .padding-left-4em {
     padding-left: 4em;
 }
+.padding-left-5em {
+    padding-left: 5em;
+}
 .padding-right-0 {
     padding-right: 0;
 }
@@ -368,6 +409,12 @@ Misc tools
 }
 .padding-right-30 {
     padding-right: 30px;
+}
+.padding-bottom-2{
+    padding-bottom: 2px;
+}
+.padding-bottom-3{
+    padding-bottom: 3px;
 }
 .padding-bottom-10{
     padding-bottom: 10px;
@@ -516,8 +563,8 @@ Misc tools
 .divider {
     padding-top: .25rem;
     padding-bottom: .25rem;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: .18em;
+    margin-right: .18em;
     overflow: hidden;
     border-right:solid #d6d6d6 1px;
 }
