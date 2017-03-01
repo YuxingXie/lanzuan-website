@@ -8,8 +8,14 @@
     var app = angular.module('homeApp', []);
 
     app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
-        $scope.test=function(){
-            $scope.active=1;
+        $scope.initHome=function(){
+            $scope.getNews();
+        }
+        $scope.getNews=function(){
+            $http.get("/json/news.json").success(function (data) {
+                console.log(JSON.stringify(data));
+                $scope.newsList=data;
+            });
         }
     }])
 })();
