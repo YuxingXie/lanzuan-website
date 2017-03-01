@@ -2,9 +2,7 @@ package com.lanzuan.common.base;
 
 
 import com.lanzuan.common.constant.Constant;
-import com.lanzuan.entity.Administrator;
-import com.lanzuan.entity.Cart;
-import com.lanzuan.entity.Order;
+
 import com.lanzuan.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,15 +55,7 @@ public class BaseRestSpringController  {
     protected User getLoginUser(HttpSession session) {
         return session.getAttribute(Constant.LOGIN_USER)==null?null:((User)(session.getAttribute(Constant.LOGIN_USER)));
     }
-    protected Administrator getLoginAdministrator(HttpSession session) {
-        return session.getAttribute(Constant.LOGIN_ADMINISTRATOR)==null?null:((Administrator)(session.getAttribute(Constant.LOGIN_ADMINISTRATOR)));
-    }
-    protected Cart getCart(HttpSession session) {
-        return session.getAttribute(Constant.CART)==null?null:((Cart)(session.getAttribute(Constant.CART)));
-    }
-    protected Order getOrder(HttpSession session) {
-        return session.getAttribute(Constant.ORDER)==null?null:((Order)(session.getAttribute(Constant.ORDER)));
-    }
+
     public static <T> T getOrCreateRequestAttribute(HttpServletRequest request, String key,Class<T> clazz) {
         Object value = request.getAttribute(key);
         if(value == null) {

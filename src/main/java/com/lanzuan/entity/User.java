@@ -57,9 +57,7 @@ public class User {
     @Field("phone")
     private String phone;
     private String loginStatus;
-    @Field(value = "cart")
-//    @DBRef
-    private Cart cart;
+
     @Field(value = "addresses")
     private String[] addresses;
     @Field private Boolean disabled;//禁用
@@ -85,21 +83,10 @@ public class User {
     private String membershipPath;
     @Field
     private Date becomeMemberDate;//成为会员的日期
-    @Transient
-    private List<AuthorizeInfo> authorizeInfos;//
+
     @Transient
     private String showName;
-    @Transient
-    private List<UserPoints> userPointsList;
-    private TencentLoginInfo tencentLoginInfo;
-    @Transient
-    private List<Account> userAccounts;
-    @Transient
-    private List<Interest> interests;
-    @Transient
-    private int relativeLevel;
-    @Transient
-    private List<MembershipInvite> membershipInviteList;
+
     @Transient
     private Pair<User> directLowerUsers;
     @Transient
@@ -164,13 +151,6 @@ public class User {
         this.becomeMemberDate = becomeMemberDate;
     }
 
-    public List<AuthorizeInfo> getAuthorizeInfos() {
-        return authorizeInfos;
-    }
-
-    public void setAuthorizeInfos(List<AuthorizeInfo> authorizeInfos) {
-        this.authorizeInfos = authorizeInfos;
-    }
 
     public String getRegisterInviteCode() {
         return registerInviteCode;
@@ -180,13 +160,6 @@ public class User {
         this.registerInviteCode = registerInviteCode;
     }
 
-    public List<UserPoints> getUserPointsList() {
-        return userPointsList;
-    }
-
-    public void setUserPointsList(List<UserPoints> userPointsList) {
-        this.userPointsList = userPointsList;
-    }
 
     public void setAddresses(String[] addresses) {
         this.addresses = addresses;
@@ -264,13 +237,6 @@ public class User {
         this.height = height;
     }
 
-    public int getRelativeLevel() {
-        return relativeLevel;
-    }
-
-    public void setRelativeLevel(int relativeLevel) {
-        this.relativeLevel = relativeLevel;
-    }
 
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
@@ -296,13 +262,7 @@ public class User {
         this.lastActivateTime = lastActivateTime;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 
     public String getIdCardNo() {
         return idCardNo;
@@ -312,13 +272,7 @@ public class User {
         this.idCardNo = idCardNo;
     }
 
-    public List<Account> getUserAccounts() {
-        return userAccounts;
-    }
 
-    public void setUserAccounts(List<Account> userAccounts) {
-        this.userAccounts = userAccounts;
-    }
 
     public String getUserCategory() {
         return userCategory;
@@ -344,31 +298,7 @@ public class User {
         this.activated = activated;
     }
 
-    private PersonalRealMessage realMessage;
 
-    public PersonalRealMessage getRealMessage() {
-        return realMessage;
-    }
-
-    public void setRealMessage(PersonalRealMessage realMessage) {
-        this.realMessage = realMessage;
-    }
-
-    public List<Interest> getInterests() {
-        return interests;
-    }
-
-    public void setInterests(List<Interest> interests) {
-        this.interests = interests;
-    }
-
-    public TencentLoginInfo getTencentLoginInfo() {
-        return tencentLoginInfo;
-    }
-
-    public void setTencentLoginInfo(TencentLoginInfo tencentLoginInfo) {
-        this.tencentLoginInfo = tencentLoginInfo;
-    }
 
     /**
      * 这些和登录相关，不保存
@@ -428,13 +358,7 @@ public class User {
         this.loginStr = loginStr;
     }
 
-    public List<MembershipInvite> getMembershipInviteList() {
-        return membershipInviteList;
-    }
 
-    public void setMembershipInviteList(List<MembershipInvite> membershipInviteList) {
-        this.membershipInviteList = membershipInviteList;
-    }
     public String getShowName() {
         return this.name!=null?this.name:(this.phone!=null?this.phone:null);
     }

@@ -26,17 +26,17 @@ public final class AuthorizedFilter implements Filter {
         Cookie cookieLoginStr=CookieTool.getCookieByName(httpServletRequest, "loginStr");
         Cookie cookiePassword=CookieTool.getCookieByName(httpServletRequest, "password");
 
-
-        if (cookieLoginStr!=null && cookiePassword!=null){
-//            System.out.println("loginStr from cookie:"+cookieLoginStr.getName()+",value:"+cookieLoginStr.getValue());
-//            System.out.println("password from cookie:"+cookiePassword.getName()+",value:"+cookiePassword.getValue());
-            HttpSession session=httpServletRequest.getSession();
-            Object userObjectInSession= session.getAttribute(Constant.LOGIN_USER);
-            if (userObjectInSession==null){
-                User user= ServiceManager.userService.findByEmailOrPhoneAndPassword(cookieLoginStr.getValue(), cookiePassword.getValue());
-                session.setAttribute(Constant.LOGIN_USER,user);
-            }
-        }
+//
+//        if (cookieLoginStr!=null && cookiePassword!=null){
+////            System.out.println("loginStr from cookie:"+cookieLoginStr.getName()+",value:"+cookieLoginStr.getValue());
+////            System.out.println("password from cookie:"+cookiePassword.getName()+",value:"+cookiePassword.getValue());
+//            HttpSession session=httpServletRequest.getSession();
+//            Object userObjectInSession= session.getAttribute(Constant.LOGIN_USER);
+//            if (userObjectInSession==null){
+//                User user= ServiceManager.userService.findByEmailOrPhoneAndPassword(cookieLoginStr.getValue(), cookiePassword.getValue());
+//                session.setAttribute(Constant.LOGIN_USER,user);
+//            }
+//        }
         chain.doFilter(httpServletRequest, response);
     }
 

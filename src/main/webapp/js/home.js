@@ -13,7 +13,6 @@
         }
         $scope.getNews=function(){
             $http.get("/json/news.json").success(function (data) {
-                console.log(JSON.stringify(data));
                 $scope.newsList=data;
             });
         }

@@ -1,6 +1,6 @@
 package com.lanzuan.task;
 
-import com.lanzuan.website.service.impl.UserPointsService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,8 +15,7 @@ public class TimerTask {
         logger.info("每日红包赠送数量为" + pointsPerDay);
     }
 
-    @Resource
-    private UserPointsService userPointsService;
+
 //    @Value(value = "${app.yexin.pointsPerDay}")
 //    @Value(value = "#{configProperties ['app.yexin.pointsPerDay']}")
 

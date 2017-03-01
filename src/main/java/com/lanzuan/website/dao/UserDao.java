@@ -199,43 +199,7 @@ public class UserDao extends BaseMongoDao<User>  {
         return true;
     }
 
-    public User findByEmailOrPhone(String emailOrPhone) {
-        DBObject queryCondition = new BasicDBObject();
-        queryCondition = new BasicDBObject();
-        BasicDBList values = new BasicDBList();
-        values.add(new BasicDBObject("phone", emailOrPhone));
-        values.add(new BasicDBObject("email", emailOrPhone));
-        queryCondition.put("$or", values);
-        Query query=new BasicQuery(queryCondition);
-//        return mongoTemplate.findOne(query,User.class);
-//        User user=findOne(queryCondition);
-        User user=mongoTemplate.findOne(query,User.class);
-        if (user!=null){
-            Cart cart=user.getCart();
-            if (cart!=null){
-                List<ProductSelected> productSelectedList=cart.getProductSelectedList();
-                if (productSelectedList!=null){
-                    for (ProductSelected productSelected:productSelectedList){
-                        ProductSeries productSeries= productSelected.getProductSeries();
-                        if (productSeries==null) continue;
-//                        productSeries.setProductSeriesPrices(ServiceManager.productSeriesPriceService.findByProductSeriesId(productSeries.getId()));
 
-//                        productSelected.setProductSeries(productSeries);
-                        List<String> productPropertyValueIds=productSelected.getProductPropertyValueIds();
-                        if (productPropertyValueIds!=null){
-                            List<ProductPropertyValue> productPropertyValueList=new ArrayList<ProductPropertyValue>();
-                            for (String productPropertyValueId:productPropertyValueIds){
-                                ProductPropertyValue productPropertyValue=ServiceManager.productPropertyValueService.findById(productPropertyValueId);
-                                productPropertyValueList.add(productPropertyValue);
-                            }
-                            productSelected.setProductPropertyValueList(productPropertyValueList);
-                        }
-                    }
-                }
-            }
-        }
-        return user;
-    }
 
 
     public void clearCart(User user) {
@@ -246,25 +210,9 @@ public class UserDao extends BaseMongoDao<User>  {
     }
 
 
-    public List<User> findUsersByProductSeriesInCart(ProductSeries productSeries) {
-        DBObject dbObject=new BasicDBObject();
-        dbObject.put("cart.productSelectedList.productSeries",productSeries);
-        return getMongoTemplate().find(new BasicQuery(dbObject),User.class);
-    }
 
-    public User findByTencentOpenId(String openId) {
-        DBObject dbObject=new BasicDBObject();
-        dbObject.put("tencentLoginInfo.openId",openId);
-        return getMongoTemplate().findOne(new BasicQuery(dbObject),User.class);
-    }
-       public User findInviteUserByPhoneAndInviteCode(String phone, String inviteCode) {
-        DBObject condition=new BasicDBObject();
-        condition.put("phone",phone);
-        condition.put("inviteCode",inviteCode);
-        AuthorizeInfo authorizeInfo= getMongoTemplate().findOne(new BasicQuery(condition),AuthorizeInfo.class);
-        if (authorizeInfo==null) return null;
-        return authorizeInfo.getUser();
-    }
+
+
 
     public void insertUser(User user) {
         ObjectId id=new ObjectId();
@@ -278,40 +226,7 @@ public class UserDao extends BaseMongoDao<User>  {
      * @param maxRelativeLevel <0找上级，大于0找下级
      * @return
      */
-    public List<User> findLowerOrUpperUsers(User user,int maxRelativeLevel) {
-        if (user==null) return null;
-        if (user.getId()==null) return null;
-        if (maxRelativeLevel<0)
-            return findUpperUsers(user,maxRelativeLevel);
-        List<User> users=findAllLowerUsers(user);
-        if (users==null||users.size()==0) return null;
-        List<User> ret = new ArrayList<User>();
-        for(User member :users){
-            if (user.getId().equalsIgnoreCase(member.getId())){
-                continue;
-            }
-            String membershipPath= member.getMembershipPath();
-            if (membershipPath.indexOf(member.getId())<0){
-                continue;//没有包含自己id的路径是程序错误导致的，忽略
-            }
-            UserRelationship userRelationship=new UserRelationship(user,member);
-            int relativeLevel=userRelationship.getRelativeLevel();
-            if (maxRelativeLevel<0){
-                if(relativeLevel<0 && relativeLevel>=maxRelativeLevel){
-                    member.setRelativeLevel(relativeLevel);
-                    ret.add(member);
-                }
-            }else{
-                if(relativeLevel>0 &&relativeLevel<=maxRelativeLevel){
-                    member.setRelativeLevel(relativeLevel);
-                    ret.add(member);
-                }
-            }
-        }
-        if (ret.size()==0) return null;
-        return ret;
 
-    }
 
     public List<User> findUpperUsers(User user, int maxRelativeLevel) {
         if (user==null ||user.getId()==null) return null;
@@ -345,64 +260,12 @@ public class UserDao extends BaseMongoDao<User>  {
 
     public static  void main(String[] args){
     }
-    public User findByEmailOrPhoneAndPassword(String loginStr, String password) {
-        DBObject queryCondition = new BasicDBObject();
-        queryCondition = new BasicDBObject();
-        BasicDBList values = new BasicDBList();
-        values.add(new BasicDBObject("phone", loginStr));
-        values.add(new BasicDBObject("email", loginStr));
-        queryCondition.put("$or", values);
-        queryCondition.put("password", MD5.convert(password));
-        Query query=new BasicQuery(queryCondition);
-//        return mongoTemplate.findOne(query,User.class);
-//        User user=findOne(queryCondition);
-        User user=mongoTemplate.findOne(query,User.class);
-        if (user!=null){
-            Cart cart=user.getCart();
-            if (cart!=null){
-                List<ProductSelected> productSelectedList=cart.getProductSelectedList();
-                if (productSelectedList!=null){
-                    for (ProductSelected productSelected:productSelectedList){
-                        ProductSeries productSeries= productSelected.getProductSeries();
-                        if (productSeries==null) continue;
-//                        productSeries.setProductSeriesPrices(ServiceManager.productSeriesPriceService.findByProductSeriesId(productSeries.getId()));
 
-//                        productSelected.setProductSeries(productSeries);
-                        List<String> productPropertyValueIds=productSelected.getProductPropertyValueIds();
-                        if (productPropertyValueIds!=null){
-                            List<ProductPropertyValue> productPropertyValueList=new ArrayList<ProductPropertyValue>();
-                            for (String productPropertyValueId:productPropertyValueIds){
-                                ProductPropertyValue productPropertyValue=ServiceManager.productPropertyValueService.findById(productPropertyValueId);
-                                productPropertyValueList.add(productPropertyValue);
-                            }
-                            productSelected.setProductPropertyValueList(productPropertyValueList);
-                        }
-                    }
-                }
-            }
-        }
-        return user;
-    }
 
-    public List<UserPoints> findUserPointsByUser(String userId) {
-        DBObject dbObject=new BasicDBObject();
-        DBRef userDBRef=new DBRef("mallUser",userId);
-        dbObject.put("user",userDBRef);
-        Query query=new BasicQuery(dbObject);
-        query.with(new Sort(Sort.Direction.DESC,"date"));
-        return mongoTemplate.find(query,UserPoints.class);
-    }
 
-    public void updateUserAfterOrder(Order order)     {
 
-    }
 
-    public User findDirectUpperUser(User memberUser) {
-        List<User> users=findLowerOrUpperUsers(memberUser,-1);
-        Assert.isTrue(users==null || users.size()==1);
-        User user=users==null?null:users.get(0);
-        return user;
-    }
+
     public List<User> getDirectUpperUsers(List<User> newMemberUsers) {
         if (newMemberUsers==null||newMemberUsers.size()==0) return null;
         BasicDBList dbList=new BasicDBList();
@@ -469,35 +332,7 @@ public class UserDao extends BaseMongoDao<User>  {
         return findById(directUpperUserId);
     }
 
-    public Message isValidUpper(String upperPhone) {
-        Message message=new Message();
-        User user=findByPhone(upperPhone);
-        if (user==null){
-            message.setSuccess(false);
-            message.setMessage("not_exists");
-            return message;
-        }
-        if (!user.isDirectSaleMember()){
-            message.setSuccess(false);
-            message.setMessage("not_member");
-            return message;
-        }
-        List<User> users= findLowerOrUpperUsers(user, 1);
-        if (users!=null&&users.size()>=2){
-            message.setSuccess(false);
-            message.setMessage("market_full");
-            return message;
-        }
-        if (users!=null&&users.size()!=0){
-            Pair<User> userPair=new Pair<User>();
-            userPair.setFirst(users.get(0));
-//            userPair.setSecond(users.get(1));
-            user.setDirectLowerUsers(userPair);
-        }
-        message.setSuccess(true);
-        message.setData(user);
-        return message;
-    }
+
 
     public User findFirstMember() {
         DBObject obj = new BasicDBObject();
@@ -513,45 +348,6 @@ public class UserDao extends BaseMongoDao<User>  {
         return findAll();
     }
 
-    public User findBrotherUser(User user) {
-        Assert.notNull(user);
-        List<User> users=findLowerOrUpperUsers(user,1);
-        Assert.notNull(users);
-        Assert.isTrue(users.size() > 0&&users.size()<=2);
-        if (users.size()==1)
-            return null;
-        if (users.get(0).getId().equalsIgnoreCase(user.getId())) return users.get(1);
-        return null;
-    }
 
-    public boolean isInLittleAreaWhenRegister(User newMemberUser, User upperUser) {
-        Assert.notNull(newMemberUser);
-        Assert.notNull(upperUser);
-        Assert.notNull(newMemberUser.getBecomeMemberDate());
-        Assert.notNull(newMemberUser.getMembershipPath());
-        if (newMemberUser.getMembershipPath().indexOf(upperUser.getId())<0) return false;
-        List<User> directLowersOfUpperUser=findLowerOrUpperUsers(upperUser,1);
-        if (directLowersOfUpperUser==null) return false;
-        if (directLowersOfUpperUser.size()==1) return false;
-        User aUser=directLowersOfUpperUser.get(0);
-        User bUser=directLowersOfUpperUser.get(1);
-        if (aUser.getId().equals(newMemberUser.getId())||bUser.getId().equals(newMemberUser.getId())){
-            User self=aUser.getId().equals(newMemberUser.getId())?aUser:bUser;
-            User brother=aUser.getId().equals(newMemberUser.getId())?bUser:aUser;
-            if (self.getBecomeMemberDate().before(brother.getBecomeMemberDate())) {
-                return false;
-            }else return true;
-        }
-        long aCount=findAllLowerMemberUsersCountBeforeADate(aUser,newMemberUser.getBecomeMemberDate());
-        long bCount=findAllLowerMemberUsersCountBeforeADate(bUser,newMemberUser.getBecomeMemberDate());
-        if (newMemberUser.getMembershipPath().indexOf(aUser.getId())>0){//在a区
-            if (aCount>=bCount) {
-                return false;
-            }else return true;
-        }else{//在b区
-            if (bCount>=aCount) return false;
-            else return true;
-        }
 
-    }
 }
