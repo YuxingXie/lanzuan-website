@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,91 +18,82 @@
 
 </head>
 <body ng-app="AdminApp" >
+<div>
 
+</div>
     <div class="container-fluid" >
-        <div class="fixed-left-menu">
-            <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="row">
+            <div class="col-xs-10 col-md-offset-2">
+                <i class="fa" ng-class="{'fa-male':${empty user.sex or user.sex eq 'male'},'fa-female':${not(empty user.sex or user.sex eq 'male')}}"></i>
+                欢迎您，${user.name}
+            </div>
+        </div>
+        <div class="">
+            <div id="accordion" role="tablist" aria-multiselectable="true" ng-init="_in=1;collapse1=true;collapse2=true;collapse3=true">
                 <div class="card  margin-bottom-0 margin-top-0">
                     <div class="card-header margin-bottom-0" role="tab" id="headingOne">
-                        <h4 class="card-title  margin-bottom-0">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                布局管理
-                            </a>
-                        </h4>
+                        <a href="javascript:void(0)" ng-click="_in=1;collapse1=!collapse1;collapse2=true;collapse3=true;">
+                            <h4 class="card-title  margin-bottom-0">布局管理</h4>
+                        </a>
                     </div>
-                    <div id="collapseOne" class="card-block padding-0 margin-0 collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>
-                                导航管理
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">2</span>
-                                轮播图管理
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">1</span>
-                                新闻动态管理
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">1</span>
-                                企业文化管理
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">1</span>
-                                图标管理
-                            </li>
-                        </ul>
+                    <div id="collapseOne" class="card-block padding-0 margin-0" ng-class="{'collapse':_in!==1||collapse1,'in':_in===1&&!collapse1}" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="list-group">
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>导航管理
+                            </a>
+                            <a class="list-group-item">
+                               <span class="label label-default label-pill pull-right">14</span>轮播图管理
+                            </a>
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>新闻动态管理
+                            </a>
+                            <a class="list-group-item">
+                               <span class="label label-default label-pill pull-right">14</span>企业文化管理
+                            </a>
+                            <a class="list-group-item">
+                               <span class="label label-default label-pill pull-right">14</span>图标管理
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card  margin-bottom-0 margin-top-0">
                     <div class="card-header margin-bottom-0" role="tab" id="headingTwo">
-                        <h4 class="card-title  margin-bottom-0">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                                内容管理
-                            </a>
-                        </h4>
+                        <a href="javascript:void(0)" ng-click="_in=2;collapse2=!collapse2;collapse1=true;collapse3=true">
+                            <h4 class="card-title margin-bottom-0">内容管理</h4>
+                        </a>
                     </div>
-                    <div id="collapseTwo" class="card-block padding-0 margin-0 collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>
-                                新闻及企业文化更新
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">2</span>
-                                替换轮播图
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">1</span>
-                                修改导航条
-                            </li>
-                        </ul>
+                    <div id="collapseTwo" class="card-block padding-0 margin-0 " ng-class="{'collapse':_in!==2||collapse2,'in':_in===2&&!collapse2}" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="list-group">
+                            <a class="list-group-item">
+                               <span class="label label-default label-pill pull-right">14</span>新闻及企业文化更新
+                            </a>
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>替换轮播图
+                            </a>
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>修改导航条
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card  margin-bottom-0 margin-top-0">
                     <div class="card-header margin-bottom-0" role="tab" id="headingThree">
-                        <h4 class="card-title  margin-bottom-0">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
-                                全局配置
-                            </a>
-                        </h4>
+                        <a href="javascript:void(0)" ng-click="_in=3;collapse3=!collapse3;collapse1=true;collapse2=true;">
+                            <h4 class="card-title  margin-bottom-0">全局配置</h4>
+                        </a>
                     </div>
-                    <div id="collapseThree" class="card-block padding-0 margin-0 collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>
-                                Cras justo odio
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">2</span>
-                                Dapibus ac facilisis in
-                            </li>
-                            <li class="list-group-item">
-                                <span class="label label-default label-pill pull-right">1</span>
-                                Morbi leo risus
-                            </li>
-                        </ul>
+                    <div id="collapseThree" class="card-block padding-0 margin-0" ng-class="{'collapse':_in!==3||collapse3,'in':_in===3&&!collapse3}" role="tabpanel" >
+                        <div class="list-group">
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>Cras justo odio
+                            </a>
+                            <a class="list-group-item">
+                               <span class="label label-default label-pill pull-right">14</span>Dapibus ac facilisis in
+                            </a>
+                            <a class="list-group-item">
+                                <span class="label label-default label-pill pull-right">14</span>Morbi leo risus
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,8 +101,9 @@
     </div>
     <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
     <script src="/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
-    <script src="/statics/js/jquery-3.1.1.min.js"></script>
-    <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="/statics/js/tether.min.js"></script>
+    <%--<script src="/statics/js/jquery-3.1.1.min.js"></script>--%>
+    <%--<script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>--%>
+    <%--<script src="/statics/js/tether.min.js"></script>--%>
+    <script src="/statics/js/admin.js"></script>
 </body>
 
