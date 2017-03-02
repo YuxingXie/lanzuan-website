@@ -7,7 +7,7 @@
             $scope.getNews();
         }
         $scope.getNews=function(){
-            $http.get("/json/news.json").success(function (data) {
+            $http.get("/statics/json/news.json").success(function (data) {
                 $scope.newsList=data;
             });
         }

@@ -9,10 +9,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <link href="../../../statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../../../statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="../../../statics/css/style.css" rel="stylesheet" type="text/css">
-    <link href="../../../statics/css/color.css" rel="stylesheet" type="text/css">
+    <link href="/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/statics/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/statics/css/color.css" rel="stylesheet" type="text/css">
 
 
 

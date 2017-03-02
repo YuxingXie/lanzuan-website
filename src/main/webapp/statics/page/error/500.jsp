@@ -13,14 +13,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>湖南蓝钻科技</title>
-  <link rel="stylesheet" href="../../plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="../../plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
-  <link rel="stylesheet" href="../../plugin/animate.css-master/animate.css"/>
-  <link rel="stylesheet" href="../../css/animate.css"/>
-  <link rel="stylesheet" href="../../css/style.css"/>
-  <link rel="stylesheet" href="../../css/color.css"/>
-  <link rel="stylesheet" href="../../css/bootstrap.custom.css"/>
-  <link rel="stylesheet" href="../../css/responsive.css3.css"/>
+  <link rel="stylesheet" href="/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/statics/plugin/animate.css-master/animate.css"/>
+  <link rel="stylesheet" href="/statics/css/animate.css"/>
+  <link rel="stylesheet" href="/statics/css/style.css"/>
+  <link rel="stylesheet" href="/statics/css/color.css"/>
+  <link rel="stylesheet" href="/statics/css/bootstrap.custom.css"/>
+  <link rel="stylesheet" href="/statics/css/responsive.css3.css"/>
 </head>
 <body ng-app="homeApp">
 <div ng-controller="HomeController" >
@@ -29,20 +29,20 @@
       <div class="col-xs-12 col-md-3">
         <div class="list-group fixed-left-menu">
           <div class="list-group-item padding-0 hidden-sm-down">
-            <img src="../../image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em">
+            <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em">
           </div>
           <div class="list-group-item padding-0" >
 
             <ol class="breadcrumb margin-0">
               当前位置:
-              <li class="small-90 fa fa-home"><a href="../../../index.html"> 首页</a></li>
+              <li class="small-90 fa fa-home"><a href="/statics/../index.html"> 首页</a></li>
               <li class="small active">500</li>
             </ol>
           </div>
           <a href="#title" class="list-group-item hidden-sm-down" >该页有点错误</a>
 
           <div class="list-group-item padding-0 hidden-sm-down" >
-            <img src="../../image/lanzuan/con_01.jpg" class="full-width"/>
+            <img src="/statics/image/lanzuan/con_01.jpg" class="full-width"/>
           </div>
         </div>
       </div>
@@ -71,9 +71,9 @@
     <img class="center-block height-2-5em" src="http://szcert.ebs.org.cn/Images/newGovIcon.gif"/>
   </div>
 </footer>
-<script src="../../js/jquery-3.1.1.min.js"></script>
-<script src="../../js/tether.min.js"></script>
-<script src="../../plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
+<script src="/statics/js/jquery-3.1.1.min.js"></script>
+<script src="/statics/js/tether.min.js"></script>
+<script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
 <!--<script src="../plugin/angular/1.4.8/angular.min.js"></script>-->
 
 
