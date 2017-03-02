@@ -1,0 +1,29 @@
+[
+  {
+    "name":"布局管理",
+    "class":"fa fa-list-ol",
+    "menuItem":[
+      {"name":"导航管理","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"轮播图管理","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"新闻动态管理","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"企业文化管理","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"图标管理","link":"/admin/abc","class":"fa fa-cog"}
+    ]
+  },
+  {
+    "name":"内容管理",
+    "class":"fa fa-newspaper-o",
+    "menuItem":[
+      {"name":"文章更新","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"替换轮播图","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"修改导航条","link":"/admin/abc","class":"fa fa-cog"}]
+  },
+  {
+    "name":"全局配置",
+    "class":"fa fa-wrench",
+    "menuItem":[
+      {"name":"aaa","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"aaaa","link":"/admin/abc","class":"fa fa-cog"},
+      {"name":"aaaaba","link":"/admin/abc","class":"fa fa-cog"}]
+  }
+]

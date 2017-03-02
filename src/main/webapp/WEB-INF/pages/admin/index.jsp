@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,97 +14,56 @@
     <link href="/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/statics/css/style.css" rel="stylesheet" type="text/css">
     <link href="/statics/css/color.css" rel="stylesheet" type="text/css">
-
-
-
 </head>
 <body ng-app="AdminApp" >
-<div>
-
-</div>
-    <div class="container-fluid" >
-        <div class="row">
-            <div class="col-xs-10 col-md-offset-2">
-                <i class="fa" ng-class="{'fa-male':${empty user.sex or user.sex eq 'male'},'fa-female':${not(empty user.sex or user.sex eq 'male')}}"></i>
+    <div class="container-fluid  padding-0 margin-0" ng-controller="AdminController" ng-init="initAdmin()">
+        <nav class="row navbar">
+            <div class="navbar-brand">
+                <c:choose>
+                    <c:when test="${empty user.sex or user.sex eq 'male'}">
+                        <i class="fa fa-male"></i>
+                    </c:when>
+                    <c:otherwise><i class="fa fa-female"></i></c:otherwise>
+                </c:choose>
                 欢迎您，${user.name}
+                <c:choose>
+                    <c:when test="${empty user.sex or user.sex eq 'male'}">先生</c:when>
+                    <c:otherwise>女士</c:otherwise>
+                </c:choose>!
             </div>
-        </div>
-        <div class="">
-            <div id="accordion" role="tablist" aria-multiselectable="true" ng-init="_in=1;collapse1=true;collapse2=true;collapse3=true">
-                <div class="card  margin-bottom-0 margin-top-0">
-                    <div class="card-header margin-bottom-0" role="tab" id="headingOne">
-                        <a href="javascript:void(0)" ng-click="_in=1;collapse1=!collapse1;collapse2=true;collapse3=true;">
-                            <h4 class="card-title  margin-bottom-0">布局管理</h4>
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="card-block padding-0 margin-0" ng-class="{'collapse':_in!==1||collapse1,'in':_in===1&&!collapse1}" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="list-group">
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>导航管理
-                            </a>
-                            <a class="list-group-item">
-                               <span class="label label-default label-pill pull-right">14</span>轮播图管理
-                            </a>
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>新闻动态管理
-                            </a>
-                            <a class="list-group-item">
-                               <span class="label label-default label-pill pull-right">14</span>企业文化管理
-                            </a>
-                            <a class="list-group-item">
-                               <span class="label label-default label-pill pull-right">14</span>图标管理
-                            </a>
-                        </div>
-                    </div>
+            <ul class="nav navbar-nav">
+                <li class="nav-item pull-right">
+                    <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出</button>
+                </li>
+            </ul>
+        </nav>
+        <div class="row" role="tablist" ng-init="_in=1;collapse=true">
+            <div class="card  margin-bottom-0 margin-top-0" ng-repeat="menuItem in menuItems">
+                <div class="card-header margin-bottom-0" role="tab">
+                    <a href="javascript:void(0)" ng-click="_in=$index;collapse=!collapse;">
+
+                        <h5 class="card-title  margin-bottom-0">
+                            <i class="{{menuItem.class}} padding-left-10"></i>
+                            {{menuItem.name}}
+                            <i class="fa pull-right padding-right-30" ng-class="{'fa-angle-down':_in===$index&&!collapse,'fa-angle-right':_in!==$index||collapse}"></i>
+                        </h5>
+                    </a>
                 </div>
-                <div class="card  margin-bottom-0 margin-top-0">
-                    <div class="card-header margin-bottom-0" role="tab" id="headingTwo">
-                        <a href="javascript:void(0)" ng-click="_in=2;collapse2=!collapse2;collapse1=true;collapse3=true">
-                            <h4 class="card-title margin-bottom-0">内容管理</h4>
+                <div class="card-block padding-0 margin-0" ng-class="{'collapse':_in!==$index||collapse,'in':_in===$index&&!collapse}" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="list-group">
+                        <a class="list-group-item" ng-repeat="subMenuItem in menuItem.menuItem" ng-href="{{subMenuItem.link}}">
+                            <i class="{{subMenuItem.class}} padding-left-20"></i>
+                            <span class="label label-default label-pill pull-right margin-right-20">14</span>{{subMenuItem.name}}
                         </a>
-                    </div>
-                    <div id="collapseTwo" class="card-block padding-0 margin-0 " ng-class="{'collapse':_in!==2||collapse2,'in':_in===2&&!collapse2}" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="list-group">
-                            <a class="list-group-item">
-                               <span class="label label-default label-pill pull-right">14</span>新闻及企业文化更新
-                            </a>
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>替换轮播图
-                            </a>
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>修改导航条
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card  margin-bottom-0 margin-top-0">
-                    <div class="card-header margin-bottom-0" role="tab" id="headingThree">
-                        <a href="javascript:void(0)" ng-click="_in=3;collapse3=!collapse3;collapse1=true;collapse2=true;">
-                            <h4 class="card-title  margin-bottom-0">全局配置</h4>
-                        </a>
-                    </div>
-                    <div id="collapseThree" class="card-block padding-0 margin-0" ng-class="{'collapse':_in!==3||collapse3,'in':_in===3&&!collapse3}" role="tabpanel" >
-                        <div class="list-group">
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>Cras justo odio
-                            </a>
-                            <a class="list-group-item">
-                               <span class="label label-default label-pill pull-right">14</span>Dapibus ac facilisis in
-                            </a>
-                            <a class="list-group-item">
-                                <span class="label label-default label-pill pull-right">14</span>Morbi leo risus
-                            </a>
-                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
     <script src="/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
-    <%--<script src="/statics/js/jquery-3.1.1.min.js"></script>--%>
-    <%--<script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>--%>
-    <%--<script src="/statics/js/tether.min.js"></script>--%>
     <script src="/statics/js/admin.js"></script>
 </body>
 
