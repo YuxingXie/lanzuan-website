@@ -5,8 +5,8 @@
 .bg-grey { background-color: #555555;}
 .bg-medium-grey { background-color: #eeecec;}
 .bg-medium-grey-2 { background-color: #d4d2d2;}
-.bg-light-grey { background-color: #faf1f3;}
-.bg-very-light { background-color: #f6f6f6;}
+.bg-light-grey {color: #000; background-color: #faf1f3;}
+.bg-very-light {color: #000;background-color: #f6f6f6;}
 .bg-green { background-color: #35aa47;}
 .bg-yellow { background-color: #ffb848;}
 .bg-light-yellow { background-color: #f2ff09;}

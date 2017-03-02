@@ -42,40 +42,11 @@ public class CommonInterceptor  implements HandlerInterceptor {
      * 回值为false，当preHandle的返回值为false的时候整个请求就结束了。
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        request.setAttribute("uri",request.getRequestURI());
+//        request.setAttribute("uri",request.getRequestURI());
 //        return forTest(request, response);
 
         return true;
     }
 
-    public boolean forTest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (true) return true;
-        HttpSession session=request.getSession(true);
-        Object testObj=session.getAttribute("test");
-        String test=request.getParameter("test");
-        if(testObj==null){
-            if (test==null||"".equals(test.trim())){
-//                request.getRequestDispatcher("test.jsp").forward(request,response);
-                response.sendRedirect("test.jsp");
-                return false;
-            }else if(test.equals("exit")){
-                response.sendRedirect("test.jsp");
-//                request.getRequestDispatcher("test.jsp").forward(request,response);
-                return false;
-            }else{
-                session.setAttribute("test",test);
-                return true;
-            }
-        }else {
-            if (test!=null&&test.equals("exit")){
-                session.setAttribute("test",null);
-                session.removeAttribute("test");
-                response.sendRedirect("test.jsp");
-//                request.getRequestDispatcher("test.jsp").forward(request,response);
-                return false;
-            }else{
-                return true;
-            }
-        }
-    }
+
 }

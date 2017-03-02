@@ -1,6 +1,5 @@
 package com.lanzuan.common.handler;
 
-import com.lanzuan.common.constant.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +24,6 @@ public class EmptyHandler {
 
     @RequestMapping(value = "/admin")
     public void admin(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
-            request.getRequestDispatcher("/page/admin/index.html").forward(request,response);
+            request.getRequestDispatcher("/statics/page/admin/login.html").forward(request,response);
     }
 }

@@ -1,18 +1,15 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.common.code.NotifyTypeCodeEnum;
-import com.lanzuan.common.directSale.util.UserRelationship;
-import com.lanzuan.common.helper.service.ServiceManager;
-import com.lanzuan.common.util.MD5;
-import com.lanzuan.entity.*;
-import com.lanzuan.support.vo.Message;
-import com.lanzuan.common.support.Pair;
-import com.mongodb.*;
+import com.lanzuan.common.util.BusinessException;
+import com.lanzuan.entity.User;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -110,8 +106,8 @@ public class UserDao extends BaseMongoDao<User>  {
         return findOne(user);
     }
 
-    private User findByName(String name) {
-        return findOne(new BasicDBObject("name",name));
+    public User findByName(String name) {
+        return findByName(name, null);
     }
     public User findByEmail(String email) {
         return findOne(new BasicDBObject("email",email));
@@ -119,10 +115,17 @@ public class UserDao extends BaseMongoDao<User>  {
     public User findByPhone(String phone) {
         return findOne(new BasicDBObject("phone",phone));
     }
-    private User findByName(String name,boolean activated) {
+    private User findByName(String name,Boolean activated) {
         DBObject dbObject=new BasicDBObject("name",name);
-        dbObject.put("activated",activated);
-        return findOne(dbObject);
+        if (activated!=null){
+            dbObject.put("activated",activated);
+        }
+        List<User> users=findAll(dbObject);
+        if (users!=null &&users.size()>1){
+            throw new BusinessException("用户名在系统中不是唯一的");
+        }
+        if (users==null ||users.size()==0) return null;
+        return users.get(0);
     }
     public User findByEmail(String email,boolean activated) {
         DBObject dbObject=new BasicDBObject("email",email);

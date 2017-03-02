@@ -1,6 +1,6 @@
 package com.lanzuan.common.helper.service;
-import com.lanzuan.website.service.*;
 
+import com.lanzuan.website.service.IUserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 @Component

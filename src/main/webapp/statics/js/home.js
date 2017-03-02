@@ -1,8 +1,3 @@
-
-//
-// Here is how to define your module 
-// has dependent on mobile-angular-ui
-//
 (function () {
     "use strict";
     var app = angular.module('homeApp', []);

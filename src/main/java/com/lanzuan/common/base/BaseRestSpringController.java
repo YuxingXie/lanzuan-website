@@ -2,7 +2,6 @@ package com.lanzuan.common.base;
 
 
 import com.lanzuan.common.constant.Constant;
-
 import com.lanzuan.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -546,20 +546,6 @@ Misc tools
     cursor: hand;
 }
 
-
-.sticker-sale {
-    background: url(../img/sale.png) no-repeat;
-}
-.sticker-new {
-    background: url(../img/new.png) no-repeat;
-    left: auto;
-    right:0px;
-}
-
-
-
-
-
 .checkbox-list > label {
     display: block;
     font-weight: normal;

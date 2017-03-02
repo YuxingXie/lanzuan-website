@@ -21,7 +21,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/admin"/>
-            <mvc:exclude-mapping path="/admin/login"/>
+            <mvc:exclude-mapping path="/admin/sign_up"/>
             <bean class="com.lanzuan.website.interceptor.AuthorizedInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
@@ -42,8 +42,7 @@
             <bean class="com.lanzuan.common.handler.EmptyHandler"/>
         </constructor-arg>
     </bean>
-    <bean
-            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <util:list id="beanList">
                 <ref bean="mappingJacksonHttpMessageConverter"/>

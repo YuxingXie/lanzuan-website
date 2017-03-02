@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <link href="../../plugin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../../plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="../../css/style.css" rel="stylesheet" type="text/css">
-    <link href="../../css/color.css" rel="stylesheet" type="text/css">
+    <link href="../../../statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../../statics/css/style.css" rel="stylesheet" type="text/css">
+    <link href="../../../statics/css/color.css" rel="stylesheet" type="text/css">
 
 
 
@@ -19,7 +20,6 @@
 <body ng-app="AdminApp" >
 
     <div class="container-fluid" >
-
         <div class="fixed-left-menu">
             <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card  margin-bottom-0 margin-top-0">
@@ -107,12 +107,11 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script src="../../plugin/angular/1.4.8/angular.min.js"></script>
-    <script src="../../plugin/angular/1.4.8/angular-route.min.js"></script>
-    <script src="../../js/jquery-3.1.1.min.js"></script>
-    <script src="../../plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="../../js/tether.min.js"></script>
+    <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
+    <script src="/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
+    <script src="/statics/js/jquery-3.1.1.min.js"></script>
+    <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
+    <script src="/statics/js/tether.min.js"></script>
 </body>
 
