@@ -584,10 +584,16 @@ Misc tools
 .block{
     display:block;
 }
-.dash-sliver-right-border{
+.dash-silver-border{
+    border: dashed #c0c0c0 1px;
+}
+.dash-silver-right-border{
     border-right: dashed #c0c0c0 1px;
 }
-.solid-sliver-right-border{
+.solid-dark-border{
+    border-right: solid #000 4px;
+}
+.solid-silver-right-border{
     border-right: solid #c0c0c0 1px;
 }
 .text-indent-1em{text-indent: 1em}

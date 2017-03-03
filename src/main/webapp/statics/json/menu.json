@@ -2,6 +2,7 @@
   {
     "name":"布局管理",
     "class":"fa fa-list-ol",
+    "collapse":true,
     "menuItem":[
       {"name":"导航管理","link":"/admin/abc","class":"fa fa-cog"},
       {"name":"轮播图管理","link":"/admin/abc","class":"fa fa-cog"},
@@ -13,6 +14,7 @@
   {
     "name":"内容管理",
     "class":"fa fa-newspaper-o",
+    "collapse":true,
     "menuItem":[
       {"name":"文章更新","link":"/admin/abc","class":"fa fa-cog"},
       {"name":"替换轮播图","link":"/admin/abc","class":"fa fa-cog"},
@@ -21,6 +23,7 @@
   {
     "name":"全局配置",
     "class":"fa fa-wrench",
+    "collapse":true,
     "menuItem":[
       {"name":"aaa","link":"/admin/abc","class":"fa fa-cog"},
       {"name":"aaaa","link":"/admin/abc","class":"fa fa-cog"},
