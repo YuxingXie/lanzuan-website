@@ -41,6 +41,7 @@
         $scope.initAdmin=function(){
 
             $scope.getMenu();
+            $scope.editable=false;
         }
         $scope.getMenu=function(){
             $http.get("/statics/json/menu.json").success(function (data) {

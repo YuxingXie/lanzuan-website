@@ -29,24 +29,31 @@ public class IndexController extends BaseRestSpringController {
         }
         if (Constant.pageComponentList==null||Constant.pageComponentList.size()==0){
             PageComponent pageComponent1=new PageComponent();
+            pageComponent1.setId("1");
             pageComponent1.setUrl("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.html");
 
             PageComponent pageComponent2=new PageComponent();
+            pageComponent2.setId("2");
             pageComponent2.setUrl("/statics/page/included/component/carousel/carousel-full-width-1.html");
 
             PageComponent pageComponent3=new PageComponent();
+            pageComponent3.setId("3");
             pageComponent3.setUrl("/statics/page/included/component/card-group/img-card-group-1.html");
 
             PageComponent pageComponent4=new PageComponent();
+            pageComponent4.setId("4");
             pageComponent4.setUrl("/statics/page/included/lanzuan/collapse-image-title-text-1.html");
 
             PageComponent pageComponent5=new PageComponent();
+            pageComponent5.setId("5");
             pageComponent5.setUrl("/statics/page/included/lanzuan/article-section-1.html");
 
             PageComponent pageComponent6=new PageComponent();
+            pageComponent6.setId("6");
             pageComponent6.setUrl("/statics/page/included/lanzuan/full-width-image-1.html");
 
             PageComponent pageComponent7=new PageComponent();
+            pageComponent7.setId("7");
             pageComponent7.setUrl("/statics/page/included/lanzuan/sort-link-section-1.html");
 
             Constant.pageComponentList.add(pageComponent1);

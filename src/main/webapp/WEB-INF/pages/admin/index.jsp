@@ -66,7 +66,8 @@
         </div>
         <div class="row padding-top-2em margin-0">
             <div class="text-center">
-                点击<button class="btn btn-primary" id="start">开始编辑</button>按钮后，右键点击可编辑的元素可弹出一个右键菜单（不是浏览器菜单），请点击菜单项选择相应操作。
+                <button class="btn btn-primary" ng-click="editable=!editable">显示可编辑项</button>
+                点击<button class="btn btn-primary" id="start">开始编辑{{test}}</button>按钮后，右键点击可编辑的元素可弹出一个右键菜单（不是浏览器菜单），请点击菜单项选择相应操作。
             </div>
 
             <div id="context-menu">
@@ -95,7 +96,7 @@
                 </ul>
             </div>
             <div class="col-xs-10 col-xl-offset-1 solid-dark-border">
-                <div ng-include="'/statics/page/included/home.html'"></div>
+                <jsp:include page="${path}/home"></jsp:include>
             </div>
         </div>
 
@@ -108,19 +109,19 @@
     <script src="${path}/statics/js/app.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $(document).on("click", $("#start"), function() {
-                $("img").data("target","#img-context-menu");
-                $("img").contextmenu({
-                    onItem: function(context, e) {
-                        console.log(context.attr("class"));
-                    }
-                });
-                $("a").data("target","#a-context-menu");
-                $("a").contextmenu();
-                $(".fa").data("target","#context-menu");
-                $(".fa").contextmenu();
-
-            });
+//            $(document).on("click", $("#start"), function() {
+//                $("img").data("target","#img-context-menu");
+//                $("img").contextmenu({
+//                    onItem: function(context, e) {
+//                        console.log(context.attr("class"));
+//                    }
+//                });
+//                $("a").data("target","#a-context-menu");
+//                $("a").contextmenu();
+//                $(".fa").data("target","#context-menu");
+//                $(".fa").contextmenu();
+//
+//            });
         });
     </script>
 

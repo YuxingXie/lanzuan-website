@@ -22,8 +22,13 @@
     <body ng-app="app">
         <div ng-controller="HomeController">
             <c:forEach items="${pageComponentList}" var="pageComponent">
-                <div ng-include="'${pageComponent.url}'"></div>
+                <%--<div ng-include="'${pageComponent.url}'"></div>--%>
+                <jsp:include page="${pageComponent.url}"></jsp:include>
+                <div class="row">
+                    <div class="col-xs-2" ng-init="$parent.test='test'"> editable:{{editable}}</div>
+                </div>
             </c:forEach>
+
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
