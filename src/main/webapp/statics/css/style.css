@@ -86,16 +86,16 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 
 a:link {color: #666666}
 a:visited{color: #666666}
+.white-link:link,.white-link:visited {color: #fff}
 .green-link:visited{color: #666666}
 a, a:focus, a:hover, a:active {
     /*outline: 0;*/
     text-decoration: none;
-    /*color: #314c97;*/
+    color: #314c97;
 }
 .green-link:link {color: rgba(0, 171, 0, 0.53)
 }
-.grey-link:link {color: #969696
-}
+.grey-link:link, .grey-link a:link{color: #969696}
 .black-link:link {color: #000000}
 /*.green-link:hover,.grey-link:hover,.black-link:hover{*/
     /*outline: 0;*/
@@ -263,6 +263,12 @@ Misc tools
 }
 .margin-0{
     margin: 0;
+}
+.bottom-0{
+    bottom: 0;
+}
+.bottom-10{
+    bottom: 10px;
 }
 .margin-1{
     margin: 1px;
@@ -546,7 +552,7 @@ Misc tools
 }
 .sticker-bottom{
     bottom:0;
-    left: 45%;
+    left: 40%;
 }
 .hover-cursor-hand:hover{
     cursor: hand;

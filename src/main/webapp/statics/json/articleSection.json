@@ -1,0 +1,51 @@
+[
+  {
+    "name": "新闻动态",
+    "articles": [
+      {
+        "title": "携手并进·共赢未来 ——2015蓝钻新媒体云服务商交流大会成功召开",
+        "date": "15-02-15",
+        "link": "/statics/page/news/001.html"
+      },
+      {
+        "title": "携手并进·共赢未来 ——2016蓝钻新媒体云服务商交流大会成功召开",
+        "date": "15-02-15",
+        "link": "/statics/page/news/001.html"
+      },
+      {
+        "title": "携手并进·共赢未来 ——2017蓝钻新媒体云服务商交流大会成功召开",
+        "date": "15-02-15",
+        "link": "/statics/page/news/001.html"
+      }
+    ]
+  },
+  {
+    "name": "企业文化",
+    "articles": [
+      {
+        "title": "倾家荡产捐助”与“扎克伯格式慈善",
+        "date": "15-02-15",
+        "link": "/statics/page/article/001.html"
+      },
+      {
+        "title": "倾家荡产捐助”与“扎克伯格式慈善",
+        "date": "15-02-15",
+        "link": "/statics/page/article/001.html"
+      },
+      {
+        "title": "携手并进·共赢未来 ——2014蓝钻新媒体云服务商交流大会成功召开",
+        "date": "15-02-15",
+        "link": "/statics/page/news/001.html"
+      },
+      {
+        "title": "携手并进·共赢未来 ——2015蓝钻新媒体云服务商交流大会成功召开",
+        "date": "15-02-15",
+        "link": "/statics/page/news/001.html"
+      }
+    ]
+  },
+  {
+    "name": "活动专题",
+    "image": "/statics/image/lanzuan/home/huodongzhuanti.png"
+  }
+]

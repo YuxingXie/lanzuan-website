@@ -1,0 +1,33 @@
+<div class="row  margin-left-right-0 margin-top-2-4em margin-bottom-1-6em md-up-padding-left-right-4em " ng-init="getCollapseImageTitleText()">
+    <div class="col-xs-12 col-md-9 padding-0 margin-0">
+                   <span class="col-xs-12 col-md-4 col-lg-3 col-xl-2 padding-right-0">
+                        <h4 class="md-down-no-padding-left large-180" >{{collapseBlock.name}}</h4>
+                    </span>
+                    <span class="col-xs-12 col-md-8 col-lg-9 col-xl-10 text-left margin-0">
+
+                        <span ng-repeat="blockItem in collapseBlock.blocks">
+                            <span  ng-mouseover="$parent._active=$index" class="btn btn-padding-little bg-none sm-down-btn" ng-class="{'active bg-light-blue color-white':_active===$index}">
+                            {{blockItem.name}}
+                            </span>
+                            <span ng-if="$index!==$parent.collapseBlock.blocks.length-1" class="divider hidden-sm-down"></span>
+                        </span>
+                </span>
+    </div>
+
+</div>
+<div class="row margin-left-right-0 md-up-padding-left-right-4em margin-bottom-2em" ng-repeat="block in collapseBlock.blocks"
+     ng-class="{'active in':$parent._active===$index,'collapse':$parent._active!==$index}">
+    <div class="col-xs-6 col-md-3 md-down-padding-left-right-0" ng-repeat="blockItem in block.items">
+        <a ng-href="{{blockItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">
+            <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"
+                 ng-src="{{blockItem.image}}"/>
+            <div class="absolute-center small-90 hidden-md-down" ng-class="{'block':show,'hidden':!show}">
+                <div class="text-indent-1em">{{blockItem.text}}</div>
+                <button class="btn btn-primary margin-top-05em" ng-href="{{blockItem.link}}">了解详情</button>
+            </div>
+        </a>
+
+        <p class="img-title">{{blockItem.title}}</p>
+    </div>
+
+</div>

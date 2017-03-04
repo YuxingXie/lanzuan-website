@@ -1,0 +1,16 @@
+<nav class="navbar navbar-md-down-fix-bottom padding-top-1-5em padding-bottom-1em" role="navigation" ng-init="getNavbar()">
+    <div class="navbar-brand col-md-2 hidden-md-down margin-right-6-5em margin-left-2em">
+        <img ng-if="navbar.navbarBrand&&navbar.navbarBrand.type&&navbar.navbarBrand.type==='image'"
+             ng-src="{{navbar.navbarBrand.value}}" class="img-responsive img-ico-larger margin-left-5em">
+        <a ng-if="navbar.navbarBrand&&navbar.navbarBrand.type&&navbar.navbarBrand.type==='text'"class="margin-left-5em">{{navbar.navbarBrand.value}}</a>
+    </div>
+    <ul class="nav navbar-nav padding-top-1em margin-0 padding-left-0 padding-left-right-4em editable">
+
+        <li class="nav-item  {{navItem.nav_item_class}}" ng-repeat="navItem in navbar.navItems">
+            <a class="nav-link" href="{{navItem.link}}">
+                <div class="fa {{navItem.fa_class}} fa-2x hidden-md-up block"></div>
+                {{navItem.name}}
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "新闻动态",
+    "links": [
+      {
+        "text": "荣誉奖项",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "新闻报道",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "活动专题",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "人才招聘",
+        "link": "/statics/page/building.html"
+      }
+    ]
+  },
+  {
+    "name": "售后支持",
+    "links": [
+      {
+        "text": "在线咨询（售后）",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "资料库",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "软件下载",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "建议反馈",
+        "link": "/statics/page/building.html"
+      }
+    ]
+  },
+  {
+    "name": "如何购买",
+    "links": [
+      {
+        "text": "在线咨询（售前）",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "申请试用",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "联系我们",
+        "link": "/statics/page/building.html"
+      }
+    ]
+  },
+  {
+    "name": "合作伙伴",
+    "links": [
+      {
+        "text": "渠道政策",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "合作申请",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "渠道公告",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "英博智能",
+        "link": "/statics/page/building.html"
+      },
+      {
+        "text": "培训公告",
+        "link": "/statics/page/building.html"
+      }
+    ]
+  }
+]
