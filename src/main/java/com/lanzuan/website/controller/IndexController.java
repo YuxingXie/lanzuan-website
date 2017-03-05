@@ -57,7 +57,7 @@ public class IndexController extends BaseRestSpringController {
 
                 PageComponent pageComponent4=new PageComponent();
                 pageComponent4.setUri("/statics/page/included/lanzuan/collapse-image-title-text-1.html");
-                pageComponent4.setName("蓝钻鼠标掠过下弹出菜单模板1");
+                pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
                 pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
 
                 PageComponent pageComponent5=new PageComponent();
