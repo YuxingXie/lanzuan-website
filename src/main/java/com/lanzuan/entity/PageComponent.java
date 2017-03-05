@@ -8,9 +8,9 @@ public class PageComponent {
     @Id
     private String id;
     private String name;
-    private String url;
+    private String uri;
     private String remark;
-
+    private String dataClass;
 
     public String getId() {
         return id;
@@ -28,12 +28,20 @@ public class PageComponent {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getDataClass() {
+        return dataClass;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDataClass(String dataClass) {
+        this.dataClass = dataClass;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getRemark() {

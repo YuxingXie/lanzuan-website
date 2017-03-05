@@ -1,8 +1,10 @@
 package com.lanzuan.common.constant;
 
 import com.lanzuan.entity.PageComponent;
+import com.lanzuan.entity.PageTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/29.
@@ -16,6 +18,6 @@ public class Constant {
     public static double MEMBERSHIP_UPPER_LEVEL_2_RATE=0.1d;
     public static double MEMBERSHIP_UPPER_LEVEL_3_RATE=0.05d;
 
-    public static List<PageComponent> pageComponentList;
+    public static Map<String,PageTemplate> pageTemplateMap;
 
 }
