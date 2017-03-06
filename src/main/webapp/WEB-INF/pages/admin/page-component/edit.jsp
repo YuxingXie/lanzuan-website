@@ -43,7 +43,6 @@
         <div class="card  m-b-0 m-t-0" ng-repeat="menuItem in menuItems">
             <div class="card-header m-b-0" role="tab">
                 <a href="javascript:void(0)" ng-click="menuItem.collapse=!menuItem.collapse">
-
                     <h5 class="card-title  m-b-0">
                         <i class="{{menuItem.class}} padding-left-10"></i>
                         {{menuItem.name}}
@@ -60,14 +59,11 @@
                         <i class="{{subMenuItem.class}} padding-left-20"></i>
                         <span class="label label-default label-pill pull-right margin-right-20">14</span>{{subMenuItem.name}}
                     </a>
-
                 </div>
             </div>
         </div>
-
     </div>
     <div class="row padding-top-2em p-a-0 m-a-0">
-
         <div ng-controller="HomeController">
             <div class="col-xs-12 m-a-0 p-a-0">
                 <div class="col-xs-12 margin-left-2em margin-right-2em">
@@ -81,14 +77,9 @@
                     <jsp:include page="${pageComponent.uri}"></jsp:include>
                 </div>
                 <div class="padding-top-2em">
-
                     <jsp:include page="${pageComponent.editUri}"></jsp:include>
                 </div>
-
-
-
             </div>
-
         </div>
     </div>
 </div>
