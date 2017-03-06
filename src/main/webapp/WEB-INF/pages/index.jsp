@@ -24,9 +24,6 @@
             <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
                 <%--<div ng-include="'${pageComponent.url}'"></div>--%>
                 <jsp:include page="${pageComponent.uri}"></jsp:include>
-                <div class="row">
-                    <div class="col-xs-2" ng-init="$parent.test='test'"> editable:{{editable}}</div>
-                </div>
             </c:forEach>
 
         </div>

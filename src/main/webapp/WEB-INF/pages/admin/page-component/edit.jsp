@@ -70,23 +70,23 @@
                 点击<button class="btn btn-primary" id="start">开始编辑{{test}}</button>按钮后，右键点击可编辑的元素可弹出一个右键菜单（不是浏览器菜单），请点击菜单项选择相应操作。
             </div>
             <div ng-controller="HomeController">
-                <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
-                    <div class="row"style="border-top: solid #000 1px">
+
+            <div class="row"style="border-top: solid #000 1px">
                         <div class="col-xs-8 m-a-0 p-a-0">
                             <jsp:include page="${pageComponent.uri}"></jsp:include>
                         </div>
 
                         <div class="col-xs-4 m-a-0 p-a-0" >
-                            <div>这是一个${pageComponent.name},您可以如下操作：</div>
-                            <div class="btn-group">
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/new/${pageComponent.id}">新建一个</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">编辑内容</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/css/${pageComponent.id}">调整样式</a>
+                            <div>导航组件名称：${pageComponent.name}：</div>
+                            <div>
+                                <div>导航条品牌标示类型：{{navbar.navbarBrand.type=='image'?"图片":"文字"}}</div>
+                                <div>导航条品牌标示值：{{navbar.navbarBrand.value}}</div>
+                                <div>组件说明：${pageComponent.remark}</div>
+
                             </div>
-                            <div>${pageComponent.remark}</div>
                         </div>
                     </div>
-                </c:forEach>
+
 
             </div>
         </div>

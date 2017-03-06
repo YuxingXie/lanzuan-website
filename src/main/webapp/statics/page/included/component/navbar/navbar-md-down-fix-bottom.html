@@ -6,9 +6,9 @@
     </div>
     <ul class="nav navbar-nav padding-top-1em margin-0 padding-left-0 padding-left-right-4em editable">
 
-        <li class="nav-item  {{navItem.nav_item_class}}" ng-repeat="navItem in navbar.navItems">
+        <li class="nav-item  {{navItem.navItemCass}}" ng-repeat="navItem in navbar.navItems">
             <a class="nav-link" href="{{navItem.link}}">
-                <div class="fa {{navItem.fa_class}} fa-2x hidden-md-up block"></div>
+                <div class="fa {{navItem.faClass}} fa-2x hidden-md-up block"></div>
                 {{navItem.name}}
             </a>
         </li>

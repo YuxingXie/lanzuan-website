@@ -5,10 +5,10 @@
     <div class="carousel-inner " role="listbox">
         <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in carousel">
             <img ng-if="carouselItem.type==='image'" class="center-block full-width" ng-src="{{carouselItem.value}}"/>
-            <div ng-if="carouselItem.carousel_caption" class="carousel-caption">
-                <a ng-if="carouselItem.carousel_caption.type &&carouselItem.carousel_caption.type==='link'"
-                   ng-href="{{carouselItem.carousel_caption.value}}"
-                   class="btn btn-primary hidden-md-down white-link">{{carouselItem.carousel_caption.text}} <i class="fa fa-chevron-right right"></i></a>
+            <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
+                <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
+                   ng-href="{{carouselItem.carouselCaption.value}}"
+                   class="btn btn-primary hidden-md-down white-link">{{carouselItem.carouselCaption.text}} <i class="fa fa-chevron-right right"></i></a>
             </div>
         </div>
     </div>

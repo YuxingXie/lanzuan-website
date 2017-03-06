@@ -14,6 +14,7 @@ mongod --dbpath D:\develop\MongoDB\db\lanzuan_website
 >db.shutdownServer()
 
 mongod --dbpath D:\develop\MongoDB\db\lanzuan_website --auth
+//------ mongod --dbpath E:\db\lanzuan\test
 > use admin
 > db.auth("admin","admin")
 >use dabast

@@ -2,7 +2,7 @@
   {
     "type": "image",
     "value": "/statics/image/lanzuan/home/carousel1.jpg",
-    "carousel_caption": {
+    "carouselCaption": {
       "type": "link",
       "value": "/statics/page/business/b1.html",
       "text": "了解更多",
@@ -12,7 +12,7 @@
   {
     "type": "image",
     "value": "/statics/image/lanzuan/home/carousel2.jpg",
-    "carousel_caption": {
+    "carouselCaption": {
       "type": "link",
       "value": "/statics/page/business/b1.html",
       "text": "了解更多",
@@ -22,7 +22,7 @@
   {
     "type": "image",
     "value": "/statics/image/lanzuan/home/carousel3.jpg",
-    "carousel_caption": {
+    "carouselCaption": {
       "type": "link",
       "value": "/statics/page/business/b1.html",
       "text": "了解更多",
@@ -32,7 +32,7 @@
   {
     "type": "image",
     "value": "/statics/image/lanzuan/home/carousel4.jpg",
-    "carousel_caption": {
+    "carouselCaption": {
       "type": "link",
       "value": "/statics/page/business/b1.html",
       "text": "了解更多",

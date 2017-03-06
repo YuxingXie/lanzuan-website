@@ -54,6 +54,9 @@ public class BaseRestSpringController  {
     protected User getLoginUser(HttpSession session) {
         return session.getAttribute(Constant.LOGIN_USER)==null?null:((User)(session.getAttribute(Constant.LOGIN_USER)));
     }
+    protected User getLoginAdministrator(HttpSession session) {
+        return session.getAttribute(Constant.LOGIN_ADMINISTRATOR)==null?null:((User)(session.getAttribute(Constant.LOGIN_ADMINISTRATOR)));
+    }
 
     public static <T> T getOrCreateRequestAttribute(HttpServletRequest request, String key,Class<T> clazz) {
         Object value = request.getAttribute(key);

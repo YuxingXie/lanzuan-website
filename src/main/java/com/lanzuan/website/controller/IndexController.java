@@ -31,7 +31,6 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
-
         if (Constant.pageTemplateMap==null){
            Constant.pageTemplateMap=new HashMap<String, PageTemplate>();
         }
@@ -67,7 +66,7 @@ public class IndexController extends BaseRestSpringController {
 
                 PageComponent pageComponent6=new PageComponent();
                 pageComponent6.setUri("/statics/page/included/lanzuan/full-width-image-1.html");
-                pageComponent6.setUri("全屏宽度图片模板1");
+                pageComponent6.setName("全屏宽度图片模板1");
                 pageComponent6.setRemark("简单的全屏宽度图片。");
 
                 PageComponent pageComponent7=new PageComponent();
@@ -94,4 +93,5 @@ public class IndexController extends BaseRestSpringController {
         map.addAttribute("pageTemplate",Constant.pageTemplateMap.get(uri));
         return "index";
     }
+
 }
