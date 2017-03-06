@@ -4,11 +4,10 @@
              ng-src="{{navbar.navbarBrand.value}}" class="img-responsive img-ico-larger margin-left-5em">
         <a ng-if="navbar.navbarBrand&&navbar.navbarBrand.type&&navbar.navbarBrand.type==='text'"class="margin-left-5em">{{navbar.navbarBrand.value}}</a>
     </div>
-    <ul class="nav navbar-nav padding-top-1em m-a-0 padding-left-0 padding-left-right-4em editable">
-
-        <li class="nav-item  {{navItem.navItemCass}}" ng-repeat="navItem in navbar.navItems">
-            <a class="nav-link" href="{{navItem.link}}">
-                <div class="fa {{navItem.faClass}} fa-2x hidden-md-up block"></div>
+    <ul class="nav navbar-nav padding-top-1em m-a-0 p-l-0 padding-left-right-4em">
+        <li class="nav-item {{navItem.navItemCass}}" ng-repeat="navItem in navbar.navItems">
+            <a class="nav-link" ng-href="{{navItem.link}}">
+                <!--<i class="fa {{navItem.faClass}} fa-2x hidden-md-up"></i>-->
                 {{navItem.name}}
             </a>
         </li>

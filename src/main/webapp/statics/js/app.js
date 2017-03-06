@@ -24,7 +24,8 @@
             $scope.navbar.navItems.splice(index,1)
         }
         $scope.insertNavItemsBefore=function(index){
-            $scope.navbar.navItems.splice(index,0,{"name":"ssss","link":"dfdfd","faClass":"dfdf","navItemCass":"dfd"})
+
+            $scope.navbar.navItems.splice(index,0,{"name":"百度","link":"http://baidu.com","faClass":"","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"})
         }
 
         $scope.submitNavbar=function(form){

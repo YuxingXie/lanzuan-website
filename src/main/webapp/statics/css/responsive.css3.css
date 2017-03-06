@@ -153,12 +153,14 @@
     .navbar-md-down-fix-bottom a:link{
         color: #ffffff;
     }
-    .navbar-md-down-fix-bottom .navbar-nav .nav-item + .nav-item {
+    .navbar-md-down-fix-bottom .navbar-nav .nav-item {
+    /*.navbar-md-down-fix-bottom .navbar-nav .nav-item + .nav-item {*/
         /*border-right: solid #c0c0c0 1px;*/
         border: solid #0266C9 1px;
         margin-left: 0;
         border-radius: .25rem .25rem 0 0;
         background-color: #0275d8;
+        float: left;
 
     }
     /*.navbar-md-down-fix-bottom .nav-link{*/
