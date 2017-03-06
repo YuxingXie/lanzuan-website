@@ -1,12 +1,20 @@
 <div class="row p-a-0 m-a-0">
-    <form ng-submit="" class="col-xs-12 p-a-0 m-a-0">
+    <form ng-submit="" class="col-xs-12 p-a-0 m-a-0" name="form">
+
+        <div class="col-xs-10 m-a-0 p-a-0">
+            <label class="label label-default large-180">编辑数据</label>
+            <div class="btn-group padding-bottom-10">
+                <button class="btn btn-primary fa fa-upload" type="button" ng-click="submitNavbar(form)"> 修 改</button>
+                <button class="btn btn-primary fa fa-save" type="button" ng-click="newNavbar(form)"> 另 存</button>
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetNavbar(form)"> 重 置</button>
+            </div>
 
 
-
-            <div class="col-xs-10">
+        </div>
+            <div class="col-xs-12">
                 <div class="btn-group dropup">
-                    <button type="button" class="btn btn-secondary">更换图片</button>
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
@@ -49,9 +57,9 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm  fa fa-plus">前面插入一条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insertNavItemsBefore($index)"> 前面插入一条</button>
 
-                        <button class="btn btn-primary btn-sm  fa fa-trash">删掉此条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="removeNavItems($index)"> 删掉此条</button>
                     </div>
 
                 </td>
@@ -61,12 +69,7 @@
             </tr>
 
         </table>
-        <div class="col-xs-10 col-xs-push-2 m-a-0 p-a-0 ">
-            <button class="btn btn-primary fa fa-upload" type="submit"> 提 交 修 改</button>
-            <button class="btn btn-primary fa fa-save" type="submit"> 数 据 另 存</button>
-            <button class="btn btn-primary fa fa-refresh" type="submit"> 重 置</button>
 
-        </div>
 
 
     </form>

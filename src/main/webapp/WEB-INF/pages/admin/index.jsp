@@ -17,7 +17,7 @@
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" >
-    <div class="container-fluid  padding-0 margin-0" ng-controller="AdminController" ng-init="initAdmin()">
+    <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
         <nav class="row navbar">
             <div class="navbar-brand">
                 <c:choose>
@@ -39,11 +39,11 @@
             </ul>
         </nav>
         <div class="row" role="tablist">
-            <div class="card  margin-bottom-0 margin-top-0" ng-repeat="menuItem in menuItems">
-                <div class="card-header margin-bottom-0" role="tab">
+            <div class="card  m-b-0 m-t-0" ng-repeat="menuItem in menuItems">
+                <div class="card-header m-b-0" role="tab">
                     <a href="javascript:void(0)" ng-click="menuItem.collapse=!menuItem.collapse">
 
-                        <h5 class="card-title  margin-bottom-0">
+                        <h5 class="card-title  m-b-0">
                             <i class="{{menuItem.class}} padding-left-10"></i>
                             {{menuItem.name}}
                             <i class="fa pull-right padding-right-30"
@@ -51,7 +51,7 @@
                         </h5>
                     </a>
                 </div>
-                <div class="card-block padding-0 margin-0"
+                <div class="card-block p-a-0 m-a-0"
                      ng-class="{'collapse':menuItem.collapse,'in':!menuItem.collapse}">
                     <div class="list-group">
                         <a class="list-group-item" ng-repeat="subMenuItem in menuItem.menuItem" ng-href="{{subMenuItem.link}}">
@@ -64,11 +64,8 @@
             </div>
 
         </div>
-        <div class="row padding-top-2em margin-0">
-            <div class="text-center">
-                <button class="btn btn-primary" ng-click="editable=!editable">显示可编辑项</button>
-                点击<button class="btn btn-primary" id="start">开始编辑{{test}}</button>按钮后，右键点击可编辑的元素可弹出一个右键菜单（不是浏览器菜单），请点击菜单项选择相应操作。
-            </div>
+        <div class="row padding-top-2em m-a-0">
+
             <div ng-controller="HomeController">
                 <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
                     <div class="row"style="border-top: solid #000 1px">
@@ -76,14 +73,13 @@
                             <jsp:include page="${pageComponent.uri}"></jsp:include>
                         </div>
 
-                        <div class="col-xs-4 m-a-0 p-a-0" >
-                            <div>这是一个${pageComponent.name},您可以如下操作：</div>
-                            <div class="btn-group">
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/new/${pageComponent.id}">新建一个</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">编辑内容</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/css/${pageComponent.id}">调整样式</a>
-                            </div>
+                        <div class="col-xs-4 m-a-0 padding-left-2em" >
+                            <div>这是一个${pageComponent.name}</div>
                             <div>${pageComponent.remark}</div>
+
+                            <div class="btn-group">
+                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">编辑内容</a>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>

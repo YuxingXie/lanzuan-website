@@ -19,6 +19,23 @@
                 $scope.navbar=data;
             });
         }
+
+        $scope.removeNavItems=function(index){
+            $scope.navbar.navItems.splice(index,1)
+        }
+        $scope.insertNavItemsBefore=function(index){
+            $scope.navbar.navItems.splice(index,0,{"name":"ssss","link":"dfdfd","faClass":"dfdf","navItemCass":"dfd"})
+        }
+
+        $scope.submitNavbar=function(form){
+            form.reset();
+        }
+        $scope.newNavbar=function(form){
+
+        }
+        $scope.resetNavbar=function(form){
+            $scope.getNavbar();
+        }
         $scope.getCarousel=function(){
             $http.get("/statics/json/carousel.json").success(function (data) {
                 $scope.carousel=data;

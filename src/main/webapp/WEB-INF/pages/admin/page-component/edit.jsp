@@ -17,7 +17,7 @@
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app">
-<div class="container-fluid  padding-0 margin-0" ng-controller="AdminController" ng-init="initAdmin()">
+<div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
     <nav class="row navbar">
         <div class="navbar-brand">
             <c:choose>
@@ -41,10 +41,10 @@
     </nav>
     <div class="row" role="tablist">
         <div class="card  m-b-0 m-t-0" ng-repeat="menuItem in menuItems">
-            <div class="card-header margin-bottom-0" role="tab">
+            <div class="card-header m-b-0" role="tab">
                 <a href="javascript:void(0)" ng-click="menuItem.collapse=!menuItem.collapse">
 
-                    <h5 class="card-title  margin-bottom-0">
+                    <h5 class="card-title  m-b-0">
                         <i class="{{menuItem.class}} padding-left-10"></i>
                         {{menuItem.name}}
                         <i class="fa pull-right padding-right-30"
@@ -52,7 +52,7 @@
                     </h5>
                 </a>
             </div>
-            <div class="card-block padding-0 margin-0"
+            <div class="card-block p-a-0 m-a-0"
                  ng-class="{'collapse':menuItem.collapse,'in':!menuItem.collapse}">
                 <div class="list-group">
                     <a class="list-group-item" ng-repeat="subMenuItem in menuItem.menuItem"
@@ -81,7 +81,7 @@
                     <jsp:include page="${pageComponent.uri}"></jsp:include>
                 </div>
                 <div class="padding-top-2em">
-                    <label class="label label-default large-180">编辑数据</label>
+
                     <jsp:include page="${pageComponent.editUri}"></jsp:include>
                 </div>
 
