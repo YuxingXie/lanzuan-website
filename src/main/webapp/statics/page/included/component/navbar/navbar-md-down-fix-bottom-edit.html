@@ -1,0 +1,73 @@
+<div class="row p-a-0 m-a-0">
+    <form ng-submit="" class="col-xs-12 p-a-0 m-a-0">
+
+
+
+            <div class="col-xs-10">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-secondary">更换图片</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" ng-click="navbar.navbarBrand.value='/statics/image/lanzuan/icons/foll1.gif'">
+                            <img type="text" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="img-ico-lg"/>
+                        </div>
+                        <div class="dropdown-item" ng-click="navbar.navbarBrand.value='/statics/image/lanzuan/icons/foll2.gif'">
+                            <img type="text" ng-src="/statics/image/lanzuan/icons/foll2.gif" class="img-ico-lg"/>
+                        </div>
+
+                    </div>
+                    如果没有合适的图片，您可以先上传图片素材
+                </div>
+            </div>
+
+
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th >名称</th>
+                <th >链接</th>
+                <th >bootstrap类</th>
+                <th >font-awesome类</th>
+                <th>其它操作</th>
+            </tr>
+            <tr ng-repeat="navItem in navbar.navItems">
+
+
+                <td>
+                    <input type="text" ng-model="navItem.name" class="form-control">
+                </td>
+                <td>
+                    <input type="text" ng-model="navItem.link" class="form-control" >
+                </td>
+                <td>
+                    <input type="text" ng-model="navItem.navItemCass" class="form-control">
+                </td>
+                <td>
+                    <input type="text" ng-model="navItem.faClass" class="form-control">
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm  fa fa-plus">前面插入一条</button>
+
+                        <button class="btn btn-primary btn-sm  fa fa-trash">删掉此条</button>
+                    </div>
+
+                </td>
+
+
+
+            </tr>
+
+        </table>
+        <div class="col-xs-10 col-xs-push-2 m-a-0 p-a-0 ">
+            <button class="btn btn-primary fa fa-upload" type="submit"> 提 交 修 改</button>
+            <button class="btn btn-primary fa fa-save" type="submit"> 数 据 另 存</button>
+            <button class="btn btn-primary fa fa-refresh" type="submit"> 重 置</button>
+
+        </div>
+
+
+    </form>
+</div>

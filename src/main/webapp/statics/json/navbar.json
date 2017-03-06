@@ -1,10 +1,10 @@
 {
   "navbarBrand":{"type":"image","value":"/statics/image/lanzuan/icons/ico.jpg"},
   "navItems":[
-    {"name":"首页","link":"/","faClass":"a-home","navItemCass":"col-xs-3 col-md-2 col-lg-1 margin-0 padding-left-0 padding-right-0 padding-top-10 text-center"},
-    {"name":"智慧城市","link":"/statics/page/business/b1.html","faClass":"fa-wifi","navItemCass":"col-xs-3 col-md-2 col-lg-1 margin-0 padding-left-0 padding-right-0 padding-top-10 text-center"},
-    {"name":"三农服务","link":"/statics/page/business/b2.html","faClass":"fa-tree","navItemCass":"col-xs-3 col-md-2 col-lg-1 margin-0 padding-left-0 padding-right-0 padding-top-10 text-center"},
-    {"name":"软件开发","link":"/statics/page/business/b3.html","faClass":"fa-safari","navItemCass":"col-xs-3 col-md-2 col-lg-1 margin-0 padding-left-0 padding-right-0 padding-top-10 text-center"},
-    {"name":"关于我们","link":"/statics/page/about-us.html","faClass":"fa-male","navItemCass":"col-xs-3 col-md-2 col-lg-1 margin-0 padding-left-0 padding-right-0 padding-top-10 text-center"}
+    {"name":"首页","link":"/","faClass":"fa-home","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"},
+    {"name":"智慧城市","link":"/statics/page/business/b1.html","faClass":"fa-wifi","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"},
+    {"name":"三农服务","link":"/statics/page/business/b2.html","faClass":"fa-tree","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"},
+    {"name":"软件开发","link":"/statics/page/business/b3.html","faClass":"fa-safari","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"},
+    {"name":"关于我们","link":"/statics/page/about-us.html","faClass":"fa-male","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"}
   ]
 }

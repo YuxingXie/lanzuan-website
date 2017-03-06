@@ -9,8 +9,9 @@ public class PageComponent {
     private String id;
     private String name;
     private String uri;
+    private String editUri;
     private String remark;
-    private String dataClass;
+
 
     public String getId() {
         return id;
@@ -28,13 +29,7 @@ public class PageComponent {
         this.name = name;
     }
 
-    public String getDataClass() {
-        return dataClass;
-    }
 
-    public void setDataClass(String dataClass) {
-        this.dataClass = dataClass;
-    }
 
     public String getUri() {
         return uri;
@@ -44,6 +39,14 @@ public class PageComponent {
         this.uri = uri;
     }
 
+    public String getEditUri() {
+        return editUri;
+    }
+
+    public void setEditUri(String editUri) {
+        this.editUri = editUri;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -51,4 +54,8 @@ public class PageComponent {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+
+
+
 }

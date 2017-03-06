@@ -4,7 +4,9 @@ import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.IdentifyingCode;
 import com.lanzuan.common.util.MD5;
+import com.lanzuan.common.util.MongoDbUtil;
 import com.lanzuan.common.web.CookieTool;
+import com.lanzuan.entity.Navbar;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
@@ -24,11 +26,12 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by Administrator on 2015/6/11.
@@ -92,8 +95,9 @@ public class AdminController extends BaseRestSpringController {
     @RequestMapping(value = "/page_component/edit/{id}")
     public String editPageComponent(@PathVariable String id,ModelMap model, HttpSession session) {
         PageComponent pageComponent=pageComponentService.findById(id);
-        pageComponent.setDataClass("com.lanzuan.entity.Navbar");
+        pageComponent.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.html");
         model.addAttribute("pageComponent",pageComponent);
+
         return "admin/page-component/edit";
     }
     @RequestMapping(value = "/page_component/css/{id}")

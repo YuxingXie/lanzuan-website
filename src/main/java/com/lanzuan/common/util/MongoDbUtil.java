@@ -5,13 +5,16 @@ import com.lanzuan.entity.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
+import java.util.*;
 
 public class MongoDbUtil {
 
@@ -169,6 +172,23 @@ public class MongoDbUtil {
         Document document=t.getAnnotation(Document.class);
         String collection= document==null?null:(document.collection()==null?ReflectUtil.firstLowerCase(t.getSimpleName()):document.collection());
         return collection;
+    }
+    public static<T>  List<String> getUpdateFromEntity(Class collectionClass) {
+        List<String> list = new ArrayList<String>();
+        for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Transient.class) || field.isAnnotationPresent(Id.class)) continue;
+            String setterMethodName = ReflectUtil.getSetterMethodName(field.getName());
+            Class fieldType = field.getType();
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            if (field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class)) {
+                org.springframework.data.mongodb.core.mapping.Field docField = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class);
+                fieldName = docField.value() == null || docField.value().equals("") ? field.getName() : docField.value();
+
+            }
+            list.add(fieldName);
+        }
+        return list;
     }
     public static void main(String[] args){
         System.out.println(ReflectUtil.firstLowerCase(User.class.getSimpleName()));
