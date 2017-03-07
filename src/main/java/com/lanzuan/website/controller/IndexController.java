@@ -10,6 +10,10 @@ import com.lanzuan.website.service.IArticleSectionService;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
 import com.lanzuan.website.service.IPageTemplateService;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBRef;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,7 +56,11 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/article/{id}")
     public String article(@PathVariable String id,ModelMap modelMap){
         Article article=articleService.findById(id);
-        ArticleSection section=articleSectionService.findById("");
+        DBObject dbObject=new BasicDBObject();
+       // {"productSeriesPrices.price":0.05},{"$set":{"productSeriesPrices.$.price":0.01}},false,true
+        dbObject.put("articles.$id",new ObjectId(id));
+        ArticleSection section=articleSectionService.findOne(dbObject);
+        article.setArticleSection(section);
         modelMap.addAttribute("article",article);
         return "website/article/article";
     }
