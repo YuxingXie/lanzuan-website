@@ -66,6 +66,12 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
         return getEntityDao().findAll();
     }
     @Override
+    public List<E> findFields(List<String> fields) {
+        return getEntityDao().findFields(fields);
+    }
+    public List<E> findFields(DBObject dbObject,List<String> fields){
+        return getEntityDao().findFields(dbObject,fields);}
+    @Override
     public List<E> findAll(Integer limit){
         return getEntityDao().findAll(limit);
     }
@@ -180,5 +186,11 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     }
     public E getMax(String field, String fieldQuery, Object fieldQueryValue){
         return getEntityDao().getMax(field, fieldQuery, fieldQueryValue);
+    }
+    public List<E> findFields(DBObject dbObject, List<String> fields, int limit){
+        return getEntityDao().findFields(dbObject,  fields,  limit);
+    }
+    public List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc){
+        return getEntityDao().findFields(dbObject,fields,limit,sortField,asc);
     }
 }

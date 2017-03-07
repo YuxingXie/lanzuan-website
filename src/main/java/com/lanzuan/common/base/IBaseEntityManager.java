@@ -1,5 +1,6 @@
 package com.lanzuan.common.base;
 
+import com.lanzuan.entity.ArticleSection;
 import com.mongodb.CommandResult;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -26,6 +27,8 @@ public interface IBaseEntityManager<E> {
    List<E> findNotEquals(E e);
    List<E> textQuery(String keyWord);
    List<E> findAll();
+   List<E> findFields(List<String> fields);
+   List<E> findFields(DBObject dbObject,List<String> fields);
    List<E> findAll(Integer limit);
 //   public int upsert(E queryEntity,E updateEntity);
    E findById(ObjectId id);;
@@ -66,4 +69,7 @@ public interface IBaseEntityManager<E> {
    Page<E> findPage(DBObject dbObject, Integer page, int i, String sortField, boolean asc);
 
    E getMax(String field, String fieldQuery, Object fieldQueryValue);
+
+   List<E> findFields(DBObject dbObject, List<String> fields, int limit);
+   List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc);
 }

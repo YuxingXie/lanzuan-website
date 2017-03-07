@@ -4,7 +4,8 @@
 
     app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
         $scope.getArticleSection=function(){
-            $http.get("/statics/json/articleSection.json").success(function (data) {
+            $http.get("/articleSection/data").success(function (data) {
+                console.log(JSON.stringify(data))
                 $scope.articleSection=data;
             });
         }

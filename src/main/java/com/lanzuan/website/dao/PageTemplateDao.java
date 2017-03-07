@@ -8,6 +8,7 @@ import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -25,10 +26,14 @@ public class PageTemplateDao extends BaseMongoDao<PageTemplate>  {
 
 
     public PageTemplate findByUri(String uri) {
+
         DBObject dbObject=new BasicDBObject();
         dbObject.put("uri",uri);
         dbObject.put("active",true);
         List<PageTemplate> list=findAll(dbObject);
+//        query.fields().include("_id");
+//        query.fields().include("domain");
+//        query.fields().include("count");
         return list==null||list.size()!=1?null:list.get(0);
     }
 }

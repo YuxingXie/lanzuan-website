@@ -6,12 +6,14 @@ import com.lanzuan.common.util.IdentifyingCode;
 import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.MongoDbUtil;
 import com.lanzuan.common.web.CookieTool;
-import com.lanzuan.entity.Navbar;
-import com.lanzuan.entity.PageComponent;
-import com.lanzuan.entity.User;
+import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
+import com.lanzuan.website.service.IArticleSectionService;
+import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
 import com.lanzuan.website.service.impl.UserService;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -29,9 +31,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/11.
@@ -44,6 +44,10 @@ public class AdminController extends BaseRestSpringController {
     UserService userService;
     @Resource(name = "pageComponentService")
     IPageComponentService pageComponentService;
+    @Resource(name = "articleSectionService")
+    IArticleSectionService articleSectionService;
+    @Resource(name = "articleService")
+    IArticleService articleService;
     @RequestMapping(value = "/sign_up")
     public String signUp(@ModelAttribute User user,ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         Assert.notNull(user);
@@ -103,5 +107,34 @@ public class AdminController extends BaseRestSpringController {
     @RequestMapping(value = "/page_component/css/{id}")
     public String editPageComponentCss(@PathVariable String id,ModelMap model, HttpSession session) {
         return "admin/page-component/css";
+    }
+    @RequestMapping(value = "/file-editor/{id}")
+    public String articleEditor(@PathVariable String id,ModelMap model, HttpSession session) {
+        PageComponent pageComponent=pageComponentService.findById(id);
+        pageComponent.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.html");
+        model.addAttribute("pageComponent",pageComponent);
+        return "admin/page-component/edit";
+    }
+    @RequestMapping(value = "/file-editor")
+    public String articleNew(ModelMap model, HttpSession session) {
+
+        model.addAttribute("articleSections",Constant.articleSections);
+        return "admin/file-editor";
+    }
+    @RequestMapping(value = "/article/upload")
+    public String articleUpload(ModelMap model,@ModelAttribute Article article, HttpSession session) {
+        ArticleSection articleSection=articleSectionService.findById(article.getArticleSection().getId());
+        List<Article> articles=articleSection.getArticles();
+        if (articles==null){
+            articles=new ArrayList<Article>();
+        }
+        article.setDate(new Date());
+        article.setUploader(getLoginAdministrator(session));
+        articles.add(article);
+        articleSection.setArticles(articles);
+        articleService.insert(article);
+        articleSectionService.update(articleSection);
+        model.addAttribute("article",article);
+        return "redirect:/admin/a";
     }
 }

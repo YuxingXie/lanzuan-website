@@ -502,4 +502,30 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
     public void removeAll(){
         mongoTemplate.findAllAndRemove(new BasicQuery(new BasicDBObject()),collectionClass);
     }
+    @Override
+    public List<E> findFields(List<String> fields){
+        return findFields(null,fields);
+    }
+    @Override
+    public List<E> findFields(DBObject dbObject, List<String> fields){
+        return findFields(dbObject,fields,0);
+    }
+     public List<E> findFields(DBObject dbObject, List<String> fields, int limit){
+        return findFields(dbObject,fields,limit,null,false);
+    }
+    public List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc){
+        Query query=new BasicQuery(dbObject);
+        for(String field:fields){
+            query.fields().include(field);
+        }
+        if (limit!=0){
+            query.limit(limit);
+
+        }
+        if (sortField!=null){
+            Sort.Direction direction=asc? Sort.Direction.ASC: Sort.Direction.DESC;
+            query.with(new Sort(direction,sortField));
+        }
+        return findAll(query);
+    }
   }
