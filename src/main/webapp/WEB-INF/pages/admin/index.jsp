@@ -93,23 +93,5 @@
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
     <script src="${path}/statics/plugin/bootstrap-contextmenu-master/bootstrap-contextmenu.js"></script>
     <script src="${path}/statics/js/app.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-//            $(document).on("click", $("#start"), function() {
-//                $("img").data("target","#img-context-menu");
-//                $("img").contextmenu({
-//                    onItem: function(context, e) {
-//                        console.log(context.attr("class"));
-//                    }
-//                });
-//                $("a").data("target","#a-context-menu");
-//                $("a").contextmenu();
-//                $(".fa").data("target","#context-menu");
-//                $(".fa").contextmenu();
-//
-//            });
-        });
-    </script>
-
 </body>
 

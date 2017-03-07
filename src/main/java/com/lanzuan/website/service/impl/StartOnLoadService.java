@@ -43,15 +43,15 @@ public class StartOnLoadService {
         fields.add("name");
         fields.add("image");
         fields.add("articles");
-
         int limit=Constant.articleSectionNum;
-        Date now=new Date();
         List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
         if (articleSections==null||articleSections.size()==0){
             System.out.println("未查询到文章版块数据，使用默认内容。。。");
             articleSections=new ArrayList<ArticleSection>();
             ArticleSection articleSection1=new ArticleSection();
             articleSection1.setName("新闻动态");
+            Date now=new Date();
+
             articleSection1.setCreateDate(now);
 //            articleSection1.setCreator(getLoginAdministrator(session));
             articleSection1.setEnabled(true);

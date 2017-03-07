@@ -17,8 +17,8 @@
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" charset="utf-8"
             src="${path}/statics/plugin/ueditor1_4_3_3/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8"
-            src="${path}/statics/plugin/ueditor1_4_3_3/ueditor.all.min.js"></script>
+    <%--<script type="text/javascript" charset="utf-8" src="${path}/statics/plugin/ueditor1_4_3_3/ueditor.all.min.js"></script>--%>
+    <script type="text/javascript" charset="utf-8" src="${path}/statics/plugin/ueditor1_4_3_3/ueditor.all.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8"
@@ -59,20 +59,28 @@
                 <fieldset>
                     <div class="form-group input-group">
                         <label class="fa fa-user input-group-addon">标题</label>
-                        <input class="form-control" placeholder="" name="title" type="text">
-                        <input type="hidden" name="content" id="content"/>
+                        <input class="form-control" name="title" type="text" value="${article.title}">
+                        <input type="hidden" name="content" id="content" />
+                        <input type="hidden" name="id" id="id" value="${article.id}"/>
                     </div>
                     <div class="form-group input-group">
                         <label class="fa fa-lock input-group-addon">版块</label>
-                        <select class="form-control" name="articleSection.id">
-                            <c:forEach var="articleSection" items="${articleSections}">
-                                <option value="${articleSection.id}">${articleSection.name}</option>
-                            </c:forEach>
-                        </select>
+                        <c:if test="${empty articleSections}">
+                            <input type="text" value="${articleSection.name}" disabled/>
+                            <input type="hidden" value="${articleSection.id}" name="articleSectionId"/>
+                        </c:if>
+                        <c:if test="${not empty articleSections}">
+                            <select class="form-control" name="articleSectionId" >
+                                <c:forEach var="articleSection" items="${articleSections}">
+                                    <option value="${articleSection.id}">${articleSection.name}</option>
+                                </c:forEach>
+                            </select>
+                        </c:if>
+
                     </div>
                     <div class="form-group input-group">
                         <label class="fa fa-user input-group-addon">作者</label>
-                        <input class="form-control" placeholder="" name="author" type="text">
+                        <input class="form-control" name="author" type="text" value="${article.author}">
                     </div>
                     <button class="btn btn-lg btn-primary btn-block " onclick="uploadF()" type="button"><i class="fa fa-upload"></i> 上 传 文 档</button>
                 </fieldset>
@@ -87,10 +95,15 @@
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
-
+    <c:if test="${not empty article}">
+    UE.getEditor('editor').ready(function() {
+        //this是当前创建的编辑器实例
+        this.setContent('${article.content}')
+    })
+    </c:if>
     uploadF=function(){
-        var art=UE.getEditor('editor').getContent();
-        var hasContents=UE.getEditor('editor').hasContents();
+        var art=ue.getContent();
+        var hasContents=ue.hasContents();
         if(!hasContents){
             alert("文章没有内容！");
             return;
@@ -117,10 +130,9 @@
         alert(arr.join('\n'))
     }
     function setContent(isAppendTo) {
-        var arr = [];
-        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
-        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
-        alert(arr.join("\n"));
+
+        UE.getEditor('editor').setContent('${article.content}', isAppendTo);
+
     }
 
 
@@ -162,6 +174,7 @@
         UE.getEditor('editor').execCommand("clearlocaldata");
         alert("已清空草稿箱")
     }
+
 </script>
 </body>
 </html>

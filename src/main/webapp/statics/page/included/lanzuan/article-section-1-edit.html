@@ -1,0 +1,59 @@
+<div class="row p-a-0 m-a-0">
+    <form ng-submit="" class="col-xs-12 p-a-0 m-a-0" name="form">
+
+        <div class="col-xs-12 m-a-0 p-a-0">
+            <label class="label label-default large-180">编辑数据</label>
+            <div class="btn-group padding-bottom-10">
+                <button class="btn btn-primary fa fa-upload " type="button" ng-click="a(form)" ng-disabled="form.$pristine||true" disabled> 保 存</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="a(form)" ng-disabled="form.$pristine||true" disabled> 新增版块</button>
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetArticleSections(form)" disabled> 重 置</button>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="alert alert-warning">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-warning fa-fw"></i> 如果不点击上方的“保 存”按钮，修改不会生效;</li>
+                    <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，所以如果点击“编辑此文”按钮后文章显示异常，则无法编辑。</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-xs-12">
+
+        </div>
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th >编辑版块名称</th>
+                <th class="half-width">编辑文章标题</th>
+                <th>版块操作</th>
+            </tr>
+            <tr ng-repeat="articleSection in articleSections">
+                <td>
+                    <input type="text" ng-model="articleSection.name" class="form-control">
+                </td>
+                <td>
+                    <table class="table table-hover table-responsive">
+                        <tr ng-repeat="article in articleSection.articles">
+                            <td>
+                                <input type="text" ng-model="article.title" class="form-control ">
+                            </td>
+                            <td class="btn-group">
+                                <a class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/{{article.id}}" disabled> 编辑此文</a>
+                                <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeNavItems($index)" disabled> 删掉此文</button>
+                                <button class="btn btn-primary btn-sm  fa fa-arrow-up " ng-click="toTop($index)" disabled> 置顶</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/{{articleSection.id}}"> 此版块加入一篇</a>
+                        <button disabled class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/{{articleSection.id}}"> 删除此版块</button>
+                        <button disabled class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/{{articleSection.id}}"> 删除此版块及文章</button>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

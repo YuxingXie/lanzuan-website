@@ -7,7 +7,8 @@
     <title></title>
 </head>
 <body>
-<div >${article.articleSection.id}</div>
+<div >${article.articleSections[0].name}</div>
+<div >${article.articleSections[1].name}</div>
 author:${article.author}
 uploader: ${article.uploader.name}
 content:${article.content}

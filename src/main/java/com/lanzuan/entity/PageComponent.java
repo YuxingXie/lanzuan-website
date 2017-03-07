@@ -1,5 +1,5 @@
 package com.lanzuan.entity;
-
+//> db.pageComponent.update({"name":"文章块组件1"},{"$set":{"editUri":"/statics/page/included/lanzuan/article-section-1-edit.html"}},false,true)
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

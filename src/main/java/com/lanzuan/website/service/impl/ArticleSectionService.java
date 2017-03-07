@@ -11,6 +11,7 @@ import com.lanzuan.website.service.IPageTemplateService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/6.
@@ -25,4 +26,8 @@ public class ArticleSectionService extends BaseEntityManager<ArticleSection> imp
     }
 
 
+    @Override
+    public List<ArticleSection> findArticleSectionByArticleId(String id) {
+        return articleSectionDao.findArticleSectionByArticleId(id);
+    }
 }

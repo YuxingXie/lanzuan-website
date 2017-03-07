@@ -6,7 +6,7 @@
         $scope.getArticleSection=function(){
             $http.get("/articleSection/data").success(function (data) {
                 console.log(JSON.stringify(data))
-                $scope.articleSection=data;
+                $scope.articleSections=data;
             });
         }
         $scope.getSortLinkSection=function(){

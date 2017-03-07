@@ -51,16 +51,24 @@ public class IndexController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/articleSection/data")
     public ResponseEntity<List<ArticleSection>> articleSectionData() throws ServletException, IOException {
-        return new ResponseEntity<List<ArticleSection>>(Constant.articleSections, HttpStatus.OK);
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("enabled",true);
+        List<String> fields=new ArrayList<String>();
+        fields.add("id");
+        fields.add("name");
+        fields.add("image");
+        fields.add("articles");
+        int limit=Constant.articleSectionNum;
+        List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
+        return new ResponseEntity<List<ArticleSection>>(articleSections, HttpStatus.OK);
     }
     @RequestMapping(value = "/article/{id}")
     public String article(@PathVariable String id,ModelMap modelMap){
         Article article=articleService.findById(id);
-        DBObject dbObject=new BasicDBObject();
-       // {"productSeriesPrices.price":0.05},{"$set":{"productSeriesPrices.$.price":0.01}},false,true
-        dbObject.put("articles.$id",new ObjectId(id));
-        ArticleSection section=articleSectionService.findOne(dbObject);
-        article.setArticleSection(section);
+
+
+        List<ArticleSection> sections=articleSectionService.findArticleSectionByArticleId(id);
+        article.setArticleSections(sections);
         modelMap.addAttribute("article",article);
         return "website/article/article";
     }

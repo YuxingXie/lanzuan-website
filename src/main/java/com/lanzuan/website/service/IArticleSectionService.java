@@ -4,9 +4,12 @@ import com.lanzuan.common.base.IBaseEntityManager;
 import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.entity.PageTemplate;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2015/11/6.
  */
 public interface IArticleSectionService extends IBaseEntityManager<ArticleSection> {
 
+    List<ArticleSection> findArticleSectionByArticleId(String id);
 }

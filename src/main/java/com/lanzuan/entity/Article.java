@@ -2,9 +2,11 @@ package com.lanzuan.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "article")
 public class Article {
@@ -14,9 +16,13 @@ public class Article {
     private Date date;
     private String content;
     private String author;
+    @DBRef
     private User uploader;
+    private Date lastModifyDate;
+    @DBRef
+    private User lastModifyUser;
     @Transient
-    private ArticleSection articleSection;
+    private List<ArticleSection> articleSections;
     public String getId() {
         return id;
     }
@@ -65,11 +71,27 @@ public class Article {
         this.uploader = uploader;
     }
 
-    public ArticleSection getArticleSection() {
-        return articleSection;
+    public List<ArticleSection> getArticleSections() {
+        return articleSections;
     }
 
-    public void setArticleSection(ArticleSection articleSection) {
-        this.articleSection = articleSection;
+    public void setArticleSections(List<ArticleSection> articleSections) {
+        this.articleSections = articleSections;
+    }
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
     }
 }

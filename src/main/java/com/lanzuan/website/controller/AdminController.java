@@ -22,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -99,7 +101,6 @@ public class AdminController extends BaseRestSpringController {
     @RequestMapping(value = "/page_component/edit/{id}")
     public String editPageComponent(@PathVariable String id,ModelMap model, HttpSession session) {
         PageComponent pageComponent=pageComponentService.findById(id);
-        pageComponent.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.html");
         model.addAttribute("pageComponent",pageComponent);
 
         return "admin/page-component/edit";
@@ -110,10 +111,18 @@ public class AdminController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/file-editor/{id}")
     public String articleEditor(@PathVariable String id,ModelMap model, HttpSession session) {
-        PageComponent pageComponent=pageComponentService.findById(id);
-        pageComponent.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.html");
-        model.addAttribute("pageComponent",pageComponent);
-        return "admin/page-component/edit";
+        Article article=articleService.findById(id);
+        model.addAttribute("article",article);
+        List<ArticleSection> articleSections=articleSectionService.findArticleSectionByArticleId(id);
+        model.addAttribute("articleSections",articleSections);
+        return "admin/file-editor";
+    }
+    @RequestMapping(value = "/file-editor/in-section/{id}")
+    public String addNewArticleInSection(@PathVariable String id,ModelMap model, HttpSession session) {
+        ArticleSection articleSection=articleSectionService.findById(id);
+
+        model.addAttribute("articleSection",articleSection);
+        return "admin/file-editor";
     }
     @RequestMapping(value = "/file-editor")
     public String articleNew(ModelMap model, HttpSession session) {
@@ -122,19 +131,42 @@ public class AdminController extends BaseRestSpringController {
         return "admin/file-editor";
     }
     @RequestMapping(value = "/article/upload")
-    public String articleUpload(ModelMap model,@ModelAttribute Article article, HttpSession session) {
-        ArticleSection articleSection=articleSectionService.findById(article.getArticleSection().getId());
-        List<Article> articles=articleSection.getArticles();
-        if (articles==null){
-            articles=new ArrayList<Article>();
+    public String articleUpload(RedirectAttributes redirectAttributes,ModelMap model,@ModelAttribute Article article,String articleSectionId, HttpSession session) {
+        Date now=new Date();
+        if (article.getId()!=null&&!article.getId().trim().equals("")){
+            article.setLastModifyDate(now);
+//            article.setLastModifyUser(getLoginUser(session));
+            articleService.update(article);
+        }else {
+            article.setDate(now);
+//            article.setUploader(getLoginAdministrator(session));
+            articleService.insert(article);
         }
-        article.setDate(new Date());
-        article.setUploader(getLoginAdministrator(session));
-        articles.add(article);
-        articleSection.setArticles(articles);
-        articleService.insert(article);
-        articleSectionService.update(articleSection);
-        model.addAttribute("article",article);
+
+
+        ArticleSection articleSection=null;
+        if(articleSectionId!=null&&!articleSectionId.trim().equals("")){
+            articleSection=articleSectionService.findById(articleSectionId);
+            List<Article> articles=articleSection.getArticles();
+            boolean exists=false;
+            if (articles==null){
+                articles=new ArrayList<Article>();
+            }else{
+                for (Article article1:articles){
+                    if (article.getId().equals(article1.getId())){
+                        exists=true;
+                        break;
+                    }
+                }
+            }
+            if (!exists){
+                articles.add(article);
+                articleSection.setArticles(articles);
+                articleSectionService.update(articleSection);
+            }
+        }
+
+        redirectAttributes.addFlashAttribute("article",article);
         return "redirect:/admin/a";
     }
 }
