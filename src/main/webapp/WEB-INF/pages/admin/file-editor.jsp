@@ -6,7 +6,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>完整demo</title>
+    <title>蓝钻科技文本编辑</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>

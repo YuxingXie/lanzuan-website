@@ -16,6 +16,7 @@ public class Article {
     private Date date;
     private String content;
     private String author;
+    private boolean byEditor;//文章是否由百度文本编辑器生成
     @DBRef
     private User uploader;
     private Date lastModifyDate;
@@ -93,5 +94,13 @@ public class Article {
 
     public void setLastModifyUser(User lastModifyUser) {
         this.lastModifyUser = lastModifyUser;
+    }
+
+    public boolean isByEditor() {
+        return byEditor;
+    }
+
+    public void setByEditor(boolean byEditor) {
+        this.byEditor = byEditor;
     }
 }

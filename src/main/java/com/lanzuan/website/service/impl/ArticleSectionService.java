@@ -30,4 +30,9 @@ public class ArticleSectionService extends BaseEntityManager<ArticleSection> imp
     public List<ArticleSection> findArticleSectionByArticleId(String id) {
         return articleSectionDao.findArticleSectionByArticleId(id);
     }
+
+    @Override
+    public List<ArticleSection> findHomePageArticleSections() {
+        return articleSectionDao.findHomePageArticleSections();
+    }
 }

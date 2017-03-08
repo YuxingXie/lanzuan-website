@@ -1,6 +1,7 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
+import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.BusinessException;
 import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.entity.PageTemplate;
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,5 +35,18 @@ public class ArticleSectionDao extends BaseMongoDao<ArticleSection>  {
         return articleSections;
     }
 
+    public List<ArticleSection> findHomePageArticleSections() {
+
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("enabled",true);
+        List<String> fields=new ArrayList<String>();
+        fields.add("id");
+        fields.add("name");
+        fields.add("image");
+        fields.add("enabled");
+        fields.add("articles");
+        int limit= Constant.articleSectionNum;
+        return findFields(dbObject,fields,limit,"createDate",false);
+    }
 }
 

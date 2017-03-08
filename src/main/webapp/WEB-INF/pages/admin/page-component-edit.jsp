@@ -26,9 +26,9 @@
                 </c:when>
                 <c:otherwise><i class="fa fa-female padding-left-2em"></i></c:otherwise>
             </c:choose>
-            欢迎您，${user.name}
+            欢迎您，${sessionScope.administrator.name}
             <c:choose>
-                <c:when test="${empty user.sex or user.sex eq 'male'}">先生</c:when>
+                <c:when test="${empty sessionScope.administrator.sex or sessionScope.administrator.sex eq 'male'}">先生</c:when>
                 <c:otherwise>女士</c:otherwise>
             </c:choose>!
         </div>
@@ -54,7 +54,9 @@
                     <jsp:include page="${pageComponent.uri}"></jsp:include>
                 </div>
                 <div class="padding-top-2em">
-                    <jsp:include page="${pageComponent.editUri}"></jsp:include>
+                    <c:if test="${not empty pageComponent.editUri}">
+                        <jsp:include page="${pageComponent.editUri}"></jsp:include>
+                    </c:if>
                 </div>
             </div>
         </div>

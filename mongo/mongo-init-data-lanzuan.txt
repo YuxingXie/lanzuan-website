@@ -1,0 +1,1 @@
+db.pageComponent.update({"name":"文章块组件1"},{"$set":{"editUri":"/statics/page/included/lanzuan/article-section-1-edit.html"}},false,true)

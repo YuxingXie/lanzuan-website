@@ -12,4 +12,6 @@ import java.util.List;
 public interface IArticleSectionService extends IBaseEntityManager<ArticleSection> {
 
     List<ArticleSection> findArticleSectionByArticleId(String id);
+
+    List<ArticleSection> findHomePageArticleSections();
 }

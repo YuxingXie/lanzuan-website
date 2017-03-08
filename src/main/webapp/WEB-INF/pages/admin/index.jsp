@@ -18,54 +18,10 @@
 </head>
 <body ng-app="app" >
     <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
-        <nav class="row navbar">
-            <div class="navbar-brand">
-                <c:choose>
-                    <c:when test="${empty user.sex or user.sex eq 'male'}">
-                        <i class="fa fa-male padding-left-2em"></i>
-                    </c:when>
-                    <c:otherwise><i class="fa fa-female padding-left-2em"></i></c:otherwise>
-                </c:choose>
-                欢迎您，${user.name}
-                <c:choose>
-                    <c:when test="${empty user.sex or user.sex eq 'male'}">先生</c:when>
-                    <c:otherwise>女士</c:otherwise>
-                </c:choose>!
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="nav-item pull-right">
-                    <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出</button>
-                </li>
-            </ul>
-        </nav>
-        <div class="row" role="tablist">
-            <div class="card  m-b-0 m-t-0" ng-repeat="menuItem in menuItems">
-                <div class="card-header m-b-0" role="tab">
-                    <a href="javascript:void(0)" ng-click="menuItem.collapse=!menuItem.collapse">
+        <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+        <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
 
-                        <h5 class="card-title  m-b-0">
-                            <i class="{{menuItem.class}} padding-left-10"></i>
-                            {{menuItem.name}}
-                            <i class="fa pull-right padding-right-30"
-                               ng-class="{'fa-angle-down':!menuItem.collapse,'fa-angle-right':menuItem.collapse}"></i>
-                        </h5>
-                    </a>
-                </div>
-                <div class="card-block p-a-0 m-a-0"
-                     ng-class="{'collapse':menuItem.collapse,'in':!menuItem.collapse}">
-                    <div class="list-group">
-                        <a class="list-group-item" ng-repeat="subMenuItem in menuItem.menuItem" ng-href="{{subMenuItem.link}}">
-                            <i class="{{subMenuItem.class}} padding-left-20"></i>
-                            <span class="label label-default label-pill pull-right margin-right-20">14</span>{{subMenuItem.name}}
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
         <div class="row padding-top-2em m-a-0">
-
             <div ng-controller="HomeController">
                 <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
                     <div class="row"style="border-top: solid #000 1px">

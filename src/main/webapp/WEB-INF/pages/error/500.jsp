@@ -1,10 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/3/2
-  Time: 9:27
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath() %>"/>
+<c:if test="${path eq '/'}"><c:set var="path" value=""/></c:if>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
@@ -35,7 +32,7 @@
 
             <ol class="breadcrumb m-a-0">
               当前位置:
-              <li class="small-90 fa fa-home"><a href="/statics/../index.html"> 首页</a></li>
+              <li class="small-90 fa fa-home"><a href="${path}/"> 首页</a></li>
               <li class="small active">500</li>
             </ol>
           </div>
@@ -47,30 +44,12 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-9">
-        <i class="fa fa-warning fa-5x padding-top-2em padding-bottom-2em padding-left-2em text-warning">页面找不到了</i>
+        <i class="fa fa-bolt fa-2x padding-top-2em padding-bottom-2em padding-left-2em text-warning">出错了，快呼叫攻城狮吧</i>
       </div>
     </div>
   </div>
 </div>
-<footer>
-  <div class="row bg-black-2 small-90 padding-top-2em padding-bottom-2em md-down-margin-bottom-1em md-down-text-small-70 m-l-0 margin-right-0">
-                <span class="col-md-offset-2 col-xs-12 col-md-3 color-light-grey-2 text-center">
-                    ©2000-2017&nbsp;&nbsp;&nbsp;&nbsp;湖南蓝钻科技有限公司&nbsp;&nbsp;版权所有
-               </span>
-                <span class="col-xs-12 col-md-2 text-center">
-                    <a href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank" style="color:#efefef;">粤ICP备08126214号-5</a>
-                </span>
-    <div class="col-xs-12 col-md-3">
-                    <span class="col-xs-6 col-md-5 text-right color-light-grey-2 solid-silver-right-border">
-                        <a  href="../building.html" target="_blank" style="color:#efefef;">法律声明</a>
-                    </span>
-                    <span class="col-xs-6 col-md-5 text-left color-light-grey-2"><a  href="../article/privacy-protection.html" target="_blank" style="color:#efefef;">隐私保护</a>
-                    </span>
-    </div>
-
-    <img class="center-block height-2-5em" src="http://szcert.ebs.org.cn/Images/newGovIcon.gif"/>
-  </div>
-</footer>
+<jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
 <script src="/statics/js/jquery-3.1.1.min.js"></script>
 <script src="/statics/js/tether.min.js"></script>
 <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>

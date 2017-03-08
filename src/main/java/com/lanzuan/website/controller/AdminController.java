@@ -5,6 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.IdentifyingCode;
 import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.MongoDbUtil;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
@@ -50,23 +51,29 @@ public class AdminController extends BaseRestSpringController {
     IArticleSectionService articleSectionService;
     @Resource(name = "articleService")
     IArticleService articleService;
+
+    @RequestMapping(value = "/index")
+    public String index(HttpSession session,ModelMap modelMap){
+        modelMap.addAttribute("pageTemplate", Constant.pageTemplateMap.get("/home"));
+        return "forward:/WEB-INF/pages/admin/index.jsp";
+    }
     @RequestMapping(value = "/sign_up")
-    public String signUp(@ModelAttribute User user,ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public String signUp(@ModelAttribute User user,final RedirectAttributes redirectAttributes,HttpSession session) throws UnsupportedEncodingException {
         Assert.notNull(user);
-        Assert.notNull(user.getName());
-        Assert.notNull(user.getPassword());
+        Assert.isTrue(StringUtils.isNotBlank(user.getName()));
+        Assert.notNull(StringUtils.isNotBlank(user.getPassword()));
         User find=userService.findByName(user.getName());
-        model.addAttribute("pageTemplate",Constant.pageTemplateMap.get("/home"));
         if (find==null){
             session.setAttribute(Constant.LOGIN_ADMINISTRATOR,user);
-            return "admin/index";
+            return "redirect:/admin/index";
         }
         if (MD5.convert(user.getPassword()).equalsIgnoreCase(find.getPassword())){
             session.setAttribute(Constant.LOGIN_ADMINISTRATOR,user);
-
-            return "admin/index";
+            return "redirect:/admin/index";
         }
-        return "forward:/admin";
+
+        return "admin";
+
     }
     @RequestMapping(value = "/to_login")
     public String toLogin(ModelMap model,String to, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -95,20 +102,17 @@ public class AdminController extends BaseRestSpringController {
     }
 
     @RequestMapping(value = "/page_component/new")
-    public String newPageComponent(ModelMap model, HttpSession session) {
+    public String newPageComponent() {
         return "admin/page-component/new";
     }
     @RequestMapping(value = "/page_component/edit/{id}")
-    public String editPageComponent(@PathVariable String id,ModelMap model, HttpSession session) {
+    public String editPageComponent(@PathVariable String id,ModelMap model) {
         PageComponent pageComponent=pageComponentService.findById(id);
         model.addAttribute("pageComponent",pageComponent);
+        System.out.println("forward:/admin/page-component-edit");
+        return "forward:/admin/page-component-edit";
+    }
 
-        return "admin/page-component/edit";
-    }
-    @RequestMapping(value = "/page_component/css/{id}")
-    public String editPageComponentCss(@PathVariable String id,ModelMap model, HttpSession session) {
-        return "admin/page-component/css";
-    }
     @RequestMapping(value = "/file-editor/{id}")
     public String articleEditor(@PathVariable String id,ModelMap model, HttpSession session) {
         Article article=articleService.findById(id);
@@ -133,12 +137,15 @@ public class AdminController extends BaseRestSpringController {
     @RequestMapping(value = "/article/upload")
     public String articleUpload(RedirectAttributes redirectAttributes,ModelMap model,@ModelAttribute Article article,String articleSectionId, HttpSession session) {
         Date now=new Date();
+        article.setByEditor(true);
         if (article.getId()!=null&&!article.getId().trim().equals("")){
             article.setLastModifyDate(now);
 //            article.setLastModifyUser(getLoginUser(session));
             articleService.update(article);
         }else {
+            article.setId(null);
             article.setDate(now);
+            article.setLastModifyDate(now);
 //            article.setUploader(getLoginAdministrator(session));
             articleService.insert(article);
         }
@@ -168,5 +175,35 @@ public class AdminController extends BaseRestSpringController {
 
         redirectAttributes.addFlashAttribute("article",article);
         return "redirect:/admin/a";
+    }
+
+    @RequestMapping(value = "/ajaxTimeout")
+    public ResponseEntity<Message> ajaxTimeout(@RequestBody ArticleSection articleSection){
+        Message message=new Message();
+        message.setMessage("登录超时了");
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/article_section/rename")
+    public ResponseEntity<Message> renameArticleSection(@RequestBody ArticleSection articleSection){
+
+        Message message=new Message();
+        String name=articleSection.getName();
+        articleSection=articleSectionService.findById(articleSection.getId());
+        articleSection.setName(name);
+        articleSectionService.update(articleSection);
+        message.setSuccess(true);
+        message.setData(articleSection);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/article/remove")
+    public ResponseEntity<Message> removeArticle(@RequestBody Article article){
+        Message message=new Message();
+        articleService.removeById(article.getId());
+        //TODO 还要删掉articleSection中的DBref引用,暂时不会有问题
+        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
+        message.setSuccess(true);
+        message.setData(articleSections);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
 }

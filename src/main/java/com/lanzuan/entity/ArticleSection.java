@@ -7,7 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-
+/*
+db.articleSection.update({},{"$set":{"enabled":true}},false,true)
+db.articleSection.update({"name":"活动专题"},{"$set":{"enabled":true}},false,true)
+db.articleSection.update({"name":"新闻动态"},{"$set":{"articles":null}},false,true)
+ */
 @Document(collection = "articleSection")
 public class ArticleSection {
     @Id
