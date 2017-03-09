@@ -26,13 +26,14 @@
             }
         </style>
     </head>
-    <body ng-app="homeApp">
+    <body ng-app="homeApp" class="bg-very-light-1">
     <div ng-controller="HomeController" >
-
-        <div class="container margin-top-2em">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-md-3 col-lg-2 col-xl-1">
-                    <div class="list-group fixed-left-menu">
+                <%--<div style="width: 10%"></div>--%>
+                <div style="position:fixed;top:0;left:10%;width: 10%;z-index: 100">
+                    <%--<div class="list-group fixed-left-menu">--%>
+                    <div class="list-group ">
                         <div class="list-group-item p-a-0 hidden-sm-down">
                             <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em img-responsive">
                         </div>
@@ -50,20 +51,40 @@
                         <%--</div>--%>
                     </div>'
                 </div>
-                <div class="col-xs-12 col-md-9 col-lg-10 col-xl-11 p-a-0" id="content">
-                    <div class="col-xs-12 text-center p-a-0 m-a-0">
-                        <h4>${article.title}</h4>
-                        <label class="pull-right margin-bottom-2em label label-pill label-default">
-                        <c:if test="${not empty article.author}">作者:${article.author}</c:if>
-                            发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
-                        </label>
-                    </div>
-                    <div class="col-xs-12">${article.content}</div>
+                <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
+                  <table>
+                      <tr>
+                          <td width="25%"></td>
+                          <td width="65%" >
+                              <div class="clearfix col-xs-12 text-center p-a-0 m-a-0 ">
+                                  <h4>${article.title}</h4>
+                                  <label class="pull-right margin-bottom-2em label label-pill label-default">
+                                      <c:if test="${not empty article.author}">作者:${article.author}</c:if>
+                                      发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
+                                  </label>
+                              </div>
+                              <div class="col-xs-12 bg-white ">
+                              ${article.content}
+                              </div>
+                          </td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td colspan="3">
+                              <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
+                          </td>
+                      </tr>
+                  </table>
+
                 </div>
+
             </div>
+
+
         </div>
     </div>
-    <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
+    <div class="col-xs-12 padding-top-50">
+    </div>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/js/tether.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
