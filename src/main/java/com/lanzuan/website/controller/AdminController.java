@@ -2,10 +2,7 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
-import com.lanzuan.common.util.IdentifyingCode;
-import com.lanzuan.common.util.MD5;
-import com.lanzuan.common.util.MongoDbUtil;
-import com.lanzuan.common.util.StringUtils;
+import com.lanzuan.common.util.*;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
@@ -23,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
@@ -31,6 +30,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -105,26 +105,47 @@ public class AdminController extends BaseRestSpringController {
     public String newPageComponent() {
         return "admin/page-component/new";
     }
-    @RequestMapping(value = "/page_component/edit/{id}")
-    public String editPageComponent(@PathVariable String id,ModelMap model) {
-        PageComponent pageComponent=pageComponentService.findById(id);
-        model.addAttribute("pageComponent",pageComponent);
-        System.out.println("forward:/admin/page-component-edit");
-        return "forward:/admin/page-component-edit";
+    @RequestMapping(value = "/page_component/edit/{pageComponentId}")
+    public String editPageComponent(@PathVariable String pageComponentId,ModelMap model) {
+        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
+        model.addAttribute("pageComponent", pageComponent);
+        return "forward:/WEB-INF/pages/admin/page-component-edit.jsp";
     }
 
-    @RequestMapping(value = "/file-editor/{id}")
-    public String articleEditor(@PathVariable String id,ModelMap model, HttpSession session) {
-        Article article=articleService.findById(id);
+    /**
+     * 编辑某articleSection中的某篇文章
+     * @param pageComponentId
+     * @param articleSectionId
+     * @param articleId
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/file-editor/{pageComponentId}/{articleSectionId}/{articleId}")
+    public String articleEditor(@PathVariable String pageComponentId,@PathVariable String articleSectionId, @PathVariable String articleId,ModelMap model, HttpSession session) {
+        Article article=articleService.findById(articleId);
+        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("article",article);
-        List<ArticleSection> articleSections=articleSectionService.findArticleSectionByArticleId(id);
-        model.addAttribute("articleSections",articleSections);
+        model.addAttribute("pageComponent",pageComponent);
+//        List<ArticleSection> articleSections=articleSectionService.findArticleSectionByArticleId(id);
+//        model.addAttribute("articleSections",articleSections);
+        ArticleSection articleSection=articleSectionService.findById(articleSectionId);
+        model.addAttribute("articleSection",articleSection);
         return "admin/file-editor";
     }
-    @RequestMapping(value = "/file-editor/in-section/{pageComponentId}/{id}")
-    public String addNewArticleInSection(@PathVariable String pageComponentId,@PathVariable String id,ModelMap model, HttpSession session) {
+
+    /**
+     * 为文章块撰文(新增)
+     * @param pageComponentId
+     * @param articleSectionId
+     * @param model
+     * @return
+     */
+
+    @RequestMapping(value = "/file-editor/in-section/{pageComponentId}/{articleSectionId}")
+    public String addNewArticleInSection(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap model) {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
-        ArticleSection articleSection=articleSectionService.findById(id);
+        ArticleSection articleSection=articleSectionService.findById(articleSectionId);
 
         model.addAttribute("pageComponent",pageComponent);
         model.addAttribute("articleSection",articleSection);
@@ -137,7 +158,7 @@ public class AdminController extends BaseRestSpringController {
         return "admin/file-editor";
     }
     @RequestMapping(value = "/article/upload")
-    public String articleUpload(RedirectAttributes redirectAttributes,ModelMap model,@ModelAttribute Article article,String articleSectionId,String pageComponentId, HttpSession session) {
+    public String articleUpload(@ModelAttribute Article article,String articleSectionId,String pageComponentId, HttpSession session) {
         Date now=new Date();
         article.setByEditor(true);
         if (article.getId()!=null&&!article.getId().trim().equals("")){
@@ -175,11 +196,10 @@ public class AdminController extends BaseRestSpringController {
             }
         }
 
-        redirectAttributes.addFlashAttribute("article",article);
         if (pageComponentId!=null){
-            return "redirect:/page_component/edit/"+pageComponentId;
+            return "redirect:/admin/page_component/edit/"+pageComponentId;
         }
-        return "redirect:/admin/a";
+        return "redirect:/admin/index";
     }
 
     @RequestMapping(value = "/ajaxTimeout")
@@ -187,6 +207,39 @@ public class AdminController extends BaseRestSpringController {
         Message message=new Message();
         message.setMessage("登录超时了");
         return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/article_section/image/input/{pageComponentId}/{articleSectionId}")
+    public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap modelMap){
+
+       modelMap.addAttribute("pageComponentId",pageComponentId);
+       modelMap.addAttribute("articleSectionId",articleSectionId);
+        return "admin/img-article-section";
+    }
+
+    @RequestMapping(value = "/article_section/image/new/{pageComponentId}/{articleSectionId}")
+    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String articleSectionId,HttpServletRequest request){
+
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+            try {
+                String type=FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
+//                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
+                String fileName=System.currentTimeMillis()+ type;
+                String filePath = request.getServletContext().getRealPath("/") + "statics/upload/"+fileName;
+                // 转存文件
+                file.transferTo(new File(filePath));
+                ArticleSection articleSection=articleSectionService.findById(articleSectionId);
+                articleSection.setImage("/statics/upload/"+fileName);
+                articleSectionService.update(articleSection);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (StringUtils.isNotBlank(pageComponentId)){
+            return "redirect:/admin/page_component/edit/"+pageComponentId;
+        }
+        return "redirect:/admin/index";
     }
     @RequestMapping(value = "/article_section/rename")
     public ResponseEntity<Message> renameArticleSection(@RequestBody ArticleSection articleSection){
@@ -226,7 +279,9 @@ public class AdminController extends BaseRestSpringController {
     public ResponseEntity<Message> removeArticleSection(@RequestBody ArticleSection articleSection){
 
         Message message=new Message();
-        articleSectionService.removeById(articleSection.getId());
+        if(articleSection!=null&&StringUtils.isNotBlank(articleSection.getId())){
+            articleSectionService.removeById(articleSection.getId());
+        }
         List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
         message.setSuccess(true);
         message.setData(articleSections);

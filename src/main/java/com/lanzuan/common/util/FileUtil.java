@@ -86,4 +86,10 @@ public class FileUtil {
 
     }
 
+    public static String getFileTypeByOriginalFilename(String originalFilename) {
+        if (originalFilename.indexOf(".")<0){
+            return "";
+        }
+        return originalFilename.substring(originalFilename.lastIndexOf("."));
+    }
 }

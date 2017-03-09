@@ -3,6 +3,7 @@ package com.lanzuan.website.dao;
 import com.lanzuan.common.base.BaseMongoDao;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.BusinessException;
+import com.lanzuan.entity.Article;
 import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.entity.PageTemplate;
 import com.mongodb.BasicDBObject;
@@ -47,9 +48,19 @@ public class ArticleSectionDao extends BaseMongoDao<ArticleSection>  {
         fields.add("name");
         fields.add("image");
         fields.add("enabled");
+//        fields.add("articles.$.title");
         fields.add("articles");
         int limit= Constant.articleSectionNum;
-        return findFields(dbObject,fields,limit,"createDate",false);
+        List<ArticleSection> articleSections=findFields(dbObject,fields,limit,"createDate",false);
+        for (ArticleSection articleSection:articleSections){
+            //首页并不需要文章内容，设为空提高页面速度
+            if (articleSection!=null&&articleSection.getArticles()!=null){
+                for (Article article:articleSection.getArticles()){
+                    article.setContent(null);
+                }
+            }
+        }
+        return articleSections;
     }
 }
 

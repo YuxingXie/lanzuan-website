@@ -26,8 +26,6 @@
                                 if(articleArr.length){
                                     for(var k=0;k<articleArr.length;k++){
                                         var articleInArr=articleArr[k];
-                                        console.log(articleInArr.id)
-                                        console.log(article)
                                         if(article&&articleArr&&articleInArr.id&&article.id&&articleInArr.id===article.id){
                                             duplicated=true;
                                         }
@@ -79,6 +77,8 @@
         }
         $scope.resetArticleSections=function(form){
             $scope.getArticleSection();
+            $scope.addArticleSection=false;
+            $scope.addArticleSectionSaved=true;
         }
         $scope.newArticleSection=function(){
             $scope.addArticleSection=true;
@@ -87,12 +87,13 @@
                 $scope.articleSections=[];
             }
             var articleSection={};
-            articleSection.name="请重命名我"
-            if(!$scope.articleSections.length){
-                $scope.articleSections[0]=articleSection;
-            }else{
-                $scope.articleSections[ $scope.articleSections.length]=articleSection;
-            }
+            articleSection.name="请重命名我*"
+            //if(!$scope.articleSections.length){
+                $scope.articleSections.splice(0,0,articleSection);
+            //}
+            //else{
+            //    $scope.articleSections[ $scope.articleSections.length]=articleSection;
+            //}
         }
         $scope.saveNewArticleSection=function(articleSection){
             $http.post("/admin/article_section/new",JSON.stringify($scope.articleSections)).success(function (message) {
@@ -106,9 +107,9 @@
         }
         $scope.renameArticleSection=function(articleSection){
             $http.post("/admin/article_section/rename",JSON.stringify(articleSection)).success(function (message) {
-                $scope.articleSections=message.data;
+                articleSection=message.data;
                 if(message.success){
-                    alert("删除成功！");
+                    alert("重命名成功！");
                 }
             });
         }
@@ -116,6 +117,22 @@
         $scope.removeArticleSection=function(articleSection,index){
             if(!articleSection.id){
                 $scope.articleSections.splice(index,1);
+                if($scope.articleSections&&$scope.articleSections.length){
+                    var allNotSavedRemoved=true;
+                    for(var i=0;i<$scope.articleSections.length;i++){
+                        var articleSection=$scope.articleSections[i];
+                        if(!articleSection.id){
+                            allNotSavedRemoved=false;
+                            break;
+                        }
+                    }
+                    if(allNotSavedRemoved){
+                        $scope.addArticleSection=false;
+                        $scope.addArticleSectionSaved=true;
+                    }
+                }
+
+                return;
             }
             $http.post("/admin/article_section/remove",JSON.stringify(articleSection)).success(function (message) {
                 $scope.articleSections=message.data;

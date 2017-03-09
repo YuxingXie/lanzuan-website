@@ -15,6 +15,7 @@
             <div class="alert alert-warning">
                 <ul class="list-unstyled">
                     <li><i class="fa fa-warning fa-fw"></i>有些文章在不同版块都显示，但在这里（编辑模式下）这些文章只显示一次；</li>
+                    <li><i class="fa fa-warning fa-fw"></i>如果超过三个文章分类，可能在较大尺寸屏幕下显示混乱；</li>
                     <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，所以如果点击“编辑此文”按钮后文章显示异常，则无法编辑。</li>
                     <li><i class="fa fa-flash fa-fw color-red"></i> 新增的文章分类<b class="color-red">一定要</b>点击“保存新增文章分类”才会被系统保存。</li>
                 </ul>
@@ -48,7 +49,7 @@
                             <td>
                                 <span ng-if="!article.duplicated"  class="btn-group">
                                     <span class="btn btn-danger btn-sm  fa fa-warning" ng-if="!article.byEditor">此文无法用编辑器编辑</span>
-                                <a ng-if="article.byEditor" class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/${pageComponent.id}/{{article.id}}">编辑此文</a>
+                                <a ng-if="article.byEditor" class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/${pageComponent.id}/{{articleSection.id}}/{{article.id}}">编辑此文</a>
                                 <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeArticle(article)" > 删掉此文</button>
                                 </span>
                                 <span ng-if="article.duplicated">
@@ -61,14 +62,12 @@
                         </tr>
                     </table>
                     <div  ng-if="!articleSection.articles&&!articleSection.image">
-                        此版块无内容
+                        此版块无内容,可以将该文章分类块变为只显示图片的区域
+                        <a class="btn btn-primary btn-sm btn-padding-little white-link"
+                           ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
                     </div>
-                    <span ng-if="!articleSection.articles&&articleSection.image" class="btn-sm  fa fa-warning">
 
-                            这个版块没有文章，只包含一张图片
-
-                    </span>
-                    <img ng-if="articleSection.image" ng-src="{{articleSection.image}}" class="img-responsive">
+                    <img ng-if="articleSection.image" ng-src="{{articleSection.image}}" class="img-responsive img-ico-xl">
                 </td>
                 <td>
                     <div class="btn-group" ng-if="!articleSection.image">
@@ -78,9 +77,17 @@
                             <input type="text" ng-model="articleSection.name" class="">
                             <span class="input-group-btn"><button class="btn btn-primary btn-sm" ng-click="renameArticleSection(articleSection)" ng-if="articleSection.id">重命名</button></span>
                         </div>
+
+
                     </div>
-                    <div ng-if="!articleSection.articles&&articleSection.image" class="">
-                        <button disabled class="btn btn-primary">更换图片</button>
+                    <span class="text-danger" ng-if="!articleSection.id">未保存*</span>
+                    <div ng-if="!articleSection.articles&&articleSection.image" class="btn-group btn-group-sm">
+                        <a class="btn btn-primary white-link" ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">更换图片</a>
+                        <button class="btn btn-primary white-link fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>
+                        <div class="input-group padding-left-2">
+                            <input type="text" ng-model="articleSection.name" class="">
+                            <span class="input-group-btn"><button class="btn btn-primary btn-sm" ng-click="renameArticleSection(articleSection)" ng-if="articleSection.id">重命名</button></span>
+                        </div>
                     </div>
                 </td>
             </tr>
