@@ -62,6 +62,9 @@
                         <input class="form-control" name="title" type="text" value="${article.title}">
                         <input type="hidden" name="content" id="content" />
                         <input type="hidden" name="id" id="id" value="${article.id}"/>
+                        <c:if test="${not empty pageComponent}">
+                            <input type="hidden" name="pageComponentId" id="pageComponentId" value="${pageComponent.id}"/>
+                        </c:if>
                     </div>
                     <div class="form-group input-group">
                         <label class="fa fa-lock input-group-addon">版块</label>
@@ -92,12 +95,10 @@
 
 <script type="text/javascript">
 
-    //实例化编辑器
-    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+
     var ue = UE.getEditor('editor');
     <c:if test="${not empty article}">
     UE.getEditor('editor').ready(function() {
-        //this是当前创建的编辑器实例
         this.setContent('${article.content}')
     })
     </c:if>

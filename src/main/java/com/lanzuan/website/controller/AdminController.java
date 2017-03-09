@@ -121,10 +121,12 @@ public class AdminController extends BaseRestSpringController {
         model.addAttribute("articleSections",articleSections);
         return "admin/file-editor";
     }
-    @RequestMapping(value = "/file-editor/in-section/{id}")
-    public String addNewArticleInSection(@PathVariable String id,ModelMap model, HttpSession session) {
+    @RequestMapping(value = "/file-editor/in-section/{pageComponentId}/{id}")
+    public String addNewArticleInSection(@PathVariable String pageComponentId,@PathVariable String id,ModelMap model, HttpSession session) {
+        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         ArticleSection articleSection=articleSectionService.findById(id);
 
+        model.addAttribute("pageComponent",pageComponent);
         model.addAttribute("articleSection",articleSection);
         return "admin/file-editor";
     }
@@ -135,7 +137,7 @@ public class AdminController extends BaseRestSpringController {
         return "admin/file-editor";
     }
     @RequestMapping(value = "/article/upload")
-    public String articleUpload(RedirectAttributes redirectAttributes,ModelMap model,@ModelAttribute Article article,String articleSectionId, HttpSession session) {
+    public String articleUpload(RedirectAttributes redirectAttributes,ModelMap model,@ModelAttribute Article article,String articleSectionId,String pageComponentId, HttpSession session) {
         Date now=new Date();
         article.setByEditor(true);
         if (article.getId()!=null&&!article.getId().trim().equals("")){
@@ -174,6 +176,9 @@ public class AdminController extends BaseRestSpringController {
         }
 
         redirectAttributes.addFlashAttribute("article",article);
+        if (pageComponentId!=null){
+            return "redirect:/page_component/edit/"+pageComponentId;
+        }
         return "redirect:/admin/a";
     }
 
@@ -195,12 +200,59 @@ public class AdminController extends BaseRestSpringController {
         message.setData(articleSection);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+    @RequestMapping(value = "/article_section/new")
+    public ResponseEntity<Message> saveNewArticleSections(@RequestBody List<ArticleSection> articleSections){
+
+        Message message=new Message();
+        List<ArticleSection> articleSectionsToSave=new ArrayList<ArticleSection>();
+        Date now=new Date();
+        for(ArticleSection articleSection:articleSections){
+            if(articleSection.getId()!=null&&!articleSection.getId().trim().equals("")){
+                continue;
+            }
+            articleSection.setEnabled(true);
+            articleSection.setCreateDate(now);
+           articleSectionsToSave.add(articleSection);
+        }
+        if (articleSectionsToSave.size()!=0){
+            articleSectionService.insertAll(articleSectionsToSave);
+        }
+        message.setSuccess(true);
+        articleSections=articleSectionService.findHomePageArticleSections();
+        message.setData(articleSections);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/article_section/remove")
+    public ResponseEntity<Message> removeArticleSection(@RequestBody ArticleSection articleSection){
+
+        Message message=new Message();
+        articleSectionService.removeById(articleSection.getId());
+        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
+        message.setSuccess(true);
+        message.setData(articleSections);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/article/remove")
     public ResponseEntity<Message> removeArticle(@RequestBody Article article){
         Message message=new Message();
+        List<ArticleSection> articleSectionsIncludeArticle=articleSectionService.findArticleSectionByArticleId(article.getId());
+        for(ArticleSection articleSection:articleSectionsIncludeArticle){
+            if (articleSection.getArticles()==null) break;
+            List<Article> articles=articleSection.getArticles();
+            List<Article> articlesToSave=new ArrayList<Article>();
+            for(Article articleInSection :articles){
+                if (!articleInSection.getId().equalsIgnoreCase(article.getId())){
+                    articlesToSave.add(articleInSection);
+                }
+            }
+            if (articlesToSave.size()==0) articlesToSave=null;
+            articleSection.setArticles(articlesToSave);
+            articleSectionService.update(articleSection,false);
+        }
+
         articleService.removeById(article.getId());
-        //TODO 还要删掉articleSection中的DBref引用,暂时不会有问题
+
         List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
         message.setSuccess(true);
         message.setData(articleSections);

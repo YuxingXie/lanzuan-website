@@ -17,6 +17,9 @@
     </c:choose>!
   </div>
   <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="${path}/admin/index"><i class="fa fa-home"></i>管理首页 </a>
+    </li>
     <li class="nav-item pull-right">
       <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出</button>
     </li>

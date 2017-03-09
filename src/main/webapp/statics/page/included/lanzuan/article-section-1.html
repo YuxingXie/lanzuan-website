@@ -1,4 +1,6 @@
 <div class="row margin-left-right-0 margin-top-1em md-up-padding-left-right-4em padding-top-4em padding-bottom-2em  bg-very-light" ng-init="getArticleSection()">
+
+
     <div class="col-xs-12 col-md-4" ng-repeat="articleSection in articleSections" ng-if="articleSections">
         <div class="row" >
             <h4 class="col-xs-8 large-180">{{articleSection.name}}</h4>
@@ -15,7 +17,7 @@
             <a href="/article/{{article.id}}" class="list-group-item p-l-0 p-r-0 no-border no-background fa fa-ext-dot-blue"
                ng-repeat="article in articleSection.articles">
 
-                <span class="label label-default color-grey bg-medium-grey-2 label-pill pull-right">{{article.date |date:'shortDate'}}</span>{{article.title}}
+                <span class="color-grey bg-medium-grey-2 label-pill pull-right" style="border-radius: .2rem;background-color: #efefefef">{{article.date |date:'shortDate'}}</span>{{article.title}}
             </a>
         </div>
         <div class="list-group small-90" ng-if="!articleSection.articles &&!articleSection.image">

@@ -39,6 +39,9 @@ public class ArticleSectionDao extends BaseMongoDao<ArticleSection>  {
 
         DBObject dbObject=new BasicDBObject();
         dbObject.put("enabled",true);
+//        dbObject.put("articles.$.title",1);
+//        dbObject.put("articles.$.date",1);
+//        dbObject.put("articles.$.content",0);
         List<String> fields=new ArrayList<String>();
         fields.add("id");
         fields.add("name");

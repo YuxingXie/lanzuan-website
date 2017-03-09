@@ -305,8 +305,10 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         Page<E> page = new PageImpl<E>(list, pageable, count);
         return page;
     }
-
-    public void upsert(E e) {
+    public void upsert(E e){
+        upsert(e,true);
+    }
+    public void upsert(E e,boolean ignoreNullValue) {
         String id = MongoDbUtil.getId(e);
         if (null == id || "".equals(id.trim())) {
             //如果主键为空,则新增记录
@@ -322,7 +324,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         } catch (IllegalAccessException e1) {
             e1.printStackTrace();
         }
-        Update update = getUpdateFromEntity(e);
+        Update update = getUpdateFromEntity(e,ignoreNullValue);
         mongoTemplate.updateFirst(getEqualsQuery(qe), update, collectionClass);
 
     }
@@ -406,8 +408,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         return query;
 
     }
-
-    private Update getUpdateFromEntity(E e) {
+    private Update getUpdateFromEntity(E e,boolean ignoreNullValue) {
         Update update = new Update();
         String id=MongoDbUtil.getId(e);
         for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
@@ -419,7 +420,9 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
                 String fieldName=field.getName();
                 Object fieldValue = field.get(e);
                 if (fieldValue == null){
-//                    update.set(fieldName, null);
+                    if(!ignoreNullValue){
+                        update.set(fieldName, null);
+                    }
                     continue;
                 }
                 if (field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class)) {

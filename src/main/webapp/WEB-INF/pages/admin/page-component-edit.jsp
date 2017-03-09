@@ -18,27 +18,7 @@
 </head>
 <body ng-app="app">
 <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
-    <nav class="row navbar">
-        <div class="navbar-brand">
-            <c:choose>
-                <c:when test="${empty user.sex or user.sex eq 'male'}">
-                    <i class="fa fa-male padding-left-2em"></i>
-                </c:when>
-                <c:otherwise><i class="fa fa-female padding-left-2em"></i></c:otherwise>
-            </c:choose>
-            欢迎您，${sessionScope.administrator.name}
-            <c:choose>
-                <c:when test="${empty sessionScope.administrator.sex or sessionScope.administrator.sex eq 'male'}">先生</c:when>
-                <c:otherwise>女士</c:otherwise>
-            </c:choose>!
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="nav-item pull-right">
-                <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出
-                </button>
-            </li>
-        </ul>
-    </nav>
+    <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
 
     <div class="row padding-top-2em p-a-0 m-a-0">
         <div ng-controller="HomeController">

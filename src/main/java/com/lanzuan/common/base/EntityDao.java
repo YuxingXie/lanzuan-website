@@ -45,6 +45,7 @@ public interface EntityDao <E>{
     Page<E> findPage(int pageIndex);
 
     void upsert(E e);
+    void upsert(E e,boolean ignoreNullValue);
 
     CommandResult runCommand(String s);
 

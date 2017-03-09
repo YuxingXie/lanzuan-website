@@ -134,10 +134,13 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     public Page<E> findPage(int pageIndex) {
         return getEntityDao().findPage(pageIndex);
     }
-
     @Override
-    public void update(E e) {
+    public void update(E e){
         getEntityDao().upsert(e);
+    }
+    @Override
+    public void update(E e,boolean ignoreNullValue) {
+        getEntityDao().upsert(e,ignoreNullValue);
     }
 
     @Override

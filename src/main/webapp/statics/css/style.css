@@ -567,7 +567,6 @@ Misc tools
     font-weight: normal;
 }
 
-
 .items-info {
     padding-top: 7px;
     color: #868c93;
@@ -628,8 +627,6 @@ Misc tools
 .fixed-left-menu{
     position: fixed;
     top:0;
-    left: 2%;
-    width: 23%;
 }
 
 /* font-awesome的扩展*/

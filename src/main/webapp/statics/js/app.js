@@ -6,6 +6,10 @@
         $scope.getArticleSection=function(){
             $http.get("/articleSection/data").success(function (data) {
                 console.log(JSON.stringify(data));
+                if(!data ||!data.length){
+                    $scope.articleSections=null;
+                    return;
+                }
                 var articleArr=new Array();
                 if(data&&data.length){
                     //console.log("data.length "+data.length)
@@ -22,7 +26,9 @@
                                 if(articleArr.length){
                                     for(var k=0;k<articleArr.length;k++){
                                         var articleInArr=articleArr[k];
-                                        if(articleInArr.id===article.id){
+                                        console.log(articleInArr.id)
+                                        console.log(article)
+                                        if(article&&articleArr&&articleInArr.id&&article.id&&articleInArr.id===article.id){
                                             duplicated=true;
                                         }
                                     }
@@ -74,15 +80,50 @@
         $scope.resetArticleSections=function(form){
             $scope.getArticleSection();
         }
+        $scope.newArticleSection=function(){
+            $scope.addArticleSection=true;
+            $scope.addArticleSectionSaved=false;
+            if(!$scope.articleSections){
+                $scope.articleSections=[];
+            }
+            var articleSection={};
+            articleSection.name="请重命名我"
+            if(!$scope.articleSections.length){
+                $scope.articleSections[0]=articleSection;
+            }else{
+                $scope.articleSections[ $scope.articleSections.length]=articleSection;
+            }
+        }
+        $scope.saveNewArticleSection=function(articleSection){
+            $http.post("/admin/article_section/new",JSON.stringify($scope.articleSections)).success(function (message) {
+                $scope.articleSections=message.data;
+                if(message.success){
+                    alert("保存成功！");
+                    $scope.addArticleSection=false;
+                    $scope.addArticleSectionSaved=true;
+                }
+            });
+        }
         $scope.renameArticleSection=function(articleSection){
             $http.post("/admin/article_section/rename",JSON.stringify(articleSection)).success(function (message) {
-                articleSection=message.data;
+                $scope.articleSections=message.data;
+                if(message.success){
+                    alert("删除成功！");
+                }
+            });
+        }
+
+        $scope.removeArticleSection=function(articleSection,index){
+            if(!articleSection.id){
+                $scope.articleSections.splice(index,1);
+            }
+            $http.post("/admin/article_section/remove",JSON.stringify(articleSection)).success(function (message) {
+                $scope.articleSections=message.data;
                 if(message.success){
                     alert("修改成功！");
                 }
             });
         }
-
         $scope.removeArticle=function(article){
             $http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
                 $scope.articleSections=message.data;
