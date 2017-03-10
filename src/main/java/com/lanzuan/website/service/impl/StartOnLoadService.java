@@ -1,11 +1,11 @@
 package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.constant.Constant;
-import com.lanzuan.entity.Article;
-import com.lanzuan.entity.ArticleSection;
-import com.lanzuan.entity.PageComponent;
-import com.lanzuan.entity.PageTemplate;
+import com.lanzuan.entity.*;
+import com.lanzuan.entity.entityfield.CarouselCaption;
 import com.lanzuan.website.service.IArticleService;
+import com.lanzuan.website.service.ICarouselItemService;
+import com.lanzuan.website.service.ICarouselService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,10 @@ public class StartOnLoadService {
     private ArticleSectionService articleSectionService;
     @Resource(name = "articleService")
     private IArticleService articleService;
+    @Resource(name = "carouselService")
+    private ICarouselService carouselService;
+    @Resource(name = "carouselItemService")
+    private ICarouselItemService carouselItemService;
     /**
      * Spring 容器初始化时加载
      */
@@ -36,6 +40,11 @@ public class StartOnLoadService {
     }
 
     private void initPageData() {
+        initCarouselData();
+        initArticleSectionData();
+    }
+
+    private void initArticleSectionData() {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("enabled",true);
         List<String> fields=new ArrayList<String>();
@@ -43,7 +52,7 @@ public class StartOnLoadService {
         fields.add("name");
         fields.add("image");
         fields.add("articles");
-        int limit=Constant.articleSectionNum;
+        int limit= Constant.articleSectionNum;
         List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
         if (articleSections==null||articleSections.size()==0){
             System.out.println("未查询到文章版块数据，使用默认内容。。。");
@@ -173,17 +182,70 @@ public class StartOnLoadService {
             articleSectionService.insertAll(articleSections);
 
         }
-        Constant.articleSections=articleSections;
+    }
+
+    private void initCarouselData() {
+        Carousel carousel=carouselService.findCarouselByUri("/home");
+        if (carousel==null||carousel.getId()==null){
+            carousel=new Carousel();
+            carousel.setName("首页轮播图");
+            carousel.setDate(new Date());
+            carousel.setUri("/home");
+            carousel.setEnabled(true);
+            List<CarouselItem> carouselItems=new ArrayList<CarouselItem>();
+            CarouselCaption caption1=new CarouselCaption();
+            caption1.setType("link");
+            caption1.setText("了解更多");
+            caption1.setValue("/statics/page/business/b1.html");
+            CarouselItem carouselItem1=new CarouselItem();
+            carouselItem1.setValue("/statics/image/lanzuan/home/carousel1.jpg");
+            carouselItem1.setType("image");
+            carouselItem1.setCarouselCaption(caption1);
+
+            carouselItems.add(carouselItem1);
+
+
+            CarouselCaption caption2=new CarouselCaption();
+            caption2.setType("link");
+            caption2.setText("了解更多");
+            caption2.setValue("/statics/page/business/b2.html");
+            CarouselItem carouselItem2=new CarouselItem();
+            carouselItem2.setValue("/statics/image/lanzuan/home/carousel2.jpg");
+            carouselItem2.setType("image");
+            carouselItem2.setCarouselCaption(caption2);
+            carouselItems.add(carouselItem2);
+
+            CarouselCaption caption3=new CarouselCaption();
+            caption3.setType("link");
+            caption3.setText("了解更多");
+            caption3.setValue("/statics/page/business/b2.html");
+            CarouselItem carouselItem3=new CarouselItem();
+            carouselItem3.setValue("/statics/image/lanzuan/home/carousel3.jpg");
+            carouselItem3.setType("image");
+            carouselItem3.setCarouselCaption(caption3);
+            carouselItems.add(carouselItem3);
+
+            CarouselCaption caption4=new CarouselCaption();
+            caption4.setType("link");
+            caption4.setText("了解更多");
+            caption4.setValue("/statics/page/business/b2.html");
+            CarouselItem carouselItem4=new CarouselItem();
+            carouselItem4.setValue("/statics/image/lanzuan/home/carousel4.jpg");
+            carouselItem4.setType("image");
+            carouselItem4.setCarouselCaption(caption4);
+            carouselItems.add(carouselItem4);
+            carouselItemService.insertAll(carouselItems);
+            carousel.setCarouselItems(carouselItems);
+            carouselService.insert(carousel);
+        }
     }
 
     private void initPageTemplates() {
         initHomePageTemplates();
-        initArticlePageTemplates();
-    }
-
-    private void initArticlePageTemplates() {
 
     }
+
+
 
     private void initHomePageTemplates() {
         PageTemplate pageTemplate = pageTemplateService.findByUri("/home");
@@ -239,9 +301,7 @@ public class StartOnLoadService {
 
             pageTemplateService.insert(pageTemplate);
         }
-        if (Constant.pageTemplateMap==null)
-            Constant.pageTemplateMap=new HashMap<String, PageTemplate>();
-        Constant.pageTemplateMap.put("/home",pageTemplate);
+
     }
 
 

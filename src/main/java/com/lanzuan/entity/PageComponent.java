@@ -2,7 +2,7 @@ package com.lanzuan.entity;
 /*
 db.pageComponent.update({"name":"文章块组件1"},{"$set":{"editUri":"/statics/page/included/lanzuan/article-section-1-edit.jsp"}},false,true)
 db.pageComponent.update({"name":"响应式导航条模板1"},{"$set":{"editUri":"/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.html"}},false,true)
-db.pageComponent.update({"name":"响应式轮播图"},{"$set":{"editUri":"/statics/page/included/component/carousel/carousel-full-width-1-edit.html"}},false,true)
+db.pageComponent.update({"name":"响应式轮播图"},{"$set":{"editUri":"/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp"}},false,true)
 db.pageComponent.update({"name":"图文卡片组模板1"},{"$set":{"editUri":"/statics/page/included/component/card-group/img-card-group-1-edit.html"}},false,true)
 db.pageComponent.update({"name":"蓝钻鼠标掠过类似手风琴模板1"},{"$set":{"editUri":"/statics/page/included/lanzuan/collapse-image-title-text-1-edit.html"}},false,true)
 db.pageComponent.update({"name":"全屏宽度图片模板1"},{"$set":{"editUri":"/statics/page/included/lanzuan/full-width-image-1-edit.html"}},false,true)

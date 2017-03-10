@@ -1,0 +1,25 @@
+[
+  {"type":"背景色","classes":[
+  {"className":"bg-info","name":"消息","source":"bootstrap"},
+  {"className":"bg-primary","name":"首要","source":"bootstrap"},
+  {"className":"bg-danger","name":"危险","source":"bootstrap"},
+  {"className":"bg-inverse","name":"反色","source":"bootstrap"},
+  {"className":"bg-white","name":"白","source":"custom"},
+  {"className":"bg-black","name":"黑","source":"custom"}
+]},
+  {"type":"前景色","classes":[
+    {"className":"text-info","name":"消息","source":"bootstrap"},
+    {"className":"text-primary","name":"首要","source":"bootstrap"},
+    {"className":"text-danger","name":"危险","source":"bootstrap"},
+    {"className":"text-inverse","name":"反色","source":"bootstrap"},
+    {"className":"text-white","name":"白","source":"custom"},
+    {"className":"text-black","name":"黑","source":"custom"}
+  ]}
+,
+  {"type":"文字定位","classes":[
+    {"className":"text-left","name":"左对齐","source":"bootstrap"},
+    {"className":"text-right","name":"右对齐","source":"bootstrap"},
+    {"className":"text-center","name":"居中","source":"bootstrap"},
+    {"className":"text-inverse","name":"反色","source":"bootstrap"}
+  ]}
+]

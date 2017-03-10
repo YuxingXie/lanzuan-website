@@ -5,7 +5,7 @@
     app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
         $scope.getArticleSection=function(){
             $http.get("/articleSection/data").success(function (data) {
-                console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data));
                 if(!data ||!data.length){
                     $scope.articleSections=null;
                     return;
@@ -74,6 +74,9 @@
         }
         $scope.resetNavbar=function(form){
             $scope.getNavbar();
+        }
+        $scope.resetCarousel=function(){
+            $scope.getCarousel();
         }
         $scope.resetArticleSections=function(form){
             $scope.getArticleSection();
@@ -150,9 +153,32 @@
             });
         }
         $scope.getCarousel=function(){
-            $http.get("/statics/json/carousel.json").success(function (data) {
+            $http.get("/carousel/home/data").success(function (data) {
                 $scope.carousel=data;
             });
+        }
+        $scope.removeCarouselItem= function (index) {
+
+            if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
+            &&$scope.carousel.carouselItems[index].id){
+                $http.post("/admin/carousel/item/remove"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (data) {
+                    $scope.carousel=data;
+                });
+            }else{
+                $scope.carousel.carouselItems.splice(index,1);
+            }
+
+        }
+        $scope.insertCarouselItem= function () {
+            var item={
+                "type": "image",
+                "value": "/statics/image/lanzuan/home/cloud.jpg",
+                "carouselCaption": {
+                    "type": "text",
+                    "text": "我是白云。。。。。。"
+                }
+            }
+            $scope.carousel.carouselItems.splice(0,0,item);
         }
         $scope.getCardGroup=function(){
             $http.get("/statics/json/img-card-group.json").success(function (data) {

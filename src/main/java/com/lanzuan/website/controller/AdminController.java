@@ -9,6 +9,7 @@ import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleSectionService;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
+import com.lanzuan.website.service.IPageTemplateService;
 import com.lanzuan.website.service.impl.UserService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -51,10 +52,12 @@ public class AdminController extends BaseRestSpringController {
     IArticleSectionService articleSectionService;
     @Resource(name = "articleService")
     IArticleService articleService;
-
+    @Resource(name = "pageTemplateService")
+    IPageTemplateService pageTemplateService;
     @RequestMapping(value = "/index")
     public String index(HttpSession session,ModelMap modelMap){
-        modelMap.addAttribute("pageTemplate", Constant.pageTemplateMap.get("/home"));
+        PageTemplate pageTemplate=pageTemplateService.findByUri("/home");
+        modelMap.addAttribute("pageTemplate", pageTemplate);
         return "forward:/WEB-INF/pages/admin/index.jsp";
     }
     @RequestMapping(value = "/sign_up")
@@ -153,8 +156,8 @@ public class AdminController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/file-editor")
     public String articleNew(ModelMap model, HttpSession session) {
-
-        model.addAttribute("articleSections",Constant.articleSections);
+        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
+        model.addAttribute("articleSections",articleSections);
         return "admin/file-editor";
     }
     @RequestMapping(value = "/article/upload")

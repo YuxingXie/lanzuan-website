@@ -4,33 +4,33 @@
     <form ng-submit="" class="col-xs-12 p-a-0 m-a-0" name="form">
 
         <div class="col-xs-12 m-a-0 p-a-0">
-            <label class="label label-default large-180">编辑文章分类</label>
+            <label class="label label-default large-180">编辑文章块</label>
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection()"> 新增文章分类</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection()"> 新增文章块</button>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetArticleSections(form)"> 重 置</button>
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="saveNewArticleSection()">保存新增文章分类</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="saveNewArticleSection()">保存新增文章块</button>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="alert alert-warning">
                 <ul class="list-unstyled">
                     <li><i class="fa fa-warning fa-fw"></i>有些文章在不同版块都显示，但在这里（编辑模式下）这些文章只显示一次；</li>
-                    <li><i class="fa fa-warning fa-fw"></i>如果超过三个文章分类，可能在较大尺寸屏幕下显示混乱；</li>
-                    <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，所以如果点击“编辑此文”按钮后文章显示异常，则无法编辑。</li>
-                    <li><i class="fa fa-flash fa-fw color-red"></i> 新增的文章分类<b class="color-red">一定要</b>点击“保存新增文章分类”才会被系统保存。</li>
+                    <li><i class="fa fa-warning fa-fw"></i>如果超过三个文章块，可能在较大尺寸屏幕下显示混乱，除非它们一样高；</li>
+                    <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，点击“编辑此文”无法编辑；</li>
+                    <li><i class="fa fa-flash fa-fw color-red"></i> 新增的文章块<b class="color-red">一定要</b>点击“保存新增文章块”才会被系统保存。</li>
                 </ul>
 
             </div>
         </div>
         <div class="col-xs-12 col-md-4" ng-if="!articleSections">
-            <h5>此组件还没有文章分类，可以点击“新增文章分类”按钮增加一个文章分类</h5>
+            <h5>此组件还没有文章块，可以点击“新增文章块”按钮增加一个文章块</h5>
         </div>
 
         <table class="table table-responsive table-hover" ng-if="articleSections">
             <tr>
-                <th >文章分类名称</th>
-                <th class="half-width">文章分类内文章</th>
-                <th>文章分类操作</th>
+                <th >文章块名称</th>
+                <th class="half-width">文章块内文章</th>
+                <th>文章块操作</th>
             </tr>
             <tr ng-repeat="articleSection in articleSections">
                 <td>
@@ -39,7 +39,7 @@
                 <td ng-init="showArticles=false">
                     <a href="javascript:void(0)" ng-click="$parent.showArticles=!$parent.showArticles" class="fa" ng-class="{'fa-minus-square':$parent.showArticles,'fa-plus-square':!$parent.showArticles}"
                        ng-if="!articleSection.image &&articleSection.articles&&articleSection.articles.length">
-                        文章分类包含{{articleSection.articles.length}}篇文章,点击查看
+                        文章块包含{{articleSection.articles.length}}篇文章,点击查看
                     </a>
                     <table class="table table-hover table-responsive" ng-if="showArticles">
                         <tr ng-repeat="article in articleSection.articles">
@@ -62,7 +62,7 @@
                         </tr>
                     </table>
                     <div  ng-if="!articleSection.articles&&!articleSection.image">
-                        此版块无内容,可以将该文章分类块变为只显示图片的区域
+                        此版块无内容,可以将该文章块块变为只显示图片的区域
                         <a class="btn btn-primary btn-sm btn-padding-little white-link"
                            ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
                     </div>
@@ -71,8 +71,8 @@
                 </td>
                 <td>
                     <div class="btn-group" ng-if="!articleSection.image">
-                        <a class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/${pageComponent.id}/{{articleSection.id}}" ng-if="articleSection.id"> 为此文章分类撰文</a>
-                        <button class="btn btn-primary white-link btn-sm fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除此文章分类</button>
+                        <a class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/${pageComponent.id}/{{articleSection.id}}" ng-if="articleSection.id"> 为此文章块撰文</a>
+                        <button class="btn btn-primary white-link btn-sm fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除此文章块</button>
                         <div class="input-group padding-left-2">
                             <input type="text" ng-model="articleSection.name" class="">
                             <span class="input-group-btn"><button class="btn btn-primary btn-sm" ng-click="renameArticleSection(articleSection)" ng-if="articleSection.id">重命名</button></span>

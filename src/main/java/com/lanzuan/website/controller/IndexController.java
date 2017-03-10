@@ -2,14 +2,8 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
-import com.lanzuan.entity.Article;
-import com.lanzuan.entity.ArticleSection;
-import com.lanzuan.entity.PageComponent;
-import com.lanzuan.entity.PageTemplate;
-import com.lanzuan.website.service.IArticleSectionService;
-import com.lanzuan.website.service.IArticleService;
-import com.lanzuan.website.service.IPageComponentService;
-import com.lanzuan.website.service.IPageTemplateService;
+import com.lanzuan.entity.*;
+import com.lanzuan.website.service.*;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBRef;
@@ -43,10 +37,13 @@ public class IndexController extends BaseRestSpringController {
     IArticleService articleService;
     @Resource(name = "articleSectionService")
     IArticleSectionService articleSectionService;
+    @Resource(name = "carouselService")
+    ICarouselService carouselService;
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
-        map.addAttribute("pageTemplate",Constant.pageTemplateMap.get(uri));
+        PageTemplate pageTemplate=pageTemplateService.findByUri(uri);
+        map.addAttribute("pageTemplate",pageTemplate);
         return "index";
     }
     @RequestMapping(value = "/articleSection/data")
@@ -63,5 +60,10 @@ public class IndexController extends BaseRestSpringController {
         article.setArticleSections(sections);
         modelMap.addAttribute("article",article);
         return "website/article/article";
+    }
+    @RequestMapping(value = "/carousel/home/data")
+    public ResponseEntity<Carousel> carouselHomeData(){
+        Carousel carousel=carouselService.findCarouselByUri("/home");
+        return new ResponseEntity<Carousel>(carousel, HttpStatus.OK);
     }
 }
