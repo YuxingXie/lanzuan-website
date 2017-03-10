@@ -1,10 +1,7 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.entity.Carousel;
 import com.lanzuan.entity.CarouselItem;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;

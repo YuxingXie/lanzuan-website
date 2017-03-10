@@ -2,7 +2,6 @@ package com.lanzuan.website.service;
 
 import com.lanzuan.common.base.IBaseEntityManager;
 import com.lanzuan.entity.PageComponent;
-import com.lanzuan.entity.User;
 
 import java.util.List;
 

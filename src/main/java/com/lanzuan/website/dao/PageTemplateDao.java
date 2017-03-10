@@ -1,14 +1,12 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.PageTemplate;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

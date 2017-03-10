@@ -3,10 +3,7 @@ package com.lanzuan.website.service.impl;
 import com.lanzuan.common.base.BaseEntityManager;
 import com.lanzuan.common.base.EntityDao;
 import com.lanzuan.entity.Article;
-import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.website.dao.ArticleDao;
-import com.lanzuan.website.dao.ArticleSectionDao;
-import com.lanzuan.website.service.IArticleSectionService;
 import com.lanzuan.website.service.IArticleService;
 import org.springframework.stereotype.Service;
 

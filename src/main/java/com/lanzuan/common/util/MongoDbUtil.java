@@ -5,16 +5,15 @@ import com.lanzuan.entity.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MongoDbUtil {
 

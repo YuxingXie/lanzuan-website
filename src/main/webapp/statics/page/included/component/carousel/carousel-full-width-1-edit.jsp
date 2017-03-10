@@ -12,9 +12,9 @@
             <div class="btn-group padding-bottom-10">
                 <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">全部保存</button>
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
-                <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()">  方案另存为</button>
-                <button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()">  组装方案</button>
-                <button class="btn btn-primary fa fa-download" type="button" ng-click="useCarousel()">  应用方案</button>
+                <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存为</button>
+                <button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>
+                <button class="btn btn-primary fa fa-download" type="button" ng-click="useCarousel()"> 应用方案</button>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCarousel()"> 重 置</button>
             </div>
         </div>
@@ -23,6 +23,7 @@
                 <ul class="list-unstyled">
                     <li><i class="fa fa-graduation-cap fa-fw"></i>轮播图不但可以轮播“图”，还可以轮播任何内容；</li>
                     <li><i class="fa fa-graduation-cap fa-fw"></i>点击“插入一条”,“前移”，“后移”按钮后，顶端的预览效果会可能出现异常；</li>
+                    <li><i class="fa fa-warning fa-fw"></i>新插入的条目要先保存才可以更换图片；</li>
                     <li><i class="fa fa-warning fa-fw"></i>图片高宽比例不一致导致的，会导致页面跳动，请确保图片使用相同高宽比例。</li>
 
 
@@ -50,35 +51,33 @@
 
                 </td>
                 <td>
-
-
-                        <div ng-if="carouselItem.carouselCaption">
-                            标题效果：
-                            <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
-                               ng-href="{{carouselItem.carouselCaption.value}}"
-                               class="btn btn-primary white-link">{{carouselItem.carouselCaption.text}} <i
-                                    class="fa fa-chevron-right right"></i></a>
-                        </div>
-                        <div ng-if="carouselItem.carouselCaption.type==='text'">文字效果请在上方预览</div>
-
-
+                    <div ng-if="carouselItem.carouselCaption">
+                        标题效果：
+                        <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
+                           ng-href="{{carouselItem.carouselCaption.value}}"
+                           class="btn btn-primary white-link">{{carouselItem.carouselCaption.text}} <i
+                                class="fa fa-chevron-right right"></i></a>
+                    </div>
+                    <div ng-if="carouselItem.carouselCaption.type==='text'">文字效果请在上方预览</div>
                     <div class="input-group">
                         <span class="input-group-addon" style="width: 4em">类型</span>
                         <select ng-model="carouselItem.carouselCaption.type" class="form-control">
                             <option value="link">链接</option>
                             <option value="text">文字</option>
-                    </select>
+                        </select>
                     </div>
                     <div class="input-group" ng-if="carouselItem.carouselCaption.type==='link'">
                         <span class="input-group-addon" style="width: 4em">值</span>
-                        <input class="form-control" style="width: 24em" type="text" ng-model="carouselItem.carouselCaption.value">
+                        <input class="form-control" style="width: 24em" type="text"
+                               ng-model="carouselItem.carouselCaption.value">
                         <span class="input-group-addon">
-                            <a class="black-link"  target="_blank" href="/admin/article/all">不知道填什么请点我</a>
+                            <a class="black-link" target="_blank" href="/admin/article/all">不知道填什么请点我</a>
                         </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" style="width: 4em">文字</span>
-                        <input class="form-control" style="width: 24em" type="text" ng-model="carouselItem.carouselCaption.text">
+                        <input class="form-control" style="width: 24em" type="text"
+                               ng-model="carouselItem.carouselCaption.text">
                     </div>
                 </td>
                 <td>
@@ -92,12 +91,10 @@
                                 ng-click="forwardCarouselItem($index)" ng-if="$index!==0"> 前移
                         </button>
                         <button class="btn btn-primary white-link fa fa-arrow-down"
-                                ng-click="backwardCarouselItem($index)" ng-if="$index!==carousel.carouselItems.length-1"> 后移
+                                ng-click="backwardCarouselItem($index)"
+                                ng-if="$index!==carousel.carouselItems.length-1"> 后移
                         </button>
                     </div>
-
-
-
                 </td>
             </tr>
         </table>

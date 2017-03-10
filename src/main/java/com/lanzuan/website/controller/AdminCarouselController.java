@@ -1,12 +1,8 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.common.constant.Constant;
-import com.lanzuan.common.util.FileUtil;
-import com.lanzuan.common.util.MD5;
-import com.lanzuan.common.util.StringUtils;
-import com.lanzuan.common.web.CookieTool;
-import com.lanzuan.entity.*;
+import com.lanzuan.entity.Carousel;
+import com.lanzuan.entity.CarouselItem;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.*;
 import com.lanzuan.website.service.impl.UserService;
@@ -16,20 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,12 +39,12 @@ public class AdminCarouselController extends BaseRestSpringController {
     ICarouselService carouselService;
     @Resource(name = "carouselItemService")
     ICarouselItemService carouselItemService;
-    @RequestMapping(value = "/image/input/{pageComponentId}/{carouselId}")
-    public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap modelMap){
+    @RequestMapping(value = "/image/input/{pageComponentId}/{carouselItemId}")
+    public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String carouselItemId,ModelMap modelMap){
 
         modelMap.addAttribute("pageComponentId",pageComponentId);
-        modelMap.addAttribute("articleSectionId",articleSectionId);
-        return "admin/img-article-section";
+        modelMap.addAttribute("carouselItemId",carouselItemId);
+        return "admin/img-carousel-input";
     }
     @RequestMapping(value = "/item/remove/{itemId}")
     public ResponseEntity<Message> removeItem(@PathVariable String itemId,@RequestBody Carousel carousel){

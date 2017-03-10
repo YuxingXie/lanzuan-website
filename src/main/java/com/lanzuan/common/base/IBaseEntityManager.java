@@ -1,6 +1,5 @@
 package com.lanzuan.common.base;
 
-import com.lanzuan.entity.ArticleSection;
 import com.mongodb.CommandResult;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;

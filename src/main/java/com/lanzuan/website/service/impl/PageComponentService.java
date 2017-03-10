@@ -3,11 +3,8 @@ package com.lanzuan.website.service.impl;
 import com.lanzuan.common.base.BaseEntityManager;
 import com.lanzuan.common.base.EntityDao;
 import com.lanzuan.entity.PageComponent;
-import com.lanzuan.entity.User;
 import com.lanzuan.website.dao.PageComponentDao;
-import com.lanzuan.website.dao.UserDao;
 import com.lanzuan.website.service.IPageComponentService;
-import com.lanzuan.website.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

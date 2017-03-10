@@ -1,13 +1,11 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.common.constant.Constant;
-import com.lanzuan.entity.*;
+import com.lanzuan.entity.Article;
+import com.lanzuan.entity.ArticleSection;
+import com.lanzuan.entity.Carousel;
+import com.lanzuan.entity.PageTemplate;
 import com.lanzuan.website.service.*;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.DBRef;
-import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
