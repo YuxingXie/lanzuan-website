@@ -8,10 +8,7 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
-import com.lanzuan.website.service.IArticleSectionService;
-import com.lanzuan.website.service.IArticleService;
-import com.lanzuan.website.service.ICarouselService;
-import com.lanzuan.website.service.IPageComponentService;
+import com.lanzuan.website.service.*;
 import com.lanzuan.website.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,6 +49,8 @@ public class AdminCarouselController extends BaseRestSpringController {
     IArticleService articleService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
+    @Resource(name = "carouselItemService")
+    ICarouselItemService carouselItemService;
     @RequestMapping(value = "/image/input/{pageComponentId}/{carouselId}")
     public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap modelMap){
 
@@ -69,12 +68,63 @@ public class AdminCarouselController extends BaseRestSpringController {
                 carouselItemsToSave.add(carouselItem);
             }
         }
+
         if(carouselItemsToSave.size()>0){
             carousel.setCarouselItems(carouselItemsToSave);
-            carouselService.update(carousel);
+
+        }else {
+            carousel.setCarouselItems(null);
         }
+        carouselService.update(carousel,false);
         message.setSuccess(true);
+        message.setData(carousel);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/insert-all")
+    public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel){
+        Message message=new Message();
+        List<CarouselItem> carouselItems=carousel.getCarouselItems();
+        if(carouselItems!=null&&carouselItems.size()>0){
+            for (CarouselItem carouselItem:carouselItems){
+                if (carouselItem.getId()==null){
+                    carouselItemService.insert(carouselItem);
+                }else{
+                    carouselItemService.update(carouselItem);
+                }
+            }
+        }else {
+            carousel.setCarouselItems(null);
+        }
+        if (carousel.getId()==null){
+            carouselService.insert(carousel);
+        }else{
+            carouselService.update(carousel,false);
+        }
+        message.setSuccess(true);
+        message.setData(carousel);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/save-as")
+    public ResponseEntity<Message> saveAs(@RequestBody Carousel carousel){
+        Message message=new Message();
+        List<CarouselItem> carouselItems=carousel.getCarouselItems();
+        if(carouselItems!=null&&carouselItems.size()>0){
+            for (CarouselItem carouselItem:carouselItems){
+                if (carouselItem.getId()==null){
+                    carouselItemService.insert(carouselItem);
+                }else{
+                    carouselItemService.update(carouselItem);
+                }
+            }
+        }else {
+            carousel.setCarouselItems(null);
+        }
+        carousel.setId(null);
+        carousel.setEnabled(false);
+        carouselService.insert(carousel);
+        message.setSuccess(true);
+        message.setData(carousel);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
 }

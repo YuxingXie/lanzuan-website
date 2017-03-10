@@ -144,6 +144,24 @@
                 }
             });
         }
+        $scope.saveCarousel=function(){
+            $http.post("/admin/carousel/insert-all",JSON.stringify( $scope.carousel)).success(function (message) {
+                $scope.carousel=message.data;
+                if(message.success){
+                    alert("保存成功！");
+                }
+            });
+        }
+        $scope.newCarousel=function(){
+            var name = window.prompt("请给方案命名","在此输入方案名");
+            $scope.carousel.name=name;
+            $http.post("/admin/carousel/save-as",JSON.stringify( $scope.carousel)).success(function (message) {
+                $scope.carousel=message.data;
+                if(message.success){
+                    alert("方案保存成功！");
+                }
+            });
+        }
         $scope.removeArticle=function(article){
             $http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
                 $scope.articleSections=message.data;
@@ -161,8 +179,10 @@
 
             if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
             &&$scope.carousel.carouselItems[index].id){
-                $http.post("/admin/carousel/item/remove"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (data) {
-                    $scope.carousel=data;
+
+                $http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
+                    $scope.carousel=message.data;
+                    alert("删除成功！");
                 });
             }else{
                 $scope.carousel.carouselItems.splice(index,1);
@@ -178,7 +198,26 @@
                     "text": "我是白云。。。。。。"
                 }
             }
+            if(!$scope.carousel){
+                $scope.carousel={};
+            }
+            if(!$scope.carousel.carouselItems){
+                $scope.carousel.carouselItems=[];
+
+            }
+
+
             $scope.carousel.carouselItems.splice(0,0,item);
+        }
+        $scope.forwardCarouselItem=function(index){
+            var item=$scope.carousel.carouselItems[index];
+            $scope.carousel.carouselItems.splice(index,1);
+            $scope.carousel.carouselItems.splice(index-1,0,item);
+        }
+        $scope.backwardCarouselItem=function(index){
+            var item=$scope.carousel.carouselItems[index];
+            $scope.carousel.carouselItems.splice(index,1);
+            $scope.carousel.carouselItems.splice(index+1,0,item);
         }
         $scope.getCardGroup=function(){
             $http.get("/statics/json/img-card-group.json").success(function (data) {

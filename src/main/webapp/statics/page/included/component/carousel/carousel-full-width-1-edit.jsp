@@ -10,7 +10,7 @@
             <label class="label label-default large-180">编辑轮播图</label>
 
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">  保 存</button>
+                <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">全部保存</button>
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()">  方案另存为</button>
                 <button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()">  组装方案</button>
@@ -22,8 +22,10 @@
             <div class="alert alert-warning">
                 <ul class="list-unstyled">
                     <li><i class="fa fa-graduation-cap fa-fw"></i>轮播图不但可以轮播“图”，还可以轮播任何内容；</li>
-                    <li><i class="fa fa-warning fa-fw"></i>点击“插入一条”后，顶端的预览效果会可能出现异常，可以先保存后点击“重置”按钮解决；</li>
-                    <li><i class="fa fa-warning fa-fw"></i>请保持轮播图片具有相同的高宽比，否则在转换图片时会产生高度变化。</li>
+                    <li><i class="fa fa-graduation-cap fa-fw"></i>点击“插入一条”,“前移”，“后移”按钮后，顶端的预览效果会可能出现异常；</li>
+                    <li><i class="fa fa-warning fa-fw"></i>图片高宽比例不一致导致的，会导致页面跳动，请确保图片使用相同高宽比例。</li>
+
+
                 </ul>
             </div>
         </div>
@@ -37,7 +39,10 @@
                 <th>编辑标题</th>
                 <th>其它操作</th>
             </tr>
-            <tr ng-repeat="carouselItem in carousel.carouselItems">
+            <tr ng-if="!carousel||!carousel.carouselItems||!carousel.carouselItems.length">
+                <td colspan="3"><h5>该轮播方案没有任何轮播内容，点击上方 “插入一条”按钮添加轮播内容</h5></td>
+            </tr>
+            <tr ng-repeat="carouselItem in carousel.carouselItems track by $index">
 
                 <td>
                     <img ng-if="carouselItem.type==='image'" class="center-block full-width"
@@ -48,6 +53,7 @@
 
 
                         <div ng-if="carouselItem.carouselCaption">
+                            标题效果：
                             <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
                                ng-href="{{carouselItem.carouselCaption.value}}"
                                class="btn btn-primary white-link">{{carouselItem.carouselCaption.text}} <i
@@ -76,16 +82,16 @@
                     </div>
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button class="btn btn-primary white-link btn-sm fa fa-plus"
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-primary white-link fa fa-plus"
                                 ng-click="removeCarouselItem($index)"> 删除此条
                         </button>
-                        <a class="btn btn-primary white-link btn-sm"
+                        <a class="btn btn-primary white-link " ng-if="carouselItem.id"
                            ng-href="${path}/admin/carousel/image/input/${pageComponent.id}/{{carouselItem.id}}">更换图片</a>
-                        <button class="btn btn-primary white-link btn-sm fa fa-arrow-up"
+                        <button class="btn btn-primary white-link fa fa-arrow-up"
                                 ng-click="forwardCarouselItem($index)" ng-if="$index!==0"> 前移
                         </button>
-                        <button class="btn btn-primary white-link btn-sm fa fa-arrow-down"
+                        <button class="btn btn-primary white-link fa fa-arrow-down"
                                 ng-click="backwardCarouselItem($index)" ng-if="$index!==carousel.carouselItems.length-1"> 后移
                         </button>
                     </div>

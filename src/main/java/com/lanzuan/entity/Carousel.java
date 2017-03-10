@@ -14,6 +14,9 @@ db.carousel.update({},{"$set":{"enabled":true}},false,true)
 public class Carousel {
     @Id
     private String id;
+    /**
+     * 轮播方案名
+     */
     private String name;
     @DBRef
     private User creator;
