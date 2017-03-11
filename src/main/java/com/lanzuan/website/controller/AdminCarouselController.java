@@ -1,6 +1,9 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
+import com.lanzuan.common.code.CarouselItemTypeEnum;
+import com.lanzuan.common.util.FileUtil;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Carousel;
 import com.lanzuan.entity.CarouselItem;
 import com.lanzuan.support.vo.Message;
@@ -15,8 +18,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,5 +121,31 @@ public class AdminCarouselController extends BaseRestSpringController {
         message.setSuccess(true);
         message.setData(carousel);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/image/new/{pageComponentId}/{carouselItemId}")
+    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String carouselItemId,HttpServletRequest request){
+
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+            try {
+                String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
+//                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
+                String fileName=System.currentTimeMillis()+ type;
+                String filePath = request.getServletContext().getRealPath("/") + "statics/upload/"+fileName;
+                // 转存文件
+                file.transferTo(new File(filePath));
+                CarouselItem carouselItem=carouselItemService.findById(carouselItemId);
+                carouselItem.setValue("/statics/upload/"+fileName);
+                carouselItem.setType(CarouselItemTypeEnum.IMAGE.toCode());
+                carouselItemService.update(carouselItem);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (StringUtils.isNotBlank(pageComponentId)){
+            return "redirect:/admin/page_component/edit/"+pageComponentId;
+        }
+        return "redirect:/admin/index";
     }
 }
