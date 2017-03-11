@@ -1,0 +1,52 @@
+package com.lanzuan.entity;
+
+import com.lanzuan.entity.entityfield.NavItem;
+import com.lanzuan.entity.entityfield.NavbarBrand;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2017/3/11.
+ */
+@Document(collection = "navbar")
+public class Navbar {
+    @Id
+    private String id;
+    private NavbarBrand navbarBrand;
+    private List<NavItem> navItems;
+    private String uri;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public NavbarBrand getNavbarBrand() {
+        return navbarBrand;
+    }
+
+    public void setNavbarBrand(NavbarBrand navbarBrand) {
+        this.navbarBrand = navbarBrand;
+    }
+
+    public List<NavItem> getNavItems() {
+        return navItems;
+    }
+
+    public void setNavItems(List<NavItem> navItems) {
+        this.navItems = navItems;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+}
