@@ -53,7 +53,7 @@
         }
 
         $scope.getNavbar=function(){
-            $http.get("/statics/json/navbar.json").success(function (data) {
+            $http.get("/admin/navbar/home/data").success(function (data) {
                 $scope.navbar=data;
             });
         }
@@ -66,8 +66,14 @@
             $scope.navbar.navItems.splice(index,0,{"name":"百度","link":"http://baidu.com","faClass":"","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"})
         }
 
-        $scope.submitNavbar=function(form){
-            form.reset();
+        $scope.saveNavbar=function(){
+
+            $http.post("/admin/navbar/update",JSON.stringify($scope.navbar)).success(function (message) {
+                $scope.navbar=message.data;
+                if(message.success){
+                    alert("保存成功！");
+                }
+            });
         }
         $scope.newNavbar=function(form){
 
@@ -237,6 +243,32 @@
 
             $scope.getMenu();
             $scope.editable=false;
+        }
+        $scope.getArticles=function(){
+            console.log("all arts")
+            $http.get("/admin/article/list/data").success(function (data) {
+                $scope.articles=data;
+            });
+        }
+        $scope.getAllCarousels=function(){
+            $http.get("/admin/carousel/list/data").success(function (data) {
+                $scope.carousels=data;
+            });
+        }
+        $scope.changeEnabledStatus=function(carousel){
+            $http.post("/admin/carousel/update",JSON.stringify(carousel)).success(function (data) {
+                $scope.carousels=data;
+
+            });
+        }
+
+        $scope.deleteCarousel=function(carousel){
+            if(!confirm("确定删除?"))
+                return ;
+            $http.post("/admin/carousel/delete/"+carousel.id,JSON.stringify(carousel)).success(function (data) {
+                $scope.carousels=data;
+
+            });
         }
         $scope.getMenu=function(){
             $http.get("/statics/json/menu.json").success(function (data) {

@@ -8,7 +8,7 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑数据</label>
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-upload " type="button" ng-click="submitNavbar(form)" ng-disabled="form.$pristine&&false"> 修 改</button>
+                <button class="btn btn-primary fa fa-upload " type="button" ng-click="saveNavbar()" ng-disabled="form.$pristine&&false"> 修 改</button>
                 <button class="btn btn-primary fa fa-save" type="button" ng-click="newNavbar(form)" ng-disabled="form.$pristine&&false"> 另 存</button>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetNavbar(form)"> 重 置</button>
             </div>

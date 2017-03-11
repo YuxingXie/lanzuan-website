@@ -47,7 +47,6 @@
     <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/statics/plugin/bootstrap-contextmenu-master/bootstrap-contextmenu.js"></script>
     <script src="${path}/statics/js/app.js"></script>
 </body>
 

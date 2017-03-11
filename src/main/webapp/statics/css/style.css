@@ -562,8 +562,14 @@ Misc tools
     bottom:0;
     left: 40%;
 }
-.hover-cursor-hand:hover{
-    cursor: hand;
+.hover-cursor-hand{
+    cursor: pointer;
+}
+.hover-color-grey:hover{
+     color: lightgrey;
+ }
+.hover-bg-color-grey:hover{
+    background-color: #f6f6f6;
 }
 
 .checkbox-list > label {
@@ -600,6 +606,7 @@ Misc tools
 .dash-silver-border{
     border: dashed #c0c0c0 1px;
 }
+
 .dash-silver-right-border{
     border-right: dashed #c0c0c0 1px;
 }
@@ -608,6 +615,12 @@ Misc tools
 }
 .solid-silver-right-border{
     border-right: solid #c0c0c0 1px;
+}
+.solid-silver-border-top{
+    border-top: solid #c0c0c0 1px;
+}
+.solid-silver-border-bottom{
+    border-bottom: solid #c0c0c0 1px;
 }
 .text-indent-1em{text-indent: 1em}
 .text-indent-5em{text-indent: 5em}

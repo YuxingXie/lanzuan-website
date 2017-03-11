@@ -97,7 +97,7 @@ public class Carousel {
         this.uri = uri;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 

@@ -6,6 +6,7 @@ import com.lanzuan.entity.entityfield.CarouselCaption;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.ICarouselItemService;
 import com.lanzuan.website.service.ICarouselService;
+import com.lanzuan.website.service.INavbarService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ public class StartOnLoadService {
     private ICarouselService carouselService;
     @Resource(name = "carouselItemService")
     private ICarouselItemService carouselItemService;
+    @Resource(name = "navbarService")
+    private INavbarService navbarService;
+
     /**
      * Spring 容器初始化时加载
      */
@@ -39,8 +43,14 @@ public class StartOnLoadService {
     }
 
     private void initPageData() {
+        initNavbarData();
         initCarouselData();
         initArticleSectionData();
+    }
+
+    private void initNavbarData() {
+        Navbar navbar=navbarService.findByUri("/home");
+
     }
 
     private void initArticleSectionData() {

@@ -8,13 +8,14 @@
 
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑轮播图</label>
+            <label class="label label-info large-180">方案名称：{{carousel.name}}</label>
 
             <div class="btn-group padding-bottom-10">
                 <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">全部保存</button>
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
-                <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存为</button>
-                <button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>
-                <button class="btn btn-primary fa fa-download" type="button" ng-click="useCarousel()"> 应用方案</button>
+                <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存并应用</button>
+                <%--<button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>--%>
+                <a class="btn btn-primary white-link fa fa-download" ng-href="${path}/admin/carousel/list_page/${pageComponent.id}"> 应用方案</a>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCarousel()"> 重 置</button>
             </div>
         </div>
@@ -71,7 +72,7 @@
                         <input class="form-control" style="width: 24em" type="text"
                                ng-model="carouselItem.carouselCaption.value">
                         <span class="input-group-addon">
-                            <a class="black-link" target="_blank" href="/admin/article/all">不知道填什么请点我</a>
+                            <a class="black-link" target="_blank" href="/admin/article/list">不知道填什么请点我</a>
                         </span>
                     </div>
                     <div class="input-group">

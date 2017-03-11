@@ -115,8 +115,10 @@ public class AdminCarouselController extends BaseRestSpringController {
         }else {
             carousel.setCarouselItems(null);
         }
-        carousel.setId(null);
         carousel.setEnabled(false);
+        carouselService.update(carousel);
+        carousel.setId(null);
+        carousel.setEnabled(true);
         carouselService.insert(carousel);
         message.setSuccess(true);
         message.setData(carousel);
@@ -147,5 +149,29 @@ public class AdminCarouselController extends BaseRestSpringController {
             return "redirect:/admin/page_component/edit/"+pageComponentId;
         }
         return "redirect:/admin/index";
+    }
+
+    @RequestMapping(value = "/list_page/{pageComponentId}")
+    public String listPage(ModelMap modelMap,@PathVariable String pageComponentId){
+//        List<Carousel> carousels=carouselService.findAll();
+//        modelMap.addAttribute("carousels",carousels);
+        modelMap.addAttribute("pageComponentId",pageComponentId);
+        return "admin/carousel-list";
+    }
+    @RequestMapping(value = "/list/data")
+    public ResponseEntity<List<Carousel>> getAllCarousels(){
+        List<Carousel> carousels=carouselService.findAll();
+        return new ResponseEntity<List<Carousel>>(carousels,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/update")
+    public ResponseEntity<List<Carousel>> update(@RequestBody Carousel carousel){
+        carousel.setEnabled(!carousel.getEnabled());
+        carouselService.update(carousel, false);
+        return getAllCarousels();
+    }
+    @RequestMapping(value = "/delete/{id}")
+    public ResponseEntity<List<Carousel>> remove(@PathVariable String id){
+        carouselService.removeById(id);
+        return getAllCarousels();
     }
 }
