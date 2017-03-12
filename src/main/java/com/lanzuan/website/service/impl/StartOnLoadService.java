@@ -1,8 +1,11 @@
 package com.lanzuan.website.service.impl;
 
+import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.entity.*;
 import com.lanzuan.entity.entityfield.CarouselCaption;
+import com.lanzuan.entity.entityfield.NavItem;
+import com.lanzuan.entity.entityfield.NavbarBrand;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.ICarouselItemService;
 import com.lanzuan.website.service.ICarouselService;
@@ -50,7 +53,45 @@ public class StartOnLoadService {
 
     private void initNavbarData() {
         Navbar navbar=navbarService.findByUri("/home");
+        if (navbar==null){
+            navbar=new Navbar();
+            navbar.setName("首页导航条");
+            navbar.setUri("/home");
+            navbar.setEnabled(true);
+            NavbarBrand navbarBrand=new NavbarBrand();
+            navbarBrand.setType(NavbarBrandTypeEnum.IMAGE.toCode());
+            navbarBrand.setValue("/statics/image/lanzuan/icons/ico.jpg");
+            navbar.setNavbarBrand(navbarBrand);
+            List<NavItem> navItems=new ArrayList<NavItem>();
+            NavItem navItem1=new NavItem();
+            NavItem navItem2=new NavItem();
+            NavItem navItem3=new NavItem();
+            NavItem navItem4=new NavItem();
+            NavItem navItem5=new NavItem();
+            navItem1.setName("首页");
+            navItem2.setName("智慧城市");
+            navItem3.setName("三农服务");
+            navItem4.setName("软件开发");
+            navItem5.setName("关于我们");
+            navItem1.setFaClass("fa-home");
+            navItem2.setFaClass("fa-wifi");
+            navItem3.setFaClass("fa-tree");
+            navItem4.setFaClass("fa-safari");
+            navItem5.setFaClass("fa-male");
+            navItem1.setLink("/");
+            navItem2.setLink("/statics/page/business/b1.html");
+            navItem3.setLink("/statics/page/business/b2.html");
+            navItem4.setLink("/statics/page/business/b3.html");
+            navItem5.setLink("/statics/page/about-us.html");
 
+            navItems.add(navItem1);
+            navItems.add(navItem2);
+            navItems.add(navItem3);
+            navItems.add(navItem4);
+            navItems.add(navItem5);
+            navbar.setNavItems(navItems);
+            navbarService.insert(navbar);
+        }
     }
 
     private void initArticleSectionData() {

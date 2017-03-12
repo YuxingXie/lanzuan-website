@@ -565,6 +565,18 @@ Misc tools
 .hover-cursor-hand{
     cursor: pointer;
 }
+.cursor-not-allowed{
+    cursor: not-allowed;
+}
+.cursor-none{
+    cursor: none;
+}
+.cursor-alias{
+    cursor: alias;
+}
+.cursor-auto{
+    cursor: auto;
+}
 .hover-color-grey:hover{
      color: lightgrey;
  }

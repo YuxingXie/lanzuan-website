@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -75,6 +77,27 @@ public class AdminController extends BaseRestSpringController {
 
         return "admin";
 
+    }
+    @RequestMapping(value = "/icons/data")
+    public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(), Constant.icoUri);
+        List<String> strings=new ArrayList<String>();
+        if (!resource.exists()){
+            File file=resource.getFile();
+            file.mkdirs();
+            return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
+        }else{
+            if (resource.getFile().isDirectory()){
+                File[] files= resource.getFile().listFiles();
+                for (File file:files){
+                    if (file.isDirectory()) continue;
+                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),Constant.icoUri+"/"+file.getName());
+                    strings.add(fileResource.getPath());
+                }
+            }
+        }
+
+        return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
     }
     @RequestMapping(value = "/to_login")
     public String toLogin(ModelMap model,String to, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -217,9 +240,8 @@ public class AdminController extends BaseRestSpringController {
         return "admin/img-article-section";
     }
 
-    @RequestMapping(value = "/article_section/image/new/{pageComponentId}/{articleSectionId}")
-    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String articleSectionId,HttpServletRequest request){
-
+    @RequestMapping(value = "/icon/new/{pageComponentId}")
+    public String uploadIcon(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String articleSectionId,HttpServletRequest request){
         // 判断文件是否为空
         if (!file.isEmpty()) {
             try {
@@ -242,6 +264,34 @@ public class AdminController extends BaseRestSpringController {
         }
         return "redirect:/admin/index";
     }
+
+    @RequestMapping(value = "/icon/upload-input/{pageComponentId}")
+    public String iconUploadInput(ModelMap modelMap,@PathVariable String pageComponentId){
+        modelMap.addAttribute("pageComponentId",pageComponentId);
+        return "admin/img-nav-icon-input";
+    }
+    @RequestMapping(value = "/icons/add/{pageComponentId}")
+    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
+
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+            try {
+                String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
+                String fileName=System.currentTimeMillis()+ type;
+                String filePath = request.getServletContext().getRealPath("/") +Constant.icoUri+"/"+fileName;
+                // 转存文件
+                file.transferTo(new File(filePath));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (StringUtils.isNotBlank(pageComponentId)){
+            return "redirect:/admin/page_component/edit/"+pageComponentId;
+        }
+        return "redirect:/admin/index";
+    }
+
     @RequestMapping(value = "/article_section/rename")
     public ResponseEntity<Message> renameArticleSection(@RequestBody ArticleSection articleSection){
 

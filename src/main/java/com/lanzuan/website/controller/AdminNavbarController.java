@@ -1,6 +1,8 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
+import com.lanzuan.common.constant.Constant;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Navbar;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleSectionService;
@@ -13,10 +15,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.support.ServletContextResource;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,10 +47,48 @@ public class AdminNavbarController extends BaseRestSpringController {
         message.setData(navbar);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+    @RequestMapping(value = "/status-change")
+    public ResponseEntity<List<Navbar>> statusChange(@RequestBody Navbar navbar){
+        navbar.setEnabled(!navbar.isEnabled());
+        navbarService.update(navbar, false);
+        return getNavbars();
+    }
     @RequestMapping(value = "/home/data")
     public ResponseEntity<Navbar> getNavbar(){
         Navbar navbar=navbarService.findByUri("/home");
         return new ResponseEntity<Navbar>(navbar, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/list/data")
+    public ResponseEntity<List<Navbar>> getNavbars(){
+        List<Navbar> navbarList=navbarService.findAll();
+        return new ResponseEntity<List<Navbar>>(navbarList, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/save-as")
+    public ResponseEntity<Message> saveAs(@RequestBody Navbar navbar){
+
+        Message message=new Message();
+        if (StringUtils.isNotBlank(navbar.getId())){
+            Navbar old=navbarService.findById(navbar.getId());
+//            old.setEnabled(false);
+            navbarService.update(old);
+            navbar.setEnabled(false);
+            navbar.setId(null);
+            navbarService.insert(navbar);
+            message.setData(old);
+
+        }
+        message.setSuccess(true);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/delete/{id}")
+    public ResponseEntity<List<Navbar>> remove(@PathVariable String id){
+        navbarService.removeById(id);
+        return getNavbars();
+    }
+    @RequestMapping(value = "/list-page/{pageComponentId}")
+    public String remove(@PathVariable String pageComponentId,ModelMap modelMap){
+        modelMap.addAttribute("pageComponentId",pageComponentId);
+        return "admin/navbar-list";
     }
 
 }

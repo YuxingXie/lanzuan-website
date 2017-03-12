@@ -1,17 +1,24 @@
-[
-  {
-    "image": "/statics/image/lanzuan/home/logo-bg.jpg",
-    "text": "智慧城市",
-    "link": "/statics/page/business/b1.html"
-  },
-  {
-    "image": "/statics/image/lanzuan/home/logo-bg.jpg",
-    "text": "三农服务",
-    "link": "/statics/page/business/b2.html"
-  },
-  {
-    "image": "/statics/image/lanzuan/home/logo-bg.jpg",
-    "text": "软件开发",
-    "link": "/statics/page/business/b3.html"
-  }
-]
+{
+  "name":"图文卡片组1",
+  "uri":"/home",
+  "imageCardGroupItems":[
+    {
+      "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+      "text": "智慧城市",
+      "link": "/statics/page/business/b1.html"
+    },
+    {
+      "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+      "text": "三农服务",
+      "link": "/statics/page/business/b2.html"
+    },
+    {
+      "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+      "text": "软件开发",
+      "link": "/statics/page/business/b3.html"
+    }
+  ]
+}
+
+
+

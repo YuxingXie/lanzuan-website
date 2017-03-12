@@ -75,8 +75,15 @@
                 }
             });
         }
-        $scope.newNavbar=function(form){
-
+        $scope.newNavbar=function(){
+            var name=prompt("输入导航条名称");
+            $scope.navbar.name=name;
+            $http.post("/admin/navbar/save-as",JSON.stringify($scope.navbar)).success(function (message) {
+                $scope.navbar=message.data;
+                if(message.success){
+                    alert("另存成功！");
+                }
+            });
         }
         $scope.resetNavbar=function(form){
             $scope.getNavbar();
@@ -244,8 +251,13 @@
             $scope.getMenu();
             $scope.editable=false;
         }
+        $scope.getIcons=function(){
+            console.log("icons");
+            $http.get("/admin/icons/data").success(function (data) {
+                $scope.icons=data;
+            });
+        }
         $scope.getArticles=function(){
-            console.log("all arts")
             $http.get("/admin/article/list/data").success(function (data) {
                 $scope.articles=data;
             });
@@ -262,6 +274,11 @@
             });
         }
 
+        $scope.changeNavbarEnabledStatus=function(navbar){
+            $http.post("/admin/navbar/status-change",JSON.stringify(navbar)).success(function (data) {
+                $scope.navbarList=data;
+            });
+        }
         $scope.deleteCarousel=function(carousel){
             if(!confirm("确定删除?"))
                 return ;
@@ -270,9 +287,23 @@
 
             });
         }
+        $scope.deleteNavbar=function(navbar){
+            if(!confirm("确定删除?"))
+                return ;
+            $http.post("/admin/navbar/delete/"+navbar.id,JSON.stringify(navbar)).success(function (data) {
+                $scope.navbarList=data;
+
+            });
+        }
         $scope.getMenu=function(){
             $http.get("/statics/json/menu.json").success(function (data) {
                 $scope.menuItems=data;
+            });
+        }
+
+        $scope.getNavbarList=function(){
+            $http.get("/admin/navbar/list/data").success(function (data) {
+                $scope.navbarList=data;
             });
         }
 
