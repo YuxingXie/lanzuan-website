@@ -1,6 +1,6 @@
 package com.lanzuan.entity.entityfield;
 
-public class ImageCardGroupItem {
+public class Card {
     private String image;
     private String text;
     private String link;

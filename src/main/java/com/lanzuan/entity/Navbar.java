@@ -14,11 +14,12 @@ import java.util.List;
 public class Navbar {
     @Id
     private String id;
-    private NavbarBrand navbarBrand;
-    private List<NavItem> navItems;
     private String uri;
     private String name;
     private boolean enabled;
+    private NavbarBrand navbarBrand;
+    private List<NavItem> navItems;
+
 
     public String getId() {
         return id;

@@ -61,9 +61,20 @@
         $scope.removeNavItems=function(index){
             $scope.navbar.navItems.splice(index,1)
         }
+        $scope.removeCard=function(index){
+            $scope.cardGroup.cards.splice(index,1)
+        }
         $scope.insertNavItemsBefore=function(index){
 
             $scope.navbar.navItems.splice(index,0,{"name":"百度","link":"http://baidu.com","faClass":"","navItemCass":"col-xs-3 col-md-2 col-lg-1 m-a-0 p-l-0 p-r-0 padding-top-10 text-center"})
+        }
+        $scope.insertCardBefore=function(index){
+
+            $scope.cardGroup.cards.splice(index,0,{
+                "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+                "text": "baidu",
+                "link": "http://baidu.com"
+            });
         }
 
         $scope.saveNavbar=function(){
@@ -75,6 +86,7 @@
                 }
             });
         }
+
         $scope.newNavbar=function(){
             var name=prompt("输入导航条名称");
             $scope.navbar.name=name;
@@ -87,6 +99,9 @@
         }
         $scope.resetNavbar=function(form){
             $scope.getNavbar();
+        }
+        $scope.resetCardGroup=function(){
+            $scope.getCardGroup();
         }
         $scope.resetCarousel=function(){
             $scope.getCarousel();
@@ -233,13 +248,33 @@
             $scope.carousel.carouselItems.splice(index+1,0,item);
         }
         $scope.getCardGroup=function(){
-            $http.get("/statics/json/img-card-group.json").success(function (data) {
+            $http.get("/admin/card-group/home/data").success(function (data) {
                 $scope.cardGroup=data;
+            });
+        }
+        $scope.saveCardGroup=function(){
+
+            $http.post("/admin/card-group/update",JSON.stringify($scope.cardGroup)).success(function (message) {
+                $scope.cardGroup=message.data;
+                if(message.success){
+                    alert("保存成功！");
+                }
+            });
+        }
+
+        $scope.newCardGroup=function(){
+            var name=prompt("输入卡片组方案名称");
+            $scope.cardGroup.name=name;
+            $http.post("/admin/card-group/save-as",JSON.stringify($scope.cardGroup)).success(function (message) {
+                $scope.cardGroup=message.data;
+                if(message.success){
+                    alert("另存成功！");
+                }
             });
         }
         $scope.getCollapseImageTitleText=function(){
             $http.get("/statics/json/collapse-img-title-text-block.json").success(function (data) {
-                $scope.collapseBlock=data;
+                $scope.imageTextBlockGroup=data;
                 $scope._active=0;
                 //console.log(JSON.stringify(data))
             });
@@ -279,6 +314,11 @@
                 $scope.navbarList=data;
             });
         }
+        $scope.changeCardGroupEnabledStatus=function(cardGroup){
+            $http.post("/admin/card-group/status-change",JSON.stringify(cardGroup)).success(function (data) {
+                $scope.cardGroupList=data;
+            });
+        }
         $scope.deleteCarousel=function(carousel){
             if(!confirm("确定删除?"))
                 return ;
@@ -295,6 +335,14 @@
 
             });
         }
+        $scope.deleteCardGroup=function(cardGroup){
+            if(!confirm("确定删除?"))
+                return ;
+            $http.post("/admin/card-group/delete/"+cardGroup.id,JSON.stringify(cardGroup)).success(function (data) {
+                $scope.cardGroupList=data;
+
+            });
+        }
         $scope.getMenu=function(){
             $http.get("/statics/json/menu.json").success(function (data) {
                 $scope.menuItems=data;
@@ -304,6 +352,11 @@
         $scope.getNavbarList=function(){
             $http.get("/admin/navbar/list/data").success(function (data) {
                 $scope.navbarList=data;
+            });
+        }
+        $scope.getCardGroupList=function(){
+            $http.get("/admin/card-group/list/data").success(function (data) {
+                $scope.cardGroupList=data;
             });
         }
 

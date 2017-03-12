@@ -1,22 +1,28 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.entityfield.ImageCardGroupItem;
+import com.lanzuan.entity.entityfield.Card;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/12.
  */
-@Document(collection = "carouselItem")
+@Document(collection = "imageCardGroup")
 public class ImageCardGroup {
     @Id
     private String id;
     private String name;
     private String uri;
-    private List<ImageCardGroupItem> imageCardGroupItems;
+    private List<Card> cards;
     private boolean enabled;
+    @DBRef
+    private User creator;
+    private Date createDate;
+
     public String getId() {
         return id;
     }
@@ -49,11 +55,27 @@ public class ImageCardGroup {
         this.enabled = enabled;
     }
 
-    public List<ImageCardGroupItem> getImageCardGroupItems() {
-        return imageCardGroupItems;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public void setImageCardGroupItems(List<ImageCardGroupItem> imageCardGroupItems) {
-        this.imageCardGroupItems = imageCardGroupItems;
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

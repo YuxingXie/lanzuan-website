@@ -16,23 +16,23 @@
     <link href="${path}/statics/css/style.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
 </head>
+
 <body ng-app="app">
-<div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
-    <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<div class="container" ng-controller="AdminController" ng-init="initAdmin()">
 
     <div class="row padding-top-2em p-a-0 m-a-0">
         <div ng-controller="HomeController">
             <div class="col-xs-12 m-a-0 p-a-0">
-                <div class="col-xs-12 margin-left-2em margin-right-2em">
+                <div class="alert alert-info">
                     <div>组件名称：${pageComponent.name}</div>
                     <div>组件说明：${pageComponent.remark}</div>
                 </div>
             </div>
             <div class="col-xs-12 m-a-0 p-a-0">
                 <label class="label label-default large-180">组件预览</label>
-                <div style="border: groove #000 5px">
                     <jsp:include page="${pageComponent.uri}"></jsp:include>
-                </div>
+
                 <div class="padding-top-2em">
                     <c:if test="${not empty pageComponent.editUri}">
                         <jsp:include page="${pageComponent.editUri}"></jsp:include>

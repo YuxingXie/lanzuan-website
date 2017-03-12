@@ -1,6 +1,7 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
+import com.lanzuan.entity.ImageCardGroup;
 import com.lanzuan.entity.Navbar;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -15,13 +16,13 @@ import javax.annotation.Resource;
  * Created by Administrator on 2015/5/22.
  */
 @Repository
-public class NavbarDao extends BaseMongoDao<Navbar>  {
+public class ImageCardGroupDao extends BaseMongoDao<ImageCardGroup>  {
     private static Logger logger = LogManager.getLogger();
-    //单个插入
     @Resource
     private MongoOperations mongoTemplate;
 
-    public Navbar findByUri(String uri) {
+
+    public ImageCardGroup findByUri(String uri) {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("uri",uri);
         dbObject.put("enabled",true);

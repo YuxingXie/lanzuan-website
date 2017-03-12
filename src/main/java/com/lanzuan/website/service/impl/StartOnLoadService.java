@@ -3,15 +3,15 @@ package com.lanzuan.website.service.impl;
 import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.entity.*;
+import com.lanzuan.entity.entityfield.Card;
 import com.lanzuan.entity.entityfield.CarouselCaption;
 import com.lanzuan.entity.entityfield.NavItem;
 import com.lanzuan.entity.entityfield.NavbarBrand;
-import com.lanzuan.website.service.IArticleService;
-import com.lanzuan.website.service.ICarouselItemService;
-import com.lanzuan.website.service.ICarouselService;
-import com.lanzuan.website.service.INavbarService;
+import com.lanzuan.website.service.*;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +21,7 @@ import java.util.List;
 
 @Service
 public class StartOnLoadService {
+    private static Logger logger = LogManager.getLogger();
     @Resource(name = "pageTemplateService")
     private PageTemplateService pageTemplateService;
     @Resource(name = "pageComponentService")
@@ -35,12 +36,14 @@ public class StartOnLoadService {
     private ICarouselItemService carouselItemService;
     @Resource(name = "navbarService")
     private INavbarService navbarService;
+    @Resource(name = "imageCardGroupService")
+    private IImageCardGroupService imageCardGroupService;
 
     /**
      * Spring 容器初始化时加载
      */
     public void loadData() {
-        System.out.println("容器初始化完成，载入初始化数据。。。。。。");
+        logger.info("容器初始化完成，载入初始化数据。。。。。。");
         initPageTemplates();
         initPageData();
     }
@@ -48,12 +51,46 @@ public class StartOnLoadService {
     private void initPageData() {
         initNavbarData();
         initCarouselData();
+        initImageCardGroupData();
         initArticleSectionData();
     }
 
+    private void initImageCardGroupData() {
+        logger.info("初始化图文卡片组。。。");
+        ImageCardGroup imageCardGroup=imageCardGroupService.findByUri("/home");
+        if (imageCardGroup==null){
+            logger.info("   未查询到图文卡片组方案，应用默认方案。。。");
+            imageCardGroup=new ImageCardGroup();
+            imageCardGroup.setEnabled(true);
+            imageCardGroup.setUri("/home");
+            imageCardGroup.setName("图文卡片组1");
+            List<Card> Cards=new ArrayList<Card>();
+            Card Card1=new Card();
+            Card Card2=new Card();
+            Card Card3=new Card();
+            Card1.setLink("/statics/page/business/b1.html");
+            Card2.setLink("/statics/page/business/b2.html");
+            Card3.setLink("/statics/page/business/b3.html");
+            Card1.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
+            Card2.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
+            Card3.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
+            Card1.setText("智慧城市");
+            Card2.setText("三农服务");
+            Card3.setText("软件开发");
+            Cards.add(Card1);
+            Cards.add(Card2);
+            Cards.add(Card3);
+            imageCardGroup.setCards(Cards);
+            imageCardGroupService.insert(imageCardGroup);
+        }
+
+    }
+
     private void initNavbarData() {
+        logger.info("初始化导航条。。。");
         Navbar navbar=navbarService.findByUri("/home");
         if (navbar==null){
+            logger.info("   未查询到导航条方案，应用默认方案。。。");
             navbar=new Navbar();
             navbar.setName("首页导航条");
             navbar.setUri("/home");
@@ -95,6 +132,7 @@ public class StartOnLoadService {
     }
 
     private void initArticleSectionData() {
+        logger.info("初始化文章版块。。。");
         DBObject dbObject=new BasicDBObject();
         dbObject.put("enabled",true);
         List<String> fields=new ArrayList<String>();
@@ -105,7 +143,7 @@ public class StartOnLoadService {
         int limit= Constant.articleSectionNum;
         List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
         if (articleSections==null||articleSections.size()==0){
-            System.out.println("未查询到文章版块数据，使用默认内容。。。");
+            System.out.println("    未查询到文章版块数据，使用默认内容。。。");
             articleSections=new ArrayList<ArticleSection>();
             ArticleSection articleSection1=new ArticleSection();
             articleSection1.setName("新闻动态");
@@ -235,8 +273,10 @@ public class StartOnLoadService {
     }
 
     private void initCarouselData() {
+        logger.info("初始化轮播图。。。");
         Carousel carousel=carouselService.findCarouselByUri("/home");
         if (carousel==null||carousel.getId()==null){
+            logger.info("   未查询到轮播图方案，应用默认方案。。。");
             carousel=new Carousel();
             carousel.setName("首页轮播图");
             carousel.setDate(new Date());

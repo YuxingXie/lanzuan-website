@@ -1,5 +1,5 @@
 <div class="card-group margin-left-right-0" ng-init="getCardGroup()">
-    <div class="card" ng-repeat="card in cardGroup">
+    <div class="card" ng-repeat="card in cardGroup.cards">
         <div class="card-block padding-1">
             <a ng-if="card.link" ng-href="{{card.link}}">
                 <img ng-src="{{card.image}}" class="full-width "/>

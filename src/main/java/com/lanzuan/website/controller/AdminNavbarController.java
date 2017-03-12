@@ -1,15 +1,10 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Navbar;
 import com.lanzuan.support.vo.Message;
-import com.lanzuan.website.service.IArticleSectionService;
-import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.INavbarService;
-import com.lanzuan.website.service.IPageComponentService;
-import com.lanzuan.website.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -19,13 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.support.ServletContextResource;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

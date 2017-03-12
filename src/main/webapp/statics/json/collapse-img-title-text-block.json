@@ -1,9 +1,10 @@
 {
-  "name":"典型应用",
-  "blocks":[
+  "name":"ImageTextBlockGroup One",
+  "text":"典s型应用",
+  "imageTextBlocks":[
     {
       "name": "智慧城市",
-      "items": [
+      "imageTextItems": [
         {
           "image": "/statics/image/lanzuan/280-180/zfdl.jpg",
           "text": "宁乡县政府WIFI覆盖应用",
