@@ -31,11 +31,7 @@ public class AdminCardGroupController extends BaseRestSpringController {
     @Resource(name = "imageCardGroupService")
     IImageCardGroupService imageCardGroupService;
 
-    @RequestMapping(value = "/home/data")
-    public ResponseEntity<ImageCardGroup> homeImageCardGroup(){
-        ImageCardGroup imageCardGroup=imageCardGroupService.findByUri("/home");
-        return new ResponseEntity<ImageCardGroup>(imageCardGroup, HttpStatus.OK);
-    }
+
     @RequestMapping(value = "/update")
     public ResponseEntity<Message> update(@RequestBody ImageCardGroup cardGroup){
         Message message=new Message();

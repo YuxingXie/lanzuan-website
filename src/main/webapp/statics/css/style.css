@@ -625,6 +625,9 @@ Misc tools
 .solid-dark-border{
     border-right: solid #000 4px;
 }
+.solid-silver-border{
+    border: solid #c0c0c0 1px;
+}
 .solid-silver-right-border{
     border-right: solid #c0c0c0 1px;
 }

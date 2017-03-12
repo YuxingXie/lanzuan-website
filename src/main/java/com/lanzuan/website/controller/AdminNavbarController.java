@@ -43,11 +43,7 @@ public class AdminNavbarController extends BaseRestSpringController {
         navbarService.update(navbar, false);
         return getNavbars();
     }
-    @RequestMapping(value = "/home/data")
-    public ResponseEntity<Navbar> getNavbar(){
-        Navbar navbar=navbarService.findByUri("/home");
-        return new ResponseEntity<Navbar>(navbar, HttpStatus.OK);
-    }
+
     @RequestMapping(value = "/list/data")
     public ResponseEntity<List<Navbar>> getNavbars(){
         List<Navbar> navbarList=navbarService.findAll();

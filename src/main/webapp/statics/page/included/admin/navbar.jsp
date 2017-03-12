@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="<%=request.getContextPath() %>"/>
 <c:if test="${path eq '/'}"><c:set var="path" value=""/></c:if>
-<nav class="row navbar">
+<nav class="navbar bg-inverse">
   <div class="navbar-brand">
     <c:choose>
       <c:when test="${empty sessionScope.administrator.sex or sessionScope.administrator.sex eq 'male'}">
@@ -18,7 +18,7 @@
   </div>
   <ul class="nav navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="${path}/admin/index"><i class="fa fa-home"></i>管理首页 </a>
+      <a class="nav-link white-link" href="${path}/admin/index"><i class="fa fa-home"></i>管理首页 </a>
     </li>
     <li class="nav-item pull-right">
       <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出</button>

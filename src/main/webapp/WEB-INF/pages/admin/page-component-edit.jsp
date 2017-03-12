@@ -15,6 +15,8 @@
     <link href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/style.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
+    <link href="${path}/statics/css/responsive.css3.css" rel="stylesheet" type="text/css">
+    <link href="${path}/statics/css/bootstrap.custom.css" rel="stylesheet" type="text/css">
 </head>
 
 <body ng-app="app">

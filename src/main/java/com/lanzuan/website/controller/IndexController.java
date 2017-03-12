@@ -1,10 +1,7 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.entity.Article;
-import com.lanzuan.entity.ArticleSection;
-import com.lanzuan.entity.Carousel;
-import com.lanzuan.entity.PageTemplate;
+import com.lanzuan.entity.*;
 import com.lanzuan.website.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +32,33 @@ public class IndexController extends BaseRestSpringController {
     IArticleSectionService articleSectionService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
+    @Resource(name = "imageCardGroupService")
+    IImageCardGroupService imageCardGroupService;
+    @Resource(name = "imageTextBlockGroupService")
+    IImageTextBlockGroupService imageTextBlockGroupService;
+    @Resource(name = "navbarService")
+    INavbarService navbarService;
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
         PageTemplate pageTemplate=pageTemplateService.findByUri(uri);
         map.addAttribute("pageTemplate",pageTemplate);
         return "index";
+    }
+    @RequestMapping(value = "/navbar/home/data")
+    public ResponseEntity<Navbar> getNavbar(){
+        Navbar navbar=navbarService.findByUri("/home");
+        return new ResponseEntity<Navbar>(navbar, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/card-group/home/data")
+    public ResponseEntity<ImageCardGroup> homeImageCardGroup(){
+        ImageCardGroup imageCardGroup=imageCardGroupService.findByUri("/home");
+        return new ResponseEntity<ImageCardGroup>(imageCardGroup, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/image-text-block-group/home/data")
+    public ResponseEntity<ImageTextBlockGroup> homeImageTextBlockGroup(){
+        ImageTextBlockGroup imageCardGroup=imageTextBlockGroupService.findByUri("/home");
+        return new ResponseEntity<ImageTextBlockGroup>(imageCardGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/articleSection/data")
     public ResponseEntity<List<ArticleSection>> articleSectionData() throws ServletException, IOException {

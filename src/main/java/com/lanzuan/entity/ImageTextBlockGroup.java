@@ -2,8 +2,10 @@ package com.lanzuan.entity;
 
 import com.lanzuan.entity.entityfield.ImageTextBlock;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +19,26 @@ public class ImageTextBlockGroup {
     private String name;
     private boolean enabled;
     private String text;
+    private List<ImageTextBlock> imageTextBlocks;
+    @DBRef
+    private User creator;
+    private Date createDate;
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public List<ImageTextBlock> getImageTextBlocks() {
         return imageTextBlocks;
@@ -66,6 +88,5 @@ public class ImageTextBlockGroup {
         this.id = id;
     }
 
-    private List<ImageTextBlock> imageTextBlocks;
 
 }

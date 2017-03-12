@@ -53,7 +53,7 @@
         }
 
         $scope.getNavbar=function(){
-            $http.get("/admin/navbar/home/data").success(function (data) {
+            $http.get("/navbar/home/data").success(function (data) {
                 $scope.navbar=data;
             });
         }
@@ -248,7 +248,7 @@
             $scope.carousel.carouselItems.splice(index+1,0,item);
         }
         $scope.getCardGroup=function(){
-            $http.get("/admin/card-group/home/data").success(function (data) {
+            $http.get("/card-group/home/data").success(function (data) {
                 $scope.cardGroup=data;
             });
         }
@@ -272,11 +272,11 @@
                 }
             });
         }
-        $scope.getCollapseImageTitleText=function(){
-            $http.get("/statics/json/collapse-img-title-text-block.json").success(function (data) {
+        $scope.getImageTextBlockGroup=function(){
+            $http.get("/image-text-block-group/home/data").success(function (data) {
                 $scope.imageTextBlockGroup=data;
                 $scope._active=0;
-                //console.log(JSON.stringify(data))
+                console.log(JSON.stringify("from  home data"))
             });
         }
     }])
