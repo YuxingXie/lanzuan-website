@@ -1,4 +1,8 @@
+<%@ page import="com.lanzuan.common.util.StringUtils" %>
+<%@ page import="com.lanzuan.common.util.ReflectUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="row p-a-0 m-a-0">
 
     <form ng-submit="" class="col-xs-12 p-a-0 m-a-0" name="form">
@@ -6,9 +10,12 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑文章块</label>
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection()"> 新增文章块</button>
-                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetArticleSections(form)"> 重 置</button>
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="saveNewArticleSection()">保存新增文章块</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection(${param.var})"> 新增文章块</button>
+                <%
+                    String varFirstUpperCase= ReflectUtil.firstUpperCase(request.getParameter("var"));
+                %>
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset<%=varFirstUpperCase%>('${param.uri}')"> 重 置</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="saveArticleSections(${param.var})">保存</button>
             </div>
         </div>
         <div class="col-xs-12">
@@ -22,17 +29,17 @@
 
             </div>
         </div>
-        <div class="col-xs-12 col-md-4" ng-if="!articleSections">
+        <div class="col-xs-12 col-md-4" ng-if="!${param.var}">
             <h5>此组件还没有文章块，可以点击“新增文章块”按钮增加一个文章块</h5>
         </div>
 
-        <table class="table table-responsive table-hover" ng-if="articleSections">
+        <table class="table table-responsive table-hover" ng-if="${param.var}">
             <tr>
                 <th >文章块名称</th>
                 <th class="half-width">文章块内文章</th>
                 <th>文章块操作</th>
             </tr>
-            <tr ng-repeat="articleSection in articleSections">
+            <tr ng-repeat="articleSection in ${param.var}">
                 <td>
                     {{articleSection.name}}
                 </td>
@@ -80,7 +87,7 @@
 
 
                     </div>
-                    <span class="text-danger" ng-if="!articleSection.id">未保存*</span>
+                    <span class="text-danger" ng-if="!articleSection.id">未保存*</span>{{articleSection.id}}
                     <div ng-if="!articleSection.articles&&articleSection.image" class="btn-group btn-group-sm">
                         <a class="btn btn-primary white-link" ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">更换图片</a>
                         <button class="btn btn-primary white-link fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>

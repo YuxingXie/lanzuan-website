@@ -45,7 +45,7 @@ public class IndexController extends BaseRestSpringController {
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
         WebPage webPage=webPageService.findByUri(uri);
-        map.addAttribute("webPage",webPage);
+        map.addAttribute("pageTemplate",webPage);
         return "index";
     }
     @RequestMapping(value = "/navbar/home/data")

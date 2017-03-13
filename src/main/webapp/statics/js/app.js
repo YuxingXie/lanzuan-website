@@ -3,9 +3,9 @@
     var app = angular.module('app', []);
 
     app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
-        $scope.getArticleSection=function(uri){
+        $scope.getArticleSections=function(uri){
             $http.get(uri).success(function (data) {
-                //console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 if(!data ||!data.length){
                     $scope.articleSections=null;
                     return;
@@ -46,10 +46,10 @@
                 $scope.articleSections=data;
             });
         }
-        $scope.getSortLinkSection=function(uri){
+        $scope.getSortLinkSections=function(uri){
             $http.get(uri).success(function (data) {
-                console.log(JSON.stringify(data))
-                $scope.sortLinkSection=data;
+
+                $scope.sortLinkSections=data;
             });
         }
 
@@ -159,29 +159,35 @@
         $scope.resetImageTextBlockGroup=function(){
             $scope.getImageTextBlockGroup();
         }
-        $scope.resetArticleSections=function(){
-            $scope.getArticleSection();
+        $scope.resetArticleSections=function(uri){
+            $scope.getArticleSections(uri);
             $scope.addArticleSection=false;
             $scope.addArticleSectionSaved=true;
         }
-        $scope.newArticleSection=function(){
+        $scope.resetSortLinkSections=function(uri){
+            $scope.getSortLinkSections(uri);
+            $scope.addArticleSection=false;
+            $scope.addArticleSectionSaved=true;
+        }
+        $scope.newArticleSection=function(articleSections){
             $scope.addArticleSection=true;
             $scope.addArticleSectionSaved=false;
-            if(!$scope.articleSections){
-                $scope.articleSections=[];
+            if(!articleSections){
+                articleSections=[];
             }
             var articleSection={};
             articleSection.name="请重命名我*"
             //if(!$scope.articleSections.length){
-                $scope.articleSections.splice(0,0,articleSection);
+                articleSections.splice(0,0,articleSection);
+
             //}
             //else{
             //    $scope.articleSections[ $scope.articleSections.length]=articleSection;
             //}
         }
-        $scope.saveNewArticleSection=function(articleSection){
-            $http.post("/admin/article_section/new",JSON.stringify($scope.articleSections)).success(function (message) {
-                $scope.articleSections=message.data;
+        $scope.saveArticleSections=function(articleSections){
+            $http.post("/admin/article_section/new",JSON.stringify(articleSections)).success(function (message) {
+                articleSections=message.data;
                 if(message.success){
                     alert("保存成功！");
                     $scope.addArticleSection=false;
@@ -189,6 +195,7 @@
                 }
             });
         }
+
         $scope.saveImageTextBlockGroup=function(){
             $http.post("/admin/image-text-block-group/update",JSON.stringify($scope.imageTextBlockGroup)).success(function (message) {
                 $scope.imageTextBlockGroup=message.data;

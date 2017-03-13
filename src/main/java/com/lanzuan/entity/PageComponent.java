@@ -32,6 +32,18 @@ public class PageComponent {
 
      */
     private String jsonFunctionName;
+    /**
+     * 在视图中无法知晓js中的变量命名，因为js文件无法用el表达式，所以必须在视图页面指定json数据在js中的变量名，主要在编辑页面使用
+     */
+    private String jsonVariableName;
+
+    public String getJsonVariableName() {
+        return jsonVariableName;
+    }
+
+    public void setJsonVariableName(String jsonVariableName) {
+        this.jsonVariableName = jsonVariableName;
+    }
 
     public String getJsonFunctionName() {
         return jsonFunctionName;
