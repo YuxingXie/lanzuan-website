@@ -204,22 +204,22 @@
                 }
             });
         }
-        $scope.renameArticleSection=function(articleSection){
+        $scope.renameArticleSection=function(articleSections,articleSection){
             $http.post("/admin/article_section/rename",JSON.stringify(articleSection)).success(function (message) {
-                articleSection=message.data;
+                articleSections=message.data;
                 if(message.success){
                     alert("重命名成功！");
                 }
             });
         }
 
-        $scope.removeArticleSection=function(articleSection,index){
+        $scope.removeArticleSection=function(articleSections,articleSection,index){
             if(!articleSection.id){
-                $scope.articleSections.splice(index,1);
-                if($scope.articleSections&&$scope.articleSections.length){
+                articleSections.splice(index,1);
+                if(articleSections&&articleSections.length){
                     var allNotSavedRemoved=true;
-                    for(var i=0;i<$scope.articleSections.length;i++){
-                        var articleSection=$scope.articleSections[i];
+                    for(var i=0;i<articleSections.length;i++){
+                        var articleSection=articleSections[i];
                         if(!articleSection.id){
                             allNotSavedRemoved=false;
                             break;
@@ -230,7 +230,6 @@
                         $scope.addArticleSectionSaved=true;
                     }
                 }
-
                 return;
             }
             $http.post("/admin/article_section/remove",JSON.stringify(articleSection)).success(function (message) {
@@ -258,9 +257,10 @@
                 }
             });
         }
-        $scope.removeArticle=function(article){
+        $scope.removeArticle=function(articleSections,article){
+            console.log(JSON.stringify(article))
             $http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
-                $scope.articleSections=message.data;
+                articleSections=message.data;
                 if(message.success){
                     alert("删除成功！");
                 }

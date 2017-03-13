@@ -303,7 +303,7 @@ public class AdminController extends BaseRestSpringController {
         articleSection.setName(name);
         articleSectionService.update(articleSection);
         message.setSuccess(true);
-        message.setData(articleSection);
+        message.setData(articleSectionService.findHomePageArticleSections());
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/article_section/new")
@@ -318,7 +318,7 @@ public class AdminController extends BaseRestSpringController {
             }
             articleSection.setEnabled(true);
             articleSection.setCreateDate(now);
-           articleSectionsToSave.add(articleSection);
+            articleSectionsToSave.add(articleSection);
         }
         if (articleSectionsToSave.size()!=0){
             articleSectionService.insertAll(articleSectionsToSave);

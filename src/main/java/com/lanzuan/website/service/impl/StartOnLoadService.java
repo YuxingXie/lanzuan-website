@@ -560,7 +560,7 @@ public class StartOnLoadService {
             pageComponent5.setName("文章块组件1");
             pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
             pageComponent5.setJsonFunctionName("getArticleSections");
-            pageComponent5.setDataUri("/articleSection/data");
+            pageComponent5.setDataUri("/articleSections/data");
             pageComponent5.setJsonVariableName("articleSections");
 
             PageComponent pageComponent6=new PageComponent();
@@ -576,7 +576,7 @@ public class StartOnLoadService {
             pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
             pageComponent7.setName("分类链接模板1");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
-            pageComponent7.setDataUri("/articleSection/data");
+            pageComponent7.setDataUri("/articleSections/data");
             pageComponent7.setJsonFunctionName("getSortLinkSections");
             pageComponent7.setJsonVariableName("sortLinkSections");
 

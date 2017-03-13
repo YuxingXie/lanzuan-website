@@ -29,6 +29,7 @@ public class PageComponent {
      *     }
      *     在前端可以类似于如下调用函数：
      *     ${pageComponent.jsonFunctionName}('${pageComponent.dataUri}'})
+     *     实际上相当于getter方法名
 
      */
     private String jsonFunctionName;

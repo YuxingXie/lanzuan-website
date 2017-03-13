@@ -68,7 +68,7 @@ public class IndexController extends BaseRestSpringController {
         ImageTextBlockGroup imageCardGroup=imageTextBlockGroupService.findByUri("/home");
         return new ResponseEntity<ImageTextBlockGroup>(imageCardGroup, HttpStatus.OK);
     }
-    @RequestMapping(value = "/articleSection/data")
+    @RequestMapping(value = "/articleSections/data")
     public ResponseEntity<List<ArticleSection>> articleSectionData() throws ServletException, IOException {
 
 //        List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
