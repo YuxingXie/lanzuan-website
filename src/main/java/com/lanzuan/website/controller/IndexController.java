@@ -2,7 +2,7 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.entityfield.ArticleSection;
+import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.website.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ import java.util.List;
 public class IndexController extends BaseRestSpringController {
     @Resource(name = "pageComponentService")
     IPageComponentService pageComponentService;
-    @Resource(name = "pageTemplateService")
-    IPageTemplateService pageTemplateService;
+    @Resource(name = "webPageService")
+    IWebPageService webPageService;
     @Resource(name = "articleService")
     IArticleService articleService;
     @Resource(name = "articleSectionService")
@@ -44,8 +44,8 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
-        PageTemplate pageTemplate=pageTemplateService.findByUri(uri);
-        map.addAttribute("pageTemplate",pageTemplate);
+        WebPage webPage=webPageService.findByUri(uri);
+        map.addAttribute("webPage",webPage);
         return "index";
     }
     @RequestMapping(value = "/navbar/home/data")

@@ -23,10 +23,10 @@
 
         <div class="row padding-top-2em margin-left-2em margin-right-2em">
             <div ng-controller="HomeController">
-                <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
+                <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                     <div class="row padding-top-2em padding-bottom-2em"style="border-top: solid #000 1px">
                         <div class="col-xs-8 m-a-0 p-a-0">
-                            <jsp:include page="${pageComponent.uri}"></jsp:include>
+                            <jsp:include page="${pageComponent.templateUri}"></jsp:include>
                         </div>
 
                         <div class="col-xs-4 m-a-0 padding-left-2em" >

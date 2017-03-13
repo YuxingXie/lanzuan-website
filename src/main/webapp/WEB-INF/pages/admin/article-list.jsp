@@ -37,7 +37,7 @@
                 <div class="row p-a-0 m-a-0 large-180 bg-light-grey">
                     <div class="col-xs-2">类型</div>
                     <div class="col-xs-4">页面名称（或文章标题）</div>
-                    <div class="col-xs-6">地址(uri)</div>
+                    <div class="col-xs-6">地址(templateUri)</div>
                 </div>
                 <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" >
                     <div class="col-xs-2">

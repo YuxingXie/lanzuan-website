@@ -20,8 +20,8 @@ import java.util.List;
 @Service
 public class StartOnLoadService {
     private static Logger logger = LogManager.getLogger();
-    @Resource(name = "pageTemplateService")
-    private PageTemplateService pageTemplateService;
+    @Resource(name = "webPageService")
+    private WebPageService webPageService;
     @Resource(name = "pageComponentService")
     private PageComponentService pageComponentService;
     @Resource(name = "articleSectionService")
@@ -45,7 +45,7 @@ public class StartOnLoadService {
      */
     public void loadData() {
         logger.info("容器初始化完成，载入初始化数据。。。。。。");
-        initPageTemplates();
+        initWebPages();
         initPageData();
     }
 
@@ -508,60 +508,76 @@ public class StartOnLoadService {
         }
     }
 
-    private void initPageTemplates() {
-        initHomePageTemplates();
+    private void initWebPages() {
+        initHomePage();
 
     }
 
 
 
-    private void initHomePageTemplates() {
-        PageTemplate pageTemplate = pageTemplateService.findByUri("/home");
-        if (pageTemplate==null){
-            System.out.println("没有找到页面模板，应用默认模板......");
-            pageTemplate=new PageTemplate();
+    private void initHomePage() {
+        WebPage webPage = webPageService.findByUri("/home");
+        if (webPage==null){
+            logger.info("没有找到 /home 页面定义，应用默认定义......");
+            webPage=new WebPage();
             PageComponent pageComponent1=new PageComponent();
-            pageComponent1.setUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.html");
+            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
             pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
             pageComponent1.setName("响应式导航条模板1");
+            pageComponent1.setJsonFunctionName("getNavbar");
+            pageComponent1.setDataUri("/navbar/home/data");
+
             pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
 
             PageComponent pageComponent2=new PageComponent();
-            pageComponent2.setUri("/statics/page/included/component/carousel/carousel-full-width-1.html");
+            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
             pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
             pageComponent2.setName("响应式轮播图");
+            pageComponent2.setJsonFunctionName("getCarousel");
+            pageComponent2.setDataUri("/carousel/home/data");
+
             pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
 
             PageComponent pageComponent3=new PageComponent();
-            pageComponent3.setUri("/statics/page/included/component/card-group/img-card-group-1.html");
+            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
             pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
             pageComponent3.setName("图文卡片组模板1");
+            pageComponent3.setJsonFunctionName("getCardGroup");
+            pageComponent3.setDataUri("/card-group/home/data");
             pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
 
             PageComponent pageComponent4=new PageComponent();
-            pageComponent4.setUri("/statics/page/included/lanzuan/collapse-image-title-text-1.html");
+            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
             pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
             pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
             pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
+            pageComponent4.setJsonFunctionName("getImageTextBlockGroup");
+            pageComponent4.setDataUri("/image-text-block-group/home/data");
 
             PageComponent pageComponent5=new PageComponent();
-            pageComponent5.setUri("/statics/page/included/lanzuan/article-section-1.html");
+            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.jsp");
             pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
             pageComponent5.setName("文章块组件1");
             pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
+            pageComponent5.setJsonFunctionName("getArticleSection");
+            pageComponent5.setDataUri("/articleSection/data");
 
             PageComponent pageComponent6=new PageComponent();
-            pageComponent6.setUri("/statics/page/included/lanzuan/full-width-image-1.html");
+            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
             pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
             pageComponent6.setName("全屏宽度图片模板1");
             pageComponent6.setRemark("简单的全屏宽度图片。");
+            pageComponent6.setJsonFunctionName("getFullWidthImage");
+            pageComponent6.setDataUri("/full-width-image/home/data");
 
             PageComponent pageComponent7=new PageComponent();
-            pageComponent7.setUri("/statics/page/included/lanzuan/sort-link-section-1.html");
-//            pageComponent7.setEditUri("/statics/page/included/lanzuan/sort-link-section-1-edit.jsp");
+            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
             pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
             pageComponent7.setName("分类链接模板1");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
+            pageComponent7.setDataUri("/articleSection/data");
+            pageComponent7.setJsonFunctionName("getSortLinkSection");
+
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);
             pageComponentList.add(pageComponent2);
@@ -570,12 +586,12 @@ public class StartOnLoadService {
             pageComponentList.add(pageComponent5);
             pageComponentList.add(pageComponent6);
             pageComponentList.add(pageComponent7);
-            pageTemplate.setPageComponents(pageComponentList);
-            pageTemplate.setUri("/home");
-            pageTemplate.setActive(true);
+            webPage.setPageComponents(pageComponentList);
+            webPage.setUri("/home");
+            webPage.setActive(true);
             pageComponentService.insertAll(pageComponentList);
 
-            pageTemplateService.insert(pageTemplate);
+            webPageService.insert(webPage);
         }
 
     }

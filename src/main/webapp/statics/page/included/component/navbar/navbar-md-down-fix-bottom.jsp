@@ -1,4 +1,8 @@
-<nav class="navbar navbar-md-down-fix-bottom padding-top-1-5em padding-bottom-1em" role="navigation" ng-init="getNavbar()">
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<nav class="navbar navbar-md-down-fix-bottom padding-top-1-5em padding-bottom-1em" role="navigation"
+     ng-init="${param.fn}('${param.uri}')">
     <div class="navbar-brand col-md-2 hidden-md-down margin-right-6-5em margin-left-2em">
         <img ng-if="navbar.navbarBrand&&navbar.navbarBrand.type&&navbar.navbarBrand.type==='image'"
              ng-src="{{navbar.navbarBrand.value}}" class="img-responsive img-ico-larger margin-left-5em">

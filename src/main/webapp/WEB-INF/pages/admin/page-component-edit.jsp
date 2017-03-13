@@ -33,7 +33,7 @@
             </div>
             <div class="col-xs-12 m-a-0 p-a-0">
                 <label class="label label-default large-180">组件预览</label>
-                    <jsp:include page="${pageComponent.uri}"></jsp:include>
+                    <jsp:include page="${pageComponent.templateUri}"></jsp:include>
 
                 <div class="padding-top-2em">
                     <c:if test="${not empty pageComponent.editUri}">

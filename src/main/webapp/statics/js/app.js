@@ -3,8 +3,8 @@
     var app = angular.module('app', []);
 
     app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
-        $scope.getArticleSection=function(){
-            $http.get("/articleSection/data").success(function (data) {
+        $scope.getArticleSection=function(uri){
+            $http.get(uri).success(function (data) {
                 //console.log(JSON.stringify(data));
                 if(!data ||!data.length){
                     $scope.articleSections=null;
@@ -46,20 +46,20 @@
                 $scope.articleSections=data;
             });
         }
-        $scope.getSortLinkSection=function(){
-            $http.get("/articleSection/data").success(function (data) {
+        $scope.getSortLinkSection=function(uri){
+            $http.get(uri).success(function (data) {
                 console.log(JSON.stringify(data))
                 $scope.sortLinkSection=data;
             });
         }
 
-        $scope.getNavbar=function(){
-            $http.get("/navbar/home/data").success(function (data) {
+        $scope.getNavbar=function(uri){
+            $http.get(uri).success(function (data) {
                 $scope.navbar=data;
             });
         }
         $scope.getFullWidthImage=function(){
-            $http.get("/full-width-image/home/data").success(function (data) {
+            $http.get("").success(function (data) {
                 $scope.fullWidthImage=data;
             });
         }
@@ -259,8 +259,8 @@
                 }
             });
         }
-        $scope.getCarousel=function(){
-            $http.get("/carousel/home/data").success(function (data) {
+        $scope.getCarousel=function(uri){
+            $http.get(uri).success(function (data) {
                 $scope.carousel=data;
             });
         }
@@ -308,11 +308,12 @@
             $scope.carousel.carouselItems.splice(index,1);
             $scope.carousel.carouselItems.splice(index+1,0,item);
         }
-        $scope.getCardGroup=function(){
-            $http.get("/card-group/home/data").success(function (data) {
+        $scope.getCardGroup=function(uri){
+            $http.get(uri).success(function (data) {
                 $scope.cardGroup=data;
             });
         }
+
         $scope.saveCardGroup=function(){
 
             $http.post("/admin/card-group/update",JSON.stringify($scope.cardGroup)).success(function (message) {
@@ -333,11 +334,11 @@
                 }
             });
         }
-        $scope.getImageTextBlockGroup=function(){
-            $http.get("/image-text-block-group/home/data").success(function (data) {
+        $scope.getImageTextBlockGroup=function(uri){
+            $http.get(uri).success(function (data) {
                 $scope.imageTextBlockGroup=data;
                 $scope._active=0;
-                console.log(JSON.stringify("from  home data"))
+
             });
         }
     }])

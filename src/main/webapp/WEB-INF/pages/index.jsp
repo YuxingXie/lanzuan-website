@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="<%=request.getContextPath() %>"/>
 <c:if test="${path eq '/'}"><c:set var="path" value=""/></c:if>
 <!DOCTYPE html>
@@ -9,23 +9,28 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>湖南蓝钻科技</title>
-        <link rel="stylesheet" href="/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
-        <link rel="stylesheet" href="/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/statics/plugin/animate.css-master/animate.css"/>
-        <link rel="stylesheet" href="/statics/css/animate.css"/>
-        <link rel="stylesheet" href="/statics/css/style.css"/>
-        <link rel="stylesheet" href="/statics/css/color.css"/>
-        <link rel="stylesheet" href="/statics/css/bootstrap.custom.css"/>
-        <link rel="stylesheet" href="/statics/css/responsive.css3.css"/>
-        <link rel="stylesheet" href="/statics/css/lanzuan.css"/>
+        <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/animate.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/style.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/color.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/bootstrap.custom.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/responsive.css3.css"/>
+        <link rel="stylesheet" href="${path}/statics/css/lanzuan.css"/>
     </head>
     <body ng-app="app">
         <div ng-controller="HomeController">
-            <c:forEach items="${pageTemplate.pageComponents}" var="pageComponent">
-                <%--<div ng-include="'${pageComponent.url}'"></div>--%>
-                <jsp:include page="${pageComponent.uri}"></jsp:include>
-            </c:forEach>
-
+            <%--<c:forEach items="${webPage.pageComponents}" var="pageComponent">--%>
+                <%--<jsp:include page="${pageComponent.templateUri}?fn=${pageComponent.jsonFunctionName}&uri=${pageComponent.dataUri}"></jsp:include>--%>
+            <%--</c:forEach>--%>
+                <%--<jsp:include page="${webPage.pageComponents[0].templateUri}?fn=${webPage.pageComponents[0].jsonFunctionName}&uri=${webPage.pageComponents[0].dataUri}"></jsp:include>--%>
+                <%--<jsp:include page="${webPage.pageComponents[1].templateUri}?fn=${webPage.pageComponents[1].jsonFunctionName}&uri=${webPage.pageComponents[1].dataUri}"></jsp:include>--%>
+                <%--<jsp:include page="${webPage.pageComponents[2].templateUri}?fn=${webPage.pageComponents[2].jsonFunctionName}&uri=${webPage.pageComponents[2].dataUri}"></jsp:include>--%>
+                <%--<jsp:include page="${webPage.pageComponents[3].templateUri}?fn=${webPage.pageComponents[3].jsonFunctionName}&uri=${webPage.pageComponents[3].dataUri}"></jsp:include>--%>
+                <jsp:include page="${webPage.pageComponents[4].templateUri}?fn=${webPage.pageComponents[4].jsonFunctionName}&uri=${webPage.pageComponents[4].dataUri}"></jsp:include>
+                <%--<jsp:include page="${webPage.pageComponents[5].templateUri}?fn=${webPage.pageComponents[5].jsonFunctionName}&uri=${webPage.pageComponents[5].dataUri}"></jsp:include> image 404--%>
+                <jsp:include page="${webPage.pageComponents[6].templateUri}?fn=${webPage.pageComponents[6].jsonFunctionName}&uri=${webPage.pageComponents[6].dataUri}"></jsp:include>
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>

@@ -16,8 +16,39 @@ public class PageComponent {
     @Id
     private String id;
     private String name;
-    private String uri;
+    private String templateUri;
     private String editUri;
+    private String dataUri;
+    /**
+     *     详细说明：
+     *     此变量名代表该组件数据在js中数据的变量名
+     *     如果客户端采用javaScript异步数据狂框架,我们用此字段表示的javascript变量名存储数据
+     *     本系统前端使用的是angularjs,无论任何框架，拿到的数据总要保存在一个javascript变量中
+     *     假设我们用一个js函数getExampleData(dataUri){
+     *         variable={ a json or json array data}
+     *     }
+     *     在前端可以类似于如下调用函数：
+     *     ${pageComponent.jsonFunctionName}('${pageComponent.dataUri}'})
+
+     */
+    private String jsonFunctionName;
+
+    public String getJsonFunctionName() {
+        return jsonFunctionName;
+    }
+
+    public void setJsonFunctionName(String jsonFunctionName) {
+        this.jsonFunctionName = jsonFunctionName;
+    }
+
+    public String getDataUri() {
+        return dataUri;
+    }
+
+    public void setDataUri(String dataUri) {
+        this.dataUri = dataUri;
+    }
+
     private String remark;
 
 
@@ -39,12 +70,12 @@ public class PageComponent {
 
 
 
-    public String getUri() {
-        return uri;
+    public String getTemplateUri() {
+        return templateUri;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setTemplateUri(String templateUri) {
+        this.templateUri = templateUri;
     }
 
     public String getEditUri() {

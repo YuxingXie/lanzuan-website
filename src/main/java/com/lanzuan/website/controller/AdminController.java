@@ -7,12 +7,12 @@ import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.entityfield.ArticleSection;
+import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleSectionService;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
-import com.lanzuan.website.service.IPageTemplateService;
+import com.lanzuan.website.service.IWebPageService;
 import com.lanzuan.website.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,12 +53,13 @@ public class AdminController extends BaseRestSpringController {
     IArticleSectionService articleSectionService;
     @Resource(name = "articleService")
     IArticleService articleService;
-    @Resource(name = "pageTemplateService")
-    IPageTemplateService pageTemplateService;
+    @Resource(name = "webPageService")
+    IWebPageService webPageService;
     @RequestMapping(value = "/index")
     public String index(HttpSession session,ModelMap modelMap){
-        PageTemplate pageTemplate=pageTemplateService.findByUri("/home");
-        modelMap.addAttribute("pageTemplate", pageTemplate);
+        WebPage webPage=webPageService.findByUri("/home");
+        modelMap.addAttribute("webPage", webPage);
+
         return "forward:/WEB-INF/pages/admin/index.jsp";
     }
     @RequestMapping(value = "/sign_up")

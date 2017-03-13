@@ -59,7 +59,7 @@
             </button>
             <div class="dropdown-menu dropdown-full-width">
                     <span ng-repeat="icon in fullWidthImages" class="dropdown-item-inline"
-                          ng-click="fullWidthImage.image.uri=icon">
+                          ng-click="fullWidthImage.image.templateUri=icon">
                         <img type="text" ng-src="{{icon}}" class="img-320-240px img-responsive"/>
                     </span>
             </div>

@@ -3,6 +3,10 @@ package com.lanzuan.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
+
 
 /**
  * 此类对应网站的骨架页面(我把它叫单实例页，有统一url的)，比如首页等，可以是html也可以是jsp，或restful uri，但不可以带参数
@@ -16,17 +20,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class WebPage {
     @Id
     private String id;
-    /**
-     * 唯一
-     */
+    @Field
     private String uri;
+    @Field
+    private boolean active;
     @DBRef
-    private PageTemplate pageTemplate;
-    @DBRef
-    /**
-     * 前置网页，表示在一系列跳转操作中的前一步页面
-     */
-    private WebPage prevWebPage;
+    private List<PageComponent> pageComponents;
 
     public String getId() {
         return id;
@@ -44,19 +43,19 @@ public class WebPage {
         this.uri = uri;
     }
 
-    public PageTemplate getPageTemplate() {
-        return pageTemplate;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setPageTemplate(PageTemplate pageTemplate) {
-        this.pageTemplate = pageTemplate;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public WebPage getPrevWebPage() {
-        return prevWebPage;
+    public List<PageComponent> getPageComponents() {
+        return pageComponents;
     }
 
-    public void setPrevWebPage(WebPage prevWebPage) {
-        this.prevWebPage = prevWebPage;
+    public void setPageComponents(List<PageComponent> pageComponents) {
+        this.pageComponents = pageComponents;
     }
 }

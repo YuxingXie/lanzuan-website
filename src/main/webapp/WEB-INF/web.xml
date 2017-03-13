@@ -125,11 +125,11 @@
     <location>/error/500</location>
     </error-page>
     <!--<taglib>-->
-        <!--<taglib-uri>/pageTag</taglib-uri>-->
+        <!--<taglib-templateUri>/pageTag</taglib-templateUri>-->
         <!--<taglib-location>/WEB-INF/tags/pageTag.tld</taglib-location>-->
     <!--</taglib>-->
     <!--<taglib>-->
-        <!--<taglib-uri>/functions</taglib-uri>-->
+        <!--<taglib-templateUri>/functions</taglib-templateUri>-->
         <!--<taglib-location>/WEB-INF/tags/functions.tld</taglib-location>-->
     <!--</taglib>-->
 
