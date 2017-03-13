@@ -9,18 +9,18 @@
         <div class="btn-group padding-bottom-10">
             <label class="btn btn-info cursor-auto">方案名称：{{imageTextBlockGroup.name}}</label>
 
-            <button class="btn btn-primary fa fa-upload " type="button" ng-click="saveCardGroup()"> 保存</button>
-            <button class="btn btn-primary fa fa-save" type="button" ng-click="newCardGroup()"> 方案另存为</button>
-            <a class="btn btn-primary fa fa-save white-link"
-               ng-href="${path}/admin/card-group/list-page/${pageComponent.id}"> 应用其它方案</a>
-            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCardGroup()"> 重 置</button>
+            <button class="btn btn-primary fa fa-save " type="button" ng-click="saveImageTextBlockGroup()"> 保存</button>
+            <button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>
+            <a class="btn btn-primary fa fa-gears white-link"
+               ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用其它方案</a>
+            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetImageTextBlockGroup()"> 重 置</button>
         </div>
     </div>
     <div class="col-xs-12">
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="/admin/icon/upload-input/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="/admin/image-text-block-group/image/upload-input/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a>
                 </li>
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
@@ -35,7 +35,7 @@
 
 
 </div>
-<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getIcons()" ng-repeat="imageTextBlock in imageTextBlockGroup.imageTextBlocks">
+<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in imageTextBlockGroup.imageTextBlocks">
     <div class="row">
         <div class="col-xs-4">
             <div class="input-group">
@@ -82,9 +82,10 @@
         </div>
         <div class="col-xs-4">
             <div class="btn-group">
-                <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insertCardBefore($index)"> 前面插入一条
-                </button>
-                <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="removeCard($index)"> 删掉此条</button>
+                <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insertBlockItemBefore(imageTextBlock,$index)"> 前面插入一条</button>
+                <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="removeBlockItem(imageTextBlock,$index)"> 删掉此条</button>
+                <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forwardBlockItem(imageTextBlock,$index)" ng-if="$index!==0">前移</button>
+                <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backwardBlockItem(imageTextBlock,$index)" ng-if="$index!==imageTextBlock.imageTextItems.length-1">后移</button>
             </div>
         </div>
     </div>

@@ -583,6 +583,9 @@ Misc tools
 .hover-bg-color-grey:hover{
     background-color: #f6f6f6;
 }
+.hover-bg-color-dark-grey:hover{
+    background-color: #e8e8e8;
+}
 
 .checkbox-list > label {
     display: block;

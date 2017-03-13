@@ -76,6 +76,32 @@
                 "link": "http://baidu.com"
             });
         }
+        $scope.insertBlockItemBefore=function(imageTextBlock,index){
+
+            imageTextBlock.imageTextItems.splice(index,0,{
+                "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+                "text": "baidu",
+                "link": "http://baidu.com",
+                "title":"百度一下"
+            });
+        }
+        $scope.removeBlockItem=function(imageTextBlock,index){
+
+            imageTextBlock.imageTextItems.splice(index,1);
+        }
+
+        $scope.forwardBlockItem=function(imageTextBlock,index){
+            var item=imageTextBlock.imageTextItems[index];
+            imageTextBlock.imageTextItems.splice(index,1);
+            imageTextBlock.imageTextItems.splice(index-1,0,item);
+        }
+        $scope.backwardBlockItem=function(imageTextBlock,index){
+            var item=imageTextBlock.imageTextItems[index];
+            imageTextBlock.imageTextItems.splice(index,1);
+            imageTextBlock.imageTextItems.splice(index+1,0,item);
+        }
+
+
 
         $scope.saveNavbar=function(){
 
@@ -97,7 +123,17 @@
                 }
             });
         }
-        $scope.resetNavbar=function(form){
+        $scope.newImageTextBlockGroup=function(){
+            var name=prompt("输入图文块组名称");
+            $scope.imageTextBlockGroup.name=name;
+            $http.post("/admin/image-text-block-group/save-as",JSON.stringify($scope.imageTextBlockGroup)).success(function (message) {
+                $scope.imageTextBlockGroup=message.data;
+                if(message.success){
+                    alert("另存成功！");
+                }
+            });
+        }
+        $scope.resetNavbar=function(){
             $scope.getNavbar();
         }
         $scope.resetCardGroup=function(){
@@ -106,7 +142,11 @@
         $scope.resetCarousel=function(){
             $scope.getCarousel();
         }
-        $scope.resetArticleSections=function(form){
+
+        $scope.resetImageTextBlockGroup=function(){
+            $scope.getImageTextBlockGroup();
+        }
+        $scope.resetArticleSections=function(){
             $scope.getArticleSection();
             $scope.addArticleSection=false;
             $scope.addArticleSectionSaved=true;
@@ -133,6 +173,14 @@
                     alert("保存成功！");
                     $scope.addArticleSection=false;
                     $scope.addArticleSectionSaved=true;
+                }
+            });
+        }
+        $scope.saveImageTextBlockGroup=function(){
+            $http.post("/admin/image-text-block-group/update",JSON.stringify($scope.imageTextBlockGroup)).success(function (message) {
+                $scope.imageTextBlockGroup=message.data;
+                if(message.success){
+                    alert("保存成功！");
                 }
             });
         }
@@ -287,14 +335,23 @@
             $scope.editable=false;
         }
         $scope.getIcons=function(){
-            console.log("icons");
             $http.get("/admin/icons/data").success(function (data) {
+                $scope.icons=data;
+            });
+        }
+        $scope.getImageTextBlockGroupImages=function(){
+            $http.get("/admin/image-text-block-group/image/data").success(function (data) {
                 $scope.icons=data;
             });
         }
         $scope.getArticles=function(){
             $http.get("/admin/article/list/data").success(function (data) {
                 $scope.articles=data;
+            });
+        }
+        $scope.getImageTextBlockGroups=function(){////////////////////
+            $http.get("/admin/image-text-block-group/list/data").success(function (data) {
+                $scope.imageTextBlockGroups=data;
             });
         }
         $scope.getAllCarousels=function(){
@@ -308,7 +365,12 @@
 
             });
         }
+        $scope.changeImageTextBlockGroupEnabledStatus=function(group){
+            $http.post("/admin/image-text-block-group/status-change",JSON.stringify(group)).success(function (data) {
+                $scope.imageTextBlockGroups=data;
 
+            });
+        }
         $scope.changeNavbarEnabledStatus=function(navbar){
             $http.post("/admin/navbar/status-change",JSON.stringify(navbar)).success(function (data) {
                 $scope.navbarList=data;
@@ -324,6 +386,14 @@
                 return ;
             $http.post("/admin/carousel/delete/"+carousel.id,JSON.stringify(carousel)).success(function (data) {
                 $scope.carousels=data;
+
+            });
+        }
+        $scope.deleteGroup=function(group){
+            if(!confirm("确定删除?"))
+                return ;
+            $http.get("/admin//image-text-block-group/delete/"+group.id).success(function (data) {
+                $scope.imageTextBlockGroups=data;
 
             });
         }

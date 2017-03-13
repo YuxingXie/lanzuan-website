@@ -89,7 +89,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
 
     @Override
     public void insert(E e) {
-        //TODO
+
 //        System.out.println("invoke insert method......");
         mongoTemplate.insert(e);
 //        DB db = mongoTemplate.getDb();

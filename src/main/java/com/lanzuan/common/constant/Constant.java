@@ -9,5 +9,6 @@ public class Constant {
     public static int articleSectionNum=5;
 //    public static String icoUri="/statics/image/icon";
     public static String icoUri="/statics/image/icon";
+    public static String imageTextBlockGroupItemImageDirectory="/statics/image/lanzuan/280-180";
 
 }
