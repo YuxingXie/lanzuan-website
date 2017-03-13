@@ -4,6 +4,7 @@ import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.entity.*;
 import com.lanzuan.entity.entityfield.*;
+import com.lanzuan.support.vo.Image;
 import com.lanzuan.website.service.*;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -37,6 +38,8 @@ public class StartOnLoadService {
     private IImageCardGroupService imageCardGroupService;
     @Resource(name = "imageTextBlockGroupService")
     private IImageTextBlockGroupService imageTextBlockGroupService;
+    @Resource(name = "fullWidthImageService")
+    private IFullWidthImageService fullWidthImageService;
     /**
      * Spring 容器初始化时加载
      */
@@ -47,11 +50,32 @@ public class StartOnLoadService {
     }
 
     private void initPageData() {
+        initHomePageData();
+    }
+
+    private void initHomePageData() {
         initNavbarData();
         initCarouselData();
         initImageTextBlockGroupData();
+        initFullWidthImageData();
         initImageCardGroupData();
         initArticleSectionData();
+    }
+
+    private void initFullWidthImageData() {
+        logger.info("初始化全屏宽度图片。。。");
+        FullWidthImage fullWidthImage=fullWidthImageService.findByUri("/home");
+        if (fullWidthImage==null){
+            logger.info("   未查询到全屏宽度图片方案，应用默认方案。。。");
+            fullWidthImage=new FullWidthImage();
+            fullWidthImage.setName("政府大楼全屏宽度图");
+            fullWidthImage.setEnabled(true);
+            fullWidthImage.setUri("/home");
+            Image image=new Image();
+            image.setUri("/statics/image/lanzuan/full-width/zfdl.jpg");
+            fullWidthImage.setImage(image);
+            fullWidthImageService.insert(fullWidthImage);
+        }
     }
 
     private void initImageTextBlockGroupData() {
@@ -534,7 +558,8 @@ public class StartOnLoadService {
 
             PageComponent pageComponent7=new PageComponent();
             pageComponent7.setUri("/statics/page/included/lanzuan/sort-link-section-1.html");
-            pageComponent7.setEditUri("/statics/page/included/lanzuan/sort-link-section-1-edit.jsp");
+//            pageComponent7.setEditUri("/statics/page/included/lanzuan/sort-link-section-1-edit.jsp");
+            pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
             pageComponent7.setName("分类链接模板1");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();

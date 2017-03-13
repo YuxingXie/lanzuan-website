@@ -7,6 +7,7 @@ import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
+import com.lanzuan.entity.entityfield.ArticleSection;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleSectionService;
 import com.lanzuan.website.service.IArticleService;

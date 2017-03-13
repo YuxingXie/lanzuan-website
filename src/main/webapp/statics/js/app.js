@@ -47,7 +47,8 @@
             });
         }
         $scope.getSortLinkSection=function(){
-            $http.get("/statics/json/sortLinkSection.json").success(function (data) {
+            $http.get("/articleSection/data").success(function (data) {
+                console.log(JSON.stringify(data))
                 $scope.sortLinkSection=data;
             });
         }
@@ -55,6 +56,11 @@
         $scope.getNavbar=function(){
             $http.get("/navbar/home/data").success(function (data) {
                 $scope.navbar=data;
+            });
+        }
+        $scope.getFullWidthImage=function(){
+            $http.get("/full-width-image/home/data").success(function (data) {
+                $scope.fullWidthImage=data;
             });
         }
 
@@ -112,7 +118,14 @@
                 }
             });
         }
-
+        $scope.saveFullWidthImage=function(){
+            $http.post("/admin/full-width-image/update",JSON.stringify($scope.fullWidthImage)).success(function (message) {
+                $scope.fullWidthImage=message.data;
+                if(message.success){
+                    alert("已保存并应用！");
+                }
+            });
+        }
         $scope.newNavbar=function(){
             var name=prompt("输入导航条名称");
             $scope.navbar.name=name;
@@ -339,6 +352,11 @@
                 $scope.icons=data;
             });
         }
+        $scope.getFullWidthImages=function(){
+            $http.get("/admin/full-width-image/image/data").success(function (data) {
+                $scope.fullWidthImages=data;
+            });
+        }
         $scope.getImageTextBlockGroupImages=function(){
             $http.get("/admin/image-text-block-group/image/data").success(function (data) {
                 $scope.icons=data;
@@ -349,7 +367,7 @@
                 $scope.articles=data;
             });
         }
-        $scope.getImageTextBlockGroups=function(){////////////////////
+        $scope.getImageTextBlockGroups=function(){
             $http.get("/admin/image-text-block-group/list/data").success(function (data) {
                 $scope.imageTextBlockGroups=data;
             });

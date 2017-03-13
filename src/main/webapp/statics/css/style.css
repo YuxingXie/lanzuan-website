@@ -71,6 +71,10 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
     max-width: 185px;
     max-height:185px;
 }
+.img-320-240px{
+    max-width: 320px;
+    max-height:240px;
+}
 .img-ico-xl{
     max-width: 270px;
     max-height:270px;

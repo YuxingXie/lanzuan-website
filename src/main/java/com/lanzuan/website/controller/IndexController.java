@@ -2,6 +2,7 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.entity.*;
+import com.lanzuan.entity.entityfield.ArticleSection;
 import com.lanzuan.website.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,8 @@ public class IndexController extends BaseRestSpringController {
     IImageTextBlockGroupService imageTextBlockGroupService;
     @Resource(name = "navbarService")
     INavbarService navbarService;
+    @Resource(name = "fullWidthImageService")
+    IFullWidthImageService fullWidthImageService;
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
@@ -49,6 +52,11 @@ public class IndexController extends BaseRestSpringController {
     public ResponseEntity<Navbar> getNavbar(){
         Navbar navbar=navbarService.findByUri("/home");
         return new ResponseEntity<Navbar>(navbar, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/full-width-image/home/data")
+    public ResponseEntity<FullWidthImage> getFullWidthImage(){
+        FullWidthImage fullWidthImage=fullWidthImageService.findByUri("/home");
+        return new ResponseEntity<FullWidthImage>(fullWidthImage, HttpStatus.OK);
     }
     @RequestMapping(value = "/card-group/home/data")
     public ResponseEntity<ImageCardGroup> homeImageCardGroup(){

@@ -1,7 +1,7 @@
 package com.lanzuan.website.service;
 
 import com.lanzuan.common.base.IBaseEntityManager;
-import com.lanzuan.entity.ArticleSection;
+import com.lanzuan.entity.entityfield.ArticleSection;
 
 import java.util.List;
 
