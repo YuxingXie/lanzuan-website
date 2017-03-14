@@ -527,7 +527,7 @@ public class StartOnLoadService {
             pageComponent1.setJsonVariableName("navbar");
             pageComponent1.setDataUri("/navbar/home/data");
             pageComponent1.setToggleUri("/admin/navbar/status-change");
-
+            pageComponent1.setDeleteUri("/admin/navbar/delete/");
             pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
 
             PageComponent pageComponent2=new PageComponent();
@@ -539,7 +539,8 @@ public class StartOnLoadService {
             pageComponent2.setDataUri("/carousel/home/data");
             pageComponent2.setSaveAsUri("/admin/carousel/save-as");
             pageComponent2.setToggleUri("/admin/carousel/update");
-
+            pageComponent2.setDeleteUri("/admin/carousel/delete/");
+            pageComponent2.setListDataUri("/admin/carousel/list/data");
             pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
 
             PageComponent pageComponent3=new PageComponent();
@@ -552,6 +553,8 @@ public class StartOnLoadService {
             pageComponent3.setSaveAsUri("/admin/card-group/save-as");
             pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
             pageComponent3.setToggleUri("/admin/card-group/status-change");
+            pageComponent3.setDeleteUri("/admin/card-group/delete/");
+
 
             PageComponent pageComponent4=new PageComponent();
             pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
@@ -561,6 +564,7 @@ public class StartOnLoadService {
             pageComponent4.setJsonVariableName("imageTextBlockGroup");
             pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
             pageComponent4.setDataUri("/image-text-block-group/home/data");
+            pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
 
             PageComponent pageComponent5=new PageComponent();
             pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.jsp");

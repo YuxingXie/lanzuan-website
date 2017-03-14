@@ -25,6 +25,8 @@ public class PageComponent {
     private String saveAsUri;
     private String toggleUri;
     private String listOperationUri;
+    private String deleteUri;
+    private String listDataUri;
     /**
      *     详细说明：
      *     此变量名代表该组件数据在js中数据的变量名
@@ -136,5 +138,21 @@ public class PageComponent {
 
     public void setListOperationUri(String listOperationUri) {
         this.listOperationUri = listOperationUri;
+    }
+
+    public String getDeleteUri() {
+        return deleteUri;
+    }
+
+    public void setDeleteUri(String deleteUri) {
+        this.deleteUri = deleteUri;
+    }
+
+    public String getListDataUri() {
+        return listDataUri;
+    }
+
+    public void setListDataUri(String listDataUri) {
+        this.listDataUri = listDataUri;
     }
 }

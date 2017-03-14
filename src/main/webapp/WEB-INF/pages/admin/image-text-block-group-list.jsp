@@ -18,7 +18,7 @@
 </head>
 <body ng-app="app">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-<div class="container-fluid" ng-controller="AdminController" ng-init="getImageTextBlockGroups()">
+<div class="container-fluid" ng-controller="AdminController" ng-init="getImageTextBlockGroupList()">
     <div class="row">
         <div class="alert alert-info">
             <h5 class="text-center">应用图文块组方案</h5>
@@ -41,7 +41,7 @@
                     <div class="col-xs-2">禁用/启用</div>
                 </div>
 
-                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom" ng-repeat="group in imageTextBlockGroups">
+                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom" ng-repeat="group in imageTextBlockGroupList">
                         <div class="col-xs-2">
                             <i  ng-class="{'color-red':!group.name}">{{group.name?group.name:"未命名"}}</i></div>
                         <div class="col-xs-4">

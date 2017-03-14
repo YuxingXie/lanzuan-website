@@ -59,13 +59,43 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
             }
         });
     }
+
+    //条目操作begin
+    $scope.forward${component.variableFirstUpper}Item=function(index){
+        var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index-1,0,item);
+    }
+    $scope.backward${component.variableFirstUpper}Item=function(index){
+        var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index+1,0,item);
+    }
+
+    //条目操作end
+
     <c:if test="${componentList}">
         //列表操作
-        $scope.${component.jsonVariableName}Toggle=function(item){
-                $http.post("${component.toggleUri}",JSON.stringify(item)).success(function (data) {
+        $scope.ge${component.variableFirstUpper}List=function(){
+            $http.get("${component.listDataUri}").success(function (data) {
+                $scope.${component.jsonVariableName}List=data;
+            });
+        }
+        //启用/禁用
+        $scope.${component.jsonVariableName}Toggle=function(component){
+                $http.post("${component.toggleUri}",JSON.stringify(component)).success(function (data) {
                 $scope.${component.jsonVariableName}=data;
             });
         }
+        //删除
+        $scope.delete${component.variableFirstUpper}=function(component){
+        if(!confirm("确定删除?"))
+            return ;
+        $http.post("${component.deleteUri}"+component.id,JSON.stringify(component)).success(function (data) {
+            $scope.${component.jsonVariableName}List=data;
+        });
+        }
+
     </c:if>
 
 </c:if>
@@ -139,65 +169,18 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
             $scope.articles=data;
         });
     }
-    $scope.getImageTextBlockGroups=function(){
-        $http.get("/admin/image-text-block-group/list/data").success(function (data) {
-            $scope.imageTextBlockGroups=data;
-        });
-    }
-    $scope.getAllCarousels=function(){
-        $http.get("/admin/carousel/list/data").success(function (data) {
-            $scope.carousels=data;
-        });
-    }
 
-$scope.deleteCarousel=function(carousel){
-if(!confirm("确定删除?"))
-return ;
-$http.post("/admin/carousel/delete/"+carousel.id,JSON.stringify(carousel)).success(function (data) {
-$scope.carousels=data;
 
-});
-}
-$scope.deleteGroup=function(group){
-if(!confirm("确定删除?"))
-return ;
-$http.get("/admin//image-text-block-group/delete/"+group.id).success(function (data) {
-$scope.imageTextBlockGroups=data;
 
-});
-}
-$scope.deleteNavbar=function(navbar){
-if(!confirm("确定删除?"))
-return ;
-$http.post("/admin/navbar/delete/"+navbar.id,JSON.stringify(navbar)).success(function (data) {
-$scope.navbarList=data;
 
-});
-}
-$scope.deleteCardGroup=function(cardGroup){
-if(!confirm("确定删除?"))
-return ;
-$http.post("/admin/card-group/delete/"+cardGroup.id,JSON.stringify(cardGroup)).success(function (data) {
-$scope.cardGroupList=data;
-
-});
-}
 $scope.getMenu=function(){
 $http.get("/statics/json/menu.json").success(function (data) {
 $scope.menuItems=data;
 });
 }
 
-$scope.getNavbarList=function(){
-$http.get("/admin/navbar/list/data").success(function (data) {
-$scope.navbarList=data;
-});
-}
-$scope.getCardGroupList=function(){
-$http.get("/admin/card-group/list/data").success(function (data) {
-$scope.cardGroupList=data;
-});
-}
+
+
 $scope.removeArticleSection=function(articleSections,articleSection,index){
 if(!articleSection.id){
 articleSections.splice(index,1);
@@ -269,16 +252,7 @@ $scope.carousel.carouselItems=[];
 
 $scope.carousel.carouselItems.splice(0,0,item);
 }
-$scope.forwardCarouselItem=function(index){
-var item=$scope.carousel.carouselItems[index];
-$scope.carousel.carouselItems.splice(index,1);
-$scope.carousel.carouselItems.splice(index-1,0,item);
-}
-$scope.backwardCarouselItem=function(index){
-var item=$scope.carousel.carouselItems[index];
-$scope.carousel.carouselItems.splice(index,1);
-$scope.carousel.carouselItems.splice(index+1,0,item);
-}
+
 
 
 

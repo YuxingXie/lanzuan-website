@@ -18,7 +18,7 @@
 </head>
 <body ng-app="app">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-<div class="container-fluid" ng-controller="AdminController" ng-init="getAllCarousels()">
+<div class="container-fluid" ng-controller="AdminController" ng-init="getCarouselList()">
     <div class="row">
         <div class="alert alert-info">
             <h5 class="text-center">应用轮播方案</h5>
@@ -41,7 +41,7 @@
                     <div class="col-xs-2">禁用/启用</div>
                 </div>
 
-                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" ng-repeat="carousel in carousels">
+                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" ng-repeat="carousel in carouselList">
                         <div class="col-xs-2">
                             <i  ng-class="{'color-red':!carousel.name}">{{carousel.name?carousel.name:"未命名"}}</i></div>
                         <div class="col-xs-3">
@@ -76,7 +76,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js?componentId=${pageComponentId}"></script>
 
 </body>
 
