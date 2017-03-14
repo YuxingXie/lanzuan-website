@@ -60,6 +60,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         });
     }
     <c:if test="${componentList}">
+        //列表操作
         $scope.${component.jsonVariableName}Toggle=function(item){
                 $http.post("${component.toggleUri}",JSON.stringify(item)).success(function (data) {
                 $scope.${component.jsonVariableName}=data;
