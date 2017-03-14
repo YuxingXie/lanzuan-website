@@ -15,8 +15,13 @@ public class Article {
     private String title;
     private Date date;
     private String content;
+    /**
+     * 可能某些文章不使用文字标题，而可能是一张图片作为封面
+     * 如果仅仅为了展示封面图片，此文章可以没有内容、标题等等其它属性
+     */
+    private String cover;
     private String author;
-    private boolean byEditor;//文章是否由百度文本编辑器生成
+    private boolean byEditor;//文章是否由系统文本编辑器生成
     @DBRef
     private User uploader;
     private Date lastModifyDate;
@@ -94,6 +99,14 @@ public class Article {
 
     public void setLastModifyUser(User lastModifyUser) {
         this.lastModifyUser = lastModifyUser;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public boolean isByEditor() {
