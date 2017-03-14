@@ -101,6 +101,28 @@ public class AdminController extends BaseRestSpringController {
 
         return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
     }
+    @RequestMapping(value = "/carousel-images/data")
+    public ResponseEntity<List<String>> carouselImages(HttpServletRequest request) throws IOException {
+        String uri=Constant.carouselImageUri;
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(), uri);
+        List<String> strings=new ArrayList<String>();
+        if (!resource.exists()){
+            File file=resource.getFile();
+            file.mkdirs();
+            return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
+        }else{
+            if (resource.getFile().isDirectory()){
+                File[] files= resource.getFile().listFiles();
+                for (File file:files){
+                    if (file.isDirectory()) continue;
+                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),uri+"/"+file.getName());
+                    strings.add(fileResource.getPath());
+                }
+            }
+        }
+
+        return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
+    }
     @RequestMapping(value = "/to_login")
     public String toLogin(ModelMap model,String to, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         if (to==null||"".equals(to.trim())){

@@ -2,6 +2,7 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.code.CarouselItemTypeEnum;
+import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Carousel;
@@ -130,7 +131,7 @@ public class AdminCarouselController extends BaseRestSpringController {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
 //                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") + "statics/upload";
+                String dir=request.getServletContext().getRealPath("/") + Constant.carouselImageUri;
                 String filePath = dir+"/"+fileName;
                 File fileDir=new File(dir);
                 if (!fileDir.exists()){

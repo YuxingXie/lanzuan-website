@@ -184,6 +184,12 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     $scope.icons=data;
     });
     }
+
+$scope.getCarouselImages=function(){
+$http.get("/admin/carousel-images/data").success(function (data) {
+    $scope.carouselImages=data;
+});
+}
     $scope.getFullWidthImages=function(){
     $http.get("/admin/full-width-image/image/data").success(function (data) {
     $scope.fullWidthImages=data;
