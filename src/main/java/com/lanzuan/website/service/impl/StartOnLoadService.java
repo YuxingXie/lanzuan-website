@@ -304,7 +304,7 @@ public class StartOnLoadService {
             navItems.add(navItem3);
             navItems.add(navItem4);
             navItems.add(navItem5);
-            navbar.setNavItems(navItems);
+            navbar.setNavbarItems(navItems);
             navbarService.insert(navbar);
         }
     }
@@ -521,74 +521,117 @@ public class StartOnLoadService {
             logger.info("没有找到 /home 页面定义，应用默认定义......");
             webPage=new WebPage();
             PageComponent pageComponent1=new PageComponent();
-            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
-            pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
-            pageComponent1.setName("响应式导航条模板1");
-            pageComponent1.setJsonVariableName("navbar");
-            pageComponent1.setDataUri("/navbar/home/data");
-            pageComponent1.setToggleUri("/admin/navbar/status-change");
-            pageComponent1.setDeleteUri("/admin/navbar/delete/");
-            pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
-
             PageComponent pageComponent2=new PageComponent();
-            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
-            pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
-            pageComponent2.setName("响应式轮播图");
-            pageComponent2.setJsonVariableName("carousel");
-            pageComponent2.setSaveUri("/admin/carousel/insert-all");
-            pageComponent2.setDataUri("/carousel/home/data");
-            pageComponent2.setSaveAsUri("/admin/carousel/save-as");
-            pageComponent2.setToggleUri("/admin/carousel/update");
-            pageComponent2.setDeleteUri("/admin/carousel/delete/");
-            pageComponent2.setListDataUri("/admin/carousel/list/data");
-            pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
-
             PageComponent pageComponent3=new PageComponent();
-            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
-            pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
-            pageComponent3.setName("图文卡片组模板1");
-            pageComponent3.setJsonVariableName("cardGroup");
-            pageComponent3.setDataUri("/card-group/home/data");
-            pageComponent3.setSaveUri("/admin/card-group/update");
-            pageComponent3.setSaveAsUri("/admin/card-group/save-as");
-            pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
-            pageComponent3.setToggleUri("/admin/card-group/status-change");
-            pageComponent3.setDeleteUri("/admin/card-group/delete/");
-
-
             PageComponent pageComponent4=new PageComponent();
-            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
-            pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
-            pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
-            pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
-            pageComponent4.setJsonVariableName("imageTextBlockGroup");
-            pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
-            pageComponent4.setDataUri("/image-text-block-group/home/data");
-            pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
-
             PageComponent pageComponent5=new PageComponent();
-            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.jsp");
-            pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
-            pageComponent5.setName("文章块组件1");
-            pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
-            pageComponent5.setDataUri("/articleSections/data");
-            pageComponent5.setJsonVariableName("articleSections");
-
             PageComponent pageComponent6=new PageComponent();
-            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
-            pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
-            pageComponent6.setName("全屏宽度图片模板1");
-            pageComponent6.setRemark("简单的全屏宽度图片。");
-            pageComponent6.setJsonVariableName("fullWidthImage");
-            pageComponent6.setDataUri("/full-width-image/home/data");
-
             PageComponent pageComponent7=new PageComponent();
-            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
-            pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
+            pageComponent1.setName("响应式导航条模板1");
+            pageComponent2.setName("响应式轮播图");
+            pageComponent3.setName("图文卡片组模板1");
+            pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
+            pageComponent5.setName("文章块组件1");
+            pageComponent6.setName("全屏宽度图片模板1");
             pageComponent7.setName("分类链接模板1");
+
+            pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
+            pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
+            pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
+            pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
+            pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
+            pageComponent6.setRemark("简单的全屏宽度图片。");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
-            pageComponent7.setDataUri("/articleSections/data");
+
+            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
+            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
+            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
+            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
+            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.jsp");
+            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
+            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
+
+            pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
+            pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
+            pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
+            pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
+            pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
+            pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
+            pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
+
+            pageComponent1.setJsonVariableName("navbar");
+            pageComponent2.setJsonVariableName("carousel");
+            pageComponent3.setJsonVariableName("cardGroup");
+            pageComponent4.setJsonVariableName("imageTextBlockGroup");
+            pageComponent5.setJsonVariableName("articleSections");
+            pageComponent6.setJsonVariableName("fullWidthImage");
             pageComponent7.setJsonVariableName("sortLinkSections");
+
+            pageComponent1.setDataUri("/navbar/home/data");
+            pageComponent2.setDataUri("/carousel/home/data");
+            pageComponent3.setDataUri("/card-group/home/data");
+            pageComponent4.setDataUri("/image-text-block-group/home/data");
+            pageComponent5.setDataUri("/articleSections/data");
+            pageComponent6.setDataUri("/full-width-image/home/data");
+            pageComponent7.setDataUri("/articleSections/data");
+
+            pageComponent1.setToggleUri("/admin/navbar/status-change");
+            pageComponent2.setToggleUri("/admin/carousel/update");
+            pageComponent3.setToggleUri("/admin/card-group/status-change");
+            pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
+            pageComponent5.setToggleUri("/admin/articleSections/status-change");
+            pageComponent6.setToggleUri("/admin/full-width-image/status-change");
+            pageComponent7.setToggleUri("/admin/articleSections/status-change");
+
+            pageComponent1.setDeleteUri("/admin/navbar/delete/");
+            pageComponent2.setDeleteUri("/admin/carousel/delete/");
+            pageComponent3.setDeleteUri("/admin/card-group/delete/");
+            pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
+            pageComponent5.setDeleteUri("/admin/articleSections/delete/");
+            pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
+            pageComponent7.setDeleteUri("/admin/articleSections/delete/");
+
+            pageComponent1.setSaveUri("/admin/navbar/update");
+            pageComponent2.setSaveUri("/admin/carousel/insert-all");
+            pageComponent3.setSaveUri("/admin/card-group/update");
+            pageComponent4.setSaveUri("/admin/image-text-block-group/update");
+            pageComponent5.setSaveUri("/admin/article_section/new");
+            pageComponent6.setSaveUri("/admin/full-width-image/update");
+            pageComponent7.setSaveUri("/admin/articleSections/update");
+
+            pageComponent1.setListOperationUri("/admin/navbar/list-page/");
+            pageComponent2.setListOperationUri("/admin/navbar/list-page/");
+            pageComponent3.setListOperationUri("/admin/navbar/list-page/");
+            pageComponent4.setListOperationUri("/admin/image-text-block-group/list-page/");
+            pageComponent5.setListOperationUri("/admin/article_section/list-page/");
+            pageComponent6.setListOperationUri("/admin/full-width-image/list-page/");
+            pageComponent7.setListOperationUri("/admin/articleSections/list-page/");
+
+            pageComponent1.setListDataUri("/admin/navbar/list/data");
+            pageComponent2.setListDataUri("/admin/carousel/list/data");
+            pageComponent3.setListDataUri("/admin/card-group/list/data");
+            pageComponent4.setListDataUri("/admin/image-text-block-group/list/data");
+            pageComponent5.setListDataUri("/admin/article_section/list/data");
+            pageComponent6.setListDataUri("/admin/full-width-image/list/data");
+            pageComponent7.setListDataUri("/admin/articleSections/list/data");
+
+            pageComponent1.setSaveAsUri("/admin/navbar/save-as");
+            pageComponent2.setSaveAsUri("/admin/carousel/save-as");
+            pageComponent3.setSaveAsUri("/admin/card-group/save-as");
+            pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
+            pageComponent5.setSaveAsUri("/admin/article_section/save-as");
+            pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
+            pageComponent7.setSaveAsUri("/admin/articleSections/save-as");
+
+
+            pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
+            pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
+            pageComponent3.setMaterialUploadUri("/admin/icon/upload-input");
+            pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
+            pageComponent5.setMaterialUploadUri("/admin/article_section/image/input");
+            pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
+            pageComponent7.setMaterialUploadUri("/admin/article_section/image/input");
+
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);

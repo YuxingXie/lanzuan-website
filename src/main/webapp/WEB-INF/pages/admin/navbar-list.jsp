@@ -53,14 +53,14 @@
                         </div>
                         <div class="col-xs-3">
                             <ol >
-                                <li ng-repeat="navItem in navbar.navItems">
+                                <li ng-repeat="navItem in navbar.navbarItems">
 
                                     <span>{{navItem.name}}</span>
                                 </li>
                             </ol>
 
 
-                            <i ng-if="!navbar.navItems" class="color-red">没有导航项</i>
+                            <i ng-if="!navbar.navbarItems" class="color-red">没有导航项</i>
                         </div>
                         <div class="col-xs-2"> {{navbar.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-3">
@@ -82,7 +82,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js?componentId=${pageComponentId}"></script>
 
 </body>
 

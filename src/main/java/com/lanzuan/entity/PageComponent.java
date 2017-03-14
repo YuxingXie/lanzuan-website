@@ -27,6 +27,8 @@ public class PageComponent {
     private String listOperationUri;
     private String deleteUri;
     private String listDataUri;
+    //素材上传uri
+    private String materialUploadUri;
     /**
      *     详细说明：
      *     此变量名代表该组件数据在js中数据的变量名
@@ -154,5 +156,13 @@ public class PageComponent {
 
     public void setListDataUri(String listDataUri) {
         this.listDataUri = listDataUri;
+    }
+
+    public String getMaterialUploadUri() {
+        return materialUploadUri;
+    }
+
+    public void setMaterialUploadUri(String materialUploadUri) {
+        this.materialUploadUri = materialUploadUri;
     }
 }

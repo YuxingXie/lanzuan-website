@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" templateUri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="<%=request.getContextPath() %>"/>
 <c:if test="${path eq '/'}"><c:set var="path" value=""/></c:if>
 <!DOCTYPE html>
@@ -29,15 +29,15 @@
     <body ng-app="homeApp" class="bg-very-light-1">
     <div ng-controller="HomeController" >
         <div class="container-fluid">
-            <div class="row">
+            <div class="row p-a-0 m-a-0">
                 <%--<div style="width: 10%"></div>--%>
-                <div style="position:fixed;top:0;left:10%;width: 10%;z-index: 100">
+                <div style="position:fixed;top:0;left:7%;width: 17%;z-index: 100;">
                     <%--<div class="list-group fixed-left-menu">--%>
-                    <div class="list-group ">
-                        <div class="list-group-item p-a-0 hidden-sm-down">
-                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em img-responsive">
+                    <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
+                        <div class="card-header p-a-0 hidden-sm-down list">
+                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top">
                         </div>
-                        <div class="list-group-item p-a-0" >
+                        <div class="card-block p-a-0" >
                             <ol class="breadcrumb m-a-0">
                                 当前位置:
                                 <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
@@ -52,10 +52,10 @@
                     </div>'
                 </div>
                 <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
-                  <table>
+                  <table style="width:100%" width="100%">
                       <tr>
-                          <td width="25%"></td>
-                          <td width="65%" >
+                          <td width="29%"></td>
+                          <td width="66%" >
                               <div class="clearfix col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4>${article.title}</h4>
                                   <label class="pull-right margin-bottom-2em label label-pill label-default">

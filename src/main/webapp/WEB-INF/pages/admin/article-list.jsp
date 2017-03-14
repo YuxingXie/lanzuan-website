@@ -15,50 +15,51 @@
     <link href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/style.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
+    <link href="${path}/statics/css/bootstrap.custom.css" rel="stylesheet" type="text/css">
+    <link href="${path}/statics/css/responsive.css3.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-<div class="container-fluid" ng-controller="AdminController" ng-init="getArticles()">
+<div class="alert alert-info">
+    <h5 class="text-center">一些文章和页面的链接，需要填写链接地址时可以拷贝这些值</h5>
+
+</div>
+<div class="container" ng-controller="AdminController" ng-init="getArticles()">
     <div class="row">
-        <div class="alert alert-info">
-            <h5 class="text-center">一些文章和页面的链接，需要填写链接地址时可以拷贝这些值</h5>
-
-        </div>
-        <div class="alert alert-warning">
-            <%--<ul class="list-unstyled">--%>
-
-                <%--<li><i class="fa fa-graduation-cap fa-fw"></i>如果多个方案都为“可用”状态，我们只会应用查到的第一个方案，为了确保使用到正确的方案，请把不用的其它方案设为“禁用”。--%>
-                <%--</li>--%>
-
-            <%--</ul>--%>
-        </div>
         <div class="col-xs-12">
             <div>
-                <div class="row p-a-0 m-a-0 large-180 bg-light-grey">
+                <div class="row large-180 bg-light-grey">
                     <div class="col-xs-2">类型</div>
                     <div class="col-xs-4">页面名称（或文章标题）</div>
-                    <div class="col-xs-6">地址(templateUri)</div>
+                    <div class="col-xs-4">地址(uri)</div>
+                    <div class="col-xs-2"></div>
                 </div>
-                <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" >
+                <div class="small-90 row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" >
                     <div class="col-xs-2">
                         本站链接
                     </div>
                     <div class="col-xs-4">
                         首页
                     </div>
-                    <div class="col-xs-6">
-                       ${path}
+                    <div class="col-xs-4">
+                       /home 或者什么都不填，或者/
+                    </div>
+                    <div class="col-xs-2">
+                        <a class="blue-link" ng-href="/" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
                     </div>
                 </div>
-                <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" ng-repeat="article in articles">
+                <div class="small-90 row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" ng-repeat="article in articles">
                     <div class="col-xs-2">
                        文章
                     </div>
                     <div class="col-xs-4">
                         {{article.title}}
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                        /article/{{article.id}}
+                    </div>
+                    <div class="col-xs-2">
+                        <a class="blue-link" ng-href="/article/{{article.id}}" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
                     </div>
                 </div>
 
@@ -67,7 +68,7 @@
     </div>
 </div>
 <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js"></script>
 
 </body>
 

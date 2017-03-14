@@ -282,7 +282,12 @@ public class AdminController extends BaseRestSpringController {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String filePath = request.getServletContext().getRealPath("/") +Constant.icoUri+"/"+fileName;
+                String dir=request.getServletContext().getRealPath("/") +Constant.icoUri;
+                String filePath = dir+"/"+fileName;
+                File fileDir=new File(dir);
+                if (!fileDir.exists()){
+                    fileDir.mkdirs();
+                }
                 // 转存文件
                 file.transferTo(new File(filePath));
             } catch (Exception e) {

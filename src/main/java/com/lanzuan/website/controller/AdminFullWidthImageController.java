@@ -95,7 +95,12 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String filePath = request.getServletContext().getRealPath("/") + Constant.fullWidthImageDirectory+"/"+fileName;
+                String dir=request.getServletContext().getRealPath("/") + Constant.fullWidthImageDirectory;
+                String filePath = dir+"/"+fileName;
+                File dirFile=new File(dir);
+                if (!dirFile.exists()){
+                    dirFile.mkdirs();
+                }
                 // 转存文件
                 file.transferTo(new File(filePath));
             } catch (Exception e) {

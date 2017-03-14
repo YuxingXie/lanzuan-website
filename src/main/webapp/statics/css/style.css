@@ -93,6 +93,8 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 a:link {color: #666666}
 a:visited{color: #666666}
 .white-link:link,.white-link:visited {color: #fff}
+.blue-link:link,.blue-link:visited {color: #3a60b9
+}
 .green-link:visited{color: #666666}
 a, a:focus, a:hover, a:active {
     /*outline: 0;*/

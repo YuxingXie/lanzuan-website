@@ -35,6 +35,11 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
 
 
 <c:if test="${not empty component}">
+    $scope.get${component.variableFirstUpper}=function(){
+        $http.get('${component.dataUri}').success(function (data) {
+            $scope.${component.jsonVariableName}=data;
+        });
+    }
     $scope.reset${component.variableFirstUpper}=function(){
     $scope.get${component.variableFirstUpper}();
     $scope.${component.jsonVariableName}Resetted=true;
@@ -60,23 +65,51 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         });
     }
 
-    //条目操作begin
+    /**
+    *条目操作begin
+    */
+    //条目前移
     $scope.forward${component.variableFirstUpper}Item=function(index){
         var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
         $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
         $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index-1,0,item);
     }
+    //条目后移
     $scope.backward${component.variableFirstUpper}Item=function(index){
         var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
         $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
         $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index+1,0,item);
     }
+    //指定位置插入条目
+    $scope.insert${component.variableFirstUpper}Item= function (index) {
+        if(index===undefined){
+            index=0;
+        }
+        var item={};
 
-    //条目操作end
+        if(!$scope.${component.jsonVariableName}){
+            $scope.${component.jsonVariableName}={};
+        }
+        if(!$scope.${component.jsonVariableName}.${component.jsonVariableName}Items){
+            $scope.${component.jsonVariableName}.${component.jsonVariableName}Items=[];
+        }
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,0,item);
+    }
 
-    <c:if test="${componentList}">
+    //前面插入条目
+    $scope.insert${component.variableFirstUpper}ItemBefore=function(index){
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,0,{})
+    }
+    //移除条目
+    $scope.remove${component.variableFirstUpper}Item=function(index){
+        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1)
+    }
+    /**
+    *条目操作end
+    */
+
         //列表操作
-        $scope.ge${component.variableFirstUpper}List=function(){
+        $scope.get${component.variableFirstUpper}List=function(){
             $http.get("${component.listDataUri}").success(function (data) {
                 $scope.${component.jsonVariableName}List=data;
             });
@@ -84,7 +117,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         //启用/禁用
         $scope.${component.jsonVariableName}Toggle=function(component){
                 $http.post("${component.toggleUri}",JSON.stringify(component)).success(function (data) {
-                $scope.${component.jsonVariableName}=data;
+                $scope.${component.jsonVariableName}List=data;
             });
         }
         //删除
@@ -95,9 +128,6 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
             $scope.${component.jsonVariableName}List=data;
         });
         }
-
-    </c:if>
-
 </c:if>
 
     $scope.initAdmin=function(){
@@ -171,8 +201,6 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     }
 
 
-
-
 $scope.getMenu=function(){
 $http.get("/statics/json/menu.json").success(function (data) {
 $scope.menuItems=data;
@@ -218,52 +246,20 @@ alert("删除成功！");
 }
 });
 }
+//此方法覆盖自动生成的removeCarouselItem方法，一定要注意此方法在js中的顺序
 $scope.removeCarouselItem= function (index) {
+    if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
+    &&$scope.carousel.carouselItems[index].id){
 
-if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
-&&$scope.carousel.carouselItems[index].id){
-
-$http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
-$scope.carousel=message.data;
-alert("删除成功！");
-});
-}else{
-$scope.carousel.carouselItems.splice(index,1);
-}
-
-}
-$scope.insertCarouselItem= function () {
-var item={
-"type": "image",
-"value": "/statics/image/lanzuan/home/cloud.jpg",
-"carouselCaption": {
-"type": "text",
-"text": "我是白云。。。。。。"
-}
-}
-if(!$scope.carousel){
-$scope.carousel={};
-}
-if(!$scope.carousel.carouselItems){
-$scope.carousel.carouselItems=[];
+    $http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
+    $scope.carousel=message.data;
+    alert("删除成功！");
+    });
+    }else{
+    $scope.carousel.carouselItems.splice(index,1);
+    }
 
 }
-
-
-$scope.carousel.carouselItems.splice(0,0,item);
-}
-
-
-
-
-$scope.getImageTextBlockGroup=function(uri){
-$http.get(uri).success(function (data) {
-$scope.imageTextBlockGroup=data;
-$scope._active=0;
-
-});
-}
-
 
 }])
 })()

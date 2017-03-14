@@ -20,7 +20,7 @@
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="/admin/icon/upload-input/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a></li>
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
                 <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>

@@ -63,7 +63,7 @@
         <div  ng-if="!articleSection.articles&&!articleSection.image">
             此版块无内容,可以将该文章块块变为只显示图片的区域
             <a class="btn btn-primary btn-sm btn-padding-little white-link"
-               ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
+               ng-href="${path}${param.muu}/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
         </div>
 
         <img ng-if="articleSection.image" ng-src="{{articleSection.image}}" class="img-responsive img-ico-xl">

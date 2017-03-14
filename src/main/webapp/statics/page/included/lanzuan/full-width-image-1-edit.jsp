@@ -20,7 +20,7 @@
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="/admin/full-width-image/image/upload-input/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a>
                 </li>
                 <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>

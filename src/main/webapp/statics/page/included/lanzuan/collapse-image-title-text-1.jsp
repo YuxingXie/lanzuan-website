@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row  margin-left-right-0 margin-top-2-4em margin-bottom-1-6em md-up-padding-left-right-4em " ng-init="getImageTextBlockGroup()">
+<div class="row  margin-left-right-0 margin-top-2-4em margin-bottom-1-6em md-up-padding-left-right-4em " ng-init="getImageTextBlockGroup();_active=0">
     <div class="col-xs-12 col-md-9 p-a-0 m-a-0">
                    <span class="col-xs-12 col-md-4 col-lg-3 col-xl-2 p-r-0">
                         <h4 class="md-down-no-padding-left large-180" >{{imageTextBlockGroup.text}}</h4>

@@ -102,26 +102,23 @@ public class AdminCarouselController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/save-as")
     public ResponseEntity<Message> saveAs(@RequestBody Carousel carousel){
+        Carousel old=carouselService.findById(carousel.getId());
         Message message=new Message();
         List<CarouselItem> carouselItems=carousel.getCarouselItems();
         if(carouselItems!=null&&carouselItems.size()>0){
             for (CarouselItem carouselItem:carouselItems){
-                if (carouselItem.getId()==null){
-                    carouselItemService.insert(carouselItem);
-                }else{
-                    carouselItemService.update(carouselItem);
-                }
+                carouselItem.setId(null);
+                carouselItemService.insert(carouselItem);
             }
         }else {
             carousel.setCarouselItems(null);
         }
         carousel.setEnabled(false);
-        carouselService.update(carousel);
+//        carouselService.update(carousel);
         carousel.setId(null);
-        carousel.setEnabled(true);
         carouselService.insert(carousel);
         message.setSuccess(true);
-        message.setData(carousel);
+        message.setData(old);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/image/new/{pageComponentId}/{carouselItemId}")
@@ -133,7 +130,12 @@ public class AdminCarouselController extends BaseRestSpringController {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
 //                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
                 String fileName=System.currentTimeMillis()+ type;
-                String filePath = request.getServletContext().getRealPath("/") + "statics/upload/"+fileName;
+                String dir=request.getServletContext().getRealPath("/") + "statics/upload";
+                String filePath = dir+"/"+fileName;
+                File fileDir=new File(dir);
+                if (!fileDir.exists()){
+                    fileDir.mkdirs();
+                }
                 // 转存文件
                 file.transferTo(new File(filePath));
                 CarouselItem carouselItem=carouselItemService.findById(carouselItemId);

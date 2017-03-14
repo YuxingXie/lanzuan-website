@@ -18,7 +18,7 @@ public class Navbar {
     private String name;
     private boolean enabled;
     private NavbarBrand navbarBrand;
-    private List<NavItem> navItems;
+    private List<NavItem> navbarItems;
 
 
     public String getId() {
@@ -37,12 +37,12 @@ public class Navbar {
         this.navbarBrand = navbarBrand;
     }
 
-    public List<NavItem> getNavItems() {
-        return navItems;
+    public List<NavItem> getNavbarItems() {
+        return navbarItems;
     }
 
-    public void setNavItems(List<NavItem> navItems) {
-        this.navItems = navItems;
+    public void setNavbarItems(List<NavItem> navbarItems) {
+        this.navbarItems = navbarItems;
     }
 
     public String getUri() {
