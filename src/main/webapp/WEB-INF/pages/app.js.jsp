@@ -1,0 +1,295 @@
+<%@ page import="com.lanzuan.common.util.StringUtils" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath() %>"/>
+<c:if test="${path eq '/'}"><c:set var="path" value=""/></c:if>
+<c:set var="word" value="hello"/>
+<c:if test="false">
+    <script></c:if>
+
+(function () {
+"use strict";
+var app = angular.module('app', []);
+app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
+<c:if test="${not empty page}">
+    <c:forEach var="component" items="${page.pageComponents}">
+        $scope.get${component.variableFirstUpper}=function(){
+        $http.get('${component.dataUri}').success(function (data) {
+        $scope.${component.jsonVariableName}=data;
+        });
+        }
+    </c:forEach>
+</c:if>
+<c:if test="${not empty component}">
+    $scope.get${component.variableFirstUpper}=function(){
+    $http.get('${component.dataUri}').success(function (data) {
+    $scope.${component.jsonVariableName}=data;
+    });
+    }
+
+</c:if>
+
+
+}])
+app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
+
+
+<c:if test="${not empty component}">
+    $scope.reset${component.variableFirstUpper}=function(){
+    $scope.get${component.variableFirstUpper}();
+    $scope.${component.jsonVariableName}Resetted=true;
+    }
+    //update
+    $scope.save${component.variableFirstUpper}=function(){
+        $http.post("${component.saveUri}",JSON.stringify($scope.${component.jsonVariableName})).success(function (message) {
+            $scope.${component.jsonVariableName}=message.data;
+            if(message.success){
+                alert("保存成功！");
+            }
+        });
+    }
+    //方案另存
+    $scope.new${component.variableFirstUpper}=function(){
+        var name = window.prompt("请给方案命名","新方案名");
+        $scope.${component.jsonVariableName}.name=name;
+        $http.post("${component.saveAsUri}",JSON.stringify( $scope.${component.jsonVariableName})).success(function (message) {
+            $scope.${component.jsonVariableName}=message.data;
+            if(message.success){
+                alert("方案保存成功！");
+            }
+        });
+    }
+    <c:if test="${componentList}">
+        $scope.${component.jsonVariableName}Toggle=function(item){
+                $http.post("${component.toggleUri}",JSON.stringify(item)).success(function (data) {
+                $scope.${component.jsonVariableName}=data;
+            });
+        }
+    </c:if>
+
+</c:if>
+
+    $scope.initAdmin=function(){
+
+    $scope.getMenu();
+    $scope.editable=false;
+    }
+    $scope.getArticleSectionsAddDuplicated=function(uri){
+        $http.get(uri).success(function (data) {
+
+        if(!data ||!data.length){
+        $scope.articleSections=null;
+        return;
+        }
+        var articleArr=new Array();
+        if(data&&data.length){
+        //console.log("data.length "+data.length)
+        for(var i=0;i<data.length;i++){
+            var section=data[i];
+            //console.log("section.enabled" + section.enabled)
+            var articles=section.articles;
+            if(articles && articles.length){
+                //console.log("articles.length "+articles.length)
+                for(var j=0;j<articles.length;j++){
+                var article=articles[j];
+                //console.log(article.title);
+                var duplicated=false;
+                if(articleArr.length){
+                    for(var k=0;k<articleArr.length;k++){
+                        var articleInArr=articleArr[k];
+                        if(article&&articleArr&&articleInArr.id&&article.id&&articleInArr.id===article.id){
+                            duplicated=true;
+                        }
+                    }
+                }
+                if(!duplicated){
+                articleArr.push(article);
+                }else{
+                    article.duplicated=true;
+                    //console.log("duplicated")
+                }
+                }
+            }
+
+        }
+        }
+
+        $scope.articleSections=data;
+        });
+    }
+
+    $scope.getIcons=function(){
+    $http.get("/admin/icons/data").success(function (data) {
+    $scope.icons=data;
+    });
+    }
+    $scope.getFullWidthImages=function(){
+    $http.get("/admin/full-width-image/image/data").success(function (data) {
+    $scope.fullWidthImages=data;
+    });
+    }
+    $scope.getImageTextBlockGroupImages=function(){
+    $http.get("/admin/image-text-block-group/image/data").success(function (data) {
+    $scope.icons=data;
+    });
+    }
+    $scope.getArticles=function(){
+        $http.get("/admin/article/list/data").success(function (data) {
+            $scope.articles=data;
+        });
+    }
+    $scope.getImageTextBlockGroups=function(){
+        $http.get("/admin/image-text-block-group/list/data").success(function (data) {
+            $scope.imageTextBlockGroups=data;
+        });
+    }
+    $scope.getAllCarousels=function(){
+        $http.get("/admin/carousel/list/data").success(function (data) {
+            $scope.carousels=data;
+        });
+    }
+
+$scope.deleteCarousel=function(carousel){
+if(!confirm("确定删除?"))
+return ;
+$http.post("/admin/carousel/delete/"+carousel.id,JSON.stringify(carousel)).success(function (data) {
+$scope.carousels=data;
+
+});
+}
+$scope.deleteGroup=function(group){
+if(!confirm("确定删除?"))
+return ;
+$http.get("/admin//image-text-block-group/delete/"+group.id).success(function (data) {
+$scope.imageTextBlockGroups=data;
+
+});
+}
+$scope.deleteNavbar=function(navbar){
+if(!confirm("确定删除?"))
+return ;
+$http.post("/admin/navbar/delete/"+navbar.id,JSON.stringify(navbar)).success(function (data) {
+$scope.navbarList=data;
+
+});
+}
+$scope.deleteCardGroup=function(cardGroup){
+if(!confirm("确定删除?"))
+return ;
+$http.post("/admin/card-group/delete/"+cardGroup.id,JSON.stringify(cardGroup)).success(function (data) {
+$scope.cardGroupList=data;
+
+});
+}
+$scope.getMenu=function(){
+$http.get("/statics/json/menu.json").success(function (data) {
+$scope.menuItems=data;
+});
+}
+
+$scope.getNavbarList=function(){
+$http.get("/admin/navbar/list/data").success(function (data) {
+$scope.navbarList=data;
+});
+}
+$scope.getCardGroupList=function(){
+$http.get("/admin/card-group/list/data").success(function (data) {
+$scope.cardGroupList=data;
+});
+}
+$scope.removeArticleSection=function(articleSections,articleSection,index){
+if(!articleSection.id){
+articleSections.splice(index,1);
+if(articleSections&&articleSections.length){
+var allNotSavedRemoved=true;
+for(var i=0;i<articleSections.length;i++){
+var articleSection=articleSections[i];
+if(!articleSection.id){
+allNotSavedRemoved=false;
+break;
+}
+}
+if(allNotSavedRemoved){
+$scope.addArticleSection=false;
+$scope.addArticleSectionSaved=true;
+}
+}
+return;
+}
+$http.post("/admin/article_section/remove",JSON.stringify(articleSection)).success(function (message) {
+$scope.articleSections=message.data;
+if(message.success){
+alert("修改成功！");
+}
+});
+}
+
+
+$scope.removeArticle=function(articleSections,article){
+console.log(JSON.stringify(article))
+$http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
+articleSections=message.data;
+if(message.success){
+alert("删除成功！");
+}
+});
+}
+$scope.removeCarouselItem= function (index) {
+
+if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
+&&$scope.carousel.carouselItems[index].id){
+
+$http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
+$scope.carousel=message.data;
+alert("删除成功！");
+});
+}else{
+$scope.carousel.carouselItems.splice(index,1);
+}
+
+}
+$scope.insertCarouselItem= function () {
+var item={
+"type": "image",
+"value": "/statics/image/lanzuan/home/cloud.jpg",
+"carouselCaption": {
+"type": "text",
+"text": "我是白云。。。。。。"
+}
+}
+if(!$scope.carousel){
+$scope.carousel={};
+}
+if(!$scope.carousel.carouselItems){
+$scope.carousel.carouselItems=[];
+
+}
+
+
+$scope.carousel.carouselItems.splice(0,0,item);
+}
+$scope.forwardCarouselItem=function(index){
+var item=$scope.carousel.carouselItems[index];
+$scope.carousel.carouselItems.splice(index,1);
+$scope.carousel.carouselItems.splice(index-1,0,item);
+}
+$scope.backwardCarouselItem=function(index){
+var item=$scope.carousel.carouselItems[index];
+$scope.carousel.carouselItems.splice(index,1);
+$scope.carousel.carouselItems.splice(index+1,0,item);
+}
+
+
+
+$scope.getImageTextBlockGroup=function(uri){
+$http.get(uri).success(function (data) {
+$scope.imageTextBlockGroup=data;
+$scope._active=0;
+
+});
+}
+
+
+}])
+})()
+<c:if test="false"></script></c:if>

@@ -21,21 +21,19 @@
     </head>
     <body ng-app="app">
         <div ng-controller="HomeController">
-            <%--<c:forEach items="${webPage.pageComponents}" var="pageComponent">--%>
-                <%--<jsp:include page="${pageComponent.templateUri}?fn=${pageComponent.jsonFunctionName}&uri=${pageComponent.dataUri}"></jsp:include>--%>
-            <%--</c:forEach>--%>
-                <%--<jsp:include page="${webPage.pageComponents[0].templateUri}?fn=${webPage.pageComponents[0].jsonFunctionName}&uri=${webPage.pageComponents[0].dataUri}"></jsp:include>--%>
-                <%--<jsp:include page="${webPage.pageComponents[1].templateUri}?fn=${webPage.pageComponents[1].jsonFunctionName}&uri=${webPage.pageComponents[1].dataUri}"></jsp:include>--%>
-                <%--<jsp:include page="${webPage.pageComponents[2].templateUri}?fn=${webPage.pageComponents[2].jsonFunctionName}&uri=${webPage.pageComponents[2].dataUri}"></jsp:include>--%>
-                <%--<jsp:include page="${webPage.pageComponents[3].templateUri}?fn=${webPage.pageComponents[3].jsonFunctionName}&uri=${webPage.pageComponents[3].dataUri}"></jsp:include>--%>
-                <jsp:include page="${webPage.pageComponents[4].templateUri}?fn=${webPage.pageComponents[4].jsonFunctionName}&uri=${webPage.pageComponents[4].dataUri}"></jsp:include>
-                <%--<jsp:include page="${webPage.pageComponents[5].templateUri}?fn=${webPage.pageComponents[5].jsonFunctionName}&uri=${webPage.pageComponents[5].dataUri}"></jsp:include> image 404--%>
-                <jsp:include page="${webPage.pageComponents[6].templateUri}?fn=${webPage.pageComponents[6].jsonFunctionName}&uri=${webPage.pageComponents[6].dataUri}"></jsp:include>
+            <c:forEach items="${webPage.pageComponents}" var="pageComponent">
+                <jsp:include page="${pageComponent.templateUri}"></jsp:include>
+            </c:forEach>
+
+                <%--<jsp:include page="${webPage.pageComponents[4].templateUri}"></jsp:include>--%>
+
+                <%--<jsp:include page="${webPage.pageComponents[6].templateUri}"></jsp:include>--%>
+
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
         <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
         <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
-        <script src="/statics/js/app.js"></script>
+        <script src="/app-js?pageId=${webPage.id}"></script>
     </body>
 </html>

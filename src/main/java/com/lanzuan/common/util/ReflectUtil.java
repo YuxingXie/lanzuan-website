@@ -30,14 +30,14 @@ public class ReflectUtil {
 
     public static String getGetterMethodName(String fieldName,boolean is_boolean) {
         if (!is_boolean)
-        return "get" + firstUpperCase(fieldName);
-        return "is"+firstUpperCase(fieldName);
+        return "get" + StringUtils.firstUpperCase(fieldName);
+        return "is"+StringUtils.firstUpperCase(fieldName);
     }
     public static String getGetterMethodName(String fieldName) {
         return getGetterMethodName(fieldName,false);
     }
     public static String getSetterMethodName(String fieldName) {
-        return "set" + firstUpperCase(fieldName);
+        return "set" + StringUtils.firstUpperCase(fieldName);
     }
 
     public static <T> Object invokeGetter(T t, String property) {
@@ -55,13 +55,8 @@ public class ReflectUtil {
         return null;
     }
 
-    public static String firstLowerCase(String word) {
-        return word.substring(0, 1).toLowerCase() + word.substring(1);
-    }
 
-    public static String firstUpperCase(String word) {
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
-    }
+
 
     public static <T> boolean isFieldExist(Class<T> clazz, String fieldName) {
         for (Field field : clazz.getDeclaredFields()) {

@@ -1,21 +1,15 @@
-<%@ page import="com.lanzuan.common.util.StringUtils" %>
-<%@ page import="com.lanzuan.common.util.ReflectUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="row p-a-0 m-a-0">
-
-
-
         <div class="col-xs-12 m-a-0 p-a-0">
-            <label class="label label-default large-180">编辑文章块</label>
+            <label class="label label-default large-180">编辑文章块${param.varU} ${param.var}</label>
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection(${param.var})"> 新增文章块</button>
-                <%
-                    String varFirstUpperCase= ReflectUtil.firstUpperCase(request.getParameter("var"));
-                %>
-                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="getArticleSections('${param.dataUri}')"> 重 置</button>
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="saveArticleSections(${param.var})">保存</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection()"> 新增文章块</button>
+
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="get${param.varU}('${param.dataUri}')"> 重 置</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="save${param.varU}()">保存</button>
             </div>
         </div>
         <div class="col-xs-12">
@@ -32,9 +26,6 @@
         <div class="col-xs-12 col-md-4" ng-if="!${param.var}">
             <h5>此组件还没有文章块，可以点击“新增文章块”按钮增加一个文章块</h5>
         </div>
-
-
-
 </div>
 
 <div class="row">
@@ -61,7 +52,7 @@
                     <span ng-if="!article.duplicated"  class="btn-group">
 
                         <a ng-if="article.byEditor" class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/${pageComponent.id}/{{articleSection.id}}/{{article.id}}">编辑</a>
-                        <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeArticle(${param.var},article)" >删除</button>
+                        <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeArticle(article)" >删除</button>
                     </span>
                     <span ng-if="article.duplicated" class="small-90">
                         这篇文章出现在其它版块，请在首次出现的版块编辑它
@@ -80,18 +71,18 @@
     <div class="col-xs-5">
         <div class="btn-group" ng-if="!articleSection.image">
             <a class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/${pageComponent.id}/{{articleSection.id}}" ng-if="articleSection.id"> 为此文章块撰文</a>
-            <button class="btn btn-primary white-link btn-sm fa fa-trash" ng-click="removeArticleSection(${param.var},articleSection,$index)"> 删除该块</button>
+            <button class="btn btn-primary white-link btn-sm fa fa-trash" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>
         </div>
         <div class="input-group input-group-sm margin-top-10">
             <input type="text" ng-model="articleSection.name" class="form-control">
-            <span ng-if="articleSection.id" class="input-group-btn"><button class="btn btn-primary" ng-click="renameArticleSection(${param.var},articleSection)">重命名</button></span>
+            <span ng-if="articleSection.id" class="input-group-btn"><button class="btn btn-primary" ng-click="renameArticleSection(articleSection)">重命名</button></span>
             <span class="text-danger input-group-addon" ng-if="!articleSection.id">未保存*</span>
         </div>
 
 
         <div ng-if="!articleSection.articles&&articleSection.image" class="btn-group btn-group-sm">
             <a class="btn btn-primary white-link" ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">更换图片</a>
-            <button class="btn btn-primary white-link fa fa-plus" ng-click="removeArticleSection(${param.var},articleSection,$index)"> 删除该块</button>
+            <button class="btn btn-primary white-link fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>
             <div class="input-group input-group-sm">
                 <input type="text" ng-model="articleSection.name" class="form-control">
                 <span class="input-group-btn"><button class="btn btn-primary" ng-click="renameArticleSection(articleSection)" ng-if="articleSection.id">重命名</button></span>

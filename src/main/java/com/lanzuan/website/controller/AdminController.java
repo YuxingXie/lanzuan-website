@@ -131,11 +131,13 @@ public class AdminController extends BaseRestSpringController {
     public String newPageComponent() {
         return "admin/page-component/new";
     }
+
     @RequestMapping(value = "/page_component/edit/{pageComponentId}")
     public String editPageComponent(@PathVariable String pageComponentId,ModelMap model) {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
-        return "forward:/WEB-INF/pages/admin/page-component-edit.jsp";
+
+        return "admin/page-component-edit";
     }
 
     /**

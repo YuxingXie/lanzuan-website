@@ -55,7 +55,7 @@
 
                         <div class="col-xs-2"> {{cardGroup.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-3">
-                            <span class="fa fa-2x hover-cursor-hand" ng-click="changeCardGroupEnabledStatus(cardGroup)"
+                            <span class="fa fa-2x hover-cursor-hand" ng-click="cardGroupToggle(cardGroup)"
                                   ng-class="{'fa-toggle-on color-blue ':cardGroup.enabled,'fa-toggle-off color-grey':!cardGroup.enabled}">
 
                             </span>

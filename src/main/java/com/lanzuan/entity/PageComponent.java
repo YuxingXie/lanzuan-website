@@ -8,7 +8,9 @@ db.pageComponent.update({"name":"蓝钻鼠标掠过类似手风琴模板1"},{"$s
 db.pageComponent.update({"name":"全屏宽度图片模板1"},{"$set":{"editUri":"/statics/page/included/lanzuan/full-width-image-1-edit.html"}},false,true)
 db.pageComponent.update({"name":"分类链接模板1"},{"$set":{"editUri":"/statics/page/included/lanzuan/sort-link-section-1-edit.html"}},false,true)
   */
+import com.lanzuan.common.util.StringUtils;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "pageComponent")
@@ -19,6 +21,9 @@ public class PageComponent {
     private String templateUri;
     private String editUri;
     private String dataUri;
+    private String saveUri;
+    private String saveAsUri;
+    private String toggleUri;
     /**
      *     详细说明：
      *     此变量名代表该组件数据在js中数据的变量名
@@ -30,29 +35,21 @@ public class PageComponent {
      *     在前端可以类似于如下调用函数：
      *     ${pageComponent.jsonFunctionName}('${pageComponent.dataUri}'})
      *     实际上相当于getter方法名
-
-     */
-    private String jsonFunctionName;
-    /**
      * 在视图中无法知晓js中的变量命名，因为js文件无法用el表达式，所以必须在视图页面指定json数据在js中的变量名，主要在编辑页面使用
      */
     private String jsonVariableName;
-
+    private String variableFirstUpper;
     public String getJsonVariableName() {
         return jsonVariableName;
+    }
+    public String getVariableFirstUpper(){
+        return StringUtils.firstUpperCase(jsonVariableName);
     }
 
     public void setJsonVariableName(String jsonVariableName) {
         this.jsonVariableName = jsonVariableName;
     }
 
-    public String getJsonFunctionName() {
-        return jsonFunctionName;
-    }
-
-    public void setJsonFunctionName(String jsonFunctionName) {
-        this.jsonFunctionName = jsonFunctionName;
-    }
 
     public String getDataUri() {
         return dataUri;
@@ -108,6 +105,27 @@ public class PageComponent {
     }
 
 
+    public String getSaveUri() {
+        return saveUri;
+    }
 
+    public void setSaveUri(String saveUri) {
+        this.saveUri = saveUri;
+    }
 
+    public String getSaveAsUri() {
+        return saveAsUri;
+    }
+
+    public void setSaveAsUri(String saveAsUri) {
+        this.saveAsUri = saveAsUri;
+    }
+
+    public String getToggleUri() {
+        return toggleUri;
+    }
+
+    public void setToggleUri(String toggleUri) {
+        this.toggleUri = toggleUri;
+    }
 }

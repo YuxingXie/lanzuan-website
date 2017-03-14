@@ -271,6 +271,9 @@
                 $scope.carousel=data;
             });
         }
+
+
+
         $scope.removeCarouselItem= function (index) {
 
             if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length

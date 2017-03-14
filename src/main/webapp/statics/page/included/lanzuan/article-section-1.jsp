@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row m-l-0 m-r-0 margin-top-1em md-up-padding-left-right-4em padding-top-4em padding-bottom-2em  bg-very-light"
-     ng-init="${param.fn}('${param.uri}')">
-    <div class="col-xs-12 col-md-4" ng-repeat="articleSection in ${param.var}" ng-if="${param.var}">
+     ng-init="getArticleSections()">
+    <div class="col-xs-12 col-md-4" ng-repeat="articleSection in articleSections" ng-if="articleSections">
         <div class="row">
             <h4 class="col-xs-8 large-180">{{articleSection.name}}</h4>
             <img src="{{articleSection.image}}" class="col-xs-12 padding-top-1em" ng-if="articleSection.image"/>

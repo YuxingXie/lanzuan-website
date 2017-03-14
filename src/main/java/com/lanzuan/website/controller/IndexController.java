@@ -1,6 +1,7 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
 import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.website.service.*;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -44,8 +46,9 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
-        WebPage webPage=webPageService.findByUri(uri);
-        map.addAttribute("pageTemplate",webPage);
+        WebPage webPage=webPageService.findByUri("/home");
+
+        map.addAttribute("webPage",webPage);
         return "index";
     }
     @RequestMapping(value = "/navbar/home/data")
@@ -82,6 +85,18 @@ public class IndexController extends BaseRestSpringController {
         article.setArticleSections(sections);
         modelMap.addAttribute("article",article);
         return "website/article/article";
+    }
+    @RequestMapping(value = "/app-js")
+    public String article(ModelMap modelMap,String pageId,String componentId){
+        if (StringUtils.isNotBlank(pageId)){
+            WebPage page=webPageService.findById(pageId);
+            modelMap.addAttribute("page",page);
+        }
+        if (StringUtils.isNotBlank(componentId)){
+            PageComponent component=pageComponentService.findById(componentId);
+            modelMap.addAttribute("component",component);
+        }
+        return "app.js";
     }
     @RequestMapping(value = "/carousel/home/data")
     public ResponseEntity<Carousel> carouselHomeData(){

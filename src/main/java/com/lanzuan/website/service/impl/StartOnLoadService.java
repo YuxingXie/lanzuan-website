@@ -524,8 +524,9 @@ public class StartOnLoadService {
             pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
             pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
             pageComponent1.setName("响应式导航条模板1");
-            pageComponent1.setJsonFunctionName("getNavbar");
+            pageComponent1.setJsonVariableName("navbar");
             pageComponent1.setDataUri("/navbar/home/data");
+            pageComponent1.setToggleUri("/admin/navbar/status-change");
 
             pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
 
@@ -533,8 +534,11 @@ public class StartOnLoadService {
             pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
             pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
             pageComponent2.setName("响应式轮播图");
-            pageComponent2.setJsonFunctionName("getCarousel");
+            pageComponent2.setJsonVariableName("carousel");
+            pageComponent2.setSaveUri("/admin/carousel/insert-all");
             pageComponent2.setDataUri("/carousel/home/data");
+            pageComponent2.setSaveAsUri("/admin/carousel/save-as");
+            pageComponent2.setToggleUri("/admin/carousel/update");
 
             pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
 
@@ -542,16 +546,20 @@ public class StartOnLoadService {
             pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
             pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
             pageComponent3.setName("图文卡片组模板1");
-            pageComponent3.setJsonFunctionName("getCardGroup");
+            pageComponent3.setJsonVariableName("cardGroup");
             pageComponent3.setDataUri("/card-group/home/data");
+            pageComponent3.setSaveUri("/admin/card-group/update");
+            pageComponent3.setSaveAsUri("/admin/card-group/save-as");
             pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
+            pageComponent3.setToggleUri("/admin/card-group/status-change");
 
             PageComponent pageComponent4=new PageComponent();
             pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
             pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
             pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
             pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
-            pageComponent4.setJsonFunctionName("getImageTextBlockGroup");
+            pageComponent4.setJsonVariableName("imageTextBlockGroup");
+            pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
             pageComponent4.setDataUri("/image-text-block-group/home/data");
 
             PageComponent pageComponent5=new PageComponent();
@@ -559,7 +567,6 @@ public class StartOnLoadService {
             pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
             pageComponent5.setName("文章块组件1");
             pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
-            pageComponent5.setJsonFunctionName("getArticleSections");
             pageComponent5.setDataUri("/articleSections/data");
             pageComponent5.setJsonVariableName("articleSections");
 
@@ -568,7 +575,7 @@ public class StartOnLoadService {
             pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
             pageComponent6.setName("全屏宽度图片模板1");
             pageComponent6.setRemark("简单的全屏宽度图片。");
-            pageComponent6.setJsonFunctionName("getFullWidthImage");
+            pageComponent6.setJsonVariableName("fullWidthImage");
             pageComponent6.setDataUri("/full-width-image/home/data");
 
             PageComponent pageComponent7=new PageComponent();
@@ -577,7 +584,6 @@ public class StartOnLoadService {
             pageComponent7.setName("分类链接模板1");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
             pageComponent7.setDataUri("/articleSections/data");
-            pageComponent7.setJsonFunctionName("getSortLinkSections");
             pageComponent7.setJsonVariableName("sortLinkSections");
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();

@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="${param.fn}('${param.uri}')">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="getCarousel()">
     <ol class="carousel-indicators bottom-0">
         <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in carousel.carouselItems"></li>
     </ol>

@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-xs-2"> {{navbar.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-3">
-                            <span class="fa fa-2x hover-cursor-hand" ng-click="changeNavbarEnabledStatus(navbar)"
+                            <span class="fa fa-2x hover-cursor-hand" ng-click="navbarToggle(navbar)"
                                   ng-class="{'fa-toggle-on color-blue ':navbar.enabled,'fa-toggle-off color-grey':!navbar.enabled}">
                                 <%--{{carousel.enabled?"禁用":"启用"}}--%>
                             </span>

@@ -26,7 +26,7 @@
                 <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                     <div class="row padding-top-2em padding-bottom-2em"style="border-top: solid #000 1px">
                         <div class="col-xs-8 m-a-0 p-a-0">
-                            <jsp:include page="${pageComponent.templateUri}?fn=${pageComponent.jsonFunctionName}&uri=${pageComponent.dataUri}&var=${pageComponent.jsonVariableName}"></jsp:include>
+                            <jsp:include page="${pageComponent.templateUri}"></jsp:include>
                         </div>
 
                         <div class="col-xs-4 m-a-0 padding-left-2em" >
@@ -34,7 +34,7 @@
                             <div>${pageComponent.remark}</div>
 
                             <div class="btn-group">
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}?fn=${pageComponent.jsonFunctionName}&uri=${pageComponent.dataUri}&var=${pageComponent.jsonVariableName}">直接修改</a>
+                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">直接修改</a>
                                 <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/safe_mode/${pageComponent.id}">安全模式</a>
                             </div>
                         </div>
@@ -48,6 +48,6 @@
     <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/statics/js/app.js"></script>
+    <script src="${path}/app-js?pageId=${webPage.id}"></script>
 </body>
 

@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-xs-3"> {{group.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-2">
-                            <span class="fa fa-2x hover-cursor-hand" ng-click="changeImageTextBlockGroupEnabledStatus(group)"
+                            <span class="fa fa-2x hover-cursor-hand" ng-click="imageTextBlockGroupToggle(group)"
                                   ng-class="{'fa-toggle-on color-blue ':group.enabled,'fa-toggle-off color-grey':!group.enabled}">
                                 <%--{{group.enabled?"禁用":"启用"}}--%>
                             </span>

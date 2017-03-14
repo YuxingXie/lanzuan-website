@@ -169,7 +169,7 @@ public class MongoDbUtil {
     }
     public static<T> String collectionName(Class<T> t){
         Document document=t.getAnnotation(Document.class);
-        String collection= document==null?null:(document.collection()==null?ReflectUtil.firstLowerCase(t.getSimpleName()):document.collection());
+        String collection= document==null?null:(document.collection()==null?StringUtils.firstLowerCase(t.getSimpleName()):document.collection());
         return collection;
     }
     public static<T>  List<String> getUpdateFromEntity(Class collectionClass) {
@@ -190,6 +190,6 @@ public class MongoDbUtil {
         return list;
     }
     public static void main(String[] args){
-        System.out.println(ReflectUtil.firstLowerCase(User.class.getSimpleName()));
+        System.out.println(StringUtils.firstLowerCase(User.class.getSimpleName()));
     }
 }

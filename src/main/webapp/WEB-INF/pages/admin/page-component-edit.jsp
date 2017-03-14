@@ -37,7 +37,7 @@
 
                 <div class="padding-top-2em">
                     <c:if test="${not empty pageComponent.editUri}">
-                        <jsp:include page="${pageComponent.editUri}"></jsp:include>
+                        <jsp:include page="${pageComponent.editUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
                     </c:if>
                 </div>
             </div>
@@ -48,7 +48,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js?componentId=${pageComponent.id}"></script>
 
 </body>
 
