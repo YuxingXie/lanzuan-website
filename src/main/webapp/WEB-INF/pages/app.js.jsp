@@ -6,10 +6,11 @@
 <c:set var="word" value="hello"/>
 <c:if test="false">
     <script></c:if>
-
 (function () {
 "use strict";
+
 var app = angular.module('app', []);
+
 app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
 <c:if test="${not empty page}">
     <c:forEach var="component" items="${page.pageComponents}">
@@ -85,7 +86,6 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         if(index===undefined){
             index=0;
         }
-        var item={};
 
         if(!$scope.${component.jsonVariableName}){
             $scope.${component.jsonVariableName}={};
@@ -93,6 +93,8 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         if(!$scope.${component.jsonVariableName}.${component.jsonVariableName}Items){
             $scope.${component.jsonVariableName}.${component.jsonVariableName}Items=[];
         }
+
+
         $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,0,item);
     }
 
@@ -252,21 +254,64 @@ alert("删除成功！");
 }
 });
 }
-//此方法覆盖自动生成的removeCarouselItem方法，一定要注意此方法在js中的顺序
-$scope.removeCarouselItem= function (index) {
-    if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
-    &&$scope.carousel.carouselItems[index].id){
+//以下方法覆盖自动生成的方法，一定要注意此方法在js中的顺序
+    $scope.removeCarouselItem= function (index) {
+        if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
+        &&$scope.carousel.carouselItems[index].id){
 
-    $http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
-    $scope.carousel=message.data;
-    alert("删除成功！");
-    });
-    }else{
-    $scope.carousel.carouselItems.splice(index,1);
+        $http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
+        $scope.carousel=message.data;
+        alert("删除成功！");
+        });
+        }else{
+        $scope.carousel.carouselItems.splice(index,1);
+        }
+
     }
+    $scope.insertBlockItemBefore=function(imageTextBlock,index){
 
-}
+        imageTextBlock.imageTextItems.splice(index,0,{
+            "image": "/statics/image/lanzuan/home/logo-bg.jpg",
+            "text": "baidu",
+            "link": "http://baidu.com",
+            "title":"百度一下"
+        });
+    }
+    $scope.removeBlockItem=function(imageTextBlock,index){
+        imageTextBlock.imageTextItems.splice(index,1);
+    }
+    $scope.forwardBlockItem=function(imageTextBlock,index){
+        var item=imageTextBlock.imageTextItems[index];
+        imageTextBlock.imageTextItems.splice(index,1);
+        imageTextBlock.imageTextItems.splice(index-1,0,item);
+    }
+    $scope.backwardBlockItem=function(imageTextBlock,index){
+        var item=imageTextBlock.imageTextItems[index];
+        imageTextBlock.imageTextItems.splice(index,1);
+        imageTextBlock.imageTextItems.splice(index+1,0,item);
+    }
+    $scope.insertImageTextBlockGroupItem=function(index){
+        if(index===undefined){
+            index=0;
+            }
 
+            if(!$scope.imageTextBlockGroup){
+            $scope.imageTextBlockGroup={};
+            }
+            if(!$scope.imageTextBlockGroup.imageTextBlockGroupItems){
+                $scope.imageTextBlockGroup.imageTextBlockGroupItems=[];
+            }
+            var item={};
+            item.name="输入名称";
+            var imageTextItem={};
+            imageTextItem.text="文字";
+            imageTextItem.link="链接";
+            imageTextItem.title="标题";
+            item.imageTextItems=[];
+            item.imageTextItems.push(imageTextItem);
+            $scope.imageTextBlockGroup.imageTextBlockGroupItems.push(item)
+            $scope.imageTextBlockGroup.imageTextBlockGroupItems.splice(index,0,item);
+            }
 }])
 })()
 <c:if test="false"></script></c:if>

@@ -46,10 +46,10 @@
                             <i  ng-class="{'color-red':!cardGroup.name}">{{cardGroup.name?cardGroup.name:"未命名"}}</i>
                         </div>
                         <div class="col-xs-5">
-                            <span ng-repeat="card in cardGroup.cards">
-                                <img ng-src="{{card.image}}"  class="img-rounded img-ico-larger"/>
+                            <div ng-repeat="card in cardGroup.cardGroupItems">
+                                <img ng-src="{{card.image}}"  class="img-rounded img-ico-lg"/>
                                 {{card.text}}
-                            </span>
+                            </div>
 
                         </div>
 
@@ -73,7 +73,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js?componentId=${pageComponentId}"></script>
 
 </body>
 

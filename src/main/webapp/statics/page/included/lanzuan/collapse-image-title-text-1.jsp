@@ -7,17 +7,17 @@
                     </span>
                     <span class="col-xs-12 col-md-8 col-lg-9 col-xl-10 text-left m-a-0">
 
-                        <span ng-repeat="block in imageTextBlockGroup.imageTextBlocks">
+                        <span ng-repeat="block in imageTextBlockGroup.imageTextBlockGroupItems">
                             <span  ng-mouseover="$parent._active=$index" class="btn btn-padding-little bg-none sm-down-btn" ng-class="{'active bg-light-blue color-white':_active===$index}">
                             {{block.name}}
                             </span>
-                            <span ng-if="$index!==imageTextBlockGroup.imageTextBlocks.length-1" class="divider hidden-sm-down"></span>
+                            <span ng-if="$index!==imageTextBlockGroup.imageTextBlockGroupItems.length-1" class="divider hidden-sm-down"></span>
                         </span>
                 </span>
     </div>
 
 </div>
-<div class="row margin-left-right-0 md-up-padding-left-right-4em margin-bottom-2em" ng-repeat="block in imageTextBlockGroup.imageTextBlocks"
+<div class="row margin-left-right-0 md-up-padding-left-right-4em margin-bottom-2em" ng-repeat="block in imageTextBlockGroup.imageTextBlockGroupItems"
      ng-class="{'active in':$parent._active===$index,'collapse':$parent._active!==$index}">
     <div class="col-xs-6 col-md-3 md-down-padding-left-right-0" ng-repeat="imageTextItem in block.imageTextItems">
         <a ng-href="{{imageTextItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">

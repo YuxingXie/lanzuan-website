@@ -1,7 +1,6 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.entity.ImageCardGroup;
 import com.lanzuan.entity.ImageTextBlockGroup;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;

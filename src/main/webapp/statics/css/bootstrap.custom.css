@@ -7,11 +7,11 @@
 
 /**依赖.dropdown-menu，置于.dropdown-menu之后，改变弹出菜单样式*/
 .dropdown-full-width {
-    position: relative;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
+    /*position: relative;*/
+    /*top: 100%;*/
+    /*left: 0;*/
+    /*z-index: 1000;*/
+    /*width: 100%;*/
     /*display: block;*/
     /*float: left;*/
     /*min-width: 360px;*/

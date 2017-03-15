@@ -35,8 +35,8 @@ public class IndexController extends BaseRestSpringController {
     IArticleSectionService articleSectionService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
-    @Resource(name = "imageCardGroupService")
-    IImageCardGroupService imageCardGroupService;
+    @Resource(name = "cardGroupService")
+    ICardGroupService cardGroupService;
     @Resource(name = "imageTextBlockGroupService")
     IImageTextBlockGroupService imageTextBlockGroupService;
     @Resource(name = "navbarService")
@@ -62,9 +62,9 @@ public class IndexController extends BaseRestSpringController {
         return new ResponseEntity<FullWidthImage>(fullWidthImage, HttpStatus.OK);
     }
     @RequestMapping(value = "/card-group/home/data")
-    public ResponseEntity<ImageCardGroup> homeImageCardGroup(){
-        ImageCardGroup imageCardGroup=imageCardGroupService.findByUri("/home");
-        return new ResponseEntity<ImageCardGroup>(imageCardGroup, HttpStatus.OK);
+    public ResponseEntity<CardGroup> homeImageCardGroup(){
+        CardGroup imageCardGroup=cardGroupService.findByUri("/home");
+        return new ResponseEntity<CardGroup>(imageCardGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/image-text-block-group/home/data")
     public ResponseEntity<ImageTextBlockGroup> homeImageTextBlockGroup(){

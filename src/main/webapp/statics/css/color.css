@@ -6,6 +6,7 @@
 .bg-medium-grey { background-color: #eeecec;}
 .bg-medium-grey-2 { background-color: #d4d2d2;}
 .bg-light-grey {color: #000; background-color: #e6e4e4;}
+.bg-dark-grey{  background-color: #e8e8e8;  }
 .bg-very-light {color: #000;background-color: #f6f6f6;}
 .bg-very-light-1 {color: #000;background-color: #f9f9f9;}
 .bg-green { background-color: #35aa47;}
@@ -13,6 +14,9 @@
 .bg-light-yellow { background-color: #f2ff09;}
 .bg-purple { background-color: #852b99;}
 .bg-light-red { background-color: #ff5400;}
+.bg--blue-1 { background-color: rgba(194, 216, 253, 0.58);}
+.bg--blue-2 { background-color: #c2d8fd;}
+.bg--blue-3 { background-color: #bfd5fa;}
 .bg-very-light-blue { background-color: #bfd5fa;}
 .bg-light-blue { background-color: #0786EA;}
 

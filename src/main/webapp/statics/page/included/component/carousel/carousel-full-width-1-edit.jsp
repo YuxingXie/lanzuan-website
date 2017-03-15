@@ -52,7 +52,7 @@
                                 aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div class="dropdown-menu dropdown-full-width">
+                        <div class="dropdown-menu bg-light-grey">
                             <span ng-repeat="icon in carouselImages" class="dropdown-item-inline"
                                   ng-click="carouselItem.type='image';carouselItem.value=icon">
                                 <img type="text" ng-src="{{icon}}" class="img-ico-larger img-rounded"/>

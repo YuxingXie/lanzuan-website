@@ -37,7 +37,7 @@
             <div class="col-xs-2">卡片文字</div>
             <div class="col-xs-4">其它操作</div>
         </div>
-        <div class="row" ng-repeat="card in cardGroup.cards">
+        <div class="row" ng-repeat="card in cardGroup.cardGroupItems">
             <div class="row padding-top-10">
                 <div class="btn-group col-xs-12">
                     <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
@@ -68,9 +68,11 @@
 
                 <div class="col-xs-4">
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insertCardBefore($index)"> 前面插入一条
+                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insert${param.varU}ItemBefore($index)"> 前面插入一条
                         </button>
-                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="removeCard($index)"> 删掉此条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${param.varU}Item($index)"> 删掉此条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
+                        <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.${param.var}Items.length-1">后移</button>
                     </div>
                 </div>
             </div>

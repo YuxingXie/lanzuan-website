@@ -2,11 +2,8 @@ package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.base.BaseEntityManager;
 import com.lanzuan.common.base.EntityDao;
-import com.lanzuan.entity.ImageCardGroup;
 import com.lanzuan.entity.ImageTextBlockGroup;
-import com.lanzuan.website.dao.ImageCardGroupDao;
 import com.lanzuan.website.dao.ImageTextBlockGroupDao;
-import com.lanzuan.website.service.IImageCardGroupService;
 import com.lanzuan.website.service.IImageTextBlockGroupService;
 import org.springframework.stereotype.Service;
 

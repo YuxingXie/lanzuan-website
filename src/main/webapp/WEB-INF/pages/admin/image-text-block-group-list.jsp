@@ -45,7 +45,9 @@
                         <div class="col-xs-2">
                             <i  ng-class="{'color-red':!group.name}">{{group.name?group.name:"未命名"}}</i></div>
                         <div class="col-xs-4">
-                            <div ng-repeat="block in group.imageTextBlocks" class="row padding-top-15 padding-bottom-10  hover-bg-color-dark-grey">
+                            <div ng-repeat="block in group.imageTextBlockGroupItems" ng-class-even="'bg--blue-1'"ng-class-odd="'bg--blue-3'"
+                                 class="row padding-top-15 padding-bottom-10">
+                                <div class="col-xs-12">{{block.name}}</div>
                                 <div class="col-xs-3" ng-repeat="item in block.imageTextItems">
                                     <img class="img-responsive img-rounded" ng-src="${path}{{item.image}}"/>
                                     <div class="text-center small-70">{{item.title}}</div>
@@ -73,7 +75,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/statics/js/app.js"></script>
+<script src="${path}/app-js?componentId=${pageComponentId}"></script>
 
 </body>
 

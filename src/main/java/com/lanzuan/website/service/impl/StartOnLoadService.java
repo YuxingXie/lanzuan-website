@@ -34,8 +34,8 @@ public class StartOnLoadService {
     private ICarouselItemService carouselItemService;
     @Resource(name = "navbarService")
     private INavbarService navbarService;
-    @Resource(name = "imageCardGroupService")
-    private IImageCardGroupService imageCardGroupService;
+    @Resource(name = "cardGroupService")
+    private ICardGroupService cardGroupService;
     @Resource(name = "imageTextBlockGroupService")
     private IImageTextBlockGroupService imageTextBlockGroupService;
     @Resource(name = "fullWidthImageService")
@@ -58,7 +58,7 @@ public class StartOnLoadService {
         initCarouselData();
         initImageTextBlockGroupData();
         initFullWidthImageData();
-        initImageCardGroupData();
+        initCardGroupData();
         initArticleSectionData();
     }
 
@@ -228,20 +228,20 @@ public class StartOnLoadService {
             imageTextBlocks.add(block2);
             imageTextBlocks.add(block3);
             imageTextBlocks.add(block4);
-            group.setImageTextBlocks(imageTextBlocks);
+            group.setImageTextBlockGroupItems(imageTextBlocks);
             imageTextBlockGroupService.insert(group);
         }
     }
 
-    private void initImageCardGroupData() {
+    private void initCardGroupData() {
         logger.info("初始化图文卡片组。。。");
-        ImageCardGroup imageCardGroup=imageCardGroupService.findByUri("/home");
-        if (imageCardGroup==null){
+        CardGroup cardGroup=cardGroupService.findByUri("/home");
+        if (cardGroup==null){
             logger.info("   未查询到图文卡片组方案，应用默认方案。。。");
-            imageCardGroup=new ImageCardGroup();
-            imageCardGroup.setEnabled(true);
-            imageCardGroup.setUri("/home");
-            imageCardGroup.setName("图文卡片组1");
+            cardGroup=new CardGroup();
+            cardGroup.setEnabled(true);
+            cardGroup.setUri("/home");
+            cardGroup.setName("图文卡片组1");
             List<Card> Cards=new ArrayList<Card>();
             Card Card1=new Card();
             Card Card2=new Card();
@@ -258,8 +258,8 @@ public class StartOnLoadService {
             Cards.add(Card1);
             Cards.add(Card2);
             Cards.add(Card3);
-            imageCardGroup.setCards(Cards);
-            imageCardGroupService.insert(imageCardGroup);
+            cardGroup.setCardGroupItems(Cards);
+            cardGroupService.insert(cardGroup);
         }
 
     }

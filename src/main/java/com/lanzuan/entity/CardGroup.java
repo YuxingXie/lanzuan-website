@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/12.
  */
-@Document(collection = "imageCardGroup")
-public class ImageCardGroup {
+@Document(collection = "cardGroup")
+public class CardGroup {
     @Id
     private String id;
     private String name;
     private String uri;
-    private List<Card> cards;
+    private List<Card> cardGroupItems;
     private boolean enabled;
     @DBRef
     private User creator;
@@ -55,12 +55,12 @@ public class ImageCardGroup {
         this.enabled = enabled;
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public List<Card> getCardGroupItems() {
+        return cardGroupItems;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public void setCardGroupItems(List<Card> cardGroupItems) {
+        this.cardGroupItems = cardGroupItems;
     }
 
     public User getCreator() {

@@ -1,7 +1,7 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.entity.ImageCardGroup;
+import com.lanzuan.entity.CardGroup;
 import com.lanzuan.entity.Navbar;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -16,13 +16,13 @@ import javax.annotation.Resource;
  * Created by Administrator on 2015/5/22.
  */
 @Repository
-public class ImageCardGroupDao extends BaseMongoDao<ImageCardGroup>  {
+public class CardGroupDao extends BaseMongoDao<CardGroup>  {
     private static Logger logger = LogManager.getLogger();
     @Resource
     private MongoOperations mongoTemplate;
 
 
-    public ImageCardGroup findByUri(String uri) {
+    public CardGroup findByUri(String uri) {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("uri",uri);
         dbObject.put("enabled",true);
