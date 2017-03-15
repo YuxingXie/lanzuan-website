@@ -13,7 +13,7 @@
             <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${param.varU}Item()">插入一块</button>
             <button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>
             <a class="btn btn-primary fa fa-gears white-link"
-               ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用其它方案</a>
+               ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用方案</a>
             <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetImageTextBlockGroup()"> 重 置</button>
         </div>
     </div>

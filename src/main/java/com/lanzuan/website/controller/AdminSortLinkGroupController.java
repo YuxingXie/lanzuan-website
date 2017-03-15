@@ -131,24 +131,16 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
 //        message.setData(articleSectionService.findHomePageArticleSections());
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value = "/sort-link/new")
+    @RequestMapping(value = "/new")
     public ResponseEntity<Message> saveNewArticleSections(@RequestBody SortLinkGroup sortLinkGroup){
 
         Message message=new Message();
-        List<SortLink> articleSectionsToSaveGroupItem =new ArrayList<SortLink>();
-        Date now=new Date();
-        for(SortLink articleSectionGroupItem : sortLinkGroup.getSortLinkGroupItems()){
 
-            sortLinkGroup.setEnabled(true);
-            sortLinkGroup.setCreateDate(now);
-            articleSectionsToSaveGroupItem.add(articleSectionGroupItem);
-        }
-//        if (articleSectionsToSaveGroupItem.size()!=0){
-//            articleSectionService.insertAll(articleSectionsToSaveGroupItem);
-//        }
-//        message.setSuccess(true);
-//        articleSectionGroup =articleSectionService.findHomePageArticleSections();
-//        message.setData(articleSectionGroup);
+        Date now=new Date();
+        sortLinkGroup.setCreateDate(now);
+        sortLinkGroupService.update(sortLinkGroup);
+        message.setData(sortLinkGroup);
+        message.setSuccess(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/sort-link/remove")
@@ -257,7 +249,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         Message message=new Message();
         sortLinkGroup.setId(null);
         sortLinkGroup.setEnabled(false);
-//        sortLinkGroup.setCreator(getLoginAdministrator(session));
+
         sortLinkGroup.setCreateDate(new Date());
         sortLinkGroupService.insert(sortLinkGroup);
         message.setSuccess(true);
@@ -267,7 +259,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
     @RequestMapping(value = "/list-page/{pageComponentId}")
     public String remove(@PathVariable String pageComponentId,ModelMap modelMap){
         modelMap.addAttribute("pageComponentId",pageComponentId);
-        return "admin/card-group-list";
+        return "admin/sort-link-group-list";
     }
     @RequestMapping(value = "/list/data")
     public ResponseEntity<List<SortLinkGroup>> getSortLinkGroupList(){

@@ -47,6 +47,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     }
     //update
     $scope.save${component.variableFirstUpper}=function(){
+        <%--console.log(JSON.stringify($scope.${component.jsonVariableName}));--%>
         $http.post("${component.saveUri}",JSON.stringify($scope.${component.jsonVariableName})).success(function (message) {
             $scope.${component.jsonVariableName}=message.data;
             if(message.success){
@@ -246,7 +247,7 @@ alert("修改成功！");
 
 
 $scope.removeArticle=function(articleSections,article){
-console.log(JSON.stringify(article))
+//console.log(JSON.stringify(article))
 $http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
 articleSections=message.data;
 if(message.success){

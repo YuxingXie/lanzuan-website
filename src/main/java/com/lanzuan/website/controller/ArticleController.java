@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Administrator on 2015/6/11.
  */
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/admin/article")
 public class ArticleController extends BaseRestSpringController {
     private static Logger logger = LogManager.getLogger();
     @Resource(name = "userService")
@@ -47,10 +47,5 @@ public class ArticleController extends BaseRestSpringController {
 
         return "admin/article-list";
     }
-    @RequestMapping(value = "/{id}")
-    public String article(@PathVariable String id,ModelMap modelMap){
-        Article article=articleService.findById(id);
-        modelMap.addAttribute("article",article);
-        return "website/article/article";
-    }
+
 }

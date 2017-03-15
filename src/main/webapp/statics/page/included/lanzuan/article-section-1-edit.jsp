@@ -4,10 +4,13 @@
 
 <div class="row p-a-0 m-a-0">
         <div class="col-xs-12 m-a-0 p-a-0">
-            <label class="label label-default large-180">编辑文章块${param.varU} ${param.var}</label>
+            <label class="label label-default large-180">编辑文章块</label>
+            <label class="label label-info large-180">{{${param.varU}.name}}</label>
             <div class="btn-group padding-bottom-10">
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="newArticleSection()"> 新增文章块</button>
-
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${param.varU}Item()"> 新增文章块</button>
+                <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="save${param.varU}()"> 保存修改</button>
+                <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${param.varU}()">方案另存为</button>
+                <a class="btn btn-primary fa fa-gears white-link" ng-href="${path}/admin/sort-link-group/list-page/${pageComponent.id}"> 应用方案</a>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="get${param.varU}('${param.dataUri}')"> 重 置</button>
                 <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="save${param.varU}()">保存</button>
             </div>
@@ -29,67 +32,100 @@
         </div>
 </div>
 
-<div class="row">
-        <div class="col-xs-2">文章块标题</div>
-        <div class="col-xs-5">文章块内文章</div>
-        <div class="col-xs-5">文章块操作</div>
+<div class="row" ng-init="getIcons()">
+        <div class="col-xs-8">文章操作</div>
+        <div class="col-xs-4">块操作</div>
     </div>
-<div class="row p-t-md p-b-md small-90" ng-class-even="'bg-dark-grey'"  ng-repeat="articleSection in ${param.var}.${param.var}Items" ng-if="${param.var}">
-    <div class="col-xs-2">
-        {{articleSection.sortName}}
-    </div>
-    <div class="col-xs-5">
-
-        <table class="table table-hover table-responsive">
-            <tr ng-repeat="article in articleSection.links">
-                <td>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon">标题</span><input class="form-control" ng-model="article.text" type="text">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon">链接</span><input class="form-control" ng-model="article.href" type="text">
-                        <span class="input-group-addon"><a class="black-link fa fa-question-circle" target="_blank" href="/admin/article/list"> </a></span>
-                    </div>
-
-
-
-                </td>
-                <td>
-                    <span class="btn-group">
-                        <a ng-if="article.byEditor" class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/${pageComponent.id}/{{articleSection.id}}/{{article.id}}">编辑</a>
-                        <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeArticle(article)" >删除</button>
+<div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${param.var}.${param.var}Items" ng-if="${param.var}">
+    <div class="col-xs-12" ng-if="!sortLink.links &&!sortLink.image">
+        <span class="">该块无内容</span>
+        <div class="row padding-top-10">
+            <div class="btn-group col-xs-12">
+                <button class="btn btn-primary btn-sm" ng-click="sortLink.links[0].text='文章标题...'">添加文章</button>
+                <button type="button" class="btn btn-primary btn-sm">添加图片</button>
+                <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-full-width">
+                    <span ng-repeat="icon in icons" class="dropdown-item-inline"
+                          ng-click="sortLink.image=icon">
+                        <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
                     </span>
+                </div>
 
-                </td>
-            </tr>
-        </table>
-        <div  ng-if="!articleSection.links&&!articleSection.image">
-            此版块无内容,可以将该文章块块变为只显示图片的区域
-            <a class="btn btn-primary btn-sm btn-padding-little white-link"
-               ng-href="${path}${param.muu}/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
-        </div>
-
-        <img ng-if="articleSection.image" ng-src="{{articleSection.image}}" class="img-responsive img-ico-xl">
-    </div>
-    <div class="col-xs-5">
-        <div class="btn-group" ng-if="!articleSection.image">
-            <a class="btn btn-primary white-link btn-sm fa fa-plus" ng-href="/admin/file-editor/in-section/${pageComponent.id}/{{articleSection.id}}" ng-if="articleSection.id"> 为此文章块撰文</a>
-            <button class="btn btn-primary white-link btn-sm fa fa-trash" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>
-        </div>
-        <div class="input-group input-group-sm margin-top-10">
-            <input type="text" ng-model="articleSection.name" class="form-control">
-            <span ng-if="articleSection.id" class="input-group-btn"><button class="btn btn-primary" ng-click="renameArticleSection(articleSection)">重命名</button></span>
-            <span class="text-danger input-group-addon" ng-if="!articleSection.id">未保存*</span>
-        </div>
-
-
-        <div ng-if="!articleSection.articles&&articleSection.image" class="btn-group btn-group-sm">
-            <a class="btn btn-primary white-link" ng-href="${path}/admin/article_section/image/input/${pageComponent.id}/{{articleSection.id}}">更换图片</a>
-            <button class="btn btn-primary white-link fa fa-plus" ng-click="removeArticleSection(articleSection,$index)"> 删除该块</button>
-            <div class="input-group input-group-sm">
-                <input type="text" ng-model="articleSection.name" class="form-control">
-                <span class="input-group-btn"><button class="btn btn-primary" ng-click="renameArticleSection(articleSection)" ng-if="articleSection.id">重命名</button></span>
             </div>
         </div>
+    </div>
+    <div class="col-xs-12" ng-if="sortLink.image">
+        <div class="btn-group col-xs-12">
+            <button type="button" class="btn btn-primary btn-sm">更换图片</button>
+            <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu dropdown-full-width">
+                    <span ng-repeat="icon in icons" class="dropdown-item-inline"
+                          ng-click="sortLink.image=icon">
+                        <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
+                    </span>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-xs-8">
+        <img  ng-src="{{sortLink.image}}" class="img-responsive img-ico-xl col-xs-5">
+        <div class="input-group col-xs-7" ng-if="sortLink.image">
+            <span class="input-group-addon">链接</span>
+            <input type="text" ng-model="sortLink.imageHref" class="form-control"/>
+
+        </div>
+    </div>
+    <div class="col-xs-4">
+
+    </div>
+    <div class="col-xs-8">
+       <div class="col-xs-12 p-b-md" ng-repeat="link in sortLink.links" ng-if="sortLink.links">
+           <div class="col-xs-7">
+               <div class="input-group input-group-sm">
+                   <span class="input-group-addon">标题</span><input class="form-control" ng-model="link.text" type="text">
+               </div>
+               <div class="input-group input-group-sm">
+                   <span class="input-group-addon">链接</span><input class="form-control" ng-model="link.href" type="text">
+                   <span class="input-group-addon"><a class="black-link fa fa-question-circle" target="_blank" href="/admin/article/list"> </a></span>
+               </div>
+           </div>
+           <div class="col-xs-5 btn-group btn-group-sm">
+
+               <button class="btn btn-primary  fa fa-trash " ng-if="!sortLink.image" ng-click="sortLink.links.splice($index,1)">删除文章</button>
+
+
+           </div>
+
+       </div>
+
+
+    </div>
+    <div class="col-xs-4">
+        <div class="btn-group btn-group-sm">
+
+            <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${param.varU}Item($index)"> 删除该块</button>
+            <button class="btn btn-primary" ng-if="(!sortLink.links&&!sortLink.image)||sortLink.links" ng-click="sortLink.links.splice(0,0,{'text':'一篇文章'})">增加文章</button>
+            <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
+            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="${param.var}.${param.var}Items.length-1!==$index">后移</button>
+        </div>
+        <div class="input-group input-group-sm margin-top-10">
+            <span class="input-group-addon">重命名</span>
+            <input type="text" ng-model="sortLink.sortName" class="form-control">
+        </div>
+
+
+
+
+
+
     </div>
 </div>

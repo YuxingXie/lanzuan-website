@@ -77,6 +77,12 @@ public class IndexController extends BaseRestSpringController {
         SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home");
         return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
     }
+    @RequestMapping(value = "/sort-link-group/bottom/data")
+    public ResponseEntity<SortLinkGroup> sortLinkGroupBottomData() throws ServletException, IOException {
+
+        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home",1);
+        return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
+    }
     @RequestMapping(value = "/app-js")
     public String article(ModelMap modelMap,String pageId,String componentId){
         if (StringUtils.isNotBlank(pageId)){
@@ -93,5 +99,11 @@ public class IndexController extends BaseRestSpringController {
     public ResponseEntity<Carousel> carouselHomeData(){
         Carousel carousel=carouselService.findCarouselByUri("/home");
         return new ResponseEntity<Carousel>(carousel, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/article/{id}")
+    public String article(@PathVariable String id,ModelMap modelMap){
+        Article article=articleService.findById(id);
+        modelMap.addAttribute("article",article);
+        return "website/article/article";
     }
 }

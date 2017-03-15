@@ -6,7 +6,7 @@
     <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${param.var}.${param.var}Items">
         <div class="row">
             <h4 class="col-xs-8 large-180">{{sortLink.sortName}}</h4>
-            <a ng-if="sortLink.image" href="{{sortLink.imageHref}}"><img src="{{sortLink.image}}" class="col-xs-12 padding-top-1em" /></a>
+            <a ng-if="sortLink.image" target="_blank" href="{{sortLink.imageHref}}"><img src="{{sortLink.image}}" class="col-xs-12 padding-top-1em" /></a>
             <a href="#" class="col-xs-4 green-link" ng-if="sortLink.links">
                 <span class="large-110">More</span>
                             <span class="fa-stack">

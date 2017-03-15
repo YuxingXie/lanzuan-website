@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row padding-top-4em padding-bottom-4em margin-left-right-0 md-up-padding-left-right-4em bg-very-light " ng-init="getSortLinkSections()">
-    <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="section in sortLinkSections">
-        <h6 class="color-blue text-left">{{section.name}}</h6>
+<div class="row padding-top-4em padding-bottom-4em margin-left-right-0 md-up-padding-left-right-4em bg-very-light " ng-init="get${param.varU}()">
+    <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.sortLinkGroupItems">
+        <h6 class="color-blue text-left">{{sortLink.sortName}}</h6>
         <div class="small-90 margin-top-1em">
             <ul class="list-unstyled grey-link">
-                <li ng-repeat="article in section.articles" class="text-left"><a ng-href="{{article.id}}">{{article.title}}</a></li>
+                <li ng-repeat="link in sortLink.links" class="text-left"><a ng-href="{{link.href}}">{{link.text}}</a></li>
             </ul>
         </div>
     </div>

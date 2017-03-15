@@ -60,6 +60,133 @@ public class StartOnLoadService {
         initFullWidthImageData();
         initCardGroupData();
         initArticleSectionData();
+        initSortLinkGroupData();
+
+    }
+
+    private void initSortLinkGroupData() {
+        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home", 1);
+        Date now=new Date();
+        if (sortLinkGroup!=null)
+               return;
+        sortLinkGroup=new SortLinkGroup();
+        SortLink sortLink1=new SortLink();
+        SortLink sortLink2=new SortLink();
+        SortLink sortLink3=new SortLink();
+        SortLink sortLink4=new SortLink();
+        sortLink1.setSortName("新闻动态");
+        sortLink2.setSortName("售后支持");
+        sortLink3.setSortName("如何购买");
+        sortLink4.setSortName("合作伙伴");
+        List<Link> links1=new ArrayList<Link>();
+        List<Link> links2=new ArrayList<Link>();
+        List<Link> links3=new ArrayList<Link>();
+        List<Link> links4=new ArrayList<Link>();
+        Link link1_1=new Link();
+        Link link1_2=new Link();
+        Link link1_3=new Link();
+        Link link1_4=new Link();
+        link1_1.setHref("/statics/page/building.html");
+        link1_1.setText("荣誉奖项");
+        link1_1.setDate(now);
+        link1_2.setHref("/statics/page/building.html");
+        link1_2.setText("新闻报道");
+        link1_2.setDate(now);
+        link1_3.setHref("/statics/page/building.html");
+        link1_3.setText("活动专题");
+        link1_3.setDate(now);
+        link1_4.setHref("/statics/page/building.html");
+        link1_4.setText("人才招聘");
+        link1_4.setDate(now);
+        links1.add(link1_1);
+        links1.add(link1_2);
+        links1.add(link1_3);
+        links1.add(link1_4);
+
+
+        Link link2_1=new Link();
+        Link link2_2=new Link();
+        Link link2_3=new Link();
+        Link link2_4=new Link();
+        link2_1.setHref("/statics/page/building.html");
+        link2_1.setText("在线咨询（售后）");
+        link2_1.setDate(now);
+        link2_2.setHref("/statics/page/building.html");
+        link2_2.setText("资料库");
+        link2_2.setDate(now);
+        link2_3.setHref("/statics/page/building.html");
+        link2_3.setText("软件下载");
+        link2_3.setDate(now);
+        link2_4.setHref("/statics/page/building.html");
+        link2_4.setText("建议反馈");
+        link2_4.setDate(now);
+        links2.add(link2_1);
+        links2.add(link2_2);
+        links2.add(link2_3);
+        links2.add(link2_4);
+
+        Link link3_1=new Link();
+        Link link3_2=new Link();
+        Link link3_3=new Link();
+
+        link3_1.setHref("/statics/page/building.html");
+        link3_1.setText("在线咨询（售前）");
+        link3_1.setDate(now);
+        link3_2.setHref("/statics/page/building.html");
+        link3_2.setText("申请试用");
+        link3_2.setDate(now);
+        link3_3.setHref("/statics/page/building.html");
+        link3_3.setText("联系我们");
+        link3_3.setDate(now);
+
+        links3.add(link3_1);
+        links3.add(link3_2);
+        links3.add(link3_3);
+
+
+        Link link4_1=new Link();
+        Link link4_2=new Link();
+        Link link4_3=new Link();
+        Link link4_4=new Link();
+        Link link4_5=new Link();
+        link4_1.setHref("/statics/page/building.html");
+        link4_1.setText("渠道政策");
+        link4_1.setDate(now);
+        link4_2.setHref("/statics/page/building.html");
+        link4_2.setText("合作申请");
+        link4_2.setDate(now);
+        link4_3.setHref("/statics/page/building.html");
+        link4_3.setText("渠道公告");
+        link4_3.setDate(now);
+        link4_4.setHref("/statics/page/building.html");
+        link4_4.setText("英博智能");
+        link4_4.setDate(now);
+        link4_5.setHref("/statics/page/building.html");
+        link4_5.setText("培训公告");
+        link4_5.setDate(now);
+        links4.add(link4_1);
+        links4.add(link4_2);
+        links4.add(link4_3);
+        links4.add(link4_4);
+        links4.add(link4_5);
+        List<SortLink> sortLinks=new ArrayList<SortLink>();
+
+        sortLink1.setLinks(links1);
+        sortLink2.setLinks(links2);
+        sortLink3.setLinks(links3);
+        sortLink4.setLinks(links4);
+        sortLinks.add(sortLink1);
+        sortLinks.add(sortLink2);
+        sortLinks.add(sortLink3);
+        sortLinks.add(sortLink4);
+        sortLinkGroup.setSortLinkGroupItems(sortLinks);
+        sortLinkGroup.setUri("/home");
+        sortLinkGroup.setCreateDate(now);
+        sortLinkGroup.setName("默认方案");
+        sortLinkGroup.setIndexOfPage(1);
+        sortLinkGroup.setEnabled(true);
+        sortLinkGroupService.insert(sortLinkGroup);
+
     }
 
     private void initFullWidthImageData() {
@@ -325,6 +452,7 @@ public class StartOnLoadService {
             sortLinkGroup =new SortLinkGroup();
             sortLinkGroup.setEnabled(true);
             sortLinkGroup.setUri("/home");
+            sortLinkGroup.setName("默认方案");
             sortLinkGroup.setIndexOfPage(0);
             Date now=new Date();
 
