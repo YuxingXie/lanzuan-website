@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.entityfield.SortLink;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,21 +13,18 @@ db.articleSection.update({"name":"活动专题"},{"$set":{"enabled":true}},false
 db.articleSection.update({"name":"新闻动态"},{"$set":{"articles":null}},false,true)
 db.articleSection.update({"name":"企业文化"},{"$set":{"articles":null}},false,true)
  */
-@Document(collection = "articleSection")
-public class ArticleSection {
+@Document(collection = "sortLinkGroup")
+public class SortLinkGroup {
     @Id
     private String id;
     private String name;
     private Date createDate;
     private boolean enabled;
-    /**
-     *     当图片也要放入文章版块的位置，直接读取image属性即可
-     *     此属性和文章列表属性articles并不互相排斥，可以图文共存
-     *     文章封面是文章的属性，而该图片是文章块的属性，虽然表现上可能类似
-     */
-    private String image;
-    @DBRef
-    private List<Article> articles;
+    private int indexOfPage;//如果页面有多个同类组件，用此字段分别
+    private String uri;
+
+    //约定字段
+    private List<SortLink> sortLinkGroupItems;
     @DBRef
     private User creator;
 
@@ -62,14 +60,6 @@ public class ArticleSection {
         this.enabled = enabled;
     }
 
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
-
     public User getCreator() {
         return creator;
     }
@@ -78,11 +68,27 @@ public class ArticleSection {
         this.creator = creator;
     }
 
-    public String getImage() {
-        return image;
+    public List<SortLink> getSortLinkGroupItems() {
+        return sortLinkGroupItems;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSortLinkGroupItems(List<SortLink> sortLinkGroupItems) {
+        this.sortLinkGroupItems = sortLinkGroupItems;
+    }
+
+    public int getIndexOfPage() {
+        return indexOfPage;
+    }
+
+    public void setIndexOfPage(int indexOfPage) {
+        this.indexOfPage = indexOfPage;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

@@ -48,18 +48,13 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         Object obj = session.getAttribute(Constant.LOGIN_ADMINISTRATOR);
         // 判断如果没有取到用户信息，就跳转到登陆页面，提示用户进行登陆
         if (obj == null || "".equals(obj.toString())) {
-            if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){
-                System.out.println("未登录管理员，跳转到/admin/ajaxTimeout");
-                request.getRequestDispatcher("/admin/ajaxTimeout").forward(request,response);
-            }else {
+
                 String path=request.getContextPath();
                 if (path.equals("/")) path="";
                 System.out.println("未登录管理员，跳转到登录页面");
                 response.sendRedirect(path+LOGIN_URL);
                 return false;
-            }
-
-        }
+         }
         return true;
     }
 

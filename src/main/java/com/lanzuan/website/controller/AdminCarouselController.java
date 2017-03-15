@@ -39,8 +39,8 @@ public class AdminCarouselController extends BaseRestSpringController {
     UserService userService;
     @Resource(name = "pageComponentService")
     IPageComponentService pageComponentService;
-    @Resource(name = "articleSectionService")
-    IArticleSectionService articleSectionService;
+    @Resource(name = "sortLinkGroupService")
+    ISortLinkGroupService sortLinkGroupService;
     @Resource(name = "articleService")
     IArticleService articleService;
     @Resource(name = "carouselService")

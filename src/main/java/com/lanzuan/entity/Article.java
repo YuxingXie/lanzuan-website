@@ -27,8 +27,7 @@ public class Article {
     private Date lastModifyDate;
     @DBRef
     private User lastModifyUser;
-    @Transient
-    private List<ArticleSection> articleSections;
+
     public String getId() {
         return id;
     }
@@ -75,14 +74,6 @@ public class Article {
 
     public void setUploader(User uploader) {
         this.uploader = uploader;
-    }
-
-    public List<ArticleSection> getArticleSections() {
-        return articleSections;
-    }
-
-    public void setArticleSections(List<ArticleSection> articleSections) {
-        this.articleSections = articleSections;
     }
 
     public Date getLastModifyDate() {

@@ -7,9 +7,8 @@ import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.support.vo.Message;
-import com.lanzuan.website.service.IArticleSectionService;
+import com.lanzuan.website.service.ISortLinkGroupService;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
 import com.lanzuan.website.service.IWebPageService;
@@ -49,8 +48,8 @@ public class AdminController extends BaseRestSpringController {
     UserService userService;
     @Resource(name = "pageComponentService")
     IPageComponentService pageComponentService;
-    @Resource(name = "articleSectionService")
-    IArticleSectionService articleSectionService;
+    @Resource(name = "sortLinkGroupService")
+    ISortLinkGroupService sortLinkGroupService;
     @Resource(name = "articleService")
     IArticleService articleService;
     @Resource(name = "webPageService")
@@ -162,102 +161,11 @@ public class AdminController extends BaseRestSpringController {
         return "admin/page-component-edit";
     }
 
-    /**
-     * 编辑某articleSection中的某篇文章
-     * @param pageComponentId
-     * @param articleSectionId
-     * @param articleId
-     * @param model
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/file-editor/{pageComponentId}/{articleSectionId}/{articleId}")
-    public String articleEditor(@PathVariable String pageComponentId,@PathVariable String articleSectionId, @PathVariable String articleId,ModelMap model, HttpSession session) {
-        Article article=articleService.findById(articleId);
-        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
-        model.addAttribute("article",article);
-        model.addAttribute("pageComponent",pageComponent);
-//        List<ArticleSection> articleSections=articleSectionService.findArticleSectionByArticleId(id);
-//        model.addAttribute("articleSections",articleSections);
-        ArticleSection articleSection=articleSectionService.findById(articleSectionId);
-        model.addAttribute("articleSection",articleSection);
-        return "admin/file-editor";
-    }
-
-    /**
-     * 为文章块撰文(新增)
-     * @param pageComponentId
-     * @param articleSectionId
-     * @param model
-     * @return
-     */
-
-    @RequestMapping(value = "/file-editor/in-section/{pageComponentId}/{articleSectionId}")
-    public String addNewArticleInSection(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap model) {
-        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
-        ArticleSection articleSection=articleSectionService.findById(articleSectionId);
-
-        model.addAttribute("pageComponent",pageComponent);
-        model.addAttribute("articleSection",articleSection);
-        return "admin/file-editor";
-    }
-    @RequestMapping(value = "/file-editor")
-    public String articleNew(ModelMap model, HttpSession session) {
-        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
-        model.addAttribute("articleSections",articleSections);
-        return "admin/file-editor";
-    }
-    @RequestMapping(value = "/article/upload")
-    public String articleUpload(@ModelAttribute Article article,String articleSectionId,String pageComponentId, HttpSession session) {
-        Date now=new Date();
-        article.setByEditor(true);
-        if (article.getId()!=null&&!article.getId().trim().equals("")){
-            article.setLastModifyDate(now);
-//            article.setLastModifyUser(getLoginUser(session));
-            articleService.update(article);
-        }else {
-            article.setId(null);
-            article.setDate(now);
-            article.setLastModifyDate(now);
-//            article.setUploader(getLoginAdministrator(session));
-            articleService.insert(article);
-        }
 
 
-        ArticleSection articleSection=null;
-        if(articleSectionId!=null&&!articleSectionId.trim().equals("")){
-            articleSection=articleSectionService.findById(articleSectionId);
-            List<Article> articles=articleSection.getArticles();
-            boolean exists=false;
-            if (articles==null){
-                articles=new ArrayList<Article>();
-            }else{
-                for (Article article1:articles){
-                    if (article.getId().equals(article1.getId())){
-                        exists=true;
-                        break;
-                    }
-                }
-            }
-            if (!exists){
-                articles.add(article);
-                articleSection.setArticles(articles);
-                articleSectionService.update(articleSection);
-            }
-        }
 
-        if (pageComponentId!=null){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
-        }
-        return "redirect:/admin/index";
-    }
 
-    @RequestMapping(value = "/ajaxTimeout")
-    public ResponseEntity<Message> ajaxTimeout(@RequestBody ArticleSection articleSection){
-        Message message=new Message();
-        message.setMessage("登录超时了");
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
+
     @RequestMapping(value = "/article_section/image/input/{pageComponentId}/{articleSectionId}")
     public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap modelMap){
 
@@ -266,30 +174,6 @@ public class AdminController extends BaseRestSpringController {
         return "admin/img-article-section";
     }
 
-    @RequestMapping(value = "/icon/new/{pageComponentId}")
-    public String uploadIcon(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String articleSectionId,HttpServletRequest request){
-        // 判断文件是否为空
-        if (!file.isEmpty()) {
-            try {
-                String type=FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
-//                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
-                String fileName=System.currentTimeMillis()+ type;
-                String filePath = request.getServletContext().getRealPath("/") + "statics/upload/"+fileName;
-                // 转存文件
-                file.transferTo(new File(filePath));
-                ArticleSection articleSection=articleSectionService.findById(articleSectionId);
-                articleSection.setImage("/statics/upload/"+fileName);
-                articleSectionService.update(articleSection);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (StringUtils.isNotBlank(pageComponentId)){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
-        }
-        return "redirect:/admin/index";
-    }
 
     @RequestMapping(value = "/icon/upload-input/{pageComponentId}")
     public String iconUploadInput(ModelMap modelMap,@PathVariable String pageComponentId){
@@ -323,76 +207,6 @@ public class AdminController extends BaseRestSpringController {
         return "redirect:/admin/index";
     }
 
-    @RequestMapping(value = "/article_section/rename")
-    public ResponseEntity<Message> renameArticleSection(@RequestBody ArticleSection articleSection){
 
-        Message message=new Message();
-        String name=articleSection.getName();
-        articleSection=articleSectionService.findById(articleSection.getId());
-        articleSection.setName(name);
-        articleSectionService.update(articleSection);
-        message.setSuccess(true);
-        message.setData(articleSectionService.findHomePageArticleSections());
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
-    @RequestMapping(value = "/article_section/new")
-    public ResponseEntity<Message> saveNewArticleSections(@RequestBody List<ArticleSection> articleSections){
 
-        Message message=new Message();
-        List<ArticleSection> articleSectionsToSave=new ArrayList<ArticleSection>();
-        Date now=new Date();
-        for(ArticleSection articleSection:articleSections){
-            if(articleSection.getId()!=null&&!articleSection.getId().trim().equals("")){
-                continue;
-            }
-            articleSection.setEnabled(true);
-            articleSection.setCreateDate(now);
-            articleSectionsToSave.add(articleSection);
-        }
-        if (articleSectionsToSave.size()!=0){
-            articleSectionService.insertAll(articleSectionsToSave);
-        }
-        message.setSuccess(true);
-        articleSections=articleSectionService.findHomePageArticleSections();
-        message.setData(articleSections);
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
-    @RequestMapping(value = "/article_section/remove")
-    public ResponseEntity<Message> removeArticleSection(@RequestBody ArticleSection articleSection){
-
-        Message message=new Message();
-        if(articleSection!=null&&StringUtils.isNotBlank(articleSection.getId())){
-            articleSectionService.removeById(articleSection.getId());
-        }
-        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
-        message.setSuccess(true);
-        message.setData(articleSections);
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/article/remove")
-    public ResponseEntity<Message> removeArticle(@RequestBody Article article){
-        Message message=new Message();
-        List<ArticleSection> articleSectionsIncludeArticle=articleSectionService.findArticleSectionByArticleId(article.getId());
-        for(ArticleSection articleSection:articleSectionsIncludeArticle){
-            if (articleSection.getArticles()==null) break;
-            List<Article> articles=articleSection.getArticles();
-            List<Article> articlesToSave=new ArrayList<Article>();
-            for(Article articleInSection :articles){
-                if (!articleInSection.getId().equalsIgnoreCase(article.getId())){
-                    articlesToSave.add(articleInSection);
-                }
-            }
-            if (articlesToSave.size()==0) articlesToSave=null;
-            articleSection.setArticles(articlesToSave);
-            articleSectionService.update(articleSection,false);
-        }
-
-        articleService.removeById(article.getId());
-
-        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
-        message.setSuccess(true);
-        message.setData(articleSections);
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
 }

@@ -3,7 +3,6 @@ package com.lanzuan.website.controller;
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.ArticleSection;
 import com.lanzuan.website.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -31,8 +29,8 @@ public class IndexController extends BaseRestSpringController {
     IWebPageService webPageService;
     @Resource(name = "articleService")
     IArticleService articleService;
-    @Resource(name = "articleSectionService")
-    IArticleSectionService articleSectionService;
+    @Resource(name = "sortLinkGroupService")
+    ISortLinkGroupService sortLinkGroupService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
     @Resource(name = "cardGroupService")
@@ -71,20 +69,12 @@ public class IndexController extends BaseRestSpringController {
         ImageTextBlockGroup imageCardGroup=imageTextBlockGroupService.findByUri("/home");
         return new ResponseEntity<ImageTextBlockGroup>(imageCardGroup, HttpStatus.OK);
     }
-    @RequestMapping(value = "/articleSections/data")
-    public ResponseEntity<List<ArticleSection>> articleSectionData() throws ServletException, IOException {
 
-//        List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
-        List<ArticleSection> articleSections=articleSectionService.findHomePageArticleSections();
-        return new ResponseEntity<List<ArticleSection>>(articleSections, HttpStatus.OK);
-    }
-    @RequestMapping(value = "/article/{id}")
-    public String article(@PathVariable String id,ModelMap modelMap){
-        Article article=articleService.findById(id);
-        List<ArticleSection> sections=articleSectionService.findArticleSectionByArticleId(id);
-        article.setArticleSections(sections);
-        modelMap.addAttribute("article",article);
-        return "website/article/article";
+    @RequestMapping(value = "/sort-link-group/data")
+    public ResponseEntity<SortLinkGroup> sortLinkGroupData() throws ServletException, IOException {
+
+        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home");
+        return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/app-js")
     public String article(ModelMap modelMap,String pageId,String componentId){

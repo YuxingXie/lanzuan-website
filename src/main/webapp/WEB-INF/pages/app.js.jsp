@@ -86,7 +86,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         if(index===undefined){
             index=0;
         }
-
+        var item={};
         if(!$scope.${component.jsonVariableName}){
             $scope.${component.jsonVariableName}={};
         }

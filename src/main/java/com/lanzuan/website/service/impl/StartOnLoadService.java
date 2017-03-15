@@ -24,8 +24,8 @@ public class StartOnLoadService {
     private WebPageService webPageService;
     @Resource(name = "pageComponentService")
     private PageComponentService pageComponentService;
-    @Resource(name = "articleSectionService")
-    private ArticleSectionService articleSectionService;
+    @Resource(name = "sortLinkGroupService")
+    private SortLinkGroupService sortLinkGroupService;
     @Resource(name = "articleService")
     private IArticleService articleService;
     @Resource(name = "carouselService")
@@ -314,22 +314,19 @@ public class StartOnLoadService {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("enabled",true);
         List<String> fields=new ArrayList<String>();
-        fields.add("id");
-        fields.add("name");
-        fields.add("image");
-        fields.add("articles");
+//        fields.add("id");
+//        fields.add("name");
+//        fields.add("image");
+//        fields.add("articles");
         int limit= Constant.articleSectionNum;
-        List<ArticleSection> articleSections=articleSectionService.findFields(dbObject,fields,limit,"createDate",false);
-        if (articleSections==null||articleSections.size()==0){
+        SortLinkGroup sortLinkGroup =sortLinkGroupService.findByUri("/home");
+        if (sortLinkGroup ==null|| sortLinkGroup.getSortLinkGroupItems()==null &&sortLinkGroup.getSortLinkGroupItems().size()==0){
             System.out.println("    未查询到文章版块数据，使用默认内容。。。");
-            articleSections=new ArrayList<ArticleSection>();
-            ArticleSection articleSection1=new ArticleSection();
-            articleSection1.setName("新闻动态");
+            sortLinkGroup =new SortLinkGroup();
+            sortLinkGroup.setEnabled(true);
+
             Date now=new Date();
 
-            articleSection1.setCreateDate(now);
-//            articleSection1.setCreator(getLoginAdministrator(session));
-            articleSection1.setEnabled(true);
             Article article1=new Article();
             article1.setDate(now);
             article1.setTitle("携手并进·共赢未来 ——2016蓝钻新媒体云服务商交流大会成功召开");
@@ -398,11 +395,9 @@ public class StartOnLoadService {
                     "                </div>");
             List<Article> articles=new ArrayList<Article>();
             articles.add(article1);
-            articleSection1.setArticles(articles);
-            articleSections.add(articleSection1);
-            ArticleSection articleSection2=new ArticleSection();
-            articleSection2.setEnabled(true);
-            articleSection2.setName("企业文化");
+
+
+
             Article article2=new Article();
             article2.setTitle("“倾家荡产捐助”与“扎克伯格式慈善”");
             article2.setDate(now);
@@ -437,15 +432,40 @@ public class StartOnLoadService {
                     "                </p><p>\n" +
                     "                    至于饱受诟病的“为富不仁”现象，其实是个伪问题。捐不捐款是个人的自由，并不能代表一个人是否“仁义”。做慈善也并非富人回报社会的惟一途径，或许人家有更好的方式去回报社会、帮助别人，例如扩大投资为社会创造更多的就业机会等等。对“穷人慈善”的宣传再轰轰烈烈，恐怕也不一定真能带动多少富人投身慈善，何况类似的做法还有“道德绑架”之嫌，并不足取。少一些“倾家荡产捐助”、多一些“扎克伯格式慈善”，才是慈善事业的应有之义。\n" +
                     "                </p>");
+
             articles.add(article2);
-            articleSection2.setArticles(articles);
-            articleSections.add(articleSection2);
-            ArticleSection articleSection3=new ArticleSection();
-            articleSection3.setName("活动专题");
-            articleSection3.setImage("/statics/image/lanzuan/home/huodongzhuanti.png");
-            articleSections.add(articleSection3);
             articleService.insertAll(articles);
-            articleSectionService.insertAll(articleSections);
+
+
+
+            List<SortLink> sortLinks=new ArrayList<SortLink>();
+            SortLink sortLink1 =new SortLink();
+            sortLink1.setSortName("新闻动态");
+            List<Link> links1=new ArrayList<Link>();
+            Link link1=new Link();
+            link1.setDate(article1.getDate());
+            link1.setHref("/article/" + article1.getId());
+            link1.setText(article1.getTitle());
+            links1.add(link1);
+            sortLink1.setLinks(links1);
+            sortLinks.add(sortLink1);
+
+
+            SortLink sortLink2 =new SortLink();
+            sortLink2.setSortName("企业文化");
+            List<Link> links2=new ArrayList<Link>();
+            Link link2=new Link();
+            link2.setDate(article2.getDate());
+            link2.setHref("/article/" + article2.getId());
+            link2.setText(article1.getTitle());
+            links2.add(link2);
+            sortLink2.setLinks(links2);
+            sortLinks.add(sortLink2);
+            sortLinkGroup.setSortLinkGroupItems(sortLinks);
+//            ArticleSectionGroupItem articleSectionGroupItem3 =new ArticleSectionGroupItem();
+//            articleSectionGroupItem3.setName("活动专题");
+//            articleSectionGroupItem3.setImage("/statics/image/lanzuan/home/huodongzhuanti.png");
+            sortLinkGroupService.insert(sortLinkGroup);
 
         }
     }
@@ -563,74 +583,74 @@ public class StartOnLoadService {
             pageComponent2.setJsonVariableName("carousel");
             pageComponent3.setJsonVariableName("cardGroup");
             pageComponent4.setJsonVariableName("imageTextBlockGroup");
-            pageComponent5.setJsonVariableName("articleSections");
+            pageComponent5.setJsonVariableName("sortLinkGroup");
             pageComponent6.setJsonVariableName("fullWidthImage");
-            pageComponent7.setJsonVariableName("sortLinkSections");
+            pageComponent7.setJsonVariableName("bottomSortLinkGroup");
 
             pageComponent1.setDataUri("/navbar/home/data");
             pageComponent2.setDataUri("/carousel/home/data");
             pageComponent3.setDataUri("/card-group/home/data");
             pageComponent4.setDataUri("/image-text-block-group/home/data");
-            pageComponent5.setDataUri("/articleSections/data");
+            pageComponent5.setDataUri("/sort-link-group/data");
             pageComponent6.setDataUri("/full-width-image/home/data");
-            pageComponent7.setDataUri("/articleSections/data");
+            pageComponent7.setDataUri("/sort-link-group/data");
 
             pageComponent1.setToggleUri("/admin/navbar/status-change");
             pageComponent2.setToggleUri("/admin/carousel/update");
             pageComponent3.setToggleUri("/admin/card-group/status-change");
             pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
-            pageComponent5.setToggleUri("/admin/articleSections/status-change");
+            pageComponent5.setToggleUri("/admin/sort-link-group/status-change");
             pageComponent6.setToggleUri("/admin/full-width-image/status-change");
-            pageComponent7.setToggleUri("/admin/articleSections/status-change");
+            pageComponent7.setToggleUri("/admin/sort-link-group/status-change");
 
             pageComponent1.setDeleteUri("/admin/navbar/delete/");
             pageComponent2.setDeleteUri("/admin/carousel/delete/");
             pageComponent3.setDeleteUri("/admin/card-group/delete/");
             pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
-            pageComponent5.setDeleteUri("/admin/articleSections/delete/");
+            pageComponent5.setDeleteUri("/admin/sort-link-group/delete/");
             pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
-            pageComponent7.setDeleteUri("/admin/articleSections/delete/");
+            pageComponent7.setDeleteUri("/admin/sort-link-group/delete/");
 
             pageComponent1.setSaveUri("/admin/navbar/update");
             pageComponent2.setSaveUri("/admin/carousel/insert-all");
             pageComponent3.setSaveUri("/admin/card-group/update");
             pageComponent4.setSaveUri("/admin/image-text-block-group/update");
-            pageComponent5.setSaveUri("/admin/article_section/new");
+            pageComponent5.setSaveUri("/admin/sort-link-group/new");
             pageComponent6.setSaveUri("/admin/full-width-image/update");
-            pageComponent7.setSaveUri("/admin/articleSections/update");
+            pageComponent7.setSaveUri("/admin/sort-link-group/update");
 
             pageComponent1.setListOperationUri("/admin/navbar/list-page/");
-            pageComponent2.setListOperationUri("/admin/navbar/list-page/");
-            pageComponent3.setListOperationUri("/admin/navbar/list-page/");
+            pageComponent2.setListOperationUri("/admin/carousel/list-page/");
+            pageComponent3.setListOperationUri("/admin/card-group/list-page/");
             pageComponent4.setListOperationUri("/admin/image-text-block-group/list-page/");
-            pageComponent5.setListOperationUri("/admin/article_section/list-page/");
+            pageComponent5.setListOperationUri("/admin/sort-link-group/list-page/");
             pageComponent6.setListOperationUri("/admin/full-width-image/list-page/");
-            pageComponent7.setListOperationUri("/admin/articleSections/list-page/");
+            pageComponent7.setListOperationUri("/admin/sort-link-group/list-page/");
 
             pageComponent1.setListDataUri("/admin/navbar/list/data");
             pageComponent2.setListDataUri("/admin/carousel/list/data");
             pageComponent3.setListDataUri("/admin/card-group/list/data");
             pageComponent4.setListDataUri("/admin/image-text-block-group/list/data");
-            pageComponent5.setListDataUri("/admin/article_section/list/data");
+            pageComponent5.setListDataUri("/admin/sort-link-group/list/data");
             pageComponent6.setListDataUri("/admin/full-width-image/list/data");
-            pageComponent7.setListDataUri("/admin/articleSections/list/data");
+            pageComponent7.setListDataUri("/admin/sort-link-group/list/data");
 
             pageComponent1.setSaveAsUri("/admin/navbar/save-as");
             pageComponent2.setSaveAsUri("/admin/carousel/save-as");
             pageComponent3.setSaveAsUri("/admin/card-group/save-as");
             pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
-            pageComponent5.setSaveAsUri("/admin/article_section/save-as");
+            pageComponent5.setSaveAsUri("/admin/sort-link-group/save-as");
             pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
-            pageComponent7.setSaveAsUri("/admin/articleSections/save-as");
+            pageComponent7.setSaveAsUri("/admin/sort-link-group/save-as");
 
 
             pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
             pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
             pageComponent3.setMaterialUploadUri("/admin/icon/upload-input");
             pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
-            pageComponent5.setMaterialUploadUri("/admin/article_section/image/input");
+            pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
             pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
-            pageComponent7.setMaterialUploadUri("/admin/article_section/image/input");
+            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
 
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();

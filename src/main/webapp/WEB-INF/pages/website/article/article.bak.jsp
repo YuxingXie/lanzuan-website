@@ -39,7 +39,7 @@
                             <ol class="breadcrumb m-a-0">
                                 当前位置:
                                 <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                                <li class="small active">${article.articleSections[0].name}</li>
+                                <li class="small active">${article.articleSectionGroupItems[0].name}</li>
                             </ol>
                         </div>
                         <a href="#content" class="list-group-item hidden-sm-down" >${article.title}</a>

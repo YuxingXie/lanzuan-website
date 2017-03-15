@@ -33,7 +33,7 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <c:if test="${not empty pageComponent.templateUri}">
                 <label class="label label-default large-180">组件预览</label>
-                <jsp:include page="${pageComponent.templateUri}"></jsp:include>
+                <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
             </c:if>
             <div class="padding-top-2em">
                 <c:if test="${not empty pageComponent.editUri}">

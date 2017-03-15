@@ -22,7 +22,7 @@
     <body ng-app="app">
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                <jsp:include page="${pageComponent.templateUri}"></jsp:include>
+                <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
             </c:forEach>
 
                 <%--<jsp:include page="${webPage.pageComponents[4].templateUri}"></jsp:include>--%>
