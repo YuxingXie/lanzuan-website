@@ -9,6 +9,7 @@ public class SortLink {
     private String sortName;
     private String maxLink;
     private String image;
+    private String imageHref;
     private List<Link> links;
 
     public String getSortName() {
@@ -41,5 +42,13 @@ public class SortLink {
 
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+
+    public String getImageHref() {
+        return imageHref;
+    }
+
+    public void setImageHref(String imageHref) {
+        this.imageHref = imageHref;
     }
 }

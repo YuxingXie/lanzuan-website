@@ -27,6 +27,8 @@ public class PageComponent {
     private String listOperationUri;
     private String deleteUri;
     private String listDataUri;
+    @Transient
+    private WebPage webPage;
     //素材上传uri
     private String materialUploadUri;
     /**
@@ -55,6 +57,13 @@ public class PageComponent {
         this.jsonVariableName = jsonVariableName;
     }
 
+    public WebPage getWebPage() {
+        return webPage;
+    }
+
+    public void setWebPage(WebPage webPage) {
+        this.webPage = webPage;
+    }
 
     public String getDataUri() {
         return dataUri;

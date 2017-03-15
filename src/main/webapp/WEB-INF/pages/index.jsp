@@ -25,9 +25,6 @@
                 <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
             </c:forEach>
 
-                <%--<jsp:include page="${webPage.pageComponents[4].templateUri}"></jsp:include>--%>
-
-                <%--<jsp:include page="${webPage.pageComponents[6].templateUri}"></jsp:include>--%>
 
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>

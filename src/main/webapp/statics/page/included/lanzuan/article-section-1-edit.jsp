@@ -19,6 +19,7 @@
                     <li><i class="fa fa-warning fa-fw"></i>如果超过三个文章块，可能在较大尺寸屏幕下显示混乱，除非它们一样高；</li>
                     <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，点击“编辑此文”无法编辑；</li>
                     <li><i class="fa fa-flash fa-fw color-red"></i> 新增的文章块<b class="color-red">一定要</b>点击“保存新增文章块”才会被系统保存。</li>
+
                 </ul>
 
             </div>
@@ -33,34 +34,36 @@
         <div class="col-xs-5">文章块内文章</div>
         <div class="col-xs-5">文章块操作</div>
     </div>
-<div class="row p-t-md p-b-md hover-bg-color-dark-grey" ng-repeat="articleSection in ${param.var}" ng-if="${param.var}">
+<div class="row p-t-md p-b-md small-90" ng-class-even="'bg-dark-grey'"  ng-repeat="articleSection in ${param.var}.${param.var}Items" ng-if="${param.var}">
     <div class="col-xs-2">
-        {{articleSection.name}}
+        {{articleSection.sortName}}
     </div>
-    <div class="col-xs-5" ng-init="showArticles=false">
-        <a href="javascript:void(0)" ng-click="$parent.showArticles=!$parent.showArticles" class="fa" ng-class="{'fa-minus-square':$parent.showArticles,'fa-plus-square':!$parent.showArticles}"
-           ng-if="!articleSection.image &&articleSection.articles&&articleSection.articles.length">
-            文章块包含{{articleSection.articles.length}}篇文章,点击查看
-        </a>
-        <table class="table table-hover table-responsive" ng-if="showArticles">
-            <tr ng-repeat="article in articleSection.articles">
+    <div class="col-xs-5">
+
+        <table class="table table-hover table-responsive">
+            <tr ng-repeat="article in articleSection.links">
                 <td>
-                    <i class="small-70">{{article.title}}</i>
-                    <label class="label label-danger  fa fa-warning" ng-if="!article.byEditor">此文无法用编辑器编辑</label>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">标题</span><input class="form-control" ng-model="article.text" type="text">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">链接</span><input class="form-control" ng-model="article.href" type="text">
+                        <span class="input-group-addon"><a class="black-link fa fa-question-circle" target="_blank" href="/admin/article/list"> </a></span>
+                    </div>
+
+
+
                 </td>
                 <td>
-                    <span ng-if="!article.duplicated"  class="btn-group">
-
+                    <span class="btn-group">
                         <a ng-if="article.byEditor" class="btn btn-primary btn-sm  fa fa-pencil-square-o white-link" ng-href="/admin/file-editor/${pageComponent.id}/{{articleSection.id}}/{{article.id}}">编辑</a>
                         <button class="btn btn-primary btn-sm  fa fa-trash " ng-click="removeArticle(article)" >删除</button>
                     </span>
-                    <span ng-if="article.duplicated" class="small-90">
-                        这篇文章出现在其它版块，请在首次出现的版块编辑它
-                    </span>
+
                 </td>
             </tr>
         </table>
-        <div  ng-if="!articleSection.articles&&!articleSection.image">
+        <div  ng-if="!articleSection.links&&!articleSection.image">
             此版块无内容,可以将该文章块块变为只显示图片的区域
             <a class="btn btn-primary btn-sm btn-padding-little white-link"
                ng-href="${path}${param.muu}/${pageComponent.id}/{{articleSection.id}}">增加图片</a>
