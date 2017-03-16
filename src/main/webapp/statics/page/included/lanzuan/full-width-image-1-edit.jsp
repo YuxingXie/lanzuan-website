@@ -9,7 +9,7 @@
         <div class="btn-group p-b-10">
             <%--<label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>--%>
 
-            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()">应用该图</button>
+            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${pageComponent.variableFirstUpper}()">应用该图</button>
             <%--<button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>--%>
             <%--<a class="btn btn-primary fa fa-gears white-link"--%>
                <%--ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用其它方案</a>--%>
@@ -20,7 +20,7 @@
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${pageComponent.materialUploadUri}/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a>
                 </li>
                 <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>
@@ -58,8 +58,8 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-full-width">
-                    <span ng-repeat="icon in fullWidthImages" class="dropdown-item-inline"
-                          ng-click="fullWidthImage.image.uri=icon">
+                    <span ng-repeat="icon in ${pageComponent.jsonVariableName}" class="dropdown-item-inline"
+                          ng-click="${pageComponent.jsonVariableName}.image.uri=icon">
                         <img type="text" ng-src="{{icon}}" class="img-320-240px img-responsive"/>
                     </span>
             </div>

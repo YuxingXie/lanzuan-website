@@ -5,8 +5,10 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.FullWidthImage;
+import com.lanzuan.entity.PageComponent;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IFullWidthImageService;
+import com.lanzuan.website.service.IPageComponentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -33,8 +35,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin/full-width-image")
+
 public class AdminFullWidthImageController extends BaseRestSpringController {
     private static Logger logger = LogManager.getLogger();
+
     @Resource(name = "fullWidthImageService")
     IFullWidthImageService fullWidthImageService;
 

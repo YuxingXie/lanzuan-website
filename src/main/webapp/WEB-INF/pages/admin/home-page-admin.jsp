@@ -18,7 +18,7 @@
     <link href="${path}/statics/css/lanzuan.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" >
-    <div class="" ng-controller="AdminController" ng-init="initAdmin()">
+    <div class="" ng-controller="AdminController">
         <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
         <div class="alert alert-info m-t-md">
             <h5 class="text-center">网站首页管理</h5>
@@ -46,7 +46,7 @@
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                 <div class="row p-t-2em p-b-2em"style="border-top: solid #000 1px">
                     <div class="col-xs-9 m-a-0 p-a-0">
-                        <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
+                        <jsp:include page="${path}/component/${pageComponent.id}"></jsp:include>
                     </div>
 
                     <div class="col-xs-3 m-a-0 padding-left-2em small-90" >
@@ -64,9 +64,8 @@
         </div>
     </div>
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
-    <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/app-js?pageId=${webPage.id}"></script>
+    <script src="${path}/app-js?pageId=${webPage.id}&componentId=${webPage.pageComponents[0].id}"></script>
 </body>
 

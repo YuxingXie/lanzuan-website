@@ -22,7 +22,7 @@
 
 <body ng-app="app">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-<div class="container" ng-controller="AdminController" ng-init="initAdmin()">
+<div class="container" ng-controller="AdminController">
 
     <div class="row p-t-2em p-a-0 m-a-0">
         <div class="col-xs-12 m-a-0 p-a-0">
@@ -47,11 +47,11 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <c:if test="${not empty pageComponent.templateUri}">
                 <label class="label label-default large-180">组件预览</label>
-                <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
+                <jsp:include page="${pageComponent.templateUri}"></jsp:include>
             </c:if>
             <div class="p-t-2em">
                 <c:if test="${not empty pageComponent.editUri}">
-                    <jsp:include page="${pageComponent.editUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}&listP=${pageComponent.listOperationUri}&muu=${pageComponent.materialUploadUri}"></jsp:include>
+                    <jsp:include page="${pageComponent.editUri}"></jsp:include>
                 </c:if>
             </div>
         </div>

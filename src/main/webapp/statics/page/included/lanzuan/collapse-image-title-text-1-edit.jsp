@@ -10,7 +10,7 @@
             <label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>
 
             <button class="btn btn-primary fa fa-save " type="button" ng-click="saveImageTextBlockGroup()"> 保存</button>
-            <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${param.varU}Item()">插入一块</button>
+            <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${pageComponent.variableFirstUpper}Item()">插入一块</button>
             <button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>
             <a class="btn btn-primary fa fa-gears white-link"
                ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用方案</a>
@@ -21,7 +21,7 @@
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${pageComponent.materialUploadUri}/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a>
                 </li>
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
@@ -40,11 +40,11 @@
     <div class="col-xs-12 m-a-0 p-a-0">
         <div class="input-group">
             <span class="input-group-addon">大标题</span>
-            <input type="text" ng-model="${param.var}.text" class="form-control"/>
+            <input type="text" ng-model="${pageComponent.jsonVariableName}.text" class="form-control"/>
         </div>
     </div>
 </div>
-<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${param.var}.items track by $index">
+<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${pageComponent.jsonVariableName}.items track by $index">
     <div class="row">
                 <div class="col-xs-4">
                     <div class="input-group">
@@ -53,10 +53,10 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <button class="fa fa-caret-up btn btn-block btn-primary" ng-click="forward${param.varU}Item($index)"ng-if="$index!==0">整块前移</button>
+                    <button class="fa fa-caret-up btn btn-block btn-primary" ng-click="forward${pageComponent.variableFirstUpper}Item($index)"ng-if="$index!==0">整块前移</button>
                 </div>
                 <div class="col-xs-4">
-                    <button class="fa fa-caret-down btn btn-block btn-primary" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.items.length-1">整块后移</button>
+                    <button class="fa fa-caret-down btn btn-block btn-primary" ng-click="backward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==${pageComponent.jsonVariableName}.items.length-1">整块后移</button>
                 </div>
 
 

@@ -20,7 +20,7 @@
         <div class="alert alert-warning">
             <ul class="list-unstyled">
                 <li><i class="fa fa-warning"></i>所有图片都会被拉伸成同样的高度和宽度，为了图片不变形，请保持相同的高宽比例；</li>
-                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                <li><i class="fa fa-warning"></i>如果没有合适的图标，您可以先<a href="${pageComponent.materialUploadUri}/${pageComponent.id}"
                                                                   style="text-decoration: underline;"><i>上传素材</i></a></li>
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
                 <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>
@@ -69,11 +69,11 @@
 
                 <div class="col-xs-4">
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insert${param.varU}ItemBefore($index)"> 前面插入一条
+                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insert${pageComponent.variableFirstUpper}ItemBefore($index)"> 前面插入一条
                         </button>
-                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${param.varU}Item($index)"> 删掉此条</button>
-                        <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
-                        <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.items.length-1">后移</button>
+                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${pageComponent.variableFirstUpper}Item($index)"> 删掉此条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==0">前移</button>
+                        <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==${pageComponent.jsonVariableName}.items.length-1">后移</button>
                     </div>
                 </div>
             </div>

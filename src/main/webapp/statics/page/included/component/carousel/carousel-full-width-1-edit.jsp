@@ -15,14 +15,14 @@
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存</button>
                 <%--<button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>--%>
-                <a class="btn btn-primary white-link fa fa-download" ng-href="${path}${param.listP}${pageComponent.id}"> 应用方案</a>
+                <a class="btn btn-primary white-link fa fa-download" ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用方案</a>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCarousel()"> 重 置</button>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="alert alert-warning">
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-graduation-cap fa-fw"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                    <li><i class="fa fa-graduation-cap fa-fw"></i>如果没有合适的图标，您可以先<a href="${pageComponent.materialUploadUri}/${pageComponent.id}"
                                                                                    style="text-decoration: underline;"><i>上传素材</i></a></li>
                     <li><i class="fa fa-graduation-cap fa-fw"></i>轮播图不但可以轮播“图”，还可以轮播任何内容；</li>
                     <li><i class="fa fa-graduation-cap fa-fw"></i>点击“插入一条”,“前移”，“后移”按钮后，顶端的预览效果会可能出现异常；</li>

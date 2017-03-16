@@ -165,7 +165,7 @@ public class AdminCarouselController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/update")
     public ResponseEntity<List<Carousel>> update(@RequestBody Carousel carousel){
-        carousel.setEnabled(!carousel.getEnabled());
+        carousel.setEnabled(!carousel.isEnabled());
         carouselService.update(carousel, false);
         return getAllCarousels();
     }

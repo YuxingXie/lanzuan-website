@@ -15,17 +15,18 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","
 <c:if test="${not empty page}">
     <c:forEach var="component" items="${page.pageComponents}">
         $scope.get${component.variableFirstUpper}=function(){
-        $http.get('${component.dataUri}').success(function (data) {
-        $scope.${component.jsonVariableName}=data;
-        });
+            $http.get('${component.dataUri}').success(function (data) {
+//                console.log(JSON.stringify(data));
+                $scope.${component.jsonVariableName}=data;
+            });
         }
     </c:forEach>
 </c:if>
 <c:if test="${not empty component}">
     $scope.get${component.variableFirstUpper}=function(){
-    $http.get('${component.dataUri}').success(function (data) {
-    $scope.${component.jsonVariableName}=data;
-    });
+            $http.get('${component.dataUri}').success(function (data) {
+                $scope.${component.jsonVariableName}=data;
+        });
     }
 
 </c:if>

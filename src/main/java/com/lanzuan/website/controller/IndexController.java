@@ -24,8 +24,7 @@ import java.util.List;
 @Controller
 @RequestMapping()
 public class IndexController extends BaseRestSpringController {
-    @Resource(name = "pageComponentService")
-    IPageComponentService pageComponentService;
+
     @Resource(name = "webPageService")
     IWebPageService webPageService;
     @Resource(name = "articleService")
@@ -42,6 +41,14 @@ public class IndexController extends BaseRestSpringController {
     INavbarService navbarService;
     @Resource(name = "fullWidthImageService")
     IFullWidthImageService fullWidthImageService;
+    @Resource(name = "pageComponentService")
+    private IPageComponentService pageComponentService;
+    @RequestMapping(value = "/component/{componentId}")
+    public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
+        PageComponent pageComponent=pageComponentService.findById(componentId);
+        modelMap.addAttribute("pageComponent",pageComponent);
+        return "forward:"+pageComponent.getTemplateUri();
+    }
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
@@ -75,7 +82,7 @@ public class IndexController extends BaseRestSpringController {
     public ResponseEntity<SortLinkGroup> sortLinkGroupData() throws ServletException, IOException {
 
         SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home",0);
-        return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
+        return new ResponseEntity<SortLinkGroup>(new SortLinkGroup(), HttpStatus.OK);
     }
     @RequestMapping(value = "/sort-link-group/bottom/data")
     public ResponseEntity<SortLinkGroup> sortLinkGroupBottomData() throws ServletException, IOException {

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row m-l-0 m-r-0 m-t-1em md-up-p-l-r-4em p-t-4em p-b-2em  bg-very-light"
-     ng-init="get${param.varU}()">
+     ng-init="get${pageComponent.variableFirstUpper}()">
 
-    <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${param.var}.items">
+    <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${pageComponent.jsonVariableName}.items">
         <div class="row">
             <h4 class="col-xs-8 large-180">{{sortLink.sortName}}</h4>
             <a ng-if="sortLink.image" target="_blank" href="{{sortLink.imageHref}}"><img src="{{sortLink.image}}" class="col-xs-12 p-t-1em" /></a>

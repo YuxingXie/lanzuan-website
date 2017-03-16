@@ -22,9 +22,19 @@
     <body ng-app="app">
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
+                <jsp:include page="${path}/component/${pageComponent.id}"></jsp:include>
             </c:forEach>
+            <%--<jsp:include page="${webPage.pageComponents[0].templateUri}"></jsp:include>--%>
+            <%--<jsp:include page="${webPage.pageComponents[1].templateUri}"></jsp:include>--%>
+            <%--<jsp:include page="${webPage.pageComponents[2].templateUri}"></jsp:include>--%>
+            <%--<jsp:include page="${webPage.pageComponents[3].templateUri}"></jsp:include>--%>
+            <%--<jsp:include page="${webPage.pageComponents[4].templateUri}"></jsp:include>--%>
 
+
+
+                <%--problems--%>
+            <%--<jsp:include page="${path}/component/${webPage.pageComponents[5].id}"></jsp:include>--%>
+            <%--<jsp:include page="${webPage.pageComponents[6].templateUri}"></jsp:include>--%>
 
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
