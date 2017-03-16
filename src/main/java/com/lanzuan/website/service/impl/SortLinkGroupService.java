@@ -8,6 +8,7 @@ import com.lanzuan.website.service.ISortLinkGroupService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/6.
@@ -30,5 +31,10 @@ public class SortLinkGroupService extends BaseEntityManager<SortLinkGroup> imple
     @Override
     public SortLinkGroup findByUri(String uri) {
         return sortLinkGroupDao.findByUri(uri);
+    }
+
+    @Override
+    public List<SortLinkGroup> findByUriAndIndex(String uri, int index) {
+        return sortLinkGroupDao.findByUriAndIndex(uri, index);
     }
 }

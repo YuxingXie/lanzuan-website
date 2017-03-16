@@ -23,10 +23,10 @@
 
         <div class="row padding-top-2em m-a-0">
             <div ng-controller="HomeController">
-                <div class="col-xs-12 alert alert-info" >为图文块组上传一张图片</div>
+                <div class="col-xs-12 alert alert-info" >为卡片组上传一张图片</div>
                 <div class="col-xs-12" >
                     <form autocomplete="off" method="post" accept-charset="UTF-8" enctype="multipart/form-data"
-                          role="form" action="/admin/image-text-block-group/image/add/${pageComponentId}">
+                          role="form" action="/admin/card-group/image/new/${pageComponentId}">
                         <fieldset>
                             <div class="form-group input-group">
                                 <label class="fa fa-user input-group-addon">本地图片</label>
@@ -39,10 +39,10 @@
             </div>
         </div>
     </div>
-    <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
-    <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
-    <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
-    <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/statics/js/app.js"></script>
+    <%--<script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>--%>
+    <%--<script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>--%>
+    <%--<script src="${path}/statics/js/jquery-3.1.1.min.js"></script>--%>
+    <%--<script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>--%>
+    <%--<script src="${path}/statics/js/app.js"></script>--%>
 </body>
 

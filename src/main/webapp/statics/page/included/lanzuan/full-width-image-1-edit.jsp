@@ -9,7 +9,7 @@
         <div class="btn-group padding-bottom-10">
             <%--<label class="btn btn-info cursor-auto">方案名称：{{imageTextBlockGroup.name}}</label>--%>
 
-            <button class="btn btn-primary fa fa-save " type="button" ng-click="saveFullWidthImage()">应用该图</button>
+            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()">应用该图</button>
             <%--<button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>--%>
             <%--<a class="btn btn-primary fa fa-gears white-link"--%>
                <%--ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用其它方案</a>--%>
@@ -59,7 +59,7 @@
             </button>
             <div class="dropdown-menu dropdown-full-width">
                     <span ng-repeat="icon in fullWidthImages" class="dropdown-item-inline"
-                          ng-click="fullWidthImage.image.templateUri=icon">
+                          ng-click="fullWidthImage.image.uri=icon">
                         <img type="text" ng-src="{{icon}}" class="img-320-240px img-responsive"/>
                     </span>
             </div>

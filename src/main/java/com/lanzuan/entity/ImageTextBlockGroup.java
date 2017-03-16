@@ -19,7 +19,8 @@ public class ImageTextBlockGroup {
     private String name;
     private boolean enabled;
     private String text;
-    private List<ImageTextBlock> imageTextBlockGroupItems;
+    //约定字段名
+    private List<ImageTextBlock> items;
     @DBRef
     private User creator;
     private Date createDate;
@@ -40,12 +41,12 @@ public class ImageTextBlockGroup {
         this.createDate = createDate;
     }
 
-    public List<ImageTextBlock> getImageTextBlockGroupItems() {
-        return imageTextBlockGroupItems;
+    public List<ImageTextBlock> getItems() {
+        return items;
     }
 
-    public void setImageTextBlockGroupItems(List<ImageTextBlock> imageTextBlockGroupItems) {
-        this.imageTextBlockGroupItems = imageTextBlockGroupItems;
+    public void setItems(List<ImageTextBlock> items) {
+        this.items = items;
     }
 
     public String getText() {

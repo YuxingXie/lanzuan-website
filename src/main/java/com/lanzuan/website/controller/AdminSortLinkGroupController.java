@@ -234,6 +234,13 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         modelMap.addAttribute("pageComponentId",pageComponentId);
         return "admin/sort-link-img-input";
     }
+    @RequestMapping(value = "/image/input/{pageComponentId}")
+    public String articleSectionInputImage(@PathVariable String pageComponentId,ModelMap modelMap){
+
+        modelMap.addAttribute("pageComponentId",pageComponentId);
+
+        return "admin/img-article-cover-input";
+    }
     @RequestMapping(value = "/update")
     public ResponseEntity<Message> update(@RequestBody SortLinkGroup sortLinkGroup){
         Message message=new Message();
@@ -257,14 +264,26 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/list-page/{pageComponentId}")
-    public String remove(@PathVariable String pageComponentId,ModelMap modelMap){
+    public String listPage(@PathVariable String pageComponentId,ModelMap modelMap){
+        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         modelMap.addAttribute("pageComponentId",pageComponentId);
+        modelMap.addAttribute("pageComponent",pageComponent);
         return "admin/sort-link-group-list";
     }
+//    @RequestMapping(value = "/list-page/bottom/{pageComponentId}")
+//    public String remove(@PathVariable String pageComponentId,ModelMap modelMap){
+//        modelMap.addAttribute("pageComponentId",pageComponentId);
+//        return "admin/sort-link-group-list";
+//    }
     @RequestMapping(value = "/list/data")
     public ResponseEntity<List<SortLinkGroup>> getSortLinkGroupList(){
-        List<SortLinkGroup> navbarList=sortLinkGroupService.findAll();
-        return new ResponseEntity<List<SortLinkGroup>>(navbarList, HttpStatus.OK);
+        List<SortLinkGroup> sortLinkGroups=sortLinkGroupService.findByUriAndIndex("/home", 0);
+        return new ResponseEntity<List<SortLinkGroup>>(sortLinkGroups, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/list/bottom/data")
+    public ResponseEntity<List<SortLinkGroup>> getSortLinkGroupBottomList(){
+        List<SortLinkGroup> sortLinkGroups=sortLinkGroupService.findByUriAndIndex("/home",1);
+        return new ResponseEntity<List<SortLinkGroup>>(sortLinkGroups, HttpStatus.OK);
     }
     @RequestMapping(value = "/status-change")
     public ResponseEntity<List<SortLinkGroup>> statusChange(@RequestBody SortLinkGroup sortLinkGroup){

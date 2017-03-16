@@ -15,13 +15,15 @@
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存</button>
                 <%--<button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>--%>
-                <a class="btn btn-primary white-link fa fa-download" ng-href="${path}/admin/carousel/list_page/${pageComponent.id}"> 应用方案</a>
+                <a class="btn btn-primary white-link fa fa-download" ng-href="${path}${param.listP}${pageComponent.id}"> 应用方案</a>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCarousel()"> 重 置</button>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="alert alert-warning">
                 <ul class="list-unstyled">
+                    <li><i class="fa fa-graduation-cap fa-fw"></i>如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                                                                                   style="text-decoration: underline;"><i>上传素材</i></a></li>
                     <li><i class="fa fa-graduation-cap fa-fw"></i>轮播图不但可以轮播“图”，还可以轮播任何内容；</li>
                     <li><i class="fa fa-graduation-cap fa-fw"></i>点击“插入一条”,“前移”，“后移”按钮后，顶端的预览效果会可能出现异常；</li>
                     <li><i class="fa fa-warning fa-fw"></i>图片高宽比例不一致导致的，会导致页面跳动，请确保图片使用相同高宽比例。</li>
@@ -40,10 +42,10 @@
                 <div class="col-xs-4">编辑标题</div>
                 <div class="col-xs-4">其它操作</div>
             </div>
-            <div class="row" ng-if="!carousel||!carousel.carouselItems||!carousel.carouselItems.length">
+            <div class="row" ng-if="!carousel||!carousel.items||!carousel.items.length">
                 <div class="col-xs-12"><h5>该轮播方案没有任何轮播内容，点击上方 “插入一条”按钮添加轮播内容</h5></div>
             </div>
-            <div ng-init="getCarouselImages()" class="row" ng-repeat="carouselItem in carousel.carouselItems track by $index">
+            <div ng-init="getCarouselImages()" class="row" ng-repeat="carouselItem in carousel.items track by $index">
                 <div class="row padding-top-10">
                     <div class="btn-group col-xs-12">
                         <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
@@ -98,7 +100,7 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-primary white-link fa fa-plus"
+                            <button class="btn white-link fa fa-trash" ng-class="{'btn-danger':carouselItem.id,'btn-primary':!carouselItem.id}"
                                     ng-click="removeCarouselItem($index)"> 删除此条
                             </button>
                             <a class="btn btn-primary white-link " ng-if="carouselItem.id"
@@ -108,7 +110,7 @@
                             </button>
                             <button class="btn btn-primary white-link fa fa-arrow-down"
                                     ng-click="backwardCarouselItem($index)"
-                                    ng-if="$index!==carousel.carouselItems.length-1"> 后移
+                                    ng-if="$index!==carousel.items.length-1"> 后移
                             </button>
                         </div>
                     </div>

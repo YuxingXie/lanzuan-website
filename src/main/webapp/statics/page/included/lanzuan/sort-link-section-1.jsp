@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row padding-top-4em padding-bottom-4em margin-left-right-0 md-up-padding-left-right-4em bg-very-light " ng-init="get${param.varU}()">
-    <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.sortLinkGroupItems">
+<div class="row padding-top-4em padding-bottom-4em m-l-0 m-r-0 md-up-padding-left-right-4em bg-very-light " ng-init="get${param.varU}()">
+    <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.items">
         <h6 class="color-blue text-left">{{sortLink.sortName}}</h6>
         <div class="small-90 margin-top-1em">
             <ul class="list-unstyled grey-link">
-                <li ng-repeat="link in sortLink.links" class="text-left"><a ng-href="{{link.href}}">{{link.text}}</a></li>
+                <li ng-repeat="link in sortLink.links" class="text-left" ng-if="sortLink.links&&!sortLink.image"><a ng-href="{{link.href}}">{{link.text}}</a></li>
+                <img src="{{sortLink.image}}" ng-if="sortLink.image&&!sortLink.links" class="img-responsive"/>
             </ul>
         </div>
     </div>

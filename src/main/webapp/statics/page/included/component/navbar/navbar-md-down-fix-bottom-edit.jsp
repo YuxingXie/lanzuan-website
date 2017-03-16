@@ -11,13 +11,15 @@
 
             <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()" >保存</button>
             <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${param.varU}()" > 方案另存为</button>
-            <a class="btn btn-primary fa fa-download white-link" ng-href="${path}${param.list_page}${pageComponent.id}"> 应用其它方案</a>
+            <a class="btn btn-primary fa fa-download white-link" ng-href="${path}${param.listP}${pageComponent.id}"> 应用其它方案</a>
             <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${param.varU}(form)"> 重 置</button>
         </div>
     </div>
     <div class="col-xs-12">
         <div class="alert alert-warning">
             <ul class="list-unstyled">
+                <li><i class="fa fa-warning"></i> 如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}"
+                                                                   style="text-decoration: underline;"><i>上传素材</i></a>；</li>
                 <li><i class="fa fa-warning"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>
                 <li><i class="fa fa-warning"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>
             </ul>
@@ -35,7 +37,7 @@
                     <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
                 </span>
             </div>
-            如果没有合适的图标，您可以先<a href="${param.muu}/${pageComponent.id}" style="text-decoration: underline;"><i>上传素材</i></a>
+
         </div>
     </div>
     <table class="table table-responsive table-hover">
@@ -46,7 +48,7 @@
                 <th>其它操作</th>
             </tr>
         <tr ng-if="!${param.var}"><td colspan="3">没有方案可用或者方案已被禁用，请点击上方“应用其它方案”查看。</td></tr>
-            <tr ng-repeat="navItem in ${param.var}.${param.var}Items">
+            <tr ng-repeat="navItem in ${param.var}.items">
                 <td>
                     <input type="text" ng-model="navItem.name" class="form-control">
                 </td>

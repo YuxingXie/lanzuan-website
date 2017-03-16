@@ -25,19 +25,20 @@
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
                 <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>
                 <%--<a href="http://fontawesome.io/icons/" target="_blank" class="green-link">http://fontawesome.io/icons/</a>，图标前加"fa-"前缀即可;</li>--%>
+
             </ul>
 
         </div>
     </div>
 
-    <div class="row" ng-init="getIcons()">
+    <div class="row" ng-init="getCardGroupImage()">
         <div class="row">
             <div class="col-xs-2">图片</div>
             <div class="col-xs-4">链接</div>
             <div class="col-xs-2">卡片文字</div>
             <div class="col-xs-4">其它操作</div>
         </div>
-        <div class="row" ng-repeat="card in cardGroup.cardGroupItems">
+        <div class="row" ng-repeat="card in cardGroup.items">
             <div class="row padding-top-10">
                 <div class="btn-group col-xs-12">
                     <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
@@ -72,7 +73,7 @@
                         </button>
                         <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${param.varU}Item($index)"> 删掉此条</button>
                         <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
-                        <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.${param.var}Items.length-1">后移</button>
+                        <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.items.length-1">后移</button>
                     </div>
                 </div>
             </div>

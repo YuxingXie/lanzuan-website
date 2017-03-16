@@ -19,29 +19,23 @@
 <body ng-app="app" >
     <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
         <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-        <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
 
-        <div class="row padding-top-2em margin-left-2em margin-right-2em">
+
+        <div class="row padding-top-2em m-a-0">
             <div ng-controller="HomeController">
-                <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                    <div class="row padding-top-2em padding-bottom-2em"style="border-top: solid #000 1px">
-                        <div class="col-xs-8 m-a-0 p-a-0">
-                            <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
-                        </div>
-
-                        <div class="col-xs-4 m-a-0 padding-left-2em" >
-                            <div>这是一个${pageComponent.name}</div>
-                            <div>${pageComponent.remark}</div>
-
-                            <div class="btn-group">
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">直接修改</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/safe_mode/${pageComponent.id}">安全模式</a>
+                <div class="col-xs-12 alert alert-info" >上传一张全拼宽度图片</div>
+                <div class="col-xs-12" >
+                    <form autocomplete="off" method="post" accept-charset="UTF-8" enctype="multipart/form-data"
+                          role="form" action="/admin/full-width-image/image/add/${pageComponentId}">
+                        <fieldset>
+                            <div class="form-group input-group">
+                                <label class="fa fa-user input-group-addon">本地图片</label>
+                                <input class="form-control" placeholder="用户名" name="file" type="file">
                             </div>
-
-                        </div>
-                    </div>
-                </c:forEach>
-
+                            <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-sign-in"></i> 上传</button>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -49,6 +43,6 @@
     <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/app-js?pageId=${webPage.id}"></script>
+    <script src="${path}/app-js?componentId=${pageComponentId}"></script>
 </body>
 

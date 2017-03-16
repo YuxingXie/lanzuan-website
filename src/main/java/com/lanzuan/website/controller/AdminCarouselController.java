@@ -1,7 +1,6 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.common.code.CarouselItemTypeEnum;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
@@ -47,18 +46,18 @@ public class AdminCarouselController extends BaseRestSpringController {
     ICarouselService carouselService;
     @Resource(name = "carouselItemService")
     ICarouselItemService carouselItemService;
-    @RequestMapping(value = "/image/input/{pageComponentId}/{carouselItemId}")
-    public String articleSectionInputImage(@PathVariable String pageComponentId,@PathVariable String carouselItemId,ModelMap modelMap){
+    @RequestMapping(value = "/image/input/{pageComponentId}")
+    public String articleSectionInputImage(@PathVariable String pageComponentId,ModelMap modelMap){
 
         modelMap.addAttribute("pageComponentId",pageComponentId);
-        modelMap.addAttribute("carouselItemId",carouselItemId);
+
         return "admin/img-carousel-input";
     }
     @RequestMapping(value = "/item/remove/{itemId}")
     public ResponseEntity<Message> removeItem(@PathVariable String itemId,@RequestBody Carousel carousel){
         Message message=new Message();
         List<CarouselItem> carouselItemsToSave=new ArrayList<CarouselItem>();
-        List<CarouselItem> carouselItems=carousel.getCarouselItems();
+        List<CarouselItem> carouselItems=carousel.getItems();
         for (CarouselItem carouselItem:carouselItems){
             if (!carouselItem.getId().equals(itemId)){
                 carouselItemsToSave.add(carouselItem);
@@ -66,10 +65,10 @@ public class AdminCarouselController extends BaseRestSpringController {
         }
 
         if(carouselItemsToSave.size()>0){
-            carousel.setCarouselItems(carouselItemsToSave);
+            carousel.setItems(carouselItemsToSave);
 
         }else {
-            carousel.setCarouselItems(null);
+            carousel.setItems(null);
         }
         carouselService.update(carousel,false);
         message.setSuccess(true);
@@ -80,7 +79,7 @@ public class AdminCarouselController extends BaseRestSpringController {
     @RequestMapping(value = "/insert-all")
     public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel){
         Message message=new Message();
-        List<CarouselItem> carouselItems=carousel.getCarouselItems();
+        List<CarouselItem> carouselItems=carousel.getItems();
         if(carouselItems!=null&&carouselItems.size()>0){
             for (CarouselItem carouselItem:carouselItems){
                 if (carouselItem.getId()==null){
@@ -90,7 +89,7 @@ public class AdminCarouselController extends BaseRestSpringController {
                 }
             }
         }else {
-            carousel.setCarouselItems(null);
+            carousel.setItems(null);
         }
         if (carousel.getId()==null){
             carouselService.insert(carousel);
@@ -105,14 +104,14 @@ public class AdminCarouselController extends BaseRestSpringController {
     public ResponseEntity<Message> saveAs(@RequestBody Carousel carousel){
         Carousel old=carouselService.findById(carousel.getId());
         Message message=new Message();
-        List<CarouselItem> carouselItems=carousel.getCarouselItems();
+        List<CarouselItem> carouselItems=carousel.getItems();
         if(carouselItems!=null&&carouselItems.size()>0){
             for (CarouselItem carouselItem:carouselItems){
                 carouselItem.setId(null);
                 carouselItemService.insert(carouselItem);
             }
         }else {
-            carousel.setCarouselItems(null);
+            carousel.setItems(null);
         }
         carousel.setEnabled(false);
 //        carouselService.update(carousel);
@@ -122,8 +121,8 @@ public class AdminCarouselController extends BaseRestSpringController {
         message.setData(old);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value = "/image/new/{pageComponentId}/{carouselItemId}")
-    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,@PathVariable String carouselItemId,HttpServletRequest request){
+    @RequestMapping(value = "/image/new/{pageComponentId}")
+    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
 
         // 判断文件是否为空
         if (!file.isEmpty()) {
@@ -131,7 +130,7 @@ public class AdminCarouselController extends BaseRestSpringController {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
 //                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") + Constant.carouselImageUri;
+                String dir=request.getServletContext().getRealPath("/") + Constant.CAROUSEL_IMAGE_DIR;
                 String filePath = dir+"/"+fileName;
                 File fileDir=new File(dir);
                 if (!fileDir.exists()){
@@ -139,10 +138,7 @@ public class AdminCarouselController extends BaseRestSpringController {
                 }
                 // 转存文件
                 file.transferTo(new File(filePath));
-                CarouselItem carouselItem=carouselItemService.findById(carouselItemId);
-                carouselItem.setValue("/statics/upload/"+fileName);
-                carouselItem.setType(CarouselItemTypeEnum.IMAGE.toCode());
-                carouselItemService.update(carouselItem);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -154,7 +150,7 @@ public class AdminCarouselController extends BaseRestSpringController {
         return "redirect:/admin/index";
     }
 
-    @RequestMapping(value = "/list_page/{pageComponentId}")
+    @RequestMapping(value = "/list-page/{pageComponentId}")
     public String listPage(ModelMap modelMap,@PathVariable String pageComponentId){
 //        List<Carousel> carousels=carouselService.findAll();
 //        modelMap.addAttribute("carousels",carousels);

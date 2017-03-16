@@ -46,7 +46,7 @@
                             <i  ng-class="{'color-red':!cardGroup.name}">{{cardGroup.name?cardGroup.name:"未命名"}}</i>
                         </div>
                         <div class="col-xs-5">
-                            <div ng-repeat="card in cardGroup.cardGroupItems">
+                            <div ng-repeat="card in cardGroup.items">
                                 <img ng-src="{{card.image}}"  class="img-rounded img-ico-lg"/>
                                 {{card.text}}
                             </div>

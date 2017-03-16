@@ -10,7 +10,7 @@
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${param.varU}Item()"> 新增文章块</button>
                 <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="save${param.varU}()"> 保存修改</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${param.varU}()">方案另存为</button>
-                <a class="btn btn-primary fa fa-gears white-link" ng-href="${path}/admin/sort-link-group/list-page/${pageComponent.id}"> 应用方案</a>
+                <a class="btn btn-primary fa fa-gears white-link" ng-href="${path}${param.listP}/${pageComponent.id}"> 应用方案</a>
                 <button class="btn btn-primary fa fa-refresh" type="button" ng-click="get${param.varU}('${param.dataUri}')"> 重 置</button>
                 <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="save${param.varU}()">保存</button>
             </div>
@@ -20,9 +20,9 @@
                 <ul class="list-unstyled">
                     <li><i class="fa fa-warning fa-fw"></i>有些文章在不同版块都显示，但在这里（编辑模式下）这些文章只显示一次；</li>
                     <li><i class="fa fa-warning fa-fw"></i>如果超过三个文章块，可能在较大尺寸屏幕下显示混乱，除非它们一样高；</li>
-                    <li><i class="fa fa-flash fa-fw color-red"></i> 不是通过本系统文本编辑器生成的文章<b class="color-red">无法在编辑器中正确显示</b>，点击“编辑此文”无法编辑；</li>
-                    <li><i class="fa fa-flash fa-fw color-red"></i> 新增的文章块<b class="color-red">一定要</b>点击“保存新增文章块”才会被系统保存。</li>
-
+                    <li><i class="fa fa-warning fa-fw"></i>基于性能考虑(文章一般比较大)，此处并不维护文章与链接的关系，如果文章删除，点击文章标题链接会出现找不到页面的404错误。</li>
+                    <li><i class="fa fa-warning"></i>如果没有合适的文章封面，您可以先<a href="${param.muu}/${pageComponent.id}"
+                                                                      style="text-decoration: underline;"><i>上传文章封面</i></a></li>
                 </ul>
 
             </div>
@@ -32,11 +32,11 @@
         </div>
 </div>
 
-<div class="row" ng-init="getIcons()">
+<div class="row" ng-init="getArticleCovers()">
         <div class="col-xs-8">文章操作</div>
         <div class="col-xs-4">块操作</div>
     </div>
-<div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${param.var}.${param.var}Items" ng-if="${param.var}">
+<div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${param.var}.items" ng-if="${param.var}">
     <div class="col-xs-12" ng-if="!sortLink.links &&!sortLink.image">
         <span class="">该块无内容</span>
         <div class="row padding-top-10">
@@ -115,11 +115,11 @@
             <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${param.varU}Item($index)"> 删除该块</button>
             <button class="btn btn-primary" ng-if="(!sortLink.links&&!sortLink.image)||sortLink.links" ng-click="sortLink.links.splice(0,0,{'text':'一篇文章'})">增加文章</button>
             <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
-            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="${param.var}.${param.var}Items.length-1!==$index">后移</button>
+            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="${param.var}.items.length-1!==$index">后移</button>
         </div>
         <div class="input-group input-group-sm margin-top-10">
-            <span class="input-group-addon">重命名</span>
-            <input type="text" ng-model="sortLink.sortName" class="form-control">
+            <span class="input-group-addon">分类名称</span>
+            <input type="text" ng-model="sortLink.sortName"  class="form-control">
         </div>
 
 

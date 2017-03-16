@@ -12,6 +12,8 @@ public interface ISortLinkGroupService extends IBaseEntityManager<SortLinkGroup>
     SortLinkGroup findByUri(String uri, int index);
     SortLinkGroup findByUri(String uri);
 
+    List<SortLinkGroup> findByUriAndIndex(String uri, int index);
+
 //    List<ArticleSectionGroupItem> findArticleSectionByArticleId(String id);
 //
 //    List<ArticleSectionGroupItem> findHomePageArticleSections();

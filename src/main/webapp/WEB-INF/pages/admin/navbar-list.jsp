@@ -53,14 +53,14 @@
                         </div>
                         <div class="col-xs-3">
                             <ol >
-                                <li ng-repeat="navItem in navbar.navbarItems">
+                                <li ng-repeat="navItem in navbar.items">
 
                                     <span>{{navItem.name}}</span>
                                 </li>
                             </ol>
 
 
-                            <i ng-if="!navbar.navbarItems" class="color-red">没有导航项</i>
+                            <i ng-if="!navbar.items" class="color-red">没有导航项</i>
                         </div>
                         <div class="col-xs-2"> {{navbar.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-3">

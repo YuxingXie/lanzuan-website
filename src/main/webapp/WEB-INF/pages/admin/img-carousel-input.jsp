@@ -26,7 +26,7 @@
                 <div class="col-xs-12 alert alert-info" >为轮播图条目选择一张图片</div>
                 <div class="col-xs-12" >
                     <form autocomplete="off" method="post" accept-charset="UTF-8" enctype="multipart/form-data"
-                          role="form" action="/admin/carousel/image/new/${pageComponentId}/${carouselItemId}">
+                          role="form" action="/admin/carousel/image/new/${pageComponentId}">
                         <fieldset>
                             <div class="form-group input-group">
                                 <label class="fa fa-user input-group-addon">本地图片</label>

@@ -31,7 +31,7 @@ public class Carousel {
     @DBRef
     private User lastModifyUser;
     @DBRef
-    private List<CarouselItem> carouselItems;
+    private List<CarouselItem> items;
 
     public String getId() {
         return id;
@@ -65,12 +65,12 @@ public class Carousel {
         this.date = date;
     }
 
-    public List<CarouselItem> getCarouselItems() {
-        return carouselItems;
+    public List<CarouselItem> getItems() {
+        return items;
     }
 
-    public void setCarouselItems(List<CarouselItem> carouselItems) {
-        this.carouselItems = carouselItems;
+    public void setItems(List<CarouselItem> items) {
+        this.items = items;
     }
 
     public Date getLastModifyDate() {

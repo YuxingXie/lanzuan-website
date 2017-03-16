@@ -28,6 +28,19 @@
             <div class="alert alert-info">
                 <div>组件名称：${pageComponent.name}</div>
                 <div>组件说明：${pageComponent.remark}</div>
+                <div ng-init="hiddenDevelopInfo=true">组件定义：(仅开发人员有用)
+                    <i class="fa" ng-click="hiddenDevelopInfo=!hiddenDevelopInfo" ng-class="{'fa-plus-square':hiddenDevelopInfo,'fa-minus-square':!hiddenDevelopInfo}"></i></div>
+                <div class="list-group" ng-show="!hiddenDevelopInfo">
+                    <div class="list-group-item">变量名:${pageComponent.jsonVariableName}</div>
+                    <div class="list-group-item">列表uri:${pageComponent.listOperationUri}</div>
+                    <div class="list-group-item">列表数据uri:${pageComponent.listDataUri}</div>
+                    <div class="list-group-item">数据uri:${pageComponent.dataUri}</div>
+                    <div class="list-group-item">删除uri:${pageComponent.deleteUri}</div>
+                    <div class="list-group-item">素材uri:${pageComponent.materialUploadUri}</div>
+                    <div class="list-group-item">另存uri:${pageComponent.saveAsUri}</div>
+                    <div class="list-group-item">保存uri:${pageComponent.saveUri}</div>
+
+                </div>
             </div>
         </div>
         <div class="col-xs-12 m-a-0 p-a-0">
@@ -37,7 +50,7 @@
             </c:if>
             <div class="padding-top-2em">
                 <c:if test="${not empty pageComponent.editUri}">
-                    <jsp:include page="${pageComponent.editUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}&list_page=${pageComponent.listOperationUri}&muu=${pageComponent.materialUploadUri}"></jsp:include>
+                    <jsp:include page="${pageComponent.editUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}&listP=${pageComponent.listOperationUri}&muu=${pageComponent.materialUploadUri}"></jsp:include>
                 </c:if>
             </div>
         </div>

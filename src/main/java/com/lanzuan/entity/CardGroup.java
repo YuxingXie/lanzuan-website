@@ -17,7 +17,8 @@ public class CardGroup {
     private String id;
     private String name;
     private String uri;
-    private List<Card> cardGroupItems;
+    //约定字段
+    private List<Card> items;
     private boolean enabled;
     @DBRef
     private User creator;
@@ -55,12 +56,12 @@ public class CardGroup {
         this.enabled = enabled;
     }
 
-    public List<Card> getCardGroupItems() {
-        return cardGroupItems;
+    public List<Card> getItems() {
+        return items;
     }
 
-    public void setCardGroupItems(List<Card> cardGroupItems) {
-        this.cardGroupItems = cardGroupItems;
+    public void setItems(List<Card> items) {
+        this.items = items;
     }
 
     public User getCreator() {

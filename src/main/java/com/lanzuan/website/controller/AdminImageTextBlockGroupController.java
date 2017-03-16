@@ -7,7 +7,6 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.ImageTextBlockGroup;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IImageTextBlockGroupService;
-import com.lanzuan.website.service.IImageTextBlockGroupService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -96,7 +95,7 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") + Constant.imageTextBlockGroupItemImageDirectory;
+                String dir=request.getServletContext().getRealPath("/") + Constant.IMAGE_TEXT_BLOCK_GROUP_ITEM_IMAGE_DIR;
                 String filePath =dir +"/"+fileName;
                 File dirFile=new File(dir);
                 if (!dirFile.exists()){
@@ -116,7 +115,7 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
     }
     @RequestMapping(value = "/image/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        String fileDirectory=Constant.imageTextBlockGroupItemImageDirectory;
+        String fileDirectory=Constant.IMAGE_TEXT_BLOCK_GROUP_ITEM_IMAGE_DIR;
         ServletContextResource resource=new ServletContextResource(request.getServletContext(), fileDirectory);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){

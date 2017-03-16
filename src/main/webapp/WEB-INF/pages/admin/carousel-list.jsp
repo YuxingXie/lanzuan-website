@@ -46,7 +46,7 @@
                             <i  ng-class="{'color-red':!carousel.name}">{{carousel.name?carousel.name:"未命名"}}</i></div>
                         <div class="col-xs-3">
                             <ol >
-                                <li ng-repeat="carouselItem in carousel.carouselItems">
+                                <li ng-repeat="carouselItem in carousel.items">
                                     <img ng-src="${path}{{carouselItem.value}}" class="img-ico-larger img-thumbnail"
                                          ng-if="carouselItem.type==='image'"/>
                                     <span  ng-if="carouselItem.type!=='image'">{{carouselItem.value}}</span>
@@ -54,7 +54,7 @@
                             </ol>
 
 
-                            <i ng-if="!carousel.carouselItems" class="color-red">没有轮播项</i>
+                            <i ng-if="!carousel.items" class="color-red">没有轮播项</i>
                         </div>
                         <div class="col-xs-4"> {{carousel.enabled?"已启用":"已禁用"}}</div>
                         <div class="col-xs-3">

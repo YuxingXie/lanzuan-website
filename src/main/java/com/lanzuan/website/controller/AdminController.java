@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,7 +80,7 @@ public class AdminController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/icons/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        ServletContextResource resource=new ServletContextResource(request.getServletContext(), Constant.icoUri);
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(), Constant.ICON_URI);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){
             File file=resource.getFile();
@@ -92,7 +91,7 @@ public class AdminController extends BaseRestSpringController {
                 File[] files= resource.getFile().listFiles();
                 for (File file:files){
                     if (file.isDirectory()) continue;
-                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),Constant.icoUri+"/"+file.getName());
+                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),Constant.ICON_URI +"/"+file.getName());
                     strings.add(fileResource.getPath());
                 }
             }
@@ -102,7 +101,7 @@ public class AdminController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/carousel-images/data")
     public ResponseEntity<List<String>> carouselImages(HttpServletRequest request) throws IOException {
-        String uri=Constant.carouselImageUri;
+        String uri=Constant.CAROUSEL_IMAGE_DIR;
         ServletContextResource resource=new ServletContextResource(request.getServletContext(), uri);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){
@@ -188,7 +187,7 @@ public class AdminController extends BaseRestSpringController {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") +Constant.icoUri;
+                String dir=request.getServletContext().getRealPath("/") +Constant.ICON_URI;
                 String filePath = dir+"/"+fileName;
                 File fileDir=new File(dir);
                 if (!fileDir.exists()){

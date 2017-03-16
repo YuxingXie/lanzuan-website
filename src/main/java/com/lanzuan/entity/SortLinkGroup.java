@@ -24,7 +24,7 @@ public class SortLinkGroup {
     private String uri;
 
     //约定字段
-    private List<SortLink> sortLinkGroupItems;
+    private List<SortLink> items;
     @DBRef
     private User creator;
 
@@ -68,12 +68,12 @@ public class SortLinkGroup {
         this.creator = creator;
     }
 
-    public List<SortLink> getSortLinkGroupItems() {
-        return sortLinkGroupItems;
+    public List<SortLink> getItems() {
+        return items;
     }
 
-    public void setSortLinkGroupItems(List<SortLink> sortLinkGroupItems) {
-        this.sortLinkGroupItems = sortLinkGroupItems;
+    public void setItems(List<SortLink> items) {
+        this.items = items;
     }
 
     public int getIndexOfPage() {

@@ -179,7 +179,7 @@ public class StartOnLoadService {
         sortLinks.add(sortLink2);
         sortLinks.add(sortLink3);
         sortLinks.add(sortLink4);
-        sortLinkGroup.setSortLinkGroupItems(sortLinks);
+        sortLinkGroup.setItems(sortLinks);
         sortLinkGroup.setUri("/home");
         sortLinkGroup.setCreateDate(now);
         sortLinkGroup.setName("默认方案");
@@ -355,7 +355,7 @@ public class StartOnLoadService {
             imageTextBlocks.add(block2);
             imageTextBlocks.add(block3);
             imageTextBlocks.add(block4);
-            group.setImageTextBlockGroupItems(imageTextBlocks);
+            group.setItems(imageTextBlocks);
             imageTextBlockGroupService.insert(group);
         }
     }
@@ -376,16 +376,16 @@ public class StartOnLoadService {
             Card1.setLink("/statics/page/business/b1.html");
             Card2.setLink("/statics/page/business/b2.html");
             Card3.setLink("/statics/page/business/b3.html");
-            Card1.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
-            Card2.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
-            Card3.setImage("/statics/image/lanzuan/home/logo-bg.jpg");
+            Card1.setImage("/statics/image/cardGroup/logo-bg.jpg");
+            Card2.setImage("/statics/image/cardGroup/logo-bg.jpg");
+            Card3.setImage("/statics/image/cardGroup/logo-bg.jpg");
             Card1.setText("智慧城市");
             Card2.setText("三农服务");
             Card3.setText("软件开发");
             Cards.add(Card1);
             Cards.add(Card2);
             Cards.add(Card3);
-            cardGroup.setCardGroupItems(Cards);
+            cardGroup.setItems(Cards);
             cardGroupService.insert(cardGroup);
         }
 
@@ -431,7 +431,7 @@ public class StartOnLoadService {
             navItems.add(navItem3);
             navItems.add(navItem4);
             navItems.add(navItem5);
-            navbar.setNavbarItems(navItems);
+            navbar.setItems(navItems);
             navbarService.insert(navbar);
         }
     }
@@ -445,9 +445,9 @@ public class StartOnLoadService {
 //        fields.add("name");
 //        fields.add("image");
 //        fields.add("articles");
-        int limit= Constant.articleSectionNum;
+        int limit= Constant.ARTICLE_SECTION_NUM;
         SortLinkGroup sortLinkGroup =sortLinkGroupService.findByUri("/home");
-        if (sortLinkGroup ==null|| sortLinkGroup.getSortLinkGroupItems()==null &&sortLinkGroup.getSortLinkGroupItems().size()==0){
+        if (sortLinkGroup ==null|| sortLinkGroup.getItems()==null &&sortLinkGroup.getItems().size()==0){
             System.out.println("    未查询到文章版块数据，使用默认内容。。。");
             sortLinkGroup =new SortLinkGroup();
             sortLinkGroup.setEnabled(true);
@@ -596,7 +596,7 @@ public class StartOnLoadService {
             sortLink3.setSortName("活动专题");
             sortLink3.setImageHref("/statics/image/lanzuan/home/huodongzhuanti.png");
             sortLinks.add(sortLink3);
-            sortLinkGroup.setSortLinkGroupItems(sortLinks);
+            sortLinkGroup.setItems(sortLinks);
 
             sortLinkGroupService.insert(sortLinkGroup);
 
@@ -656,7 +656,7 @@ public class StartOnLoadService {
             carouselItem4.setCarouselCaption(caption4);
             carouselItems.add(carouselItem4);
             carouselItemService.insertAll(carouselItems);
-            carousel.setCarouselItems(carouselItems);
+            carousel.setItems(carouselItems);
             carouselService.insert(carousel);
         }
     }
@@ -734,7 +734,8 @@ public class StartOnLoadService {
             pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
             pageComponent5.setToggleUri("/admin/sort-link-group/status-change");
             pageComponent6.setToggleUri("/admin/full-width-image/status-change");
-            pageComponent7.setToggleUri("/admin/sort-link-group/bottom/status-change");
+//            pageComponent7.setToggleUri("/admin/sort-link-group/bottom/status-change");
+            pageComponent7.setToggleUri("/admin/sort-link-group/status-change");
 
             pageComponent1.setDeleteUri("/admin/navbar/delete/");
             pageComponent2.setDeleteUri("/admin/carousel/delete/");
@@ -742,7 +743,8 @@ public class StartOnLoadService {
             pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
             pageComponent5.setDeleteUri("/admin/sort-link-group/delete/");
             pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
-            pageComponent7.setDeleteUri("/admin/sort-link-group/bottom/delete/");
+//            pageComponent7.setDeleteUri("/admin/sort-link-group/bottom/delete/");
+            pageComponent7.setDeleteUri("/admin/full-width-image/delete/");
 
             pageComponent1.setSaveUri("/admin/navbar/update");
             pageComponent2.setSaveUri("/admin/carousel/insert-all");
@@ -750,7 +752,8 @@ public class StartOnLoadService {
             pageComponent4.setSaveUri("/admin/image-text-block-group/update");
             pageComponent5.setSaveUri("/admin/sort-link-group/new");
             pageComponent6.setSaveUri("/admin/full-width-image/update");
-            pageComponent7.setSaveUri("/admin/sort-link-group/bottom/update");
+//            pageComponent7.setSaveUri("/admin/sort-link-group/bottom/update");
+            pageComponent7.setSaveUri("/admin/sort-link-group/new");
 
             pageComponent1.setListOperationUri("/admin/navbar/list-page/");
             pageComponent2.setListOperationUri("/admin/carousel/list-page/");
@@ -758,7 +761,8 @@ public class StartOnLoadService {
             pageComponent4.setListOperationUri("/admin/image-text-block-group/list-page/");
             pageComponent5.setListOperationUri("/admin/sort-link-group/list-page/");
             pageComponent6.setListOperationUri("/admin/full-width-image/list-page/");
-            pageComponent7.setListOperationUri("/admin/sort-link-group/bottom/list-page/");
+            pageComponent7.setListOperationUri("/admin/sort-link-group/list-page/");
+//            pageComponent7.setListOperationUri("/admin/sort-link-group/list-page/");
 
             pageComponent1.setListDataUri("/admin/navbar/list/data");
             pageComponent2.setListDataUri("/admin/carousel/list/data");
@@ -774,16 +778,18 @@ public class StartOnLoadService {
             pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
             pageComponent5.setSaveAsUri("/admin/sort-link-group/save-as");
             pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
-            pageComponent7.setSaveAsUri("/admin/sort-link-group/bottom/save-as");
+//            pageComponent7.setSaveAsUri("/admin/sort-link-group/bottom/save-as");
+            pageComponent7.setSaveAsUri("/admin/sort-link-group/save-as");
 
 
             pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
             pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
-            pageComponent3.setMaterialUploadUri("/admin/icon/upload-input");
+            pageComponent3.setMaterialUploadUri("/admin/card-group/image/upload-input");
             pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
             pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
             pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
-            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/bottom/input");
+//            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/bottom/input");
+            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
 
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();

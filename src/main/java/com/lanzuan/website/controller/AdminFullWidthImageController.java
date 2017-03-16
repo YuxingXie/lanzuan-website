@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,7 +84,7 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
     @RequestMapping(value = "/image/upload-input/{pageComponentId}")
     public String iconUploadInput(ModelMap modelMap,@PathVariable String pageComponentId){
         modelMap.addAttribute("pageComponentId",pageComponentId);
-        return "admin/img-input";
+        return "admin/img-full-width-input";
     }
     @RequestMapping(value = "/image/add/{pageComponentId}")
     public String addFullWidthImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
@@ -95,7 +94,7 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") + Constant.fullWidthImageDirectory;
+                String dir=request.getServletContext().getRealPath("/") + Constant.FULL_WIDTH_IMAGE_DIR;
                 String filePath = dir+"/"+fileName;
                 File dirFile=new File(dir);
                 if (!dirFile.exists()){
@@ -115,7 +114,7 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/image/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        String fileDirectory=Constant.fullWidthImageDirectory;
+        String fileDirectory=Constant.FULL_WIDTH_IMAGE_DIR;
         ServletContextResource resource=new ServletContextResource(request.getServletContext(), fileDirectory);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){

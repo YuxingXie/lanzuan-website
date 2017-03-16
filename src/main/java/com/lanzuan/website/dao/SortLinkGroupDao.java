@@ -33,9 +33,15 @@ public class SortLinkGroupDao extends BaseMongoDao<SortLinkGroup>  {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("uri",uri);
         dbObject.put("enabled",true);
-        if (index!=0)
-            dbObject.put("indexOfPage",index);
+        dbObject.put("indexOfPage",index);
         return findOne(dbObject);
+    }
+
+    public List<SortLinkGroup> findByUriAndIndex(String uri, int index) {
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("uri",uri);
+        dbObject.put("indexOfPage",index);
+        return findAll(dbObject);
     }
 //    public List<ArticleSectionGroupItem> findArticleSectionByArticleId(String id) {
 //        DBObject dbObject=new BasicDBObject();
@@ -60,7 +66,7 @@ public class SortLinkGroupDao extends BaseMongoDao<SortLinkGroup>  {
 //        fields.add("enabled");
 ////        fields.add("articles.$.title");
 //        fields.add("articles");
-//        int limit= Constant.articleSectionNum;
+//        int limit= Constant.ARTICLE_SECTION_NUM;
 //        List<ArticleSectionGroupItem> articleSectionGroup =findFields(dbObject,fields,limit,"createDate",false);
 //        for (ArticleSectionGroupItem articleSectionGroupItem : articleSectionGroup){
 //            //首页并不需要文章内容，设为空提高页面速度

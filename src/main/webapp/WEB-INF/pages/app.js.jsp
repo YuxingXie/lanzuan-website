@@ -72,15 +72,15 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     */
     //条目前移
     $scope.forward${component.variableFirstUpper}Item=function(index){
-        var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index-1,0,item);
+        var item=$scope.${component.jsonVariableName}.items[index];
+        $scope.${component.jsonVariableName}.items.splice(index,1);
+        $scope.${component.jsonVariableName}.items.splice(index-1,0,item);
     }
     //条目后移
     $scope.backward${component.variableFirstUpper}Item=function(index){
-        var item=$scope.${component.jsonVariableName}.${component.jsonVariableName}Items[index];
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1);
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index+1,0,item);
+        var item=$scope.${component.jsonVariableName}.items[index];
+        $scope.${component.jsonVariableName}.items.splice(index,1);
+        $scope.${component.jsonVariableName}.items.splice(index+1,0,item);
     }
     //指定位置插入条目
     $scope.insert${component.variableFirstUpper}Item= function (index) {
@@ -91,21 +91,21 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         if(!$scope.${component.jsonVariableName}){
             $scope.${component.jsonVariableName}={};
         }
-        if(!$scope.${component.jsonVariableName}.${component.jsonVariableName}Items){
-            $scope.${component.jsonVariableName}.${component.jsonVariableName}Items=[];
+        if(!$scope.${component.jsonVariableName}.items){
+            $scope.${component.jsonVariableName}.items=[];
         }
 
 
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,0,item);
+        $scope.${component.jsonVariableName}.items.splice(index,0,item);
     }
 
     //前面插入条目
     $scope.insert${component.variableFirstUpper}ItemBefore=function(index){
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,0,{})
+        $scope.${component.jsonVariableName}.items.splice(index,0,{})
     }
     //移除条目
     $scope.remove${component.variableFirstUpper}Item=function(index){
-        $scope.${component.jsonVariableName}.${component.jsonVariableName}Items.splice(index,1)
+        $scope.${component.jsonVariableName}.items.splice(index,1)
     }
     /**
     *条目操作end
@@ -187,7 +187,18 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     $scope.icons=data;
     });
     }
+$scope.getCardGroupImage=function(){
+    $http.get("/admin/card-group/images/data").success(function (data) {
+    $scope.icons=data;
 
+});
+}
+    $scope.getArticleCovers=function(){
+        $http.get("/admin/article/cover-images/data").success(function (data) {
+        $scope.icons=data;
+
+    });
+    }
 $scope.getCarouselImages=function(){
 $http.get("/admin/carousel-images/data").success(function (data) {
     $scope.carouselImages=data;
@@ -257,15 +268,15 @@ alert("删除成功！");
 }
 //以下方法覆盖自动生成的方法，一定要注意此方法在js中的顺序
     $scope.removeCarouselItem= function (index) {
-        if($scope.carousel&&$scope.carousel.carouselItems&&$scope.carousel.carouselItems.length
-        &&$scope.carousel.carouselItems[index].id){
+        if($scope.carousel&&$scope.carousel.items&&$scope.carousel.items.length
+        &&$scope.carousel.items[index].id){
 
-        $http.post("/admin/carousel/item/remove/"+$scope.carousel.carouselItems[index].id,JSON.stringify($scope.carousel)).success(function (message) {
+        $http.post("/admin/carousel/item/remove/"+$scope.carousel.items[index].id,JSON.stringify($scope.carousel)).success(function (message) {
         $scope.carousel=message.data;
         alert("删除成功！");
         });
         }else{
-        $scope.carousel.carouselItems.splice(index,1);
+        $scope.carousel.items.splice(index,1);
         }
 
     }
@@ -299,8 +310,8 @@ alert("删除成功！");
             if(!$scope.imageTextBlockGroup){
             $scope.imageTextBlockGroup={};
             }
-            if(!$scope.imageTextBlockGroup.imageTextBlockGroupItems){
-                $scope.imageTextBlockGroup.imageTextBlockGroupItems=[];
+            if(!$scope.imageTextBlockGroup.items){
+                $scope.imageTextBlockGroup.items=[];
             }
             var item={};
             item.name="输入名称";
@@ -310,8 +321,8 @@ alert("删除成功！");
             imageTextItem.title="标题";
             item.imageTextItems=[];
             item.imageTextItems.push(imageTextItem);
-            $scope.imageTextBlockGroup.imageTextBlockGroupItems.push(item)
-            $scope.imageTextBlockGroup.imageTextBlockGroupItems.splice(index,0,item);
+            $scope.imageTextBlockGroup.items.push(item)
+            $scope.imageTextBlockGroup.items.splice(index,0,item);
             }
 }])
 })()

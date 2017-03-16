@@ -44,7 +44,7 @@
         </div>
     </div>
 </div>
-<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${param.var}.${param.var}Items track by $index">
+<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${param.var}.items track by $index">
     <div class="row">
                 <div class="col-xs-4">
                     <div class="input-group">
@@ -56,7 +56,7 @@
                     <button class="fa fa-caret-up btn btn-block btn-primary" ng-click="forward${param.varU}Item($index)"ng-if="$index!==0">整块前移</button>
                 </div>
                 <div class="col-xs-4">
-                    <button class="fa fa-caret-down btn btn-block btn-primary" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.${param.var}Items.length-1">整块后移</button>
+                    <button class="fa fa-caret-down btn btn-block btn-primary" ng-click="backward${param.varU}Item($index)" ng-if="$index!==${param.var}.items.length-1">整块后移</button>
                 </div>
 
 

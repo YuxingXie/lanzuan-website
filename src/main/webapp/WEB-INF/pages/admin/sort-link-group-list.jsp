@@ -18,11 +18,11 @@
 </head>
 <body ng-app="app">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-<div class="container-fluid" ng-controller="AdminController" ng-init="getSortLinkGroupList()">
+<div class="container-fluid" ng-controller="AdminController" ng-init="get${pageComponent.variableFirstUpper}List()">
     <div class="row">
         <div class="alert alert-info">
             <h5 class="text-center">分类链接组方案列表</h5>
-            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page_component/edit/${pageComponentId}">返回编辑页</a>
+            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">返回编辑页</a>
         </div>
         <div class="alert alert-warning">
             <ul class="list-unstyled">
@@ -40,12 +40,12 @@
                     <div class="col-xs-2">禁用/启用</div>
                 </div>
 
-                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey small-90" ng-repeat="cardGroup in sortLinkGroupList">s
+                    <div class="row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey small-90" ng-repeat="cardGroup in ${pageComponent.jsonVariableName}List">
                         <div class="col-xs-2">
                             <i  ng-class="{'color-red':!cardGroup.name}">{{cardGroup.name?cardGroup.name:"未命名"}}</i>
                         </div>
                         <div class="col-xs-5">
-                            <div ng-repeat="card in cardGroup.sortLinkGroupItems">
+                            <div ng-repeat="card in cardGroup.items">
                                 <img ng-src="{{card.image}}"  class="img-rounded img-ico-lg"/>
                                 <div ng-repeat="link in card.links">{{link.text}}</div>
                             </div>

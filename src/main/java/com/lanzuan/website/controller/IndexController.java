@@ -74,7 +74,7 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/sort-link-group/data")
     public ResponseEntity<SortLinkGroup> sortLinkGroupData() throws ServletException, IOException {
 
-        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home");
+        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home",0);
         return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/sort-link-group/bottom/data")

@@ -3,7 +3,7 @@
 <div class="row m-l-0 m-r-0 margin-top-1em md-up-padding-left-right-4em padding-top-4em padding-bottom-2em  bg-very-light"
      ng-init="get${param.varU}()">
 
-    <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${param.var}.${param.var}Items">
+    <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${param.var}.items">
         <div class="row">
             <h4 class="col-xs-8 large-180">{{sortLink.sortName}}</h4>
             <a ng-if="sortLink.image" target="_blank" href="{{sortLink.imageHref}}"><img src="{{sortLink.image}}" class="col-xs-12 padding-top-1em" /></a>
