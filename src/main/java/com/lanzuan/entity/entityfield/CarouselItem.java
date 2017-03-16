@@ -1,4 +1,4 @@
-package com.lanzuan.entity;
+package com.lanzuan.entity.entityfield;
 
 import com.lanzuan.entity.entityfield.CarouselCaption;
 import org.springframework.data.annotation.Id;
@@ -7,10 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Created by Administrator on 2017/3/10.
  */
-@Document(collection = "carouselItem")
 public class CarouselItem {
-    @Id
-    private String id;
     /**
      * text,link,image
      */
@@ -18,13 +15,7 @@ public class CarouselItem {
     private String value;
     private CarouselCaption carouselCaption;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getType() {
         return type;

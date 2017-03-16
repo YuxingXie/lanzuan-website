@@ -24,6 +24,16 @@ public class ImageTextBlockGroup {
     @DBRef
     private User creator;
     private Date createDate;
+    @DBRef
+    private PageComponent pageComponent;
+
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
+    }
 
     public User getCreator() {
         return creator;

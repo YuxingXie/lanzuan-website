@@ -9,7 +9,7 @@
         <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{${param.var}.name}}</label>
 
-            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()" >保存</button>
+            <button class="btn btn-danger fa fa-save " type="button" ng-click="save${param.varU}()" >保存</button>
             <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${param.varU}()" > 方案另存为</button>
             <a class="btn btn-primary fa fa-download white-link" ng-href="${path}${param.listP}${pageComponent.id}"> 应用其它方案</a>
             <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${param.varU}(form)"> 重 置</button>

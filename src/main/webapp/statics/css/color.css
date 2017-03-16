@@ -14,6 +14,7 @@
 .bg-light-yellow { background-color: #f2ff09;}
 .bg-purple { background-color: #852b99;}
 .bg-light-red { background-color: #ff5400;}
+
 .bg--blue-1 { background-color: rgba(194, 216, 253, 0.58);}
 .bg--blue-2 { background-color: #c2d8fd;}
 .bg--blue-3 { background-color: #bfd5fa;}
@@ -33,6 +34,8 @@
 Colors
 ***/
 .color-red { color: #e02222;}
+.color-danger {color: #d9534f;}
+
 .color-blue { color: #0da3e2;}
 .color-white { color: #ffffff;}
 .color-black { color: #000;}

@@ -58,6 +58,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     //方案另存
     $scope.new${component.variableFirstUpper}=function(){
         var name = window.prompt("请给方案命名","新方案名");
+        if(!name) return;
         $scope.${component.jsonVariableName}.name=name;
         $http.post("${component.saveAsUri}",JSON.stringify( $scope.${component.jsonVariableName})).success(function (message) {
             $scope.${component.jsonVariableName}=message.data;

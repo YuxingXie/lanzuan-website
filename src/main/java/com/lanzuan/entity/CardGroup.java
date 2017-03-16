@@ -23,6 +23,8 @@ public class CardGroup {
     @DBRef
     private User creator;
     private Date createDate;
+    @DBRef
+    private PageComponent pageComponent;
 
     public String getId() {
         return id;
@@ -78,5 +80,13 @@ public class CardGroup {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
     }
 }

@@ -5,7 +5,6 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Carousel;
-import com.lanzuan.entity.CarouselItem;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.*;
 import com.lanzuan.website.service.impl.UserService;
@@ -24,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,8 +42,6 @@ public class AdminCarouselController extends BaseRestSpringController {
     IArticleService articleService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
-    @Resource(name = "carouselItemService")
-    ICarouselItemService carouselItemService;
     @RequestMapping(value = "/image/input/{pageComponentId}")
     public String articleSectionInputImage(@PathVariable String pageComponentId,ModelMap modelMap){
 
@@ -53,23 +49,30 @@ public class AdminCarouselController extends BaseRestSpringController {
 
         return "admin/img-carousel-input";
     }
+
+    /**
+     * 此方法应废弃
+     * @param itemId
+     * @param carousel
+     * @return
+     */
     @RequestMapping(value = "/item/remove/{itemId}")
     public ResponseEntity<Message> removeItem(@PathVariable String itemId,@RequestBody Carousel carousel){
         Message message=new Message();
-        List<CarouselItem> carouselItemsToSave=new ArrayList<CarouselItem>();
-        List<CarouselItem> carouselItems=carousel.getItems();
-        for (CarouselItem carouselItem:carouselItems){
-            if (!carouselItem.getId().equals(itemId)){
-                carouselItemsToSave.add(carouselItem);
-            }
-        }
-
-        if(carouselItemsToSave.size()>0){
-            carousel.setItems(carouselItemsToSave);
-
-        }else {
-            carousel.setItems(null);
-        }
+//        List<CarouselItem> carouselItemsToSave=new ArrayList<CarouselItem>();
+//        List<CarouselItem> carouselItems=carousel.getItems();
+//        for (CarouselItem carouselItem:carouselItems){
+//            if (!carouselItem.getId().equals(itemId)){
+//                carouselItemsToSave.add(carouselItem);
+//            }
+//        }
+//
+//        if(carouselItemsToSave.size()>0){
+//            carousel.setItems(carouselItemsToSave);
+//
+//        }else {
+//            carousel.setItems(null);
+//        }
         carouselService.update(carousel,false);
         message.setSuccess(true);
         message.setData(carousel);
@@ -79,22 +82,22 @@ public class AdminCarouselController extends BaseRestSpringController {
     @RequestMapping(value = "/insert-all")
     public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel){
         Message message=new Message();
-        List<CarouselItem> carouselItems=carousel.getItems();
-        if(carouselItems!=null&&carouselItems.size()>0){
-            for (CarouselItem carouselItem:carouselItems){
-                if (carouselItem.getId()==null){
-                    carouselItemService.insert(carouselItem);
-                }else{
-                    carouselItemService.update(carouselItem);
-                }
-            }
-        }else {
-            carousel.setItems(null);
-        }
+//        List<CarouselItem> carouselItems=carousel.getItems();
+//        if(carouselItems!=null&&carouselItems.size()>0){
+//            for (CarouselItem carouselItem:carouselItems){
+//                if (carouselItem.getId()==null){
+//                    carouselItemService.insert(carouselItem);
+//                }else{
+//                    carouselItemService.update(carouselItem);
+//                }
+//            }
+//        }else {
+//            carousel.setItems(null);
+//        }
         if (carousel.getId()==null){
             carouselService.insert(carousel);
         }else{
-            carouselService.update(carousel,false);
+            carouselService.update(carousel);
         }
         message.setSuccess(true);
         message.setData(carousel);
@@ -104,17 +107,16 @@ public class AdminCarouselController extends BaseRestSpringController {
     public ResponseEntity<Message> saveAs(@RequestBody Carousel carousel){
         Carousel old=carouselService.findById(carousel.getId());
         Message message=new Message();
-        List<CarouselItem> carouselItems=carousel.getItems();
-        if(carouselItems!=null&&carouselItems.size()>0){
-            for (CarouselItem carouselItem:carouselItems){
-                carouselItem.setId(null);
-                carouselItemService.insert(carouselItem);
-            }
-        }else {
-            carousel.setItems(null);
-        }
+//        List<CarouselItem> carouselItems=carousel.getItems();
+//        if(carouselItems!=null&&carouselItems.size()>0){
+//            for (CarouselItem carouselItem:carouselItems){
+//                carouselItem.setId(null);
+//                carouselItemService.insert(carouselItem);
+//            }
+//        }else {
+//            carousel.setItems(null);
+//        }
         carousel.setEnabled(false);
-//        carouselService.update(carousel);
         carousel.setId(null);
         carouselService.insert(carousel);
         message.setSuccess(true);

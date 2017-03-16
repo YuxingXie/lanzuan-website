@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.entityfield.CarouselItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,15 +31,28 @@ public class Carousel {
     private boolean enabled;
     @DBRef
     private User lastModifyUser;
-    @DBRef
-    private List<CarouselItem> items;
 
+    private List<CarouselItem> items;
+    @DBRef
+    private PageComponent pageComponent;
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public String getName() {
@@ -97,9 +111,7 @@ public class Carousel {
         this.uri = uri;
     }
 
-    public boolean getEnabled() {
-        return enabled;
-    }
+
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;

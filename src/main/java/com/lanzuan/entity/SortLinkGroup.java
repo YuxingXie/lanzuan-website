@@ -7,12 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-/*
-db.articleSection.update({},{"$set":{"enabled":true}},false,true)
-db.articleSection.update({"name":"活动专题"},{"$set":{"enabled":true}},false,true)
-db.articleSection.update({"name":"新闻动态"},{"$set":{"articles":null}},false,true)
-db.articleSection.update({"name":"企业文化"},{"$set":{"articles":null}},false,true)
- */
+
 @Document(collection = "sortLinkGroup")
 public class SortLinkGroup {
     @Id
@@ -27,6 +22,16 @@ public class SortLinkGroup {
     private List<SortLink> items;
     @DBRef
     private User creator;
+    @DBRef
+    private PageComponent pageComponent;
+
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
+    }
 
     public String getId() {
         return id;

@@ -3,6 +3,7 @@ package com.lanzuan.entity;
 import com.lanzuan.entity.entityfield.NavItem;
 import com.lanzuan.entity.entityfield.NavbarBrand;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -19,7 +20,16 @@ public class Navbar {
     private boolean enabled;
     private NavbarBrand navbarBrand;
     private List<NavItem> items;
+    @DBRef
+    private PageComponent pageComponent;
 
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
+    }
 
     public String getId() {
         return id;

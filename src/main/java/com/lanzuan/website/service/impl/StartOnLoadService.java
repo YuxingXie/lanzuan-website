@@ -31,8 +31,6 @@ public class StartOnLoadService {
     private IArticleService articleService;
     @Resource(name = "carouselService")
     private ICarouselService carouselService;
-    @Resource(name = "carouselItemService")
-    private ICarouselItemService carouselItemService;
     @Resource(name = "navbarService")
     private INavbarService navbarService;
     @Resource(name = "cardGroupService")
@@ -49,12 +47,12 @@ public class StartOnLoadService {
     public void loadData() {
         logger.info("容器初始化完成，载入初始化数据。。。。。。");
         initWebPages();
-        initPageData();
+        initData();
     }
 
-    private void initPageData() {
-        initHomePageData();
-        initAdminPageData();
+    private void initData() {
+
+        initAdminData();
         initDirectory();
     }
 
@@ -62,7 +60,7 @@ public class StartOnLoadService {
 
     }
 
-    private void initAdminPageData() {
+    private void initAdminData() {
         long count=userService.count();
         if (count==0){
             User user=new User();
@@ -74,23 +72,11 @@ public class StartOnLoadService {
         }
     }
 
-    private void initHomePageData() {
-        initNavbarData();
-        initCarouselData();
-        initImageTextBlockGroupData();
-        initFullWidthImageData();
-        initCardGroupData();
-        initArticleSectionData();
-        initSortLinkGroupData();
 
-    }
 
-    private void initSortLinkGroupData() {
-        SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home", 1);
+    private void initSortLinkGroupData(PageComponent pageComponent) {
         Date now=new Date();
-        if (sortLinkGroup!=null)
-               return;
-        sortLinkGroup=new SortLinkGroup();
+        SortLinkGroup sortLinkGroup=new SortLinkGroup();
         SortLink sortLink1=new SortLink();
         SortLink sortLink2=new SortLink();
         SortLink sortLink3=new SortLink();
@@ -206,255 +192,248 @@ public class StartOnLoadService {
         sortLinkGroup.setName("默认方案");
         sortLinkGroup.setIndexOfPage(1);
         sortLinkGroup.setEnabled(true);
+        sortLinkGroup.setPageComponent(pageComponent);
         sortLinkGroupService.insert(sortLinkGroup);
 
     }
 
-    private void initFullWidthImageData() {
+    private void initFullWidthImageData(PageComponent pageComponent) {
         logger.info("初始化全屏宽度图片。。。");
-        FullWidthImage fullWidthImage=fullWidthImageService.findByUri("/home");
-        if (fullWidthImage==null){
-            logger.info("   未查询到全屏宽度图片方案，应用默认方案。。。");
-            fullWidthImage=new FullWidthImage();
-            fullWidthImage.setName("政府大楼全屏宽度图");
-            fullWidthImage.setEnabled(true);
-            fullWidthImage.setUri("/home");
-            Image image=new Image();
-            image.setUri("/statics/image/lanzuan/full-width/zfdl.jpg");
-            fullWidthImage.setImage(image);
-            fullWidthImageService.insert(fullWidthImage);
-        }
+        FullWidthImage fullWidthImage=new FullWidthImage();
+        fullWidthImage.setName("政府大楼全屏宽度图");
+        fullWidthImage.setEnabled(true);
+        fullWidthImage.setUri("/home");
+        Image image=new Image();
+        image.setUri("/statics/image/lanzuan/full-width/zfdl.jpg");
+        fullWidthImage.setImage(image);
+        fullWidthImage.setPageComponent(pageComponent);
+        fullWidthImageService.insert(fullWidthImage);
+
     }
 
-    private void initImageTextBlockGroupData() {
+    private void initImageTextBlockGroupData(PageComponent pageComponent) {
         logger.info("初始化图文块组。。。");
-        ImageTextBlockGroup group=imageTextBlockGroupService.findByUri("/home");
-        if (group==null){
-            logger.info("   未查询到图文块组方案，应用默认方案。。。");
-            group=new ImageTextBlockGroup();
-            group.setUri("/home");
-            group.setName("ImageTextBlockGroup One");
-            group.setText("典型应用");
-            group.setEnabled(true);
+        ImageTextBlockGroup group=new ImageTextBlockGroup();
+        group.setUri("/home");
+        group.setName("ImageTextBlockGroup One");
+        group.setText("典型应用");
+        group.setEnabled(true);
 
-            List<ImageTextBlock> imageTextBlocks=new ArrayList<ImageTextBlock>();
-            ImageTextBlock block1=new ImageTextBlock();
-            ImageTextBlock block2=new ImageTextBlock();
-            ImageTextBlock block3=new ImageTextBlock();
-            ImageTextBlock block4=new ImageTextBlock();
-            block1.setName("智慧城市");
-            block2.setName("三农服务");
-            block3.setName("软件开发");
-            block4.setName("运营商");
-            List<ImageTextItem> imageTextItems1=new ArrayList<ImageTextItem>();
-            List<ImageTextItem> imageTextItems2=new ArrayList<ImageTextItem>();
-            List<ImageTextItem> imageTextItems3=new ArrayList<ImageTextItem>();
-            List<ImageTextItem> imageTextItems4=new ArrayList<ImageTextItem>();
-            ImageTextItem imageTextItem1_1=new ImageTextItem();
-            ImageTextItem imageTextItem2_1=new ImageTextItem();
-            ImageTextItem imageTextItem3_1=new ImageTextItem();
-            ImageTextItem imageTextItem4_1=new ImageTextItem();
-            ImageTextItem imageTextItem1_2=new ImageTextItem();
-            ImageTextItem imageTextItem2_2=new ImageTextItem();
-            ImageTextItem imageTextItem3_2=new ImageTextItem();
-            ImageTextItem imageTextItem4_2=new ImageTextItem();
-            ImageTextItem imageTextItem1_3=new ImageTextItem();
-            ImageTextItem imageTextItem2_3=new ImageTextItem();
-            ImageTextItem imageTextItem3_3=new ImageTextItem();
-            ImageTextItem imageTextItem4_3=new ImageTextItem();
-            ImageTextItem imageTextItem1_4=new ImageTextItem();
-            ImageTextItem imageTextItem2_4=new ImageTextItem();
-            ImageTextItem imageTextItem3_4=new ImageTextItem();
-            ImageTextItem imageTextItem4_4=new ImageTextItem();
-            imageTextItem1_1.setText("宁乡县政府WIFI覆盖应用");
-            imageTextItem1_1.setImage("/statics/image/lanzuan/280-180/zfdl.jpg");
-            imageTextItem1_1.setTitle("宁乡县政府");
-            imageTextItem1_1.setLink("/statics/page/business/b1.html");
+        List<ImageTextBlock> imageTextBlocks=new ArrayList<ImageTextBlock>();
+        ImageTextBlock block1=new ImageTextBlock();
+        ImageTextBlock block2=new ImageTextBlock();
+        ImageTextBlock block3=new ImageTextBlock();
+        ImageTextBlock block4=new ImageTextBlock();
+        block1.setName("智慧城市");
+        block2.setName("三农服务");
+        block3.setName("软件开发");
+        block4.setName("运营商");
+        List<ImageTextItem> imageTextItems1=new ArrayList<ImageTextItem>();
+        List<ImageTextItem> imageTextItems2=new ArrayList<ImageTextItem>();
+        List<ImageTextItem> imageTextItems3=new ArrayList<ImageTextItem>();
+        List<ImageTextItem> imageTextItems4=new ArrayList<ImageTextItem>();
+        ImageTextItem imageTextItem1_1=new ImageTextItem();
+        ImageTextItem imageTextItem2_1=new ImageTextItem();
+        ImageTextItem imageTextItem3_1=new ImageTextItem();
+        ImageTextItem imageTextItem4_1=new ImageTextItem();
+        ImageTextItem imageTextItem1_2=new ImageTextItem();
+        ImageTextItem imageTextItem2_2=new ImageTextItem();
+        ImageTextItem imageTextItem3_2=new ImageTextItem();
+        ImageTextItem imageTextItem4_2=new ImageTextItem();
+        ImageTextItem imageTextItem1_3=new ImageTextItem();
+        ImageTextItem imageTextItem2_3=new ImageTextItem();
+        ImageTextItem imageTextItem3_3=new ImageTextItem();
+        ImageTextItem imageTextItem4_3=new ImageTextItem();
+        ImageTextItem imageTextItem1_4=new ImageTextItem();
+        ImageTextItem imageTextItem2_4=new ImageTextItem();
+        ImageTextItem imageTextItem3_4=new ImageTextItem();
+        ImageTextItem imageTextItem4_4=new ImageTextItem();
+        imageTextItem1_1.setText("宁乡县政府WIFI覆盖应用");
+        imageTextItem1_1.setImage("/statics/image/lanzuan/280-180/zfdl.jpg");
+        imageTextItem1_1.setTitle("宁乡县政府");
+        imageTextItem1_1.setLink("/statics/page/business/b1.html");
 
-            imageTextItem1_2.setText("金州开发区创业大楼WIFI覆盖应用");
-            imageTextItem1_2.setImage("/statics/image/lanzuan/280-180/cydl.jpg");
-            imageTextItem1_2.setTitle("金州开发区创业大楼");
-            imageTextItem1_2.setLink("/statics/page/business/b1.html");
+        imageTextItem1_2.setText("金州开发区创业大楼WIFI覆盖应用");
+        imageTextItem1_2.setImage("/statics/image/lanzuan/280-180/cydl.jpg");
+        imageTextItem1_2.setTitle("金州开发区创业大楼");
+        imageTextItem1_2.setLink("/statics/page/business/b1.html");
 
-            imageTextItem1_3.setText("宁乡县市民之家WIFI应用");
-            imageTextItem1_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
-            imageTextItem1_3.setTitle("宁乡县市民之家");
-            imageTextItem1_3.setLink("/statics/page/business/b1.html");
+        imageTextItem1_3.setText("宁乡县市民之家WIFI应用");
+        imageTextItem1_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
+        imageTextItem1_3.setTitle("宁乡县市民之家");
+        imageTextItem1_3.setLink("/statics/page/business/b1.html");
 
-            imageTextItem1_4.setText("宁乡县公安局WIFI覆盖应用");
-            imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
-            imageTextItem1_4.setTitle("宁乡县公安局");
-            imageTextItem1_4.setLink("/statics/page/business/b1.html");
+        imageTextItem1_4.setText("宁乡县公安局WIFI覆盖应用");
+        imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
+        imageTextItem1_4.setTitle("宁乡县公安局");
+        imageTextItem1_4.setLink("/statics/page/business/b1.html");
 
-            imageTextItem2_1.setText("葡萄园产业基地");
-            imageTextItem2_1.setImage("/statics/image/lanzuan/280-180/putao.jpg");
-            imageTextItem2_1.setTitle("有机肥基地");
-            imageTextItem2_1.setLink("/statics/page/business/b2.html");
+        imageTextItem2_1.setText("葡萄园产业基地");
+        imageTextItem2_1.setImage("/statics/image/lanzuan/280-180/putao.jpg");
+        imageTextItem2_1.setTitle("有机肥基地");
+        imageTextItem2_1.setLink("/statics/page/business/b2.html");
 
-            imageTextItem2_2.setText("葡萄园产业基地");
-            imageTextItem2_2.setImage("/statics/image/lanzuan/280-180/putao2.jpg");
-            imageTextItem2_2.setTitle("有机肥农业成果");
-            imageTextItem2_2.setLink("/statics/page/business/b2.html");
+        imageTextItem2_2.setText("葡萄园产业基地");
+        imageTextItem2_2.setImage("/statics/image/lanzuan/280-180/putao2.jpg");
+        imageTextItem2_2.setTitle("有机肥农业成果");
+        imageTextItem2_2.setLink("/statics/page/business/b2.html");
 
-            imageTextItem2_3.setText("双江口桔园产业基地");
-            imageTextItem2_3.setImage("/statics/image/lanzuan/280-180/juzi.jpg");
-            imageTextItem2_3.setTitle("双江口桔园");
-            imageTextItem2_3.setLink("imageTextItem2_3.setLink(/statics/page/business/b2.html)");
+        imageTextItem2_3.setText("双江口桔园产业基地");
+        imageTextItem2_3.setImage("/statics/image/lanzuan/280-180/juzi.jpg");
+        imageTextItem2_3.setTitle("双江口桔园");
+        imageTextItem2_3.setLink("imageTextItem2_3.setLink(/statics/page/business/b2.html)");
 
-            imageTextItem2_4.setText("葡萄园产业基地");
-            imageTextItem2_4.setImage("/statics/image/lanzuan/280-180/putaoyuan5.jpg");
-            imageTextItem2_4.setTitle("有机肥农业成果");
-            imageTextItem2_4.setLink("/statics/page/business/b2.html");
+        imageTextItem2_4.setText("葡萄园产业基地");
+        imageTextItem2_4.setImage("/statics/image/lanzuan/280-180/putaoyuan5.jpg");
+        imageTextItem2_4.setTitle("有机肥农业成果");
+        imageTextItem2_4.setLink("/statics/page/business/b2.html");
 
-            imageTextItem3_1.setText("宁乡县公安局公众号");
-            imageTextItem3_1.setImage("/statics/image/lanzuan/280-180/app1.jpg");
-            imageTextItem3_1.setTitle("宁乡县公安局公众号");
-            imageTextItem3_1.setLink("/statics/page/business/b3.html");
+        imageTextItem3_1.setText("宁乡县公安局公众号");
+        imageTextItem3_1.setImage("/statics/image/lanzuan/280-180/app1.jpg");
+        imageTextItem3_1.setTitle("宁乡县公安局公众号");
+        imageTextItem3_1.setLink("/statics/page/business/b3.html");
 
-            imageTextItem3_2.setText("响应式网站、分布式web应用程序");
-            imageTextItem3_2.setImage("/statics/image/lanzuan/280-180/webapp.jpg");
-            imageTextItem3_2.setTitle("响应式网站、分布式web应用程序");
-            imageTextItem3_2.setLink("/statics/page/business/b3.html");
+        imageTextItem3_2.setText("响应式网站、分布式web应用程序");
+        imageTextItem3_2.setImage("/statics/image/lanzuan/280-180/webapp.jpg");
+        imageTextItem3_2.setTitle("响应式网站、分布式web应用程序");
+        imageTextItem3_2.setLink("/statics/page/business/b3.html");
 
-            imageTextItem3_3.setText("警民互动平台");
-            imageTextItem3_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
-            imageTextItem3_3.setTitle("警民互动平台");
-            imageTextItem3_3.setLink("/statics/page/business/b3.html");
+        imageTextItem3_3.setText("警民互动平台");
+        imageTextItem3_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
+        imageTextItem3_3.setTitle("警民互动平台");
+        imageTextItem3_3.setLink("/statics/page/business/b3.html");
 
-            imageTextItem3_4.setText("腾讯软件服务");
-            imageTextItem3_4.setImage("/statics/image/lanzuan/280-180/tengxunwang.jpg");
-            imageTextItem3_4.setTitle("腾讯软件服务");
-            imageTextItem3_4.setLink("/statics/page/business/b3.html");
+        imageTextItem3_4.setText("腾讯软件服务");
+        imageTextItem3_4.setImage("/statics/image/lanzuan/280-180/tengxunwang.jpg");
+        imageTextItem3_4.setTitle("腾讯软件服务");
+        imageTextItem3_4.setLink("/statics/page/business/b3.html");
 
-            imageTextItem4_1.setText("中国电信");
-            imageTextItem4_1.setImage("/statics/image/lanzuan/280-180/zgdx.jpg");
-            imageTextItem4_1.setTitle("中国电信");
-            imageTextItem4_1.setLink("/statics/page/business/b3.html");
+        imageTextItem4_1.setText("中国电信");
+        imageTextItem4_1.setImage("/statics/image/lanzuan/280-180/zgdx.jpg");
+        imageTextItem4_1.setTitle("中国电信");
+        imageTextItem4_1.setLink("/statics/page/business/b3.html");
 
-            imageTextItem4_2.setText("中国移动");
-            imageTextItem4_2.setImage("/statics/image/lanzuan/280-180/zgyd.jpg");
-            imageTextItem4_2.setTitle("中国移动");
-            imageTextItem4_2.setLink("/statics/page/business/b3.html");
+        imageTextItem4_2.setText("中国移动");
+        imageTextItem4_2.setImage("/statics/image/lanzuan/280-180/zgyd.jpg");
+        imageTextItem4_2.setTitle("中国移动");
+        imageTextItem4_2.setLink("/statics/page/business/b3.html");
 
-            imageTextItem4_3.setText("中国联通");
-            imageTextItem4_3.setImage("/statics/image/lanzuan/280-180/zglt.jpg");
-            imageTextItem4_3.setTitle("中国联通");
-            imageTextItem4_3.setLink("/statics/page/business/b3.html");
+        imageTextItem4_3.setText("中国联通");
+        imageTextItem4_3.setImage("/statics/image/lanzuan/280-180/zglt.jpg");
+        imageTextItem4_3.setTitle("中国联通");
+        imageTextItem4_3.setLink("/statics/page/business/b3.html");
 
-            imageTextItem4_4.setText("中国联通");
-            imageTextItem4_4.setImage("/statics/image/lanzuan/280-180/zglt.jpg");
-            imageTextItem4_4.setTitle("中国联通");
-            imageTextItem4_4.setLink("/statics/page/business/b3.html");
+        imageTextItem4_4.setText("中国联通");
+        imageTextItem4_4.setImage("/statics/image/lanzuan/280-180/zglt.jpg");
+        imageTextItem4_4.setTitle("中国联通");
+        imageTextItem4_4.setLink("/statics/page/business/b3.html");
 
-            imageTextItems1.add(imageTextItem1_1);
-            imageTextItems1.add(imageTextItem1_2);
-            imageTextItems1.add(imageTextItem1_3);
-            imageTextItems1.add(imageTextItem1_4);
+        imageTextItems1.add(imageTextItem1_1);
+        imageTextItems1.add(imageTextItem1_2);
+        imageTextItems1.add(imageTextItem1_3);
+        imageTextItems1.add(imageTextItem1_4);
 
-            imageTextItems2.add(imageTextItem2_1);
-            imageTextItems2.add(imageTextItem2_2);
-            imageTextItems2.add(imageTextItem2_3);
-            imageTextItems2.add(imageTextItem2_4);
+        imageTextItems2.add(imageTextItem2_1);
+        imageTextItems2.add(imageTextItem2_2);
+        imageTextItems2.add(imageTextItem2_3);
+        imageTextItems2.add(imageTextItem2_4);
 
-            imageTextItems3.add(imageTextItem3_1);
-            imageTextItems3.add(imageTextItem3_2);
-            imageTextItems3.add(imageTextItem3_3);
-            imageTextItems3.add(imageTextItem3_4);
+        imageTextItems3.add(imageTextItem3_1);
+        imageTextItems3.add(imageTextItem3_2);
+        imageTextItems3.add(imageTextItem3_3);
+        imageTextItems3.add(imageTextItem3_4);
 
-            imageTextItems4.add(imageTextItem4_1);
-            imageTextItems4.add(imageTextItem4_2);
-            imageTextItems4.add(imageTextItem4_3);
-            imageTextItems4.add(imageTextItem4_4);
+        imageTextItems4.add(imageTextItem4_1);
+        imageTextItems4.add(imageTextItem4_2);
+        imageTextItems4.add(imageTextItem4_3);
+        imageTextItems4.add(imageTextItem4_4);
 
 
-            block1.setImageTextItems(imageTextItems1);
-            block2.setImageTextItems(imageTextItems2);
-            block3.setImageTextItems(imageTextItems3);
-            block4.setImageTextItems(imageTextItems4);
+        block1.setImageTextItems(imageTextItems1);
+        block2.setImageTextItems(imageTextItems2);
+        block3.setImageTextItems(imageTextItems3);
+        block4.setImageTextItems(imageTextItems4);
 
-            imageTextBlocks.add(block1);
-            imageTextBlocks.add(block2);
-            imageTextBlocks.add(block3);
-            imageTextBlocks.add(block4);
-            group.setItems(imageTextBlocks);
-            imageTextBlockGroupService.insert(group);
-        }
+        imageTextBlocks.add(block1);
+        imageTextBlocks.add(block2);
+        imageTextBlocks.add(block3);
+        imageTextBlocks.add(block4);
+        group.setItems(imageTextBlocks);
+        group.setPageComponent(pageComponent);
+        imageTextBlockGroupService.insert(group);
+
     }
 
-    private void initCardGroupData() {
+    private void initCardGroupData(PageComponent pageComponent) {
         logger.info("初始化图文卡片组。。。");
-        CardGroup cardGroup=cardGroupService.findByUri("/home");
-        if (cardGroup==null){
-            logger.info("   未查询到图文卡片组方案，应用默认方案。。。");
-            cardGroup=new CardGroup();
-            cardGroup.setEnabled(true);
-            cardGroup.setUri("/home");
-            cardGroup.setName("图文卡片组1");
-            List<Card> Cards=new ArrayList<Card>();
-            Card Card1=new Card();
-            Card Card2=new Card();
-            Card Card3=new Card();
-            Card1.setLink("/statics/page/business/b1.html");
-            Card2.setLink("/statics/page/business/b2.html");
-            Card3.setLink("/statics/page/business/b3.html");
-            Card1.setImage("/statics/image/cardGroup/logo-bg.jpg");
-            Card2.setImage("/statics/image/cardGroup/logo-bg.jpg");
-            Card3.setImage("/statics/image/cardGroup/logo-bg.jpg");
-            Card1.setText("智慧城市");
-            Card2.setText("三农服务");
-            Card3.setText("软件开发");
-            Cards.add(Card1);
-            Cards.add(Card2);
-            Cards.add(Card3);
-            cardGroup.setItems(Cards);
-            cardGroupService.insert(cardGroup);
-        }
+        CardGroup cardGroup=new CardGroup();
+        cardGroup.setEnabled(true);
+        cardGroup.setUri("/home");
+        cardGroup.setName("图文卡片组1");
+        List<Card> Cards=new ArrayList<Card>();
+        Card Card1=new Card();
+        Card Card2=new Card();
+        Card Card3=new Card();
+        Card1.setLink("/statics/page/business/b1.html");
+        Card2.setLink("/statics/page/business/b2.html");
+        Card3.setLink("/statics/page/business/b3.html");
+        Card1.setImage("/statics/image/cardGroup/logo-bg.jpg");
+        Card2.setImage("/statics/image/cardGroup/logo-bg.jpg");
+        Card3.setImage("/statics/image/cardGroup/logo-bg.jpg");
+        Card1.setText("智慧城市");
+        Card2.setText("三农服务");
+        Card3.setText("软件开发");
+        Cards.add(Card1);
+        Cards.add(Card2);
+        Cards.add(Card3);
+        cardGroup.setItems(Cards);
+        cardGroup.setPageComponent(pageComponent);
+        cardGroupService.insert(cardGroup);
+
 
     }
 
-    private void initNavbarData() {
+    private void initNavbarData(PageComponent pageComponent) {
         logger.info("初始化导航条。。。");
-        Navbar navbar=navbarService.findByUri("/home");
-        if (navbar==null){
-            logger.info("   未查询到导航条方案，应用默认方案。。。");
-            navbar=new Navbar();
-            navbar.setName("首页导航条");
-            navbar.setUri("/home");
-            navbar.setEnabled(true);
-            NavbarBrand navbarBrand=new NavbarBrand();
-            navbarBrand.setType(NavbarBrandTypeEnum.IMAGE.toCode());
-            navbarBrand.setValue("/statics/image/lanzuan/icons/ico.jpg");
-            navbar.setNavbarBrand(navbarBrand);
-            List<NavItem> navItems=new ArrayList<NavItem>();
-            NavItem navItem1=new NavItem();
-            NavItem navItem2=new NavItem();
-            NavItem navItem3=new NavItem();
-            NavItem navItem4=new NavItem();
-            NavItem navItem5=new NavItem();
-            navItem1.setName("首页");
-            navItem2.setName("智慧城市");
-            navItem3.setName("三农服务");
-            navItem4.setName("软件开发");
-            navItem5.setName("关于我们");
-            navItem1.setFaClass("fa-home");
-            navItem2.setFaClass("fa-wifi");
-            navItem3.setFaClass("fa-tree");
-            navItem4.setFaClass("fa-safari");
-            navItem5.setFaClass("fa-male");
-            navItem1.setLink("/");
-            navItem2.setLink("/statics/page/business/b1.html");
-            navItem3.setLink("/statics/page/business/b2.html");
-            navItem4.setLink("/statics/page/business/b3.html");
-            navItem5.setLink("/statics/page/about-us.html");
+        Navbar navbar=new Navbar();
+        navbar.setName("首页导航条");
+        navbar.setUri("/home");
+        navbar.setEnabled(true);
+        NavbarBrand navbarBrand=new NavbarBrand();
+        navbarBrand.setType(NavbarBrandTypeEnum.IMAGE.toCode());
+        navbarBrand.setValue("/statics/image/lanzuan/icons/ico.jpg");
+        navbar.setNavbarBrand(navbarBrand);
+        List<NavItem> navItems=new ArrayList<NavItem>();
+        NavItem navItem1=new NavItem();
+        NavItem navItem2=new NavItem();
+        NavItem navItem3=new NavItem();
+        NavItem navItem4=new NavItem();
+        NavItem navItem5=new NavItem();
+        navItem1.setName("首页");
+        navItem2.setName("智慧城市");
+        navItem3.setName("三农服务");
+        navItem4.setName("软件开发");
+        navItem5.setName("关于我们");
+        navItem1.setFaClass("fa-home");
+        navItem2.setFaClass("fa-wifi");
+        navItem3.setFaClass("fa-tree");
+        navItem4.setFaClass("fa-safari");
+        navItem5.setFaClass("fa-male");
+        navItem1.setLink("/");
+        navItem2.setLink("/statics/page/business/b1.html");
+        navItem3.setLink("/statics/page/business/b2.html");
+        navItem4.setLink("/statics/page/business/b3.html");
+        navItem5.setLink("/statics/page/about-us.html");
 
-            navItems.add(navItem1);
-            navItems.add(navItem2);
-            navItems.add(navItem3);
-            navItems.add(navItem4);
-            navItems.add(navItem5);
-            navbar.setItems(navItems);
-            navbarService.insert(navbar);
-        }
+        navItems.add(navItem1);
+        navItems.add(navItem2);
+        navItems.add(navItem3);
+        navItems.add(navItem4);
+        navItems.add(navItem5);
+        navbar.setItems(navItems);
+        navbar.setPageComponent(pageComponent);
+        navbarService.insert(navbar);
+
     }
 
     private void initArticleSectionData() {
@@ -624,62 +603,59 @@ public class StartOnLoadService {
         }
     }
 
-    private void initCarouselData() {
+    private void initCarouselData(PageComponent pageComponent) {
         logger.info("初始化轮播图。。。");
-        Carousel carousel=carouselService.findCarouselByUri("/home");
-        if (carousel==null||carousel.getId()==null){
-            logger.info("   未查询到轮播图方案，应用默认方案。。。");
-            carousel=new Carousel();
-            carousel.setName("首页轮播图");
-            carousel.setDate(new Date());
-            carousel.setUri("/home");
-            carousel.setEnabled(true);
-            List<CarouselItem> carouselItems=new ArrayList<CarouselItem>();
-            CarouselCaption caption1=new CarouselCaption();
-            caption1.setType("link");
-            caption1.setText("了解更多");
-            caption1.setValue("/statics/page/business/b1.html");
-            CarouselItem carouselItem1=new CarouselItem();
-            carouselItem1.setValue("/statics/image/lanzuan/home/carousel1.jpg");
-            carouselItem1.setType("image");
-            carouselItem1.setCarouselCaption(caption1);
+        Carousel carousel=new Carousel();
+        carousel.setName("首页轮播图");
+        carousel.setDate(new Date());
+        carousel.setUri("/home");
+        carousel.setEnabled(true);
+        List<CarouselItem> carouselItems=new ArrayList<CarouselItem>();
+        CarouselCaption caption1=new CarouselCaption();
+        caption1.setType("link");
+        caption1.setText("了解更多");
+        caption1.setValue("/statics/page/business/b1.html");
+        CarouselItem carouselItem1=new CarouselItem();
+        carouselItem1.setValue("/statics/image/lanzuan/home/carousel1.jpg");
+        carouselItem1.setType("image");
+        carouselItem1.setCarouselCaption(caption1);
 
-            carouselItems.add(carouselItem1);
+        carouselItems.add(carouselItem1);
 
 
-            CarouselCaption caption2=new CarouselCaption();
-            caption2.setType("link");
-            caption2.setText("了解更多");
-            caption2.setValue("/statics/page/business/b2.html");
-            CarouselItem carouselItem2=new CarouselItem();
-            carouselItem2.setValue("/statics/image/lanzuan/home/carousel2.jpg");
-            carouselItem2.setType("image");
-            carouselItem2.setCarouselCaption(caption2);
-            carouselItems.add(carouselItem2);
+        CarouselCaption caption2=new CarouselCaption();
+        caption2.setType("link");
+        caption2.setText("了解更多");
+        caption2.setValue("/statics/page/business/b2.html");
+        CarouselItem carouselItem2=new CarouselItem();
+        carouselItem2.setValue("/statics/image/lanzuan/home/carousel2.jpg");
+        carouselItem2.setType("image");
+        carouselItem2.setCarouselCaption(caption2);
+        carouselItems.add(carouselItem2);
 
-            CarouselCaption caption3=new CarouselCaption();
-            caption3.setType("link");
-            caption3.setText("了解更多");
-            caption3.setValue("/statics/page/business/b2.html");
-            CarouselItem carouselItem3=new CarouselItem();
-            carouselItem3.setValue("/statics/image/lanzuan/home/carousel3.jpg");
-            carouselItem3.setType("image");
-            carouselItem3.setCarouselCaption(caption3);
-            carouselItems.add(carouselItem3);
+        CarouselCaption caption3=new CarouselCaption();
+        caption3.setType("link");
+        caption3.setText("了解更多");
+        caption3.setValue("/statics/page/business/b2.html");
+        CarouselItem carouselItem3=new CarouselItem();
+        carouselItem3.setValue("/statics/image/lanzuan/home/carousel3.jpg");
+        carouselItem3.setType("image");
+        carouselItem3.setCarouselCaption(caption3);
+        carouselItems.add(carouselItem3);
 
-            CarouselCaption caption4=new CarouselCaption();
-            caption4.setType("link");
-            caption4.setText("了解更多");
-            caption4.setValue("/statics/page/business/b2.html");
-            CarouselItem carouselItem4=new CarouselItem();
-            carouselItem4.setValue("/statics/image/lanzuan/home/carousel4.jpg");
-            carouselItem4.setType("image");
-            carouselItem4.setCarouselCaption(caption4);
-            carouselItems.add(carouselItem4);
-            carouselItemService.insertAll(carouselItems);
-            carousel.setItems(carouselItems);
-            carouselService.insert(carousel);
-        }
+        CarouselCaption caption4=new CarouselCaption();
+        caption4.setType("link");
+        caption4.setText("了解更多");
+        caption4.setValue("/statics/page/business/b2.html");
+        CarouselItem carouselItem4=new CarouselItem();
+        carouselItem4.setValue("/statics/image/lanzuan/home/carousel4.jpg");
+        carouselItem4.setType("image");
+        carouselItem4.setCarouselCaption(caption4);
+        carouselItems.add(carouselItem4);
+        carousel.setItems(carouselItems);
+        carousel.setPageComponent(pageComponent);
+        carouselService.insert(carousel);
+
     }
 
     private void initWebPages() {
@@ -809,7 +785,6 @@ public class StartOnLoadService {
             pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
             pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
             pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
-//            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/bottom/input");
             pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
 
 
@@ -825,8 +800,14 @@ public class StartOnLoadService {
             webPage.setUri("/home");
             webPage.setActive(true);
             pageComponentService.insertAll(pageComponentList);
-
             webPageService.insert(webPage);
+            initNavbarData(pageComponent1);
+            initCarouselData(pageComponent2);
+            initCardGroupData(pageComponent3);
+            initImageTextBlockGroupData(pageComponent4);
+            initSortLinkGroupData(pageComponent5);
+            initFullWidthImageData(pageComponent6);
+            initSortLinkGroupData(pageComponent7);
         }
 
     }

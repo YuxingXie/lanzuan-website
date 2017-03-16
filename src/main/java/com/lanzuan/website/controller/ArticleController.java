@@ -45,8 +45,7 @@ public class ArticleController extends BaseRestSpringController {
     IArticleService articleService;
     @Resource(name = "carouselService")
     ICarouselService carouselService;
-    @Resource(name = "carouselItemService")
-    ICarouselItemService carouselItemService;
+
     @RequestMapping(value = "/list/data")
     public ResponseEntity<List<Article>> getAllArts(){
         List<Article> articles=articleService.findAll();

@@ -2,6 +2,7 @@ package com.lanzuan.entity;
 
 import com.lanzuan.support.vo.Image;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -15,6 +16,16 @@ public class FullWidthImage {
     private String name;
     private boolean enabled;
     private String uri;
+    @DBRef
+    private PageComponent pageComponent;
+
+    public PageComponent getPageComponent() {
+        return pageComponent;
+    }
+
+    public void setPageComponent(PageComponent pageComponent) {
+        this.pageComponent = pageComponent;
+    }
 
     public String getId() {
         return id;

@@ -11,7 +11,7 @@
             <label class="label label-info large-180">当前方案：{{carousel.name}}</label>
 
             <div class="btn-group p-b-10">
-                <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">全部保存</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-click="saveCarousel()">保存</button>
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存</button>
                 <%--<button class="btn btn-primary fa fa-gears" type="button" ng-click="useCarousel()"> 组装方案</button>--%>
@@ -103,8 +103,7 @@
                             <button class="btn white-link fa fa-trash" ng-class="{'btn-danger':carouselItem.id,'btn-primary':!carouselItem.id}"
                                     ng-click="removeCarouselItem($index)"> 删除此条
                             </button>
-                            <a class="btn btn-primary white-link " ng-if="carouselItem.id"
-                               ng-href="${path}${param.muu}/${pageComponent.id}/{{carouselItem.id}}">应用本地图片</a>
+
                             <button class="btn btn-primary white-link fa fa-arrow-up"
                                     ng-click="forwardCarouselItem($index)" ng-if="$index!==0"> 前移
                             </button>
