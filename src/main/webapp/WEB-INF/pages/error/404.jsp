@@ -20,12 +20,12 @@
 </head>
 <body ng-app="homeApp">
     <div ng-controller="HomeController" >
-        <div class="container margin-top-2em">
+        <div class="container m-t-2em">
             <div class="row">
                 <div class="col-xs-12 col-md-3">
                     <div class="list-group fixed-left-menu">
                         <div class="list-group-item p-a-0 hidden-sm-down">
-                            <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em">
+                            <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger m-l-2em">
                         </div>
                         <div class="list-group-item p-a-0" >
 
@@ -43,13 +43,13 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-9">
-                    <i class="fa fa-warning fa-5x padding-top-2em padding-bottom-2em padding-left-2em text-warning">页面找不到了</i>
+                    <i class="fa fa-warning fa-5x p-t-2em p-b-2em padding-left-2em text-warning">页面找不到了</i>
                 </div>
         </div>
         </div>
     </div>
     <footer>
-        <div class="row bg-black-2 small-90 padding-top-2em padding-bottom-2em md-down-margin-bottom-1em md-down-text-small-70 m-l-0 m-r-0">
+        <div class="row bg-black-2 small-90 p-t-2em p-b-2em md-down-m-b-1em md-down-text-small-70 m-l-0 m-r-0">
                 <span class="col-md-offset-2 col-xs-12 col-md-3 color-light-grey-2 text-center">
                     ©2000-2017&nbsp;&nbsp;&nbsp;&nbsp;湖南蓝钻科技有限公司&nbsp;&nbsp;版权所有
                </span>

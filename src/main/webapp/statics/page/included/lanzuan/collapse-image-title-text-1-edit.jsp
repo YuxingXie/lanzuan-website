@@ -6,7 +6,7 @@
     <div class="col-xs-12 m-a-0 p-a-0">
         <label class="label label-default large-180">编辑图文块组组件方案</label>
 
-        <div class="btn-group padding-bottom-10">
+        <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>
 
             <button class="btn btn-primary fa fa-save " type="button" ng-click="saveImageTextBlockGroup()"> 保存</button>
@@ -65,7 +65,7 @@
     </div>
     <div class="row" ng-repeat="imageTextItem in imageTextBlock.imageTextItems">
 
-        <div class="btn-group col-xs-12 padding-top-1-5em ">
+        <div class="btn-group col-xs-12 p-t-1-5em ">
             <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
             <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
                     aria-haspopup="true"
@@ -84,10 +84,10 @@
             <img ng-src="{{imageTextItem.image}}" class="img-responsive img-ico-larger img-rounded"/>
         </div>
         <div class="col-xs-4">
-            <div class="input-group input-group-sm margin-bottom-10">
+            <div class="input-group input-group-sm m-b-10">
                 <span class="input-group-addon">文字</span><input type="text" class="form-control" ng-model="imageTextItem.text"/>
             </div>
-            <div class="input-group input-group-sm margin-bottom-10">
+            <div class="input-group input-group-sm m-b-10">
                 <span class="input-group-addon">链接</span><input type="text" class="form-control" ng-model="imageTextItem.link"/>
             </div>
             <div class="input-group input-group-sm">

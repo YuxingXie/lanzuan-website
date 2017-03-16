@@ -19,10 +19,15 @@
 <body ng-app="app" >
     <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
         <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
-        <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
 
-        <div class="row padding-top-2em margin-left-2em margin-right-2em">
 
+        <div class="row p-t-2em m-l-2em m-r-2em">
+            <div class="col-xs-12 col-md-3">
+                <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
+            </div>
+            <div class="col-xs-12 col-md-9">
+
+            </div>
         </div>
     </div>
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>

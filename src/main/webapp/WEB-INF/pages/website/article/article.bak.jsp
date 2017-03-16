@@ -28,12 +28,12 @@
     </head>
     <body ng-app="homeApp" class="img-responsive">
     <div ng-controller="HomeController" >
-        <div class="container margin-top-2em">
+        <div class="container m-t-2em">
             <div class="row">
                 <div class="col-xs-12 col-md-3 col-md-push-1">
                     <div class="list-group fixed-left-menu">
                         <div class="list-group-item p-a-0 hidden-sm-down">
-                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em img-responsive">
+                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger m-l-2em img-responsive">
                         </div>
                         <div class="list-group-item p-a-0" >
                             <ol class="breadcrumb m-a-0">
@@ -52,7 +52,7 @@
                 <div class="col-xs-12 col-md-9 p-a-0" id="content">
                     <div class="col-xs-12 text-center p-a-0 m-a-0">
                         <h4>${article.title}</h4>
-                        <label class="pull-right margin-bottom-2em label label-pill label-default">
+                        <label class="pull-right m-b-2em label label-pill label-default">
                         <c:if test="${not empty article.author}">作者${article.author}</c:if>
                             <fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
                         </label>

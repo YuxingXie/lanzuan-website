@@ -10,7 +10,7 @@
             <label class="label label-default large-180">编辑轮播图</label>
             <label class="label label-info large-180">当前方案：{{carousel.name}}</label>
 
-            <div class="btn-group padding-bottom-10">
+            <div class="btn-group p-b-10">
                 <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="saveCarousel()">全部保存</button>
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insertCarouselItem()">插入一条</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="newCarousel()"> 方案另存</button>
@@ -46,7 +46,7 @@
                 <div class="col-xs-12"><h5>该轮播方案没有任何轮播内容，点击上方 “插入一条”按钮添加轮播内容</h5></div>
             </div>
             <div ng-init="getCarouselImages()" class="row" ng-repeat="carouselItem in carousel.items track by $index">
-                <div class="row padding-top-10">
+                <div class="row p-t-10">
                     <div class="btn-group col-xs-12">
                         <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row padding-bottom-10 solid-silver-border-bottom">
+                <div class="row p-b-10 solid-silver-border-bottom">
                     <div class="col-xs-4">
                         <img ng-if="carouselItem.type==='image'" class="center-block full-width"
                              ng-src="{{carouselItem.value}}"/>

@@ -34,7 +34,7 @@
         <script id="editor" type="text/plain"></script>
     </div>
     <div class="row">
-        <div class="col-xs-12 padding-top-2em">
+        <div class="col-xs-12 p-t-2em">
             <form id="form" autocomplete="off" method="post" accept-charset="UTF-8" role="form" action="/admin/article/save">
                 <fieldset>
                     <div class="form-group input-group">

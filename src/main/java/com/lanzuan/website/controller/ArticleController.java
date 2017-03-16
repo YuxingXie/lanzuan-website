@@ -21,9 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,12 +112,19 @@ public class ArticleController extends BaseRestSpringController {
 
 
     @RequestMapping(value = "/save")
-    public String uploadArticle(@ModelAttribute("file") Article article){
+    public String uploadArticle(@ModelAttribute Article article,HttpSession session){
         if (article==null)
             return "redirect:/admin/article/list";
         if (StringUtils.isBlank(article.getId()))
             article.setId(null);
+        Date now=new Date();
+        article.setDate(now);
+        article.setLastModifyUser(getLoginUser(session));
+        article.setLastModifyDate(now);
+        article.setByEditor(true);
+        article.setUploader(getLoginAdministrator(session));
         articleService.insert(article);
+
         return "redirect:/admin/article/list";
     }
 

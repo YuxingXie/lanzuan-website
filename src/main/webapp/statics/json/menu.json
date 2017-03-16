@@ -13,7 +13,7 @@
     "collapse":true,
     "menuItem":[
       {"name":"编写文章","link":"/admin/file-editor","class":"fa fa-cog"},
-      {"name":"修改文章","link":"/admin/article-admin","class":"fa fa-cog"}]
+      {"name":"修改文章","link":"/admin/article/list","class":"fa fa-cog"}]
   },
   {
     "name":"全局配置",

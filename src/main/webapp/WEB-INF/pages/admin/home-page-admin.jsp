@@ -43,7 +43,7 @@
                 </div>
             </div>
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                <div class="row padding-top-2em padding-bottom-2em"style="border-top: solid #000 1px">
+                <div class="row p-t-2em p-b-2em"style="border-top: solid #000 1px">
                     <div class="col-xs-9 m-a-0 p-a-0">
                         <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
                     </div>

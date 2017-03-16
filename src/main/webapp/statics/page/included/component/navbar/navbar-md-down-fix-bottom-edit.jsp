@@ -6,7 +6,7 @@
 
     <div class="col-xs-12 m-a-0 p-a-0">
         <label class="label label-default large-180">编辑导航条</label>
-        <div class="btn-group padding-bottom-10">
+        <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{${param.var}.name}}</label>
 
             <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()" >保存</button>

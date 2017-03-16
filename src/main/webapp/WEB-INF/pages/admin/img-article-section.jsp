@@ -21,7 +21,7 @@
         <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
 
 
-        <div class="row padding-top-2em m-a-0">
+        <div class="row p-t-2em m-a-0">
             <div ng-controller="HomeController">
                 <form autocomplete="off" method="post" accept-charset="UTF-8" enctype="multipart/form-data"
                       role="form" action="/admin/article_section/image/new/${pageComponentId}/${articleSectionId}">

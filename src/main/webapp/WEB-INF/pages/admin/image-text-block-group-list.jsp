@@ -46,7 +46,7 @@
                             <i  ng-class="{'color-red':!group.name}">{{group.name?group.name:"未命名"}}</i></div>
                         <div class="col-xs-4">
                             <div ng-repeat="block in group.items" ng-class-even="'bg--blue-1'"ng-class-odd="'bg--blue-3'"
-                                 class="row padding-top-15 padding-bottom-10">
+                                 class="row p-t-15 p-b-10">
                                 <div class="col-xs-12">{{block.name}}</div>
                                 <div class="col-xs-3" ng-repeat="item in block.imageTextItems">
                                     <img class="img-responsive img-rounded" ng-src="${path}{{item.image}}"/>
@@ -61,7 +61,7 @@
                                   ng-class="{'fa-toggle-on color-blue ':group.enabled,'fa-toggle-off color-grey':!group.enabled}">
                                 <%--{{group.enabled?"禁用":"启用"}}--%>
                             </span>
-                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little margin-bottom-15" ng-click="deleteGroup(group)">
+                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little m-b-15" ng-click="deleteGroup(group)">
                                 删除方案
                             </button>
                         </div>

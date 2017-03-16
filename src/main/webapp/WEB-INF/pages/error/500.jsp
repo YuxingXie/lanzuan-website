@@ -21,12 +21,12 @@
 </head>
 <body ng-app="homeApp">
 <div ng-controller="HomeController" >
-  <div class="container margin-top-2em">
+  <div class="container m-t-2em">
     <div class="row">
       <div class="col-xs-12 col-md-3">
         <div class="list-group fixed-left-menu">
           <div class="list-group-item p-a-0 hidden-sm-down">
-            <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger margin-left-2em">
+            <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger m-l-2em">
           </div>
           <div class="list-group-item p-a-0" >
 
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-9">
-        <i class="fa fa-bolt fa-2x padding-top-2em padding-bottom-2em padding-left-2em text-warning">出错了，快呼叫攻城狮吧</i>
+        <i class="fa fa-bolt fa-2x p-t-2em p-b-2em padding-left-2em text-warning">出错了，快呼叫攻城狮吧</i>
       </div>
     </div>
   </div>

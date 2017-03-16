@@ -90,17 +90,12 @@ Template Name: Metronic - Responsive Website Template build with Twitter Bootstr
 .font-size-12{font-size: 12px;}
 
 
-a:link {color: #666666}
-a:visited{color: #666666}
+
 .white-link:link,.white-link:visited {color: #fff}
 .blue-link:link,.blue-link:visited {color: #3a60b9
 }
 .green-link:visited{color: #666666}
-a, a:focus, a:hover, a:active {
-    /*outline: 0;*/
-    text-decoration: none;
-    color: #314c97;
-}
+
 .green-link:link {color: rgba(0, 171, 0, 0.53)
 }
 .grey-link:link, .grey-link a:link{color: #969696}
@@ -210,68 +205,62 @@ Misc tools
 .no-text-shadow {
     text-shadow: none;
 }
-.padding-0 {
-    padding:0;
-}
+
 .padding-1 {
     padding:1px;
 }
 .padding-30 {
     padding:30px;
 }
-.padding-top-0 {
-    padding-top:0;
-}
-.padding-top-05em {
+
+.p-t-05em {
     padding-top:0.5em;
 }
-.padding-top-1em {
+.p-t-1em {
     padding-top: 1em;
 }
-.padding-top-1-5em {
+.p-t-1-5em {
     padding-top: 1.5em;
 }
-.padding-top-2em {
+.p-t-2em {
     padding-top: 2em;
 }
-.padding-top-4em {
+.p-t-4em {
     padding-top: 4em;
 }
-.padding-top-5 {
+.p-t-5 {
     padding-top: 5px;
 }
-.padding-top-6{padding-top:6px;}
-.padding-top-8{padding-top:8px;}
-.padding-top-10 {
+.p-t-6{padding-top:6px;}
+.p-t-8{padding-top:8px;}
+.p-t-10 {
     padding-top: 10px;
 }
-.padding-top-15 {
+.p-t-15 {
     padding-top: 15px;
 }
-.padding-top-20 {
+.p-t-20 {
     padding-top: 20px;
 }
-.padding-top-25 {
+.p-t-25 {
     padding-top: 25px;
 }
-.padding-top-30 {
+.p-t-30 {
     padding-top: 30px;
 }
-.padding-top-35 {
+.p-t-35 {
     padding-top: 35px;
 }
-.padding-top-40 {
+.p-t-40 {
     padding-top: 40px;
 }
-.padding-top-45 {
+.p-t-45 {
     padding-top: 45px;
 }
-.padding-top-50 {
+.p-t-50 {
     padding-top: 50px;
 }
-.margin-0{
-    margin: 0;
-}
+
 .bottom-0{
     bottom: 0;
 }
@@ -281,233 +270,220 @@ Misc tools
 .margin-1{
     margin: 1px;
 }
-.margin-bottom-0 {
-    margin-bottom: 0;
-}
-.margin-bottom-5 {
+
+.m-b-5 {
     margin-bottom: 5px;
 }
-.margin-bottom-10 {
+.m-b-10 {
     margin-bottom: 10px;
 }
-.margin-bottom-15 {
+.m-b-15 {
     margin-bottom: 15px;
 }
-.margin-bottom-20 {
+.m-b-20 {
     margin-bottom: 20px;
 }
-.margin-bottom-25 {
+.m-b-25 {
     margin-bottom: 25px;
 }
-.margin-bottom-30 {
+.m-b-30 {
     margin-bottom: 30px;
 }
-.margin-bottom-35 {
+.m-b-35 {
     margin-bottom: 35px;
 }
-.margin-bottom-40 {
+.m-b-40 {
     margin-bottom: 40px;
 }
-.margin-bottom-60 {
+.m-b-60 {
     margin-bottom: 60px;
 }
-.margin-bottom-1-6em {
+.m-b-1-6em {
     margin-bottom: 1.6em;
 }
-.margin-bottom-1em {
+.m-b-1em {
     margin-bottom: 1em;
 }
-.margin-bottom-2em {
+.m-b-2em {
     margin-bottom: 2em;
 }
-.margin-top-10 {
+.m-t-10 {
     margin-top: 10px;
 }
-.margin-top-20 {
+.m-t-20 {
     margin-top: 20px;
 }
-.margin-top-40 {
+.m-t-40 {
     margin-top: 40px;
 }
-.margin-top-112
+.m-t-112
 {
     margin-top:112px;
 }
-.margin-top-0 {
-    margin-top: 0;
-}
-.margin-top-05em {
+
+.m-t-05em {
     margin-top: .5em;
 }
-.margin-top-1em {
+.m-t-1em {
     margin-top: 1em;
 }
-.margin-top-2em {
+.m-t-2em {
     margin-top: 2em;
 }
-.margin-top-2-4em {
+.m-t-2-4em {
     margin-top: 2.4em;
 }
-.margin-top-3em {
+.m-t-3em {
     margin-top: 3em;
 }
-.margin-top-4em {
+.m-t-4em {
     margin-top: 4em;
 }
-.margin-top-6em {
+.m-t-6em {
     margin-top: 6em;
 }
-.margin-right-0 {
-    margin-right: 0;
-}
-.margin-right-5px {
+
+.m-r-5px {
     margin-right: 5px;
 }
-.margin-right-2em {
+.m-r-2em {
     margin-right: 2em;
 }
-.margin-right-5em {
+.m-r-5em {
     margin-right: 5em;
 }
-.margin-right-6em {
+.m-r-6em {
     margin-right: 6em;
 }
-.margin-right-6-5em {
+.m-r-6-5em {
     margin-right: 6.5em;
 }
-.margin-right-8em {
+.m-r-8em {
     margin-right: 8em;
 }
-.margin-right-10 {
+.m-r-10 {
     margin-right: 10px;
 }
-.margin-right-20 {
+.m-r-20 {
     margin-right: 20px;
 }
-.margin-right-20em {
+.m-r-20em {
     margin-right: 20em;
 }
-.margin-left--20 {
+.m-l--20 {
     margin-left: -20px;
 }
-.margin-left--10 {
+.m-l--10 {
     margin-left: -10px;
 }
-.margin-left-0 {
-    margin-left: 0;
-}
-.margin-left-2px {
+
+.m-l-2px {
     margin-left:2px;
 }
-.margin-left-2em {
+.m-l-2em {
     margin-left:2em;
 }
-.margin-left-5px {
+.m-l-5px {
     margin-left:5px;
 }
-.margin-left-5em {
+.m-l-5em {
     margin-left:5em;
 }
-.margin-left-8em {
+.m-l-8em {
     margin-left: 8em;
 }
-.margin-left-10 {
+.m-l-10 {
     margin-left: 10px;
 }
-.margin-left-15 {
+.m-l-15 {
     margin-left: 15px;
 }
-.margin-left-20 {
+.m-l-20 {
     margin-left: 20px;
 }
-.margin-left-right-0 {
+.m-l-r-0 {
     margin-left: 0;
     margin-right: 0;
 }
-.padding-left-0 {
-    padding-left: 0;
-}
-.padding-left-2 {
+
+.p-l-2 {
     padding-left: 2px;
 }
-.padding-left-3 {
+.p-l-3 {
     padding-left: 3px;
 }
-.padding-left-5 {
+.p-l-5 {
     padding-left: 5px;
 }
-.padding-left-10 {
+.p-l-10 {
     padding-left: 10px;
 }
-.padding-left-20 {
+.p-l-20 {
     padding-left: 20px;
 }
-.padding-left-30 {
+.p-l-30 {
     padding-left: 30px;
 }
-.padding-left-1em {
+.p-l-1em {
     padding-left: 1em;
 }
-.padding-left-2em {
+.p-l-2em {
     padding-left: 2em;
 }
-.padding-left-4em {
+.p-l-4em {
     padding-left: 4em;
 }
-.padding-left-5em {
+.p-l-5em {
     padding-left: 5em;
 }
-.padding-right-0 {
-    padding-right: 0;
-}
-.padding-right-2 {
+.p-r-2 {
     padding-right: 2px;
 }
-.padding-right-10 {
+.p-r-10 {
     padding-right: 10px;
 }
-.padding-right-30 {
+.p-r-30 {
     padding-right: 30px;
 }
-.padding-right-2em {
+.p-r-2em {
     padding-right: 2em;
 }
 .p-r-3em {
     padding-right: 3em;
 }
-.padding-bottom-2{
+.p-b-2{
     padding-bottom: 2px;
 }
-.padding-bottom-3{
+.p-b-3{
     padding-bottom: 3px;
 }
-.padding-bottom-10{
+.p-b-10{
     padding-bottom: 10px;
 }
-.padding-bottom-20{
+.p-b-20{
     padding-bottom: 20px;
 }
-.padding-bottom-40{
+.p-b-40{
     padding-bottom: 40px;
 }
-.padding-bottom-0{
+.p-b-0{
     padding-bottom:0;
 }
-.padding-bottom-05em{
+.p-b-05em{
     padding-bottom:.5em;
 }
-.padding-bottom-1em{
+.p-b-1em{
     padding-bottom:1em;
 }
-.padding-bottom-2em{
+.p-b-2em{
     padding-bottom:2em;
 }
-.padding-bottom-4em{
+.p-b-4em{
     padding-bottom:4em;
 }
-.padding-left-right-2{padding:0 2px}
-.padding-left-right-2em{padding:0 2em}
-.padding-left-right-4em{padding:0 4em}
+.p-l-r-2{padding:0 2px}
+.p-l-r-2em{padding:0 2em}
+.p-l-r-4em{padding:0 4em}
 
 .height-50px{height:50px;}
 .height-260px{height:260px;}

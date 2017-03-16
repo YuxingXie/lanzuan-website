@@ -1,0 +1,7 @@
+a:link {color: #666666}
+a:visited{color: #666666}
+a, a:focus, a:hover, a:active {
+    /*outline: 0;*/
+    text-decoration: none;
+    color: #314c97;
+}

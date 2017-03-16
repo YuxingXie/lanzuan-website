@@ -59,7 +59,7 @@
                           <div class="col-xs-8 p-r-lg"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4>${article.title}</h4>
-                                  <label class="pull-right margin-bottom-2em label label-pill label-default">
+                                  <label class="pull-right m-b-2em label label-pill label-default">
                                       <c:if test="${not empty article.author}">作者:${article.author}</c:if>
                                       发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
                                   </label>
@@ -84,7 +84,7 @@
 
         </div>
     </div>
-    <div class="col-xs-12 padding-top-50">
+    <div class="col-xs-12 p-t-50">
     </div>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/js/tether.min.js"></script>

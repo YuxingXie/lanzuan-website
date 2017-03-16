@@ -68,7 +68,7 @@
                                   ng-class="{'fa-toggle-on color-blue ':navbar.enabled,'fa-toggle-off color-grey':!navbar.enabled}">
                                 <%--{{carousel.enabled?"禁用":"启用"}}--%>
                             </span>
-                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little margin-bottom-15" ng-click="deleteNavbar(navbar)">
+                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little m-b-15" ng-click="deleteNavbar(navbar)">
                                 删除方案
                             </button>
                         </div>

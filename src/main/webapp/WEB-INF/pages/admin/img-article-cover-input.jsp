@@ -21,7 +21,7 @@
         <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
 
 
-        <div class="row padding-top-2em m-a-0">
+        <div class="row p-t-2em m-a-0">
             <div ng-controller="HomeController">
                 <div class="col-xs-12 alert alert-info" >为文章封面上传一张图片</div>
                 <div class="col-xs-12" >

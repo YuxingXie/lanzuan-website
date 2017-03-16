@@ -29,37 +29,22 @@
         <div class="col-xs-12">
             <div>
                 <div class="row large-180 bg-light-grey">
-                    <div class="col-xs-2">类型</div>
-                    <div class="col-xs-4">页面名称（或文章标题）</div>
+
+                    <div class="col-xs-4">标题</div>
                     <div class="col-xs-4">地址(uri)</div>
-                    <div class="col-xs-2"></div>
+                    <div class="col-xs-4">操作</div>
                 </div>
-                <div class="small-90 row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" >
-                    <div class="col-xs-2">
-                        本站链接
-                    </div>
-                    <div class="col-xs-4">
-                        首页
-                    </div>
-                    <div class="col-xs-4">
-                       /home 或者什么都不填，或者/
-                    </div>
-                    <div class="col-xs-2">
-                        <a class="blue-link" ng-href="/" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
-                    </div>
-                </div>
-                <div class="small-90 row p-a-0 m-a-0 solid-silver-border-top solid-silver-border-bottom hover-bg-color-grey" ng-repeat="article in articles">
-                    <div class="col-xs-2">
-                       文章
-                    </div>
+
+                <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in articles">
+
                     <div class="col-xs-4">
                         {{article.title}}
                     </div>
                     <div class="col-xs-4">
-                       /article/{{article.id}}
+                       /article/{{article.id}} <a class="blue-link" ng-href="/article/{{article.id}}" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
                     </div>
-                    <div class="col-xs-2">
-                        <a class="blue-link" ng-href="/article/{{article.id}}" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
+                    <div class="col-xs-4">
+
                     </div>
                 </div>
 

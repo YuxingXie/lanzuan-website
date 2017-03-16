@@ -59,7 +59,7 @@
                                   ng-class="{'fa-toggle-on color-blue ':cardGroup.enabled,'fa-toggle-off color-grey':!cardGroup.enabled}">
 
                             </span>
-                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little margin-bottom-15" ng-click="deleteCardGroup(cardGroup)">
+                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little m-b-15" ng-click="deleteCardGroup(cardGroup)">
                                 删除方案
                             </button>
                         </div>

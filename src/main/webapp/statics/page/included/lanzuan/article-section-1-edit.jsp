@@ -6,7 +6,7 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑文章块</label>
             <label class="label label-info large-180">{{${param.varU}.name}}</label>
-            <div class="btn-group padding-bottom-10">
+            <div class="btn-group p-b-10">
                 <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${param.varU}Item()"> 新增文章块</button>
                 <button class="btn btn-primary fa fa-floppy-o" type="button" ng-click="save${param.varU}()"> 保存修改</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${param.varU}()">方案另存为</button>
@@ -39,7 +39,7 @@
 <div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${param.var}.items" ng-if="${param.var}">
     <div class="col-xs-12" ng-if="!sortLink.links &&!sortLink.image">
         <span class="">该块无内容</span>
-        <div class="row padding-top-10">
+        <div class="row p-t-10">
             <div class="btn-group col-xs-12">
                 <button class="btn btn-primary btn-sm" ng-click="sortLink.links[0].text='文章标题...'">添加文章</button>
                 <button type="button" class="btn btn-primary btn-sm">添加图片</button>
@@ -117,7 +117,7 @@
             <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${param.varU}Item($index)" ng-if="$index!==0">前移</button>
             <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${param.varU}Item($index)" ng-if="${param.var}.items.length-1!==$index">后移</button>
         </div>
-        <div class="input-group input-group-sm margin-top-10">
+        <div class="input-group input-group-sm m-t-10">
             <span class="input-group-addon">分类名称</span>
             <input type="text" ng-model="sortLink.sortName"  class="form-control">
         </div>
