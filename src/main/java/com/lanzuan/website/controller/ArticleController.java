@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,7 +87,6 @@ public class ArticleController extends BaseRestSpringController {
         if (!file.isEmpty()) {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
-//                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
                 String fileName=System.currentTimeMillis()+ type;
                 String dir=request.getServletContext().getRealPath("/") + Constant.ARTICLE_COVER_IMAGE_DIR;
                 String filePath = dir+"/"+fileName;
@@ -107,5 +107,14 @@ public class ArticleController extends BaseRestSpringController {
         }
         return "redirect:/admin/index";
     }
+
+
+    @RequestMapping(value = "/save")
+    public String uploadArticle(@ModelAttribute("file") Article article){
+
+        articleService.insert(article);
+        return "redirect:/article/list";
+    }
+
 
 }

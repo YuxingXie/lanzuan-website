@@ -7,7 +7,7 @@
         <label class="label label-default large-180">编辑图文卡片组</label>
 
         <div class="btn-group padding-bottom-10">
-            <label class="btn btn-info cursor-auto">方案名称：{{cardGroup.name}}</label>
+            <label class="btn btn-info cursor-auto">当前方案：{{cardGroup.name}}</label>
 
             <button class="btn btn-primary fa fa-upload " type="button" ng-click="saveCardGroup()"> 保存</button>
             <button class="btn btn-primary fa fa-save" type="button" ng-click="newCardGroup()"> 方案另存为</button>

@@ -128,7 +128,6 @@ public class AdminCarouselController extends BaseRestSpringController {
         if (!file.isEmpty()) {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
-//                org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),"statics/upload/"+System.currentTimeMillis()+ type);
                 String fileName=System.currentTimeMillis()+ type;
                 String dir=request.getServletContext().getRealPath("/") + Constant.CAROUSEL_IMAGE_DIR;
                 String filePath = dir+"/"+fileName;

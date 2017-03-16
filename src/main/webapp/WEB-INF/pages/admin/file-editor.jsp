@@ -26,27 +26,7 @@
 
 </head>
 <body>
-<nav class="row navbar">
-    <div class="navbar-brand">
-        <c:choose>
-            <c:when test="${empty user.sex or user.sex eq 'male'}">
-                <i class="fa fa-male padding-left-2em"></i>
-            </c:when>
-            <c:otherwise><i class="fa fa-female padding-left-2em"></i></c:otherwise>
-        </c:choose>
-        欢迎您，${user.name}
-        <c:choose>
-            <c:when test="${empty user.sex or user.sex eq 'male'}">先生</c:when>
-            <c:otherwise>女士</c:otherwise>
-        </c:choose>!
-    </div>
-    <ul class="nav navbar-nav">
-        <li class="nav-item pull-right">
-            <button class="nav-link btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出
-            </button>
-        </li>
-    </ul>
-</nav>
+<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
 <div class="container">
     <h1>文本编辑器</h1>
 
@@ -55,32 +35,16 @@
     </div>
     <div class="row">
         <div class="col-xs-12 padding-top-2em">
-            <form id="form" autocomplete="off" method="post" accept-charset="UTF-8" role="form" action="/admin/article/upload">
+            <form id="form" autocomplete="off" method="post" accept-charset="UTF-8" role="form" action="/admin/article/save">
                 <fieldset>
                     <div class="form-group input-group">
                         <label class="fa fa-user input-group-addon">标题</label>
                         <input class="form-control" name="title" type="text" value="${article.title}">
                         <input type="hidden" name="content" id="content" />
                         <input type="hidden" name="id" id="id" value="${article.id}"/>
-                        <c:if test="${not empty pageComponent}">
-                            <input type="hidden" name="pageComponentId" id="pageComponentId" value="${pageComponent.id}"/>
-                        </c:if>
-                    </div>
-                    <div class="form-group input-group">
-                        <label class="fa fa-lock input-group-addon">版块</label>
-                        <c:if test="${empty articleSections}">
-                            <input type="text" value="${articleSection.name}" disabled/>
-                            <input type="hidden" value="${articleSection.id}" name="articleSectionId"/>
-                        </c:if>
-                        <c:if test="${not empty articleSections}">
-                            <select class="form-control" name="articleSectionId" >
-                                <c:forEach var="articleSection" items="${articleSections}">
-                                    <option value="${articleSection.id}">${articleSection.name}</option>
-                                </c:forEach>
-                            </select>
-                        </c:if>
 
                     </div>
+
                     <div class="form-group input-group">
                         <label class="fa fa-user input-group-addon">作者</label>
                         <input class="form-control" name="author" type="text" value="${article.author}">

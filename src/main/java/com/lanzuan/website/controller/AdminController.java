@@ -55,10 +55,14 @@ public class AdminController extends BaseRestSpringController {
     IWebPageService webPageService;
     @RequestMapping(value = "/index")
     public String index(HttpSession session,ModelMap modelMap){
-        WebPage webPage=webPageService.findByUri("/home");
-        modelMap.addAttribute("webPage", webPage);
 
         return "forward:/WEB-INF/pages/admin/index.jsp";
+    }
+    @RequestMapping(value = "/home-page-admin")
+    public String homePageAdmin(HttpSession session,ModelMap modelMap){
+        WebPage webPage=webPageService.findByUri("/home");
+        modelMap.addAttribute("webPage", webPage);
+        return "admin/home-page-admin";
     }
     @RequestMapping(value = "/sign_up")
     public String signUp(@ModelAttribute User user,final RedirectAttributes redirectAttributes,HttpSession session) throws UnsupportedEncodingException {

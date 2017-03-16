@@ -7,7 +7,7 @@
         <label class="label label-default large-180">编辑图文块组组件方案</label>
 
         <div class="btn-group padding-bottom-10">
-            <%--<label class="btn btn-info cursor-auto">方案名称：{{imageTextBlockGroup.name}}</label>--%>
+            <%--<label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>--%>
 
             <button class="btn btn-primary fa fa-save " type="button" ng-click="save${param.varU}()">应用该图</button>
             <%--<button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>--%>

@@ -22,27 +22,7 @@
         <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
 
         <div class="row padding-top-2em margin-left-2em margin-right-2em">
-            <div ng-controller="HomeController">
-                <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                    <div class="row padding-top-2em padding-bottom-2em"style="border-top: solid #000 1px">
-                        <div class="col-xs-8 m-a-0 p-a-0">
-                            <jsp:include page="${pageComponent.templateUri}?var=${pageComponent.jsonVariableName}&varU=${pageComponent.variableFirstUpper}"></jsp:include>
-                        </div>
 
-                        <div class="col-xs-4 m-a-0 padding-left-2em" >
-                            <div>这是一个${pageComponent.name}</div>
-                            <div>${pageComponent.remark}</div>
-
-                            <div class="btn-group">
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">直接修改</a>
-                                <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/safe_mode/${pageComponent.id}">安全模式</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </c:forEach>
-
-            </div>
         </div>
     </div>
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
