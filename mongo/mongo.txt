@@ -4,18 +4,33 @@ mongod --dbpath D:\develop\MongoDB\db\lanzuan_website
 >db.system.version.remove({}) <== removing current version
 >db.system.version.insert({ "_id" : "authSchema", "currentVersion" : 3 })
 >db.system.users.remove({})
->db.createUser(
-  {
-    user: "admin",
-    pwd: "admin",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" },{ role: "readWrite", db: "dabast" } ]
-  }
-)
+>db.createUser({user: "admin",pwd: "admin",roles: [ { role: "userAdminAnyDatabase", db: "admin" },{ role: "readWrite", db: "lanzuan" } ]})
 >db.shutdownServer()
 
 mongod --dbpath D:\develop\MongoDB\db\lanzuan_website --auth
 //------ mongod --dbpath E:\db\lanzuan\test
 > use admin
 > db.auth("admin","admin")
->use dabast
+>use lanzuan
 >db.administrator.insert({"name":"xieyuxing","password":"7e89b492192e4acef570348e88c318ea"})
+
+
+----------------------------------------------------  lanzuan production  local --------------------------------------------------------------
+mongod --dbpath E:\db\lanzuan\production
+use admin
+db.system.version.remove({})
+db.createUser({user: "admin",pwd: "admin",roles: [ { role: "userAdminAnyDatabase", db: "admin" },{ role: "readWrite", db: "lanzuan" } ]})
+db.shutdownServer()
+
+--------  close shell,restart by following  ------------
+mongod --dbpath E:\db\lanzuan\production --auth
+
+
+
+
+------------- if wanna use mongo in shell ------------------
+use admin
+
+db.auth("admin","admin")
+
+use lanzuan

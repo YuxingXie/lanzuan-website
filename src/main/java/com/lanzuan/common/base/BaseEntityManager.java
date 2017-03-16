@@ -196,4 +196,7 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     public List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc){
         return getEntityDao().findFields(dbObject,fields,limit,sortField,asc);
     }
+    public long count(){
+        return getEntityDao().count();
+    }
 }

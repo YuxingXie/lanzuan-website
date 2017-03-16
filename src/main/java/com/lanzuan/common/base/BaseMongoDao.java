@@ -56,7 +56,11 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
     public long count(DBObject dbObject) {
         return getMongoTemplate().count(new BasicQuery(dbObject),collectionClass);
     }
-
+    @Override
+    public long count() {
+        DBObject dbObject=new BasicDBObject();
+        return getMongoTemplate().count(new BasicQuery(dbObject), collectionClass);
+    }
     public String saveFile(String fileName, byte[] file) {
         GridFS fs = new GridFS(mongoTemplate.getDb());
         GridFSInputFile fsInputFile = fs.createFile(file);

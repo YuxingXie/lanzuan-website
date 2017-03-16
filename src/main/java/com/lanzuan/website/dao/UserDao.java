@@ -117,16 +117,34 @@ public class UserDao extends BaseMongoDao<User>  {
     }
     private User findByName(String name,Boolean activated) {
         DBObject dbObject=new BasicDBObject("name",name);
-        if (activated!=null){
-            dbObject.put("activated",activated);
-        }
+//        if (activated!=null){
+//            dbObject.put("activated",activated);
+//        }
         List<User> users=findAll(dbObject);
         if (users!=null &&users.size()>1){
             throw new BusinessException("用户名在系统中不是唯一的");
         }
-        if (users==null ||users.size()==0) return null;
+        if (users==null ||users.size()==0){
+            return null;
+
+        }
         return users.get(0);
     }
+
+    public User findByLoginName(String loginName) {
+        DBObject dbObject=new BasicDBObject("loginName",loginName);
+
+        List<User> users=findAll(dbObject);
+        if (users!=null &&users.size()>1){
+            throw new BusinessException("用户名在系统中不是唯一的");
+        }
+        if (users==null ||users.size()==0){
+            return null;
+
+        }
+        return users.get(0);
+    }
+
     public User findByEmail(String email,boolean activated) {
         DBObject dbObject=new BasicDBObject("email",email);
         if (!activated){

@@ -67,24 +67,23 @@ public class AdminController extends BaseRestSpringController {
     @RequestMapping(value = "/sign_up")
     public String signUp(@ModelAttribute User user,final RedirectAttributes redirectAttributes,HttpSession session) throws UnsupportedEncodingException {
         Assert.notNull(user);
-        Assert.isTrue(StringUtils.isNotBlank(user.getName()));
+        Assert.isTrue(StringUtils.isNotBlank(user.getLoginName()));
         Assert.notNull(StringUtils.isNotBlank(user.getPassword()));
-        User find=userService.findByName(user.getName());
+        User find=userService.findByLoginName(user.getLoginName());
         if (find==null){
-            session.setAttribute(Constant.LOGIN_ADMINISTRATOR,user);
-            return "redirect:/admin/index";
+            return "redirect:/admin";
         }
         if (MD5.convert(user.getPassword()).equalsIgnoreCase(find.getPassword())){
-            session.setAttribute(Constant.LOGIN_ADMINISTRATOR,user);
+            session.setAttribute(Constant.LOGIN_ADMINISTRATOR,find);
             return "redirect:/admin/index";
         }
 
-        return "admin";
+        return "redirect:/admin";
 
     }
     @RequestMapping(value = "/icons/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        ServletContextResource resource=new ServletContextResource(request.getServletContext(), Constant.ICON_URI);
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(), Constant.ICO_DIR);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){
             File file=resource.getFile();
@@ -95,7 +94,7 @@ public class AdminController extends BaseRestSpringController {
                 File[] files= resource.getFile().listFiles();
                 for (File file:files){
                     if (file.isDirectory()) continue;
-                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),Constant.ICON_URI +"/"+file.getName());
+                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),Constant.ICO_DIR +"/"+file.getName());
                     strings.add(fileResource.getPath());
                 }
             }
@@ -191,7 +190,7 @@ public class AdminController extends BaseRestSpringController {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") +Constant.ICON_URI;
+                String dir=request.getServletContext().getRealPath("/") +Constant.ICO_DIR;
                 String filePath = dir+"/"+fileName;
                 File fileDir=new File(dir);
                 if (!fileDir.exists()){

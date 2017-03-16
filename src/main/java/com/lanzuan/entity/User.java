@@ -23,7 +23,7 @@ import java.util.Date;
 //db.mallUser.update({"phone":"13000000000"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57f3df3d3c46b7660c653943"}},false,true)
 //db.mallUser.find({ "directSaleMember" : true , "becomeMemberDate" : { "$gte" : new Date("2016-10-13T03:59:59.996Z") , "$lt" : new Date("2016-10-13T04:00:00.996Z")}})
 //db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
-@Document(collection = "mallUser")
+@Document(collection = "user")
 public class User {
 
     @Id private String id;
@@ -69,8 +69,7 @@ public class User {
 
     @Field
     private Boolean activated;//激活
-    @Field
-    private int market;//1:一市场 2：二市场
+
     private User directUpperUser;
 
     /**
@@ -88,12 +87,7 @@ public class User {
 
     @Transient
     private Pair<User> directLowerUsers;
-    @Transient
-    private String marketString;
 
-    public String getMarketString() {
-        return market==0?null:(market==1?"一市场":(market==2?"二市场":null));
-    }
 
     public String[] getAddresses() {
         return addresses;
@@ -117,22 +111,9 @@ public class User {
         this.directLowerUsers = directLowerUsers;
     }
 
-//    public AuthorizeInfo getAuthorizeInfo() {
-//        return authorizeInfo;
-//    }
-//
-//    public void setAuthorizeInfo(AuthorizeInfo authorizeInfo) {
-//        this.authorizeInfo = authorizeInfo;
-//    }
 
 
-    public int getMarket() {
-        return market;
-    }
 
-    public void setMarket(int market) {
-        this.market = market;
-    }
 
     public User getDirectUpperUser() {
         return directUpperUser;
@@ -310,6 +291,7 @@ public class User {
     private String rePassword;
     @Transient
     private String loginStr;
+    private String loginName;
     @Transient
     private Boolean mergeCart;
 
@@ -357,6 +339,13 @@ public class User {
         this.loginStr = loginStr;
     }
 
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
 
     public String getShowName() {
         return this.name!=null?this.name:(this.phone!=null?this.phone:null);

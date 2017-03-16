@@ -8,17 +8,17 @@
             http://www.springframework.org/schema/data/mongo
             http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-    <!--<mongo:mongo-client credentials="admin:admin@admin" id="mongo" replica-set="${mongo.hostport}">-->
-        <!--<mongo:client-options description="for production"/>-->
-    <!--</mongo:mongo-client>-->
-    <!--<mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="dabast"/>-->
+    <mongo:mongo-client credentials="admin:admin@admin" id="mongo" replica-set="${mongo.hostport}">
+        <mongo:client-options description="for production"/>
+    </mongo:mongo-client>
+    <mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="lanzuan"/>
 
 
     <!--           for test begin                -->
-    <mongo:mongo-client id="mongo" replica-set="${mongo.hostport}">
-        <mongo:client-options description="for test"/>
-    </mongo:mongo-client>
-    <mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="test"/>
+    <!--<mongo:mongo-client id="mongo" replica-set="${mongo.hostport}">-->
+        <!--<mongo:client-options description="for test"/>-->
+    <!--</mongo:mongo-client>-->
+    <!--<mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="test"/>-->
     <!--           for test end                  -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
@@ -26,8 +26,8 @@
         <!--<constructor-arg name="userCredentials" ref="userCredentials" />-->
     </bean>
 
-    <bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">
-        <constructor-arg name="username" value="${mongo.db.username}"/>
-        <constructor-arg name="password" value="${mongo.db.password}"/>
-    </bean>
+    <!--<bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">-->
+        <!--<constructor-arg name="username" value="${mongo.db.username}"/>-->
+        <!--<constructor-arg name="password" value="${mongo.db.password}"/>-->
+    <!--</bean>-->
 </beans>

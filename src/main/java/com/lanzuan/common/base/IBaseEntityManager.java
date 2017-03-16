@@ -72,4 +72,6 @@ public interface IBaseEntityManager<E> {
 
    List<E> findFields(DBObject dbObject, List<String> fields, int limit);
    List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc);
+
+   long count();
 }

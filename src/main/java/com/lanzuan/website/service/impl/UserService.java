@@ -41,4 +41,9 @@ public class UserService extends BaseEntityManager<User> implements IUserService
         return userDao.findByName( name);
     }
 
+    @Override
+    public User findByLoginName(String loginStr) {
+        return userDao.findByLoginName(loginStr);
+    }
+
 }

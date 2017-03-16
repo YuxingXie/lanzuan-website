@@ -59,6 +59,7 @@ public interface EntityDao <E>{
     void insertAll(List<E> list);
 //    void updateAll(List<E> list);
     long count(DBObject dbObject);
+    long count();
 
     Page<E> findPage(DBObject dbObject, Integer page);
     Page<E> findPage(DBObject condition, int currentPage, int pageSize);

@@ -2,6 +2,7 @@ package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.constant.Constant;
+import com.lanzuan.common.util.MD5;
 import com.lanzuan.entity.*;
 import com.lanzuan.entity.entityfield.*;
 import com.lanzuan.support.vo.Image;
@@ -40,6 +41,8 @@ public class StartOnLoadService {
     private IImageTextBlockGroupService imageTextBlockGroupService;
     @Resource(name = "fullWidthImageService")
     private IFullWidthImageService fullWidthImageService;
+    @Resource(name = "userService")
+    private IUserService userService;
     /**
      * Spring 容器初始化时加载
      */
@@ -51,6 +54,24 @@ public class StartOnLoadService {
 
     private void initPageData() {
         initHomePageData();
+        initAdminPageData();
+        initDirectory();
+    }
+
+    private void initDirectory() {
+
+    }
+
+    private void initAdminPageData() {
+        long count=userService.count();
+        if (count==0){
+            User user=new User();
+            user.setName("蓝钻科技");
+            user.setLoginName("lzkj");
+            user.setPassword(MD5.convert("lzkj"));
+            userService.insert(user);
+            logger.info("   没有管理员用户，添加默认管理员");
+        }
     }
 
     private void initHomePageData() {

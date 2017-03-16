@@ -14,4 +14,6 @@ public interface IUserService extends IBaseEntityManager<User> {
     User findByEmail(String email);
     User findByPhone(String phone);
     User findByName(String name);
+
+    User findByLoginName(String loginName);
 }

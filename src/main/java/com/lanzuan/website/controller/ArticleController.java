@@ -111,9 +111,12 @@ public class ArticleController extends BaseRestSpringController {
 
     @RequestMapping(value = "/save")
     public String uploadArticle(@ModelAttribute("file") Article article){
-
+        if (article==null)
+            return "redirect:/admin/article/list";
+        if (StringUtils.isBlank(article.getId()))
+            article.setId(null);
         articleService.insert(article);
-        return "redirect:/article/list";
+        return "redirect:/admin/article/list";
     }
 
 
