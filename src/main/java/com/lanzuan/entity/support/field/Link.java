@@ -1,9 +1,13 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.support.Item;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/15.
  */
-public class Link {
+public class Link implements Item{
     private String href;
     private String text;
     private String date;
@@ -30,5 +34,15 @@ public class Link {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
     }
 }

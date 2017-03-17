@@ -1,9 +1,13 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.support.Item;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/12.
  */
-public class ImageTextItem {
+public class ImageTextItem implements Item {
     private String image;
     private String text;
     private String link ;
@@ -39,5 +43,15 @@ public class ImageTextItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
     }
 }

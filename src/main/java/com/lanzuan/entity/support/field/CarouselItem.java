@@ -1,9 +1,13 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.support.Item;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/10.
  */
-public class CarouselItem {
+public class CarouselItem implements Item{
     /**
      * text,link,image
      */
@@ -34,5 +38,15 @@ public class CarouselItem {
 
     public void setCarouselCaption(CarouselCaption carouselCaption) {
         this.carouselCaption = carouselCaption;
+    }
+
+    @Override
+    public List<Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
     }
 }

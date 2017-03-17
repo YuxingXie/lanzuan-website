@@ -1,11 +1,13 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.support.Item;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/15.
  */
-public class SortLink {
+public class SortLink implements Item{
     private String sortName;
     private String maxLink;
     private String image;
@@ -50,5 +52,15 @@ public class SortLink {
 
     public void setImageHref(String imageHref) {
         this.imageHref = imageHref;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return links;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
     }
 }

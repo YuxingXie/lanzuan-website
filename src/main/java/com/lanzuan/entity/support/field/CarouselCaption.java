@@ -1,9 +1,13 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.support.Item;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/10.
  */
-public class CarouselCaption {
+public class CarouselCaption implements Item {
     //暂时仅{link，text}，应该弄个枚举的
     private String type;
     /**
@@ -46,5 +50,15 @@ public class CarouselCaption {
 
     public void setCaptionClass(String captionClass) {
         this.captionClass = captionClass;
+    }
+
+    @Override
+    public List<Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 1;
     }
 }

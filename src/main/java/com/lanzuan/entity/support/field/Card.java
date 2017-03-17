@@ -1,6 +1,10 @@
 package com.lanzuan.entity.support.field;
 
-public class Card {
+import com.lanzuan.entity.support.Item;
+
+import java.util.List;
+
+public class Card implements Item{
     private String image;
     private String text;
     private String link;
@@ -27,5 +31,15 @@ public class Card {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public List<Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return null;
     }
 }
