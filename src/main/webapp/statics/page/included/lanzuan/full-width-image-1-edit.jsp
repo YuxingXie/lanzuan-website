@@ -9,7 +9,7 @@
         <div class="btn-group p-b-10">
             <%--<label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>--%>
 
-            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${pageComponent.variableFirstUpper}()">应用该图</button>
+            <button class="btn btn-primary fa fa-save " type="button" ng-click="save${pageComponent.varU}()">应用该图</button>
             <%--<button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>--%>
             <%--<a class="btn btn-primary fa fa-gears white-link"--%>
                <%--ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用其它方案</a>--%>
@@ -47,14 +47,14 @@
             </button>
             <div class="dropdown-menu dropdown-full-width">
                     <span ng-repeat="icon in fullWidthImages" class="dropdown-item-inline"
-                          ng-click="${pageComponent.jsonVariableName}.image.uri=icon">
+                          ng-click="${pageComponent.var}.image.uri=icon">
                         <img type="text" ng-src="{{icon}}" class="img-320-240px img-responsive"/>
                     </span>
             </div>
 
         </div>
         <div class="col-xs-2">
-            <img ng-src="{{${pageComponent.jsonVariableName}.image.uri}}" class="img-responsive img-ico-larger img-rounded"/>
+            <img ng-src="{{${pageComponent.var}.image.uri}}" class="img-responsive img-ico-larger img-rounded"/>
         </div>
         <div class="col-xs-4">
 

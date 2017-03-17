@@ -6,7 +6,7 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.SortLinkGroup;
-import com.lanzuan.entity.entityfield.SortLink;
+import com.lanzuan.entity.support.SortLink;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
@@ -21,12 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

@@ -5,14 +5,14 @@
 <div class="row p-a-0 m-a-0">
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑文章块</label>
-            <label class="label label-info large-180">{{${pageComponent.variableFirstUpper}.name}}</label>
+            <label class="label label-info large-180">{{${pageComponent.varU}.name}}</label>
             <div class="btn-group p-b-10">
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${pageComponent.variableFirstUpper}Item()"> 新增文章块</button>
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-click="save${pageComponent.variableFirstUpper}()"> 保存</button>
-                <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.variableFirstUpper}()">方案另存为</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${pageComponent.varU}Item()"> 新增文章块</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-click="save${pageComponent.varU}()"> 保存</button>
+                <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.varU}()">方案另存为</button>
                 <a class="btn btn-primary fa fa-gears white-link" ng-href="${path}${pageComponent.listOperationUri}/${pageComponent.id}"> 应用方案</a>
-                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="get${pageComponent.variableFirstUpper}('${param.dataUri}')"> 重 置</button>
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="save${pageComponent.variableFirstUpper}()">保存</button>
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="get${pageComponent.varU}('${param.dataUri}')"> 重 置</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-if="addArticleSection&&!addArticleSectionSaved" ng-click="save${pageComponent.varU}()">保存</button>
             </div>
         </div>
         <div class="col-xs-12">
@@ -27,7 +27,7 @@
 
             </div>
         </div>
-        <div class="col-xs-12 col-md-4" ng-if="!${pageComponent.jsonVariableName}">
+        <div class="col-xs-12 col-md-4" ng-if="!${pageComponent.var}">
             <h5>此组件还没有文章块，可以点击“新增文章块”按钮增加一个文章块</h5>
         </div>
 </div>
@@ -36,7 +36,7 @@
         <div class="col-xs-8">文章操作</div>
         <div class="col-xs-4">块操作</div>
     </div>
-<div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${pageComponent.jsonVariableName}.items" ng-if="${pageComponent.jsonVariableName}">
+<div class="row p-t-md p-b-md small-90 hover-bg-color-dark-grey"   ng-repeat="sortLink in ${pageComponent.var}.items" ng-if="${pageComponent.var}">
     <div class="col-xs-12" ng-if="!sortLink.links &&!sortLink.image">
         <span class="">该块无内容</span>
         <div class="row p-t-10">
@@ -112,10 +112,10 @@
             <input type="text" ng-model="sortLink.sortName"  class="form-control">
         </div>
         <div class="btn-group btn-group-sm m-b-md">
-            <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${pageComponent.variableFirstUpper}Item($index)"> 删除该块</button>
+            <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${pageComponent.varU}Item($index)"> 删除该块</button>
             <button class="btn btn-primary" ng-if="(!sortLink.links&&!sortLink.image)||sortLink.links" ng-click="sortLink.links.splice(0,0,{'text':'一篇文章'})">增加文章</button>
-            <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==0">前移</button>
-            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${pageComponent.variableFirstUpper}Item($index)" ng-if="${pageComponent.jsonVariableName}.items.length-1!==$index">后移</button>
+            <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${pageComponent.varU}Item($index)" ng-if="$index!==0">前移</button>
+            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${pageComponent.varU}Item($index)" ng-if="${pageComponent.var}.items.length-1!==$index">后移</button>
         </div>
     </div>
 </div>

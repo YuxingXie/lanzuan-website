@@ -10,12 +10,12 @@
         <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>
 
-            <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.variableFirstUpper}()"> 保存</button>
-            <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${pageComponent.variableFirstUpper}Item()">插入一块</button>
-            <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.variableFirstUpper}()"> 方案另存为</button>
+            <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.varU}()"> 保存</button>
+            <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${pageComponent.varU}Item()">插入一块</button>
+            <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.varU}()"> 方案另存为</button>
             <a class="btn btn-primary fa fa-gears white-link"
                ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用方案</a>
-            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.variableFirstUpper}()"> 重 置</button>
+            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.varU}()"> 重 置</button>
         </div>
     </div>
     <div class="col-xs-12">
@@ -40,11 +40,11 @@
     <div class="col-xs-12 m-a-0 p-a-0">
         <div class="input-group">
             <span class="input-group-addon bg-info"> 大 标 题 </span>
-            <input type="text" ng-model="${pageComponent.jsonVariableName}.text" class="form-control"/>
+            <input type="text" ng-model="${pageComponent.var}.text" class="form-control"/>
         </div>
     </div>
 </div>
-<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${pageComponent.jsonVariableName}.items track by $index">
+<div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getImageTextBlockGroupImages()" ng-repeat="imageTextBlock in ${pageComponent.var}.items track by $index">
     <div class="row">
                 <div class="col-xs-4">
                     <div class="input-group">
@@ -54,9 +54,9 @@
                 </div>
                 <div class="col-xs-8">
                     <div class="btn-group">
-                        <button class="fa fa-trash btn  btn-primary" ng-click="remove${pageComponent.variableFirstUpper}Item($index)" >删除整块</button>
-                        <button class="fa fa-caret-up btn btn-primary" ng-click="forward${pageComponent.variableFirstUpper}Item($index)"ng-if="$index!==0">整块前移</button>
-                        <button class="fa fa-caret-down btn btn-primary" ng-click="backward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==${pageComponent.jsonVariableName}.items.length-1">整块后移</button>
+                        <button class="fa fa-trash btn  btn-primary" ng-click="remove${pageComponent.varU}Item($index)" >删除整块</button>
+                        <button class="fa fa-caret-up btn btn-primary" ng-click="forward${pageComponent.varU}Item($index)"ng-if="$index!==0">整块前移</button>
+                        <button class="fa fa-caret-down btn btn-primary" ng-click="backward${pageComponent.varU}Item($index)" ng-if="$index!==${pageComponent.var}.items.length-1">整块后移</button>
 
                     </div>
 

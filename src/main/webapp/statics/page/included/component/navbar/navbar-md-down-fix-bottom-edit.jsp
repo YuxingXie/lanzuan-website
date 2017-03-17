@@ -7,12 +7,12 @@
     <div class="col-xs-12 m-a-0 p-a-0">
         <label class="label label-default large-180">编辑导航条</label>
         <div class="btn-group p-b-10">
-            <label class="btn btn-info cursor-auto">当前方案：{{${pageComponent.jsonVariableName}.name}}</label>
+            <label class="btn btn-info cursor-auto">当前方案：{{${pageComponent.var}.name}}</label>
 
-            <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.variableFirstUpper}()" >保存</button>
-            <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.variableFirstUpper}()" > 方案另存为</button>
+            <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.varU}()" >保存</button>
+            <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.varU}()" > 方案另存为</button>
             <a class="btn btn-primary fa fa-download white-link" ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用其它方案</a>
-            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.variableFirstUpper}()"> 重 置</button>
+            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.varU}()"> 重 置</button>
         </div>
     </div>
     <div class="col-xs-12">
@@ -33,7 +33,7 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-full-width">
-                <span ng-repeat="icon in icons" class="dropdown-item-inline" ng-click="${pageComponent.jsonVariableName}.navbarBrand.value=icon">
+                <span ng-repeat="icon in icons" class="dropdown-item-inline" ng-click="${pageComponent.var}.navbarBrand.value=icon">
                     <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
                 </span>
             </div>
@@ -46,8 +46,8 @@
                 <th >链接</th>
                 <th>其它操作</th>
             </tr>
-        <tr ng-if="!${pageComponent.jsonVariableName}"><td colspan="3">没有方案可用或者方案已被禁用，请点击上方“应用其它方案”查看。</td></tr>
-            <tr ng-repeat="navItem in ${pageComponent.jsonVariableName}.items">
+        <tr ng-if="!${pageComponent.var}"><td colspan="3">没有方案可用或者方案已被禁用，请点击上方“应用其它方案”查看。</td></tr>
+            <tr ng-repeat="navItem in ${pageComponent.var}.items">
                 <td>
                     <input type="text" ng-model="navItem.name" class="form-control">
                 </td>
@@ -57,8 +57,8 @@
 
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insert${pageComponent.variableFirstUpper}ItemBefore($index)"> 前面插入一条</button>
-                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${pageComponent.variableFirstUpper}Item($index)"> 删掉此条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-plus" ng-click="insert${pageComponent.varU}ItemBefore($index)"> 前面插入一条</button>
+                        <button class="btn btn-primary btn-sm  fa fa-trash" ng-click="remove${pageComponent.varU}Item($index)"> 删掉此条</button>
                     </div>
                 </td>
             </tr>

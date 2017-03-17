@@ -1,18 +1,17 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.entityfield.CarouselItem;
+import com.lanzuan.entity.support.CarouselItem;
+import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
-/**
-db.carousel.update({},{"$set":{"enabled":true}},false,true)
- */
 @Document(collection = "carousel")
-public class Carousel {
+public class Carousel  implements PageComponentData {
     @Id
     private String id;
     /**
@@ -33,7 +32,7 @@ public class Carousel {
     private User lastModifyUser;
 
     private List<CarouselItem> items;
-    @DBRef
+    @Transient
     private PageComponent pageComponent;
     public String getId() {
         return id;

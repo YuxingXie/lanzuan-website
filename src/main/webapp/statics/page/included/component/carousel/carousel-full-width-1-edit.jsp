@@ -8,15 +8,15 @@
 
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑轮播图</label>
-            <label class="label label-info large-180">当前方案：{{${pageComponent.jsonVariableName}.name}}</label>
+            <label class="label label-info large-180">当前方案：{{${pageComponent.var}.name}}</label>
 
             <div class="btn-group p-b-10">
-                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-click="save${pageComponent.variableFirstUpper}()">保存</button>
-                <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${pageComponent.variableFirstUpper}Item()">插入一条</button>
-                <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.variableFirstUpper}()"> 方案另存</button>
+                <button class="btn btn-danger fa fa-floppy-o" type="button" ng-click="save${pageComponent.varU}()">保存</button>
+                <button class="btn btn-primary fa fa-plus" type="button" ng-click="insert${pageComponent.varU}Item()">插入一条</button>
+                <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.varU}()"> 方案另存</button>
 
                 <a class="btn btn-primary white-link fa fa-download" ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用方案</a>
-                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.variableFirstUpper}()"> 重 置</button>
+                <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.varU}()"> 重 置</button>
             </div>
         </div>
         <div class="col-xs-12">
@@ -32,20 +32,20 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-12 col-md-4" ng-if="!${pageComponent.jsonVariableName}">
+        <div class="col-xs-12 col-md-4" ng-if="!${pageComponent.var}">
             <h5>此轮播图组件还没有图片</h5>
         </div>
 
-        <div class="col-xs-12" ng-if="${pageComponent.jsonVariableName}">
+        <div class="col-xs-12" ng-if="${pageComponent.var}">
             <div class="row solid-silver-border-bottom">
                 <div class="col-xs-4">内容</div>
                 <div class="col-xs-4">编辑标题</div>
                 <div class="col-xs-4">其它操作</div>
             </div>
-            <div class="row" ng-if="!${pageComponent.jsonVariableName}||!${pageComponent.jsonVariableName}.items||!${pageComponent.jsonVariableName}.items.length">
+            <div class="row" ng-if="!${pageComponent.var}||!${pageComponent.var}.items||!${pageComponent.var}.items.length">
                 <div class="col-xs-12"><h5>该轮播方案没有任何轮播内容，点击上方 “插入一条”按钮添加轮播内容</h5></div>
             </div>
-            <div ng-init="getCarouselImages()" class="row" ng-repeat="carouselItem in ${pageComponent.jsonVariableName}.items track by $index">
+            <div ng-init="getCarouselImages()" class="row" ng-repeat="carouselItem in ${pageComponent.var}.items track by $index">
                 <div class="row p-t-10">
                     <div class="btn-group col-xs-12">
                         <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
@@ -101,15 +101,15 @@
                     <div class="col-xs-4">
                         <div class="btn-group btn-group-sm">
                             <button class="btn white-link fa fa-trash " ng-class="{'btn-primary':carouselItem.id,'btn-primary':!carouselItem.id}"
-                                    ng-click="remove${pageComponent.variableFirstUpper}Item($index)"> 删除此条
+                                    ng-click="remove${pageComponent.varU}Item($index)"> 删除此条
                             </button>
 
                             <button class="btn btn-primary white-link fa fa-arrow-up"
-                                    ng-click="forward${pageComponent.variableFirstUpper}Item($index)" ng-if="$index!==0"> 前移
+                                    ng-click="forward${pageComponent.varU}Item($index)" ng-if="$index!==0"> 前移
                             </button>
                             <button class="btn btn-primary white-link fa fa-arrow-down"
-                                    ng-click="backward${pageComponent.variableFirstUpper}Item($index)"
-                                    ng-if="$index!==${pageComponent.jsonVariableName}.items.length-1"> 后移
+                                    ng-click="backward${pageComponent.varU}Item($index)"
+                                    ng-if="$index!==${pageComponent.var}.items.length-1"> 后移
                             </button>
                         </div>
                     </div>

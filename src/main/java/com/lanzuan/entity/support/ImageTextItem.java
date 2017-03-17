@@ -1,9 +1,13 @@
-package com.lanzuan.entity.entityfield;
+package com.lanzuan.entity.support;
 
-public class Card {
+/**
+ * Created by Administrator on 2017/3/12.
+ */
+public class ImageTextItem {
     private String image;
     private String text;
-    private String link;
+    private String link ;
+    private String title;
 
     public String getImage() {
         return image;
@@ -27,5 +31,13 @@ public class Card {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

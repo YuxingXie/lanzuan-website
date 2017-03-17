@@ -95,13 +95,15 @@ public class IndexController extends BaseRestSpringController {
         return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/app-js")
-    public String article(ModelMap modelMap,String pageId,String componentId){
+    public String app_js(ModelMap modelMap,String pageId,String componentId){
         if (StringUtils.isNotBlank(pageId)){
             WebPage page=webPageService.findById(pageId);
+
             modelMap.addAttribute("page",page);
         }
         if (StringUtils.isNotBlank(componentId)){
             PageComponent component=pageComponentService.findById(componentId);
+
             modelMap.addAttribute("component",component);
         }
         return "app.js";

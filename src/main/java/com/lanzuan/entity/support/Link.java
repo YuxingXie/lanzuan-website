@@ -1,6 +1,4 @@
-package com.lanzuan.entity.entityfield;
-
-import java.util.Date;
+package com.lanzuan.entity.support;
 
 /**
  * Created by Administrator on 2017/3/15.

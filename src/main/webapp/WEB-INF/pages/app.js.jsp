@@ -14,18 +14,18 @@ var app = angular.module('app', []);
 app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
 <c:if test="${not empty page}">
     <c:forEach var="component" items="${page.pageComponents}">
-        $scope.get${component.variableFirstUpper}=function(){
+        $scope.get${component.varU}=function(){
             $http.get('${component.dataUri}').success(function (data) {
 //                console.log(JSON.stringify(data));
-                $scope.${component.jsonVariableName}=data;
+                $scope.${component.var}=data;
             });
         }
     </c:forEach>
 </c:if>
 <c:if test="${not empty component}">
-    $scope.get${component.variableFirstUpper}=function(){
+    $scope.get${component.varU}=function(){
             $http.get('${component.dataUri}').success(function (data) {
-                $scope.${component.jsonVariableName}=data;
+                $scope.${component.var}=data;
         });
     }
 
@@ -37,32 +37,32 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
 
 
 <c:if test="${not empty component}">
-    $scope.get${component.variableFirstUpper}=function(){
+    $scope.get${component.varU}=function(){
         $http.get('${component.dataUri}').success(function (data) {
-            $scope.${component.jsonVariableName}=data;
+            $scope.${component.var}=data;
         });
     }
-    $scope.reset${component.variableFirstUpper}=function(){
-    $scope.get${component.variableFirstUpper}();
-    $scope.${component.jsonVariableName}Resetted=true;
+    $scope.reset${component.varU}=function(){
+    $scope.get${component.varU}();
+    $scope.${component.var}Resetted=true;
     }
     //update
-    $scope.save${component.variableFirstUpper}=function(){
-        <%--console.log(JSON.stringify($scope.${component.jsonVariableName}));--%>
-        $http.post("${component.saveUri}",JSON.stringify($scope.${component.jsonVariableName})).success(function (message) {
-            $scope.${component.jsonVariableName}=message.data;
+    $scope.save${component.varU}=function(){
+        <%--console.log(JSON.stringify($scope.${component.var}));--%>
+        $http.post("${component.saveUri}",JSON.stringify($scope.${component.var})).success(function (message) {
+            $scope.${component.var}=message.data;
             if(message.success){
                 alert("保存成功！");
             }
         });
     }
     //方案另存
-    $scope.new${component.variableFirstUpper}=function(){
+    $scope.new${component.varU}=function(){
         var name = window.prompt("请给方案命名","新方案名");
         if(!name) return;
-        $scope.${component.jsonVariableName}.name=name;
-        $http.post("${component.saveAsUri}",JSON.stringify( $scope.${component.jsonVariableName})).success(function (message) {
-            $scope.${component.jsonVariableName}=message.data;
+        $scope.${component.var}.name=name;
+        $http.post("${component.saveAsUri}",JSON.stringify( $scope.${component.var})).success(function (message) {
+            $scope.${component.var}=message.data;
             if(message.success){
                 alert("方案保存成功！");
             }
@@ -73,64 +73,64 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     *条目操作begin
     */
     //条目前移
-    $scope.forward${component.variableFirstUpper}Item=function(index){
-        var item=$scope.${component.jsonVariableName}.items[index];
-        $scope.${component.jsonVariableName}.items.splice(index,1);
-        $scope.${component.jsonVariableName}.items.splice(index-1,0,item);
+    $scope.forward${component.varU}Item=function(index){
+        var item=$scope.${component.var}.items[index];
+        $scope.${component.var}.items.splice(index,1);
+        $scope.${component.var}.items.splice(index-1,0,item);
     }
     //条目后移
-    $scope.backward${component.variableFirstUpper}Item=function(index){
-        var item=$scope.${component.jsonVariableName}.items[index];
-        $scope.${component.jsonVariableName}.items.splice(index,1);
-        $scope.${component.jsonVariableName}.items.splice(index+1,0,item);
+    $scope.backward${component.varU}Item=function(index){
+        var item=$scope.${component.var}.items[index];
+        $scope.${component.var}.items.splice(index,1);
+        $scope.${component.var}.items.splice(index+1,0,item);
     }
     //指定位置插入条目
-    $scope.insert${component.variableFirstUpper}Item= function (index) {
+    $scope.insert${component.varU}Item= function (index) {
         if(index===undefined){
             index=0;
         }
         var item={};
-        if(!$scope.${component.jsonVariableName}){
-            $scope.${component.jsonVariableName}={};
+        if(!$scope.${component.var}){
+            $scope.${component.var}={};
         }
-        if(!$scope.${component.jsonVariableName}.items){
-            $scope.${component.jsonVariableName}.items=[];
+        if(!$scope.${component.var}.items){
+            $scope.${component.var}.items=[];
         }
 
 
-        $scope.${component.jsonVariableName}.items.splice(index,0,item);
+        $scope.${component.var}.items.splice(index,0,item);
     }
 
     //前面插入条目
-    $scope.insert${component.variableFirstUpper}ItemBefore=function(index){
-        $scope.${component.jsonVariableName}.items.splice(index,0,{})
+    $scope.insert${component.varU}ItemBefore=function(index){
+        $scope.${component.var}.items.splice(index,0,{})
     }
     //移除条目
-    $scope.remove${component.variableFirstUpper}Item=function(index){
-        $scope.${component.jsonVariableName}.items.splice(index,1)
+    $scope.remove${component.varU}Item=function(index){
+        $scope.${component.var}.items.splice(index,1)
     }
     /**
     *条目操作end
     */
 
         //列表操作
-        $scope.get${component.variableFirstUpper}List=function(){
+        $scope.get${component.varU}List=function(){
             $http.get("${component.listDataUri}").success(function (data) {
-                $scope.${component.jsonVariableName}List=data;
+                $scope.${component.var}List=data;
             });
         }
         //启用/禁用
-        $scope.${component.jsonVariableName}Toggle=function(component){
+        $scope.${component.var}Toggle=function(component){
                 $http.post("${component.toggleUri}",JSON.stringify(component)).success(function (data) {
-                $scope.${component.jsonVariableName}List=data;
+                $scope.${component.var}List=data;
             });
         }
         //删除
-        $scope.delete${component.variableFirstUpper}=function(component){
+        $scope.delete${component.varU}=function(component){
         if(!confirm("确定删除?"))
             return ;
         $http.post("${component.deleteUri}"+component.id,JSON.stringify(component)).success(function (data) {
-            $scope.${component.jsonVariableName}List=data;
+            $scope.${component.var}List=data;
         });
         }
 </c:if>
@@ -329,7 +329,7 @@ alert("删除成功！");
 
     $scope.newSortLinkAddArticle=function(sortLinkIndex){
         <c:if test="${not empty component}">
-            $scope.${component.jsonVariableName}.items[sortLinkIndex]={sortName:"分类名称",links:[{text:"文章标题"}]};
+            $scope.${component.var}.items[sortLinkIndex]={sortName:"分类名称",links:[{text:"文章标题"}]};
         </c:if>
 }
 

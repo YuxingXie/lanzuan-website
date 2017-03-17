@@ -1,6 +1,7 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.entityfield.ImageTextBlock;
+import com.lanzuan.entity.support.ImageTextBlock;
+import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/12.
  */
 @Document(collection = "imageTextBlockGroup")
-public class ImageTextBlockGroup {
+public class ImageTextBlockGroup  implements PageComponentData {
     @Id
     private String id;
     private String uri;

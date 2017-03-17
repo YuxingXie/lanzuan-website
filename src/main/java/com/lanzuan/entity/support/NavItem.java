@@ -1,4 +1,4 @@
-package com.lanzuan.entity.entityfield;
+package com.lanzuan.entity.support;
 
 
 public class NavItem {

@@ -1,8 +1,4 @@
-package com.lanzuan.entity.entityfield;
-
-import com.lanzuan.entity.entityfield.CarouselCaption;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.lanzuan.entity.support;
 
 /**
  * Created by Administrator on 2017/3/10.

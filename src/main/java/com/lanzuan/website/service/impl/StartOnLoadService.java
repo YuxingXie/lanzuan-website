@@ -1,16 +1,12 @@
 package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.code.NavbarBrandTypeEnum;
-import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.DateUtil;
 import com.lanzuan.common.util.MD5;
-import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.entityfield.*;
+import com.lanzuan.entity.support.*;
 import com.lanzuan.support.vo.Image;
 import com.lanzuan.website.service.*;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -701,13 +697,13 @@ public class StartOnLoadService {
             pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
             pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
 
-            pageComponent1.setJsonVariableName("navbar");
-            pageComponent2.setJsonVariableName("carousel");
-            pageComponent3.setJsonVariableName("cardGroup");
-            pageComponent4.setJsonVariableName("imageTextBlockGroup");
-            pageComponent5.setJsonVariableName("sortLinkGroup");
-            pageComponent6.setJsonVariableName("fullWidthImage");
-            pageComponent7.setJsonVariableName("bottomSortLinkGroup");
+            pageComponent1.setVar("navbar");
+            pageComponent2.setVar("carousel");
+            pageComponent3.setVar("cardGroup");
+            pageComponent4.setVar("imageTextBlockGroup");
+            pageComponent5.setVar("sortLinkGroup");
+            pageComponent6.setVar("fullWidthImage");
+            pageComponent7.setVar("bottomSortLinkGroup");
 
             pageComponent1.setDataUri("/navbar/home/data");
             pageComponent2.setDataUri("/carousel/home/data");
