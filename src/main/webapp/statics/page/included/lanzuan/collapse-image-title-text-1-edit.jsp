@@ -5,16 +5,16 @@
 <div class="row p-a-0 m-a-0">
     <div class="col-xs-12 m-a-0 p-a-0">
         <label class="label label-default large-180">编辑图文块组组件方案</label>
-        <div class="" >{{${pageComponent.jsonVariableName}.items}}</div>
+
 
         <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>
 
             <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.variableFirstUpper}()"> 保存</button>
             <button class="btn btn-primary fa fa-plus " type="button" ng-click="insert${pageComponent.variableFirstUpper}Item()">插入一块</button>
-            <button class="btn btn-primary fa fa-copy" type="button" ng-click="newImageTextBlockGroup()"> 方案另存为</button>
+            <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.variableFirstUpper}()"> 方案另存为</button>
             <a class="btn btn-primary fa fa-gears white-link"
-               ng-href="${path}/admin/image-text-block-group/list-page/${pageComponent.id}"> 应用方案</a>
+               ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用方案</a>
             <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.variableFirstUpper}()"> 重 置</button>
         </div>
     </div>
@@ -26,8 +26,7 @@
                                                                   style="text-decoration: underline;"><i>上传素材</i></a>
                 </li>
                 <li><i class="fa fa-warning"></i> 修改卡片名称，链接，更换图片以及“前面插入一条”、“删除此条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。;</li>
-                <%--<li><i class="fa fa-graduation-cap"></i> font-awesome类可参考--%>
-                <%--<a href="http://fontawesome.io/icons/" target="_blank" class="green-link">http://fontawesome.io/icons/</a>，图标前加"fa-"前缀即可;</li>--%>
+
             </ul>
 
         </div>

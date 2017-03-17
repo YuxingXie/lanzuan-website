@@ -35,19 +35,7 @@
 
 </div>
 <div class="row solid-silver-border p-a-md hover-bg-color-grey" ng-init="getFullWidthImages()" >
-    <div class="row">
-        <div class="col-xs-4">
-            <%--<div class="input-group">--%>
-                <%--<label class="input-group-addon">图片名称</label>--%>
-                <%--<input type="text" ng-model="fullWidthImage.name" class="form-control">--%>
-            <%--</div>--%>
 
-        </div>
-        <div class="col-xs-4"></div>
-        <div class="col-xs-2 ">
-
-        </div>
-    </div>
     <div class="row">
 
         <div class="btn-group col-xs-12 p-t-1-5em ">
@@ -66,7 +54,7 @@
 
         </div>
         <div class="col-xs-2">
-            <img ng-src="{{imageTextItem.image}}" class="img-responsive img-ico-larger img-rounded"/>
+            <img ng-src="{{${pageComponent.jsonVariableName}.image.uri}}" class="img-responsive img-ico-larger img-rounded"/>
         </div>
         <div class="col-xs-4">
 

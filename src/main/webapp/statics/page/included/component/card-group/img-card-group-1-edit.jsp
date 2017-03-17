@@ -7,13 +7,13 @@
         <label class="label label-default large-180">编辑图文卡片组</label>
 
         <div class="btn-group p-b-10">
-            <label class="btn btn-info cursor-auto">当前方案：{{cardGroup.name}}</label>
+            <label class="btn btn-info cursor-auto">当前方案：{{${pageComponent.jsonVariableName}.name}}</label>
 
-            <button class="btn btn-primary fa fa-upload " type="button" ng-click="saveCardGroup()"> 保存</button>
-            <button class="btn btn-primary fa fa-save" type="button" ng-click="newCardGroup()"> 方案另存为</button>
+            <button class="btn btn-danger fa fa-upload " type="button" ng-click="save${pageComponent.variableFirstUpper}()"> 保存</button>
+            <button class="btn btn-primary fa fa-save" type="button" ng-click="new${pageComponent.variableFirstUpper}()"> 方案另存为</button>
             <a class="btn btn-primary fa fa-save white-link"
                ng-href="${path}/admin/card-group/list-page/${pageComponent.id}"> 应用其它方案</a>
-            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="resetCardGroup()"> 重 置</button>
+            <button class="btn btn-primary fa fa-refresh" type="button" ng-click="reset${pageComponent.variableFirstUpper}()"> 重 置</button>
         </div>
     </div>
     <div class="col-xs-12">
@@ -38,7 +38,7 @@
             <div class="col-xs-2">卡片文字</div>
             <div class="col-xs-4">其它操作</div>
         </div>
-        <div class="row" ng-repeat="card in cardGroup.items">
+        <div class="row" ng-repeat="card in ${pageComponent.jsonVariableName}.items">
             <div class="row p-t-10">
                 <div class="btn-group col-xs-12">
                     <button type="button" class="btn btn-secondary btn-sm">更换图片</button>
