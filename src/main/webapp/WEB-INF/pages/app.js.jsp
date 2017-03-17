@@ -16,7 +16,7 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","
     <c:forEach var="component" items="${page.pageComponents}">
         $scope.get${component.variableFirstUpper}=function(){
             $http.get('${component.dataUri}').success(function (data) {
-//                console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 $scope.${component.jsonVariableName}=data;
             });
         }

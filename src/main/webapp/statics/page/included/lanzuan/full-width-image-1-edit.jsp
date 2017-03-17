@@ -58,7 +58,7 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-full-width">
-                    <span ng-repeat="icon in ${pageComponent.jsonVariableName}" class="dropdown-item-inline"
+                    <span ng-repeat="icon in fullWidthImages" class="dropdown-item-inline"
                           ng-click="${pageComponent.jsonVariableName}.image.uri=icon">
                         <img type="text" ng-src="{{icon}}" class="img-320-240px img-responsive"/>
                     </span>

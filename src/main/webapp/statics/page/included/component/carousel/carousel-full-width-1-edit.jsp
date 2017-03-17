@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn white-link fa fa-trash" ng-class="{'btn-danger':carouselItem.id,'btn-primary':!carouselItem.id}"
+                            <button class="btn white-link fa fa-trash " ng-class="{'btn-primary':carouselItem.id,'btn-primary':!carouselItem.id}"
                                     ng-click="removeCarouselItem($index)"> 删除此条
                             </button>
 

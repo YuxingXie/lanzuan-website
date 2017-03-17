@@ -118,7 +118,7 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/image/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        String fileDirectory=Constant.FULL_WIDTH_IMAGE_DIR;
+        String fileDirectory= Constant.FULL_WIDTH_IMAGE_DIR;
         ServletContextResource resource=new ServletContextResource(request.getServletContext(), fileDirectory);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){

@@ -1,6 +1,7 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
+import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
 import com.lanzuan.website.service.*;
@@ -11,13 +12,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.support.ServletContextResource;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -82,7 +86,7 @@ public class IndexController extends BaseRestSpringController {
     public ResponseEntity<SortLinkGroup> sortLinkGroupData() throws ServletException, IOException {
 
         SortLinkGroup sortLinkGroup=sortLinkGroupService.findByUri("/home",0);
-        return new ResponseEntity<SortLinkGroup>(new SortLinkGroup(), HttpStatus.OK);
+        return new ResponseEntity<SortLinkGroup>(sortLinkGroup, HttpStatus.OK);
     }
     @RequestMapping(value = "/sort-link-group/bottom/data")
     public ResponseEntity<SortLinkGroup> sortLinkGroupBottomData() throws ServletException, IOException {
@@ -113,4 +117,5 @@ public class IndexController extends BaseRestSpringController {
         modelMap.addAttribute("article",article);
         return "website/article/article";
     }
+
 }

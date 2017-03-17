@@ -28,7 +28,7 @@
             <%--<jsp:include page="${webPage.pageComponents[1].templateUri}"></jsp:include>--%>
             <%--<jsp:include page="${webPage.pageComponents[2].templateUri}"></jsp:include>--%>
             <%--<jsp:include page="${webPage.pageComponents[3].templateUri}"></jsp:include>--%>
-            <%--<jsp:include page="${webPage.pageComponents[4].templateUri}"></jsp:include>--%>
+            <%--<jsp:include page="${path}/component/${webPage.pageComponents[4].id}"></jsp:include>--%>
 
 
 
