@@ -6,7 +6,7 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.SortLinkGroup;
-import com.lanzuan.entity.support.SortLink;
+import com.lanzuan.entity.support.field.SortLink;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;

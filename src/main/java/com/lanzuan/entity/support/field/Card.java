@@ -1,4 +1,4 @@
-package com.lanzuan.entity.support;
+package com.lanzuan.entity.support.field;
 
 public class Card {
     private String image;

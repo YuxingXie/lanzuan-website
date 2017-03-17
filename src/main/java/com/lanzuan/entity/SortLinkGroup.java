@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.SortLink;
+import com.lanzuan.entity.support.field.SortLink;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;

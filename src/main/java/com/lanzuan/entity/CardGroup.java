@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.Card;
+import com.lanzuan.entity.support.field.Card;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;

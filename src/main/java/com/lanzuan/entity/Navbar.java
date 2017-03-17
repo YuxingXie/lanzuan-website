@@ -1,7 +1,7 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.NavItem;
-import com.lanzuan.entity.support.NavbarBrand;
+import com.lanzuan.entity.support.field.NavItem;
+import com.lanzuan.entity.support.field.NavbarBrand;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;

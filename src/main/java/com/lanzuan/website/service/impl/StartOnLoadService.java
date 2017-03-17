@@ -4,7 +4,7 @@ import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.util.DateUtil;
 import com.lanzuan.common.util.MD5;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.support.*;
+import com.lanzuan.entity.support.field.*;
 import com.lanzuan.support.vo.Image;
 import com.lanzuan.website.service.*;
 import org.apache.logging.log4j.LogManager;

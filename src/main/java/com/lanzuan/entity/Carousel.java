@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.CarouselItem;
+import com.lanzuan.entity.support.field.CarouselItem;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
