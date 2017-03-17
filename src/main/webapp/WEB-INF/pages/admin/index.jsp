@@ -26,7 +26,35 @@
                 <jsp:include page="${path}/statics/page/included/admin/leftMenu.html"></jsp:include>
             </div>
             <div class="col-xs-12 col-md-9">
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-header">
+                            访问统计
+                        </div>
+                        <div class="card-block">
+                            <div>总计访问量：1000</div>
+                            <div>今日访问量：1000</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            趋势图
+                        </div>
+                        <div class="card-block">
+                            <div>building....</div>
 
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            饼图
+                        </div>
+                        <div class="card-block">
+                            <div>building....</div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

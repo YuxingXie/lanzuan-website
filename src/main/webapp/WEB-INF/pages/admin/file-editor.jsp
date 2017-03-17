@@ -25,10 +25,10 @@
             src="${path}/statics/plugin/ueditor1_4_3_3/lang/zh-cn/zh-cn.js"></script>
 
 </head>
-<body>
+<body ng-app="app" ng-controller="AdminController">
 <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
 <div class="container">
-    <h1>文本编辑器</h1>
+    <h1 class="p-t-md p-b-md">文本编辑器</h1>
 
     <div class="row">
         <script id="editor" type="text/plain"></script>
@@ -42,14 +42,12 @@
                         <input class="form-control" name="title" type="text" value="${article.title}">
                         <input type="hidden" name="content" id="content" />
                         <input type="hidden" name="id" id="id" value="${article.id}"/>
-
                     </div>
-
                     <div class="form-group input-group">
                         <label class="fa fa-user input-group-addon">作者</label>
                         <input class="form-control" name="author" type="text" value="${article.author}">
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block " onclick="uploadF()" type="button"><i class="fa fa-upload"></i> 上 传 文 档</button>
+                    <button class="btn btn-lg btn-primary btn-block " onclick="uploadF()" type="button"><i class="fa fa-floppy-o"></i> 保存 文 档</button>
                 </fieldset>
             </form>
         </div>
@@ -99,11 +97,6 @@
         UE.getEditor('editor').setContent('${article.content}', isAppendTo);
 
     }
-
-
-
-
-
     function hasContent() {
         var arr = [];
         arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
@@ -141,5 +134,7 @@
     }
 
 </script>
+<script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
+<script src="${path}/app-js"></script>
 </body>
 </html>

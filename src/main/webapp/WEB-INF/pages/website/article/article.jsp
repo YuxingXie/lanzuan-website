@@ -12,8 +12,6 @@
         <title>湖南蓝钻科技</title>
         <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.css"/>
-        <link rel="stylesheet" href="${path}/statics/css/animate.css"/>
         <link rel="stylesheet" href="${path}/statics/css/style.css"/>
         <link rel="stylesheet" href="${path}/statics/css/color.css"/>
         <link rel="stylesheet" href="${path}/statics/css/bootstrap.custom.css"/>
@@ -26,8 +24,8 @@
             }
         </style>
     </head>
-    <body ng-app="homeApp" class="bg-very-light-1">
-    <div ng-controller="HomeController" >
+    <body ng-app="app" class="bg-very-light-1">
+    <div ng-controller="AdminController" >
         <div class="container-fluid">
             <div class="row p-a-0 m-a-0">
                 <%--<div style="width: 10%"></div>--%>
@@ -86,9 +84,10 @@
     </div>
     <div class="col-xs-12 p-t-50">
     </div>
-    <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
-    <script src="${path}/statics/js/tether.min.js"></script>
-    <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
+    <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
+    <%--<script src="${path}/statics/js/jquery-3.1.1.min.js"></script>--%>
+    <%--<script src="${path}/statics/js/tether.min.js"></script>--%>
+    <%--<script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>--%>
     </body>
 </html>
 

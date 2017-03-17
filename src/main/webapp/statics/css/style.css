@@ -270,7 +270,10 @@ Misc tools
 .margin-1{
     margin: 1px;
 }
-
+/*navbar height=4.9rem*/
+.m-b-xl {
+    margin-bottom: 4.9rem !important;
+}
 .m-b-5 {
     margin-bottom: 5px;
 }

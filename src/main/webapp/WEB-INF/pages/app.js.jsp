@@ -16,7 +16,7 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "$location","
     <c:forEach var="component" items="${page.pageComponents}">
         $scope.get${component.variableFirstUpper}=function(){
             $http.get('${component.dataUri}').success(function (data) {
-                console.log(JSON.stringify(data));
+//                console.log(JSON.stringify(data));
                 $scope.${component.jsonVariableName}=data;
             });
         }
@@ -259,10 +259,9 @@ alert("修改成功！");
 }
 
 
-$scope.removeArticle=function(articleSections,article){
-//console.log(JSON.stringify(article))
-$http.post("/admin/article/remove",JSON.stringify(article)).success(function (message) {
-articleSections=message.data;
+$scope.removeArticle=function(id){
+$http.post("/admin/article/remove/"+id).success(function (message) {
+    $scope.articles=message.data;
 if(message.success){
 alert("删除成功！");
 }
@@ -327,6 +326,13 @@ alert("删除成功！");
 //            $scope.imageTextBlockGroup.items[0]=item;
             $scope.imageTextBlockGroup.items.splice(0,0,item);
             }
+
+    $scope.newSortLinkAddArticle=function(sortLinkIndex){
+        <c:if test="${not empty component}">
+            $scope.${component.jsonVariableName}.items[sortLinkIndex]={sortName:"分类名称",links:[{text:"文章标题"}]};
+        </c:if>
+}
+
 }])
 })()
 <c:if test="false"></script></c:if>

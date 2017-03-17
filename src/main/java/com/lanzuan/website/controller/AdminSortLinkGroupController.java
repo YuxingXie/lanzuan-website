@@ -182,23 +182,8 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         message.setData(null);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    /**
-     * 为文章块撰文(新增)
-     * @param pageComponentId
-     * @param articleSectionId
-     * @param model
-     * @return
-     */
 
-    @RequestMapping(value = "/file-editor/in-section/{pageComponentId}/{articleSectionId}")
-    public String addNewArticleInSection(@PathVariable String pageComponentId,@PathVariable String articleSectionId,ModelMap model) {
-        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
-        SortLinkGroup sortLinkGroup =sortLinkGroupService.findById(articleSectionId);
 
-        model.addAttribute("pageComponent",pageComponent);
-        model.addAttribute("sortLinkGroup", sortLinkGroup);
-        return "admin/file-editor";
-    }
     /**
      * 编辑某articleSection中的某篇文章
      * @param pageComponentId

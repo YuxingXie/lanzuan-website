@@ -5,6 +5,9 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
+import com.lanzuan.entity.PageComponent;
+import com.lanzuan.entity.SortLinkGroup;
+import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.*;
 import com.lanzuan.website.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +84,15 @@ public class ArticleController extends BaseRestSpringController {
     }
 
 
-
+    @RequestMapping(value = "/remove/{id}")
+    public ResponseEntity<Message> removeArticle(@PathVariable String id){
+        Message message=new Message();
+        articleService.removeById(id);
+        List<Article> articles=articleService.findAll();
+        message.setSuccess(true);
+        message.setData(articles);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
     @RequestMapping(value = "/cover-image/new/{pageComponentId}")
     public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
 
@@ -127,5 +139,13 @@ public class ArticleController extends BaseRestSpringController {
         return "redirect:/admin/article/list";
     }
 
+    @RequestMapping(value = "/file-editor/{articleId}")
+    public String addNewArticleInSection(@PathVariable String articleId,ModelMap model) {
 
+        Article article=articleService.findById(articleId);
+
+
+        model.addAttribute("article", article);
+        return "admin/file-editor";
+    }
 }
