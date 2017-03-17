@@ -8,7 +8,7 @@ import java.util.Date;
 public class Link {
     private String href;
     private String text;
-    private Date date;
+    private String date;
 
     public String getHref() {
         return href;
@@ -26,11 +26,11 @@ public class Link {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

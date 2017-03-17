@@ -39,7 +39,7 @@
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
-        <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
+        <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.min.js"></script>
         <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
         <script src="/app-js?pageId=${webPage.id}"></script>
     </body>

@@ -2,7 +2,9 @@ package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.common.constant.Constant;
+import com.lanzuan.common.util.DateUtil;
 import com.lanzuan.common.util.MD5;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
 import com.lanzuan.entity.entityfield.*;
 import com.lanzuan.support.vo.Image;
@@ -76,6 +78,7 @@ public class StartOnLoadService {
 
     private void initSortLinkGroupData(PageComponent pageComponent) {
         Date now=new Date();
+        String _now=DateUtil.getCurrentYMD();
         SortLinkGroup sortLinkGroup=new SortLinkGroup();
         SortLink sortLink1=new SortLink();
         SortLink sortLink2=new SortLink();
@@ -95,16 +98,16 @@ public class StartOnLoadService {
         Link link1_4=new Link();
         link1_1.setHref("/statics/page/building.html");
         link1_1.setText("荣誉奖项");
-        link1_1.setDate(now);
+        link1_1.setDate(_now);
         link1_2.setHref("/statics/page/building.html");
         link1_2.setText("新闻报道");
-        link1_2.setDate(now);
+        link1_2.setDate(_now);
         link1_3.setHref("/statics/page/building.html");
         link1_3.setText("活动专题");
-        link1_3.setDate(now);
+        link1_3.setDate(_now);
         link1_4.setHref("/statics/page/building.html");
         link1_4.setText("人才招聘");
-        link1_4.setDate(now);
+        link1_4.setDate(_now);
         links1.add(link1_1);
         links1.add(link1_2);
         links1.add(link1_3);
@@ -117,16 +120,16 @@ public class StartOnLoadService {
         Link link2_4=new Link();
         link2_1.setHref("/statics/page/building.html");
         link2_1.setText("在线咨询（售后）");
-        link2_1.setDate(now);
+        link2_1.setDate(_now);
         link2_2.setHref("/statics/page/building.html");
         link2_2.setText("资料库");
-        link2_2.setDate(now);
+        link2_2.setDate(_now);
         link2_3.setHref("/statics/page/building.html");
         link2_3.setText("软件下载");
-        link2_3.setDate(now);
+        link2_3.setDate(_now);
         link2_4.setHref("/statics/page/building.html");
         link2_4.setText("建议反馈");
-        link2_4.setDate(now);
+        link2_4.setDate(_now);
         links2.add(link2_1);
         links2.add(link2_2);
         links2.add(link2_3);
@@ -138,13 +141,13 @@ public class StartOnLoadService {
 
         link3_1.setHref("/statics/page/building.html");
         link3_1.setText("在线咨询（售前）");
-        link3_1.setDate(now);
+        link3_1.setDate(_now);
         link3_2.setHref("/statics/page/building.html");
         link3_2.setText("申请试用");
-        link3_2.setDate(now);
+        link3_2.setDate(_now);
         link3_3.setHref("/statics/page/building.html");
         link3_3.setText("联系我们");
-        link3_3.setDate(now);
+        link3_3.setDate(_now);
 
         links3.add(link3_1);
         links3.add(link3_2);
@@ -158,19 +161,19 @@ public class StartOnLoadService {
         Link link4_5=new Link();
         link4_1.setHref("/statics/page/building.html");
         link4_1.setText("渠道政策");
-        link4_1.setDate(now);
+        link4_1.setDate(_now);
         link4_2.setHref("/statics/page/building.html");
         link4_2.setText("合作申请");
-        link4_2.setDate(now);
+        link4_2.setDate(_now);
         link4_3.setHref("/statics/page/building.html");
         link4_3.setText("渠道公告");
-        link4_3.setDate(now);
+        link4_3.setDate(_now);
         link4_4.setHref("/statics/page/building.html");
         link4_4.setText("英博智能");
-        link4_4.setDate(now);
+        link4_4.setDate(_now);
         link4_5.setHref("/statics/page/building.html");
         link4_5.setText("培训公告");
-        link4_5.setDate(now);
+        link4_5.setDate(_now);
         links4.add(link4_1);
         links4.add(link4_2);
         links4.add(link4_3);
@@ -445,6 +448,7 @@ public class StartOnLoadService {
         sortLinkGroup.setName("默认方案");
         sortLinkGroup.setIndexOfPage(0);
         Date now=new Date();
+        String _now=DateUtil.getCurrentYMD();
 
         Article article1=new Article();
         article1.setDate(now);
@@ -562,7 +566,7 @@ public class StartOnLoadService {
         sortLink1.setSortName("新闻动态");
         List<Link> links1=new ArrayList<Link>();
         Link link1=new Link();
-        link1.setDate(article1.getDate());
+        link1.setDate(DateUtil.getCurrentYMD());
         link1.setHref("/article/" + article1.getId());
         link1.setText(article1.getTitle());
         links1.add(link1);
@@ -574,7 +578,7 @@ public class StartOnLoadService {
         sortLink2.setSortName("企业文化");
         List<Link> links2=new ArrayList<Link>();
         Link link2=new Link();
-        link2.setDate(article2.getDate());
+        link2.setDate(_now);
         link2.setHref("/article/" + article2.getId());
         link2.setText(article1.getTitle());
         links2.add(link2);

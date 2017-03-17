@@ -97,6 +97,9 @@
                    <span class="input-group-addon">链接</span><input class="form-control" ng-model="link.href" type="text">
                    <span class="input-group-addon"><a class="black-link fa fa-question-circle" target="_blank" href="/admin/article/list"> </a></span>
                </div>
+               <div class="input-group input-group-sm">
+                   <span class="input-group-addon">日期</span><input class="form-control" ng-model="link.date" type="text">
+               </div>
            </div>
            <div class="col-xs-5 btn-group btn-group-sm">
                <button class="btn btn-primary  fa fa-trash " ng-if="!sortLink.image" ng-click="sortLink.links.splice($index,1)">删除文章</button>

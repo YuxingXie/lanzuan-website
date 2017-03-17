@@ -32,7 +32,20 @@
         padding-left: 4em;
         padding-right: 4em;
     }
+    .md-p-l-r-3em{
+         padding-left: 3em;
+         padding-right: 3em;
+     }
+    .md-p-l-r-2em{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    .md-p-l-r-1-5em{
+         padding-left: 1.5em;
+         padding-right: 1.5em;
+     }
 }
+
 
 @media (min-width: 62em) {
     .fixed-left-menu{
@@ -56,6 +69,18 @@
     }
     .lg-m-r-15em{
         margin-right: 15em;
+    }
+    .lg-p-l-r-2em{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    .lg-p-l-r-3em{
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+    .lg-p-l-r-3-5em{
+         padding-left: 3.5em;
+         padding-right: 3.5em;
     }
 }
 @media (min-width: 75em) {
@@ -148,11 +173,19 @@
         margin: 0;
         padding: 0;
         color: #ffffff;
-        /*background-color: #b2b2b2;*/
+        background-color: #dbd7a1;
         font-size: 90%;
-
         border-radius: .45rem .45rem 0 0;
-        /*opacity: 1;*/
+        opacity: 1;
+
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+
+
+
+
+
     }
     .navbar-md-down-fix-bottom nav,.navbar-md-down-fix-bottom .navbar-nav{
         padding: 0;
@@ -161,32 +194,33 @@
     .navbar-md-down-fix-bottom .nav-item{
         padding: 0;
         margin: 0;
+        display: table-cell;
+        vertical-align: top;
+    }
+    /*.navbar-md-down-fix-bottom .nav-item + .nav-item {*/
+        /*margin-left: 0;*/
+        /*border-left: 0;*/
+    /*}*/
+    .navbar-md-down-fix-bottom .nav-item:last-child {
+        display: none;
     }
     .navbar-md-down-fix-bottom .nav-item .nav-link{
         padding:0 0 .2em 0 ;
         margin: .1em;
-        /*background-color: #5a5a5a;*/
-        /*border-radius:30% 30% 0 0;*/
         font-size: 70%;
     }
     .navbar-md-down-fix-bottom a,
-    .navbar-md-down-fix-bottom a:link{
+    .navbar-md-down-fix-bottom a:link,.navbar-md-down-fix-bottom a:visited,{
         color: #ffffff;
     }
-    .navbar-md-down-fix-bottom .navbar-nav .nav-item {
-    /*.navbar-md-down-fix-bottom .navbar-nav .nav-item + .nav-item {*/
-        /*border-right: solid #c0c0c0 1px;*/
-        border: solid #0266C9 1px;
-        margin-left: 0;
-        border-radius: .25rem .25rem 0 0;
-        background-color: #0275d8;
-        float: left;
-
-    }
-    /*.navbar-md-down-fix-bottom .nav-link{*/
-        /*padding-top: 0;*/
-        /*padding-bottom: 0;*/
+    /*.navbar-md-down-fix-bottom .navbar-nav .nav-item {*/
+        /*border: solid #0266C9 1px;*/
+        /*margin-left: 0;*/
+        /*border-radius: .25rem .25rem 0 0;*/
+        /*background-color: #0275d8;*/
+        /*float: left;*/
     /*}*/
+
     .navbar-md-down-fix-bottom.divider {
         padding-top:0;
         padding-bottom: 0;

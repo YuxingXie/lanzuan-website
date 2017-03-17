@@ -18,7 +18,7 @@
   </div>
   <ul class="nav navbar-nav">
     <li class="nav-item">
-      <a class="nav-link white-link" href="${path}/"><i class="fa fa-home"></i>官网首页 </a>
+      <a class="nav-link white-link" href="${path}/" target="_blank"><i class="fa fa-home"></i>官网首页 </a>
     </li>
     <li class="nav-item">
       <a class="nav-link white-link" href="${path}/admin/index"><i class="fa fa-gears"></i>管理首页 </a>
@@ -27,7 +27,10 @@
       <a class="nav-link white-link" href="${path}/admin/file-editor"><i class="fa fa-pencil-square-o"></i>写文章 </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link white-link" href="${path}/admin/article/list"><i class="fa fa-file-text"></i>文章列表 </a>
+      <a class="nav-link white-link" href="${path}/admin/article/list" target="_blank"><i class="fa fa-file-text"></i>文章列表 </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white-link" href="${path}/admin/resource/list" target="_blank"><i class="fa fa-database"></i>网站资源 </a>
     </li>
     <li class="nav-item pull-right">
       <div class="btn-group btn-group-sm">

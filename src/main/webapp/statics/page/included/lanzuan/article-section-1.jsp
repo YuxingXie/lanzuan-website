@@ -17,12 +17,12 @@
 
         </div>
         <div class="list-group small-90 p-r-3em" ng-if="sortLink.links">
-            <a href="{{article.href}}"
+            <a href="{{link.href}}"
                class="list-group-item p-l-0 p-r-0 no-border no-background fa fa-ext-dot-blue"
-               ng-repeat="article in sortLink.links">
+               ng-repeat="link in sortLink.links">
 
                 <span class="color-grey bg-medium-grey-2 label-pill pull-right"
-                      style="border-radius: .2rem;background-color: #efefefef">{{article.date |date:'shortDate'}}</span>{{article.text}}
+                      style="border-radius: .2rem;background-color: #efefefef">{{link.date}}</span>{{link.text}}
             </a>
         </div>
         <div class="list-group small-90 p-r-3em" ng-if="!sortLink.links &&!sortLink.image">
