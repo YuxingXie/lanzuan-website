@@ -1,7 +1,7 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.common.util.StringUtils;
-import com.lanzuan.entity.support.PageComponentData;
+import com.lanzuan.entity.support.Item;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "pageComponent")
-public class PageComponent<T extends PageComponentData> {
+public class PageComponent<T extends Item> {
     @Id
     private String id;
     private String name;

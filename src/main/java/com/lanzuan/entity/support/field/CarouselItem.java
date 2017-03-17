@@ -14,8 +14,15 @@ public class CarouselItem implements Item{
     private String type;
     private String value;
     private CarouselCaption carouselCaption;
+    private String link;
 
+    public String getLink() {
+        return link;
+    }
 
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getType() {
         return type;
@@ -38,6 +45,31 @@ public class CarouselItem implements Item{
 
     public void setCarouselCaption(CarouselCaption carouselCaption) {
         this.carouselCaption = carouselCaption;
+    }
+
+    @Override
+    public String name() {
+        return name();
+    }
+
+    @Override
+    public String text() {
+        return carouselCaption==null?null:carouselCaption.getText();
+    }
+
+    @Override
+    public String image() {
+        return value;
+    }
+
+    @Override
+    public String href() {
+        return link==null?(carouselCaption==null?null:carouselCaption.getLink()):link;
+    }
+
+    @Override
+    public String title() {
+        return text();
     }
 
     @Override

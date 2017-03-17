@@ -2,7 +2,6 @@ package com.lanzuan.entity;
 
 import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.CarouselItem;
-import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -12,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "carousel")
-public class Carousel  implements PageComponentData,Item {
+public class Carousel  implements Item {
     @Id
     private String id;
     /**
@@ -130,5 +129,25 @@ public class Carousel  implements PageComponentData,Item {
     @Override
     public String name() {
         return name;
+    }
+
+    @Override
+    public String text() {
+        return name;
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return text();
     }
 }

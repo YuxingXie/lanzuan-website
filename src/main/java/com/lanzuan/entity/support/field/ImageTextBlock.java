@@ -28,6 +28,31 @@ public class ImageTextBlock implements Item{
     }
 
     @Override
+    public String name() {
+        return name;
+    }
+
+    @Override
+    public String text() {
+        return name();
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return name();
+    }
+
+    @Override
     public List<ImageTextItem> childItems() {
         return imageTextItems;
     }

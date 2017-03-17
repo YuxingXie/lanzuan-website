@@ -45,6 +45,31 @@ public class NavItem implements Item{
     }
 
     @Override
+    public String name() {
+        return name();
+    }
+
+    @Override
+    public String text() {
+        return name;
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return link;
+    }
+
+    @Override
+    public String title() {
+        return null;
+    }
+
+    @Override
     public List<? extends Item> childItems() {
         return null;
     }

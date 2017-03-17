@@ -19,6 +19,15 @@ public class CarouselCaption implements Item {
      * 标题css样式名
      */
     private String captionClass;
+    private String link;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getType() {
         return type;
@@ -50,6 +59,31 @@ public class CarouselCaption implements Item {
 
     public void setCaptionClass(String captionClass) {
         this.captionClass = captionClass;
+    }
+
+    @Override
+    public String name() {
+        return name();
+    }
+
+    @Override
+    public String text() {
+        return text;
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return link;
+    }
+
+    @Override
+    public String title() {
+        return text;
     }
 
     @Override

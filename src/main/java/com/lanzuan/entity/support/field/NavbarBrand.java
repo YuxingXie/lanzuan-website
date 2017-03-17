@@ -28,6 +28,31 @@ public class NavbarBrand implements Item{
     }
 
     @Override
+    public String name() {
+        return null;
+    }
+
+    @Override
+    public String text() {
+        return value;
+    }
+
+    @Override
+    public String image() {
+        return value;
+    }
+
+    @Override
+    public String href() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return null;
+    }
+
+    @Override
     public List<? extends Item> childItems() {
         return null;
     }

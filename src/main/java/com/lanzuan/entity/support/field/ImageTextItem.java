@@ -46,6 +46,31 @@ public class ImageTextItem implements Item {
     }
 
     @Override
+    public String name() {
+        return null;
+    }
+
+    @Override
+    public String text() {
+        return text;
+    }
+
+    @Override
+    public String image() {
+        return image;
+    }
+
+    @Override
+    public String href() {
+        return link;
+    }
+
+    @Override
+    public String title() {
+        return text();
+    }
+
+    @Override
     public List<? extends Item> childItems() {
         return null;
     }

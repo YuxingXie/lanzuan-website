@@ -90,14 +90,16 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
             index=0;
         }
         var item={};
+        <%--var item=$scope.${component.var}.items.shift();--%>
+        <%--console.log(JSON.stringify(item))--%>
+        <%--$scope.${component.var}.items.splice(0,0,item,item);--%>
+        <%--return;--%>
         if(!$scope.${component.var}){
             $scope.${component.var}={};
         }
         if(!$scope.${component.var}.items){
             $scope.${component.var}.items=[];
         }
-
-
         $scope.${component.var}.items.splice(index,0,item);
     }
 
@@ -107,6 +109,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     }
     //移除条目
     $scope.remove${component.varU}Item=function(index){
+
         $scope.${component.var}.items.splice(index,1)
     }
     /**
@@ -268,19 +271,7 @@ alert("删除成功！");
 });
 }
 //以下方法覆盖自动生成的方法，一定要注意此方法在js中的顺序
-    $scope.removeCarouselItem= function (index) {
-        if($scope.carousel&&$scope.carousel.items&&$scope.carousel.items.length
-        &&$scope.carousel.items[index].id){
 
-        $http.post("/admin/carousel/item/remove/"+$scope.carousel.items[index].id,JSON.stringify($scope.carousel)).success(function (message) {
-        $scope.carousel=message.data;
-        alert("删除成功！");
-        });
-        }else{
-        $scope.carousel.items.splice(index,1);
-        }
-
-    }
     $scope.insertBlockItemBefore=function(imageTextBlock,index){
 
         imageTextBlock.imageTextItems.splice(index,0,{

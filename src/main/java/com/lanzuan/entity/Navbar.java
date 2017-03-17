@@ -3,7 +3,6 @@ package com.lanzuan.entity;
 import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.NavItem;
 import com.lanzuan.entity.support.field.NavbarBrand;
-import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/11.
  */
 @Document(collection = "navbar")
-public class Navbar  implements PageComponentData,Item {
+public class Navbar  implements Item{
     @Id
     private String id;
     private String uri;
@@ -94,5 +93,25 @@ public class Navbar  implements PageComponentData,Item {
     @Override
     public String name() {
         return name;
+    }
+
+    @Override
+    public String text() {
+        return null;
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return null;
     }
 }

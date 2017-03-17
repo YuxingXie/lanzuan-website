@@ -50,34 +50,6 @@ public class AdminCarouselController extends BaseRestSpringController {
         return "admin/img-carousel-input";
     }
 
-    /**
-     * 此方法应废弃
-     * @param itemId
-     * @param carousel
-     * @return
-     */
-    @RequestMapping(value = "/item/remove/{itemId}")
-    public ResponseEntity<Message> removeItem(@PathVariable String itemId,@RequestBody Carousel carousel){
-        Message message=new Message();
-//        List<CarouselItem> carouselItemsToSave=new ArrayList<CarouselItem>();
-//        List<CarouselItem> carouselItems=carousel.getItems();
-//        for (CarouselItem carouselItem:carouselItems){
-//            if (!carouselItem.getId().equals(itemId)){
-//                carouselItemsToSave.add(carouselItem);
-//            }
-//        }
-//
-//        if(carouselItemsToSave.size()>0){
-//            carousel.setItems(carouselItemsToSave);
-//
-//        }else {
-//            carousel.setItems(null);
-//        }
-        carouselService.update(carousel,false);
-        message.setSuccess(true);
-        message.setData(carousel);
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
 
     @RequestMapping(value = "/insert-all")
     public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel){

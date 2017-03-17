@@ -55,6 +55,31 @@ public class SortLink implements Item{
     }
 
     @Override
+    public String name() {
+        return name();
+    }
+
+    @Override
+    public String text() {
+        return name();
+    }
+
+    @Override
+    public String image() {
+        return image;
+    }
+
+    @Override
+    public String href() {
+        return imageHref;
+    }
+
+    @Override
+    public String title() {
+        return text();
+    }
+
+    @Override
     public List<? extends Item> childItems() {
         return links;
     }

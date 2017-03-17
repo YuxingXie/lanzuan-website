@@ -2,7 +2,6 @@ package com.lanzuan.entity;
 
 import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.SortLink;
-import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "sortLinkGroup")
-public class SortLinkGroup  implements PageComponentData,Item {
+public class SortLinkGroup  implements Item{
     @Id
     private String id;
     private String name;
@@ -112,5 +111,25 @@ public class SortLinkGroup  implements PageComponentData,Item {
     @Override
     public String name() {
         return name;
+    }
+
+    @Override
+    public String text() {
+        return name;
+    }
+
+    @Override
+    public String image() {
+        return null;
+    }
+
+    @Override
+    public String href() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return text();
     }
 }

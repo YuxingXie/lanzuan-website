@@ -34,6 +34,31 @@ public class Card implements Item{
     }
 
     @Override
+    public String name() {
+        return name();
+    }
+
+    @Override
+    public String text() {
+        return text;
+    }
+
+    @Override
+    public String image() {
+        return image;
+    }
+
+    @Override
+    public String href() {
+        return link;
+    }
+
+    @Override
+    public String title() {
+        return text();
+    }
+
+    @Override
     public List<Item> childItems() {
         return null;
     }

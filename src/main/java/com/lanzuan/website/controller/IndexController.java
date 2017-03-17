@@ -2,9 +2,13 @@ package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
+import com.lanzuan.common.util.ReflectUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.website.service.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -103,6 +107,20 @@ public class IndexController extends BaseRestSpringController {
         }
         if (StringUtils.isNotBlank(componentId)){
             PageComponent component=pageComponentService.findById(componentId);
+            Item data=component.getData();
+
+            if(data!=null&&data.childItems()!=null){
+                StringBuffer sb=new StringBuffer("app.controller('AdminController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {");
+                String insertItemBefore="insert"+component.getVarU()+"Before";
+                sb.append("$scope.").append(insertItemBefore).append("= function (index) {");
+                String varItem="{";
+                List<? extends Item> items=data.childItems();
+                Item item=items.get(0);
+
+
+            }
+
+
 
             modelMap.addAttribute("component",component);
         }

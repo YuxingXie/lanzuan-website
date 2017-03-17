@@ -11,6 +11,15 @@ public class Link implements Item{
     private String href;
     private String text;
     private String date;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getHref() {
         return href;
@@ -34,6 +43,31 @@ public class Link implements Item{
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String name() {
+        return text;
+    }
+
+    @Override
+    public String text() {
+        return text;
+    }
+
+    @Override
+    public String image() {
+        return image;
+    }
+
+    @Override
+    public String href() {
+        return href;
+    }
+
+    @Override
+    public String title() {
+        return text();
     }
 
     @Override
