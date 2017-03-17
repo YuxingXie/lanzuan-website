@@ -323,8 +323,9 @@ alert("删除成功！");
             imageTextItem.title="标题";
             item.imageTextItems=[];
             item.imageTextItems.push(imageTextItem);
-            $scope.imageTextBlockGroup.items.push(item)
-            $scope.imageTextBlockGroup.items.splice(index,0,item);
+//            $scope.imageTextBlockGroup.items.push(item);
+//            $scope.imageTextBlockGroup.items[0]=item;
+            $scope.imageTextBlockGroup.items.splice(0,0,item);
             }
 }])
 })()

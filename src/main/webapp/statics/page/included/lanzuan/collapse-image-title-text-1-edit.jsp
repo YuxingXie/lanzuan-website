@@ -5,6 +5,7 @@
 <div class="row p-a-0 m-a-0">
     <div class="col-xs-12 m-a-0 p-a-0">
         <label class="label label-default large-180">编辑图文块组组件方案</label>
+        <div class="" >{{${pageComponent.jsonVariableName}.items}}</div>
 
         <div class="btn-group p-b-10">
             <label class="btn btn-info cursor-auto">当前方案：{{imageTextBlockGroup.name}}</label>
