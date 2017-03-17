@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.NavItem;
 import com.lanzuan.entity.support.field.NavbarBrand;
 import com.lanzuan.entity.support.PageComponentData;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/11.
  */
 @Document(collection = "navbar")
-public class Navbar  implements PageComponentData {
+public class Navbar  implements PageComponentData,Item {
     @Id
     private String id;
     private String uri;
@@ -78,5 +79,20 @@ public class Navbar  implements PageComponentData {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return items;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

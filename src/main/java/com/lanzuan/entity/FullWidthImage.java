@@ -1,16 +1,19 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.PageComponentData;
 import com.lanzuan.support.vo.Image;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/13.
  */
 @Document(collection = "fullWidthImage")
-public class FullWidthImage  implements PageComponentData {
+public class FullWidthImage  implements PageComponentData,Item {
     @Id
     private String id;
     private Image image;
@@ -66,5 +69,20 @@ public class FullWidthImage  implements PageComponentData {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return null;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

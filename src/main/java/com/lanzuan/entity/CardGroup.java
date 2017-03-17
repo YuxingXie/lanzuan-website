@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.Card;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/12.
  */
 @Document(collection = "cardGroup")
-public class CardGroup implements PageComponentData {
+public class CardGroup implements PageComponentData,Item {
     @Id
     private String id;
     private String name;
@@ -89,5 +90,20 @@ public class CardGroup implements PageComponentData {
 
     public void setPageComponent(PageComponent pageComponent) {
         this.pageComponent = pageComponent;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return items;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

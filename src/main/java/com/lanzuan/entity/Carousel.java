@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.CarouselItem;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "carousel")
-public class Carousel  implements PageComponentData {
+public class Carousel  implements PageComponentData,Item {
     @Id
     private String id;
     /**
@@ -114,5 +115,20 @@ public class Carousel  implements PageComponentData {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return items;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

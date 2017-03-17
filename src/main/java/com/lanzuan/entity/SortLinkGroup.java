@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.field.SortLink;
 import com.lanzuan.entity.support.PageComponentData;
 import org.springframework.data.annotation.Id;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "sortLinkGroup")
-public class SortLinkGroup  implements PageComponentData {
+public class SortLinkGroup  implements PageComponentData,Item {
     @Id
     private String id;
     private String name;
@@ -96,5 +97,20 @@ public class SortLinkGroup  implements PageComponentData {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    @Override
+    public List<? extends Item> childItems() {
+        return items;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return 20;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }
