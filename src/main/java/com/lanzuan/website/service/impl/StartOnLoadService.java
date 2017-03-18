@@ -72,7 +72,7 @@ public class StartOnLoadService {
 
 
 
-    private void initSortLinkGroupData(PageComponent pageComponent) {
+    private SortLinkGroup sortLinkGroup() {
         Date now=new Date();
         String _now=DateUtil.getCurrentYMD();
         SortLinkGroup sortLinkGroup=new SortLinkGroup();
@@ -191,12 +191,12 @@ public class StartOnLoadService {
         sortLinkGroup.setName("默认方案");
         sortLinkGroup.setIndexOfPage(1);
         sortLinkGroup.setEnabled(true);
-        sortLinkGroup.setPageComponent(pageComponent);
-        sortLinkGroupService.insert(sortLinkGroup);
 
+        sortLinkGroupService.insert(sortLinkGroup);
+        return sortLinkGroup;
     }
 
-    private void initFullWidthImageData(PageComponent pageComponent) {
+    private FullWidthImage fullWidthImage() {
         logger.info("初始化全屏宽度图片。。。");
         FullWidthImage fullWidthImage=new FullWidthImage();
         fullWidthImage.setName("政府大楼全屏宽度图");
@@ -205,12 +205,12 @@ public class StartOnLoadService {
         Image image=new Image();
         image.setUri("/statics/image/lanzuan/full-width/zfdl.jpg");
         fullWidthImage.setImage(image);
-        fullWidthImage.setPageComponent(pageComponent);
-        fullWidthImageService.insert(fullWidthImage);
 
+        fullWidthImageService.insert(fullWidthImage);
+        return fullWidthImage;
     }
 
-    private void initImageTextBlockGroupData(PageComponent pageComponent) {
+    private ImageTextBlockGroup imageTextBlockGroup() {
         logger.info("初始化图文块组。。。");
         ImageTextBlockGroup group=new ImageTextBlockGroup();
         group.setUri("/home");
@@ -358,12 +358,13 @@ public class StartOnLoadService {
         imageTextBlocks.add(block3);
         imageTextBlocks.add(block4);
         group.setItems(imageTextBlocks);
-        group.setPageComponent(pageComponent);
+
         imageTextBlockGroupService.insert(group);
+        return  group;
 
     }
 
-    private void initCardGroupData(PageComponent pageComponent) {
+    private CardGroup cardGroup() {
         logger.info("初始化图文卡片组。。。");
         CardGroup cardGroup=new CardGroup();
         cardGroup.setEnabled(true);
@@ -386,13 +387,12 @@ public class StartOnLoadService {
         Cards.add(Card2);
         Cards.add(Card3);
         cardGroup.setItems(Cards);
-        cardGroup.setPageComponent(pageComponent);
         cardGroupService.insert(cardGroup);
-
+        return cardGroup;
 
     }
 
-    private void initNavbarData(PageComponent pageComponent) {
+    private Navbar navbar() {
         logger.info("初始化导航条。。。");
         Navbar navbar=new Navbar();
         navbar.setName("首页导航条");
@@ -430,12 +430,11 @@ public class StartOnLoadService {
         navItems.add(navItem4);
         navItems.add(navItem5);
         navbar.setItems(navItems);
-        navbar.setPageComponent(pageComponent);
         navbarService.insert(navbar);
-
+        return navbar;
     }
 
-    private void initArticleSectionData(PageComponent pageComponent) {
+    private SortLinkGroup articleSectionData() {
         logger.info("初始化文章版块。。。");
 
         SortLinkGroup sortLinkGroup=new SortLinkGroup();
@@ -587,11 +586,12 @@ public class StartOnLoadService {
         sortLink3.setImageHref("/statics/image/lanzuan/home/huodongzhuanti.png");
         sortLinks.add(sortLink3);
         sortLinkGroup.setItems(sortLinks);
-        sortLinkGroup.setPageComponent(pageComponent);
+
         sortLinkGroupService.insert(sortLinkGroup);
+        return sortLinkGroup;
     }
 
-    private void initCarouselData(PageComponent pageComponent) {
+    private Carousel carousel() {
         logger.info("初始化轮播图。。。");
         Carousel carousel=new Carousel();
         carousel.setName("首页轮播图");
@@ -641,9 +641,9 @@ public class StartOnLoadService {
         carouselItem4.setCarouselCaption(caption4);
         carouselItems.add(carouselItem4);
         carousel.setItems(carouselItems);
-        carousel.setPageComponent(pageComponent);
-        carouselService.insert(carousel);
 
+        carouselService.insert(carousel);
+        return carousel;
     }
 
     private void initWebPages() {
@@ -776,6 +776,8 @@ public class StartOnLoadService {
             pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
 
 
+
+
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);
             pageComponentList.add(pageComponent2);
@@ -787,15 +789,17 @@ public class StartOnLoadService {
             webPage.setPageComponents(pageComponentList);
             webPage.setUri("/home");
             webPage.setActive(true);
+
+            pageComponent1.setData(navbar());
+            pageComponent2.setData(carousel());
+            pageComponent3.setData(cardGroup());
+            pageComponent4.setData(imageTextBlockGroup());
+            pageComponent5.setData(articleSectionData());
+            pageComponent6.setData(fullWidthImage());
+            pageComponent7.setData(sortLinkGroup());
+
             pageComponentService.insertAll(pageComponentList);
             webPageService.insert(webPage);
-            initNavbarData(pageComponent1);
-            initCarouselData(pageComponent2);
-            initCardGroupData(pageComponent3);
-            initImageTextBlockGroupData(pageComponent4);
-            initArticleSectionData(pageComponent5);
-            initFullWidthImageData(pageComponent6);
-            initSortLinkGroupData(pageComponent7);
         }
 
     }
