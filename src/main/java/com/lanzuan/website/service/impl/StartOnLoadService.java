@@ -681,13 +681,13 @@ public class StartOnLoadService {
             pageComponent6.setRemark("简单的全屏宽度图片。");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
 
-            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
-            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
-            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
-            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
-            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.jsp");
-            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
-            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
+            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
+            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
+            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.preview.jsp");
+            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.preview.jsp");
+            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.preview.jsp");
+            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.preview.jsp");
+            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.preview.jsp");
 
             pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
             pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
