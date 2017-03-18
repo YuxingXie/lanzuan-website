@@ -64,7 +64,7 @@ public class IndexController extends BaseRestSpringController {
     public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
         PageComponent pageComponent=pageComponentService.findById(componentId);
         modelMap.addAttribute("pageComponent",pageComponent);
-        return "forward:"+pageComponent.getTemplateUri();
+        return "forward:"+pageComponent.getWebsiteUri();
     }
     @RequestMapping(value = "/navbar/home/data")
     public ResponseEntity<Navbar> getNavbar(){

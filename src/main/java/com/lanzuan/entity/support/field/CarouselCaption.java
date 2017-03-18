@@ -63,7 +63,7 @@ public class CarouselCaption implements Item {
 
     @Override
     public String name() {
-        return name();
+        return null;
     }
 
     @Override

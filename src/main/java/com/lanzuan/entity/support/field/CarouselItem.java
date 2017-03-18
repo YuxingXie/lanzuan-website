@@ -2,6 +2,7 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.support.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class CarouselItem implements Item{
 
     @Override
     public String name() {
-        return name();
+        return carouselCaption==null?null:carouselCaption.getText();
     }
 
     @Override
@@ -73,7 +74,12 @@ public class CarouselItem implements Item{
     }
 
     @Override
-    public List<Item> childItems() {
+    public List<CarouselCaption> childItems() {
+        if (carouselCaption!=null){
+            List<CarouselCaption> items=new ArrayList<CarouselCaption>();
+            items.add(carouselCaption);
+            return items;
+        }
         return null;
     }
 

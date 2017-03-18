@@ -44,7 +44,7 @@
         </ul>
     </nav>
 </c:if>
-<c:if test="${param.mode eq 'admin'}">
+<c:if test="${param.mode eq 'admin' and false}">
     <div class="row p-a-0 m-a-0" ng-init="getIcons()">
 
         <div class="col-xs-12 m-a-0 p-a-0">
