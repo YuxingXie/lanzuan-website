@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>轮播方案列表</title>
+    <title>图文块组方案列表</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>
@@ -61,7 +61,7 @@
                                   ng-class="{'fa-toggle-on color-blue ':group.enabled,'fa-toggle-off color-grey':!group.enabled}">
                                 <%--{{group.enabled?"禁用":"启用"}}--%>
                             </span>
-                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little m-b-15" ng-click="deleteGroup(group)">
+                            <button class="fa fa-trash btn btn-primary btn-sm btn-padding-little m-b-15" ng-click="deleteImageTextBlockGroup(group)">
                                 删除方案
                             </button>
                         </div>

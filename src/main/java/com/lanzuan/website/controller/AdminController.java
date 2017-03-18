@@ -64,6 +64,12 @@ public class AdminController extends BaseRestSpringController {
         modelMap.addAttribute("webPage", webPage);
         return "admin/home-page-admin";
     }
+    @RequestMapping(value = "/component/{componentId}")
+    public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
+        PageComponent pageComponent=pageComponentService.findById(componentId);
+        modelMap.addAttribute("pageComponent",pageComponent);
+        return "forward:"+pageComponent.getTemplateUri();
+    }
     @RequestMapping(value = "/sign_up")
     public String signUp(@ModelAttribute User user,final RedirectAttributes redirectAttributes,HttpSession session) throws UnsupportedEncodingException {
         Assert.notNull(user);

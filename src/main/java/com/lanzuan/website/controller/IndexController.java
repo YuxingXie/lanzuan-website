@@ -51,12 +51,7 @@ public class IndexController extends BaseRestSpringController {
     IFullWidthImageService fullWidthImageService;
     @Resource(name = "pageComponentService")
     private IPageComponentService pageComponentService;
-    @RequestMapping(value = "/component/{componentId}")
-    public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
-        PageComponent pageComponent=pageComponentService.findById(componentId);
-        modelMap.addAttribute("pageComponent",pageComponent);
-        return "forward:"+pageComponent.getTemplateUri();
-    }
+
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
         String uri=request.getRequestURI();
@@ -64,6 +59,12 @@ public class IndexController extends BaseRestSpringController {
 
         map.addAttribute("webPage",webPage);
         return "index";
+    }
+    @RequestMapping(value = "/component/{componentId}")
+    public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
+        PageComponent pageComponent=pageComponentService.findById(componentId);
+        modelMap.addAttribute("pageComponent",pageComponent);
+        return "forward:"+pageComponent.getTemplateUri();
     }
     @RequestMapping(value = "/navbar/home/data")
     public ResponseEntity<Navbar> getNavbar(){

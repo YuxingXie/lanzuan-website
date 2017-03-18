@@ -46,7 +46,7 @@
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                 <div class="row p-t-2em p-b-2em"style="border-top: solid #000 1px">
                     <div class="col-xs-9 m-a-0 p-a-0">
-                        <jsp:include page="${path}/component/${pageComponent.id}"></jsp:include>
+                        <jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>
                     </div>
 
                     <div class="col-xs-3 m-a-0 padding-left-2em small-90" >
@@ -54,7 +54,7 @@
                         <div>${pageComponent.remark}</div>
 
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">直接修改</a>
+                            <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}?mode=admin">直接修改</a>
                             <a class="btn btn-primary white-link" href="#" onclick="alert('\n\n\n功能开发中......\n\n')">安全模式</a>
                         </div>
 

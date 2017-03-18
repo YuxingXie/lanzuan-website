@@ -323,7 +323,9 @@ Misc tools
 {
     margin-top:112px;
 }
-
+.m-t-sm {
+    margin-top: 1rem !important;
+}
 .m-t-05em {
     margin-top: .5em;
 }
@@ -486,6 +488,9 @@ Misc tools
 }
 .p-b-4em{
     padding-bottom:4em;
+}
+.p-b-sm {
+    padding-bottom: 1rem !important;
 }
 .p-l-r-2{padding:0 2px}
 .p-l-r-2em{padding:0 2em}

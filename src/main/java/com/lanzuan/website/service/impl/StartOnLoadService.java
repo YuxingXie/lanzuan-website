@@ -681,13 +681,29 @@ public class StartOnLoadService {
             pageComponent6.setRemark("简单的全屏宽度图片。");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
 
-            pageComponent1.setTemplateUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
-            pageComponent2.setTemplateUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
-            pageComponent3.setTemplateUri("/statics/page/included/component/card-group/img-card-group-1.preview.jsp");
-            pageComponent4.setTemplateUri("/statics/page/included/lanzuan/collapse-image-title-text-1.preview.jsp");
-            pageComponent5.setTemplateUri("/statics/page/included/lanzuan/article-section-1.preview.jsp");
-            pageComponent6.setTemplateUri("/statics/page/included/lanzuan/full-width-image-1.preview.jsp");
-            pageComponent7.setTemplateUri("/statics/page/included/lanzuan/sort-link-section-1.preview.jsp");
+            pageComponent1.setPreviewUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
+            pageComponent2.setPreviewUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
+            pageComponent3.setPreviewUri("/statics/page/included/component/card-group/img-card-group-1.preview.jsp");
+            pageComponent4.setPreviewUri("/statics/page/included/lanzuan/collapse-image-title-text-1.preview.jsp");
+            pageComponent5.setPreviewUri("/statics/page/included/lanzuan/article-section-1.preview.jsp");
+            pageComponent6.setPreviewUri("/statics/page/included/lanzuan/full-width-image-1.preview.jsp");
+            pageComponent7.setPreviewUri("/statics/page/included/lanzuan/sort-link-section-1.preview.jsp");
+
+            pageComponent1.setWebsiteUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
+            pageComponent2.setWebsiteUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
+            pageComponent3.setWebsiteUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
+            pageComponent4.setWebsiteUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
+            pageComponent5.setWebsiteUri("/statics/page/included/lanzuan/article-section-1.jsp");
+            pageComponent6.setWebsiteUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
+            pageComponent7.setWebsiteUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
+
+            pageComponent1.setTemplateUri("/statics/page/included/component/template/navbar-md-down-fix-bottom.html");
+            pageComponent2.setTemplateUri("/statics/page/included/component/template/carousel-full-width-1.html");
+            pageComponent3.setTemplateUri("/statics/page/included/component/template/img-card-group-1.html");
+            pageComponent4.setTemplateUri("/statics/page/included/component/template/collapse-image-title-text-1.html");
+            pageComponent5.setTemplateUri("/statics/page/included/component/template/article-section-1.html");
+            pageComponent6.setTemplateUri("/statics/page/included/component/template/full-width-image-1.html");
+            pageComponent7.setTemplateUri("/statics/page/included/component/template/sort-link-section-1.html");
 
             pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
             pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
@@ -719,7 +735,6 @@ public class StartOnLoadService {
             pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
             pageComponent5.setToggleUri("/admin/sort-link-group/status-change");
             pageComponent6.setToggleUri("/admin/full-width-image/status-change");
-//            pageComponent7.setToggleUri("/admin/sort-link-group/bottom/status-change");
             pageComponent7.setToggleUri("/admin/sort-link-group/status-change");
 
             pageComponent1.setDeleteUri("/admin/navbar/delete/");
@@ -728,7 +743,6 @@ public class StartOnLoadService {
             pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
             pageComponent5.setDeleteUri("/admin/sort-link-group/delete/");
             pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
-//            pageComponent7.setDeleteUri("/admin/sort-link-group/bottom/delete/");
             pageComponent7.setDeleteUri("/admin/full-width-image/delete/");
 
             pageComponent1.setSaveUri("/admin/navbar/update");
@@ -737,7 +751,6 @@ public class StartOnLoadService {
             pageComponent4.setSaveUri("/admin/image-text-block-group/update");
             pageComponent5.setSaveUri("/admin/sort-link-group/new");
             pageComponent6.setSaveUri("/admin/full-width-image/update");
-//            pageComponent7.setSaveUri("/admin/sort-link-group/bottom/update");
             pageComponent7.setSaveUri("/admin/sort-link-group/new");
 
             pageComponent1.setListOperationUri("/admin/navbar/list-page/");
@@ -747,7 +760,6 @@ public class StartOnLoadService {
             pageComponent5.setListOperationUri("/admin/sort-link-group/list-page/");
             pageComponent6.setListOperationUri("/admin/full-width-image/list-page/");
             pageComponent7.setListOperationUri("/admin/sort-link-group/list-page/");
-//            pageComponent7.setListOperationUri("/admin/sort-link-group/list-page/");
 
             pageComponent1.setListDataUri("/admin/navbar/list/data");
             pageComponent2.setListDataUri("/admin/carousel/list/data");
@@ -763,9 +775,7 @@ public class StartOnLoadService {
             pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
             pageComponent5.setSaveAsUri("/admin/sort-link-group/save-as");
             pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
-//            pageComponent7.setSaveAsUri("/admin/sort-link-group/bottom/save-as");
             pageComponent7.setSaveAsUri("/admin/sort-link-group/save-as");
-
 
             pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
             pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
@@ -774,8 +784,6 @@ public class StartOnLoadService {
             pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
             pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
             pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
-
-
 
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();

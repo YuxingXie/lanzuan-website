@@ -102,20 +102,25 @@
                </div>
            </div>
            <div class="col-xs-5 btn-group btn-group-sm">
-               <button class="btn btn-primary  fa fa-trash " ng-if="!sortLink.image" ng-click="sortLink.links.splice($index,1)">删除文章</button>
+               <button class="btn btn-primary  fa fa-trash " ng-if="!sortLink.image" ng-click="sortLink.links.splice($index,1)">删除此文</button>
            </div>
        </div>
     </div>
     <div class="col-xs-4">
+        <div class="btn-group btn-group-sm m-b-10">
+            <button class="btn btn-primary btn-sm  fa fa-angle-up" ng-click="forward${pageComponent.varU}Item($index)" ng-if="$index!==0">整块前移</button>
+            <button class="btn btn-primary btn-sm  fa fa-angle-down" ng-click="backward${pageComponent.varU}Item($index)" ng-if="$index!==${pageComponent.var}.items.length-1">整块后移</button>
+            <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${pageComponent.varU}Item($index)"> 删除该块</button>
+            <button class="btn btn-primary" ng-if="(!sortLink.links&&!sortLink.image)||sortLink.links" ng-click="sortLink.links.splice(0,0,{'text':'一篇文章'})">增加文章</button>
+        </div>
         <div class="input-group input-group-sm m-b-10">
             <span class="input-group-addon">分类名称</span>
             <input type="text" ng-model="sortLink.sortName"  class="form-control">
         </div>
-        <div class="btn-group btn-group-sm m-b-md">
-            <button class="btn btn-primary white-link fa fa-trash" ng-click="remove${pageComponent.varU}Item($index)"> 删除该块</button>
-            <button class="btn btn-primary" ng-if="(!sortLink.links&&!sortLink.image)||sortLink.links" ng-click="sortLink.links.splice(0,0,{'text':'一篇文章'})">增加文章</button>
-            <button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${pageComponent.varU}Item($index)" ng-if="$index!==0">前移</button>
-            <button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${pageComponent.varU}Item($index)" ng-if="${pageComponent.var}.items.length-1!==$index">后移</button>
-        </div>
+        <%--<div class="btn-group btn-group-sm m-b-md">--%>
+
+            <%--<button class="btn btn-primary white-link fa fa-angle-up" ng-click="forward${pageComponent.varU}Item($index)" ng-if="$index!==0">前移</button>--%>
+            <%--<button class="btn btn-primary white-link fa fa-angle-down" ng-click="backward${pageComponent.varU}Item($index)" ng-if="${pageComponent.var}.items.length-1!==$index">后移</button>--%>
+        <%--</div>--%>
     </div>
 </div>

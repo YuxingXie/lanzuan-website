@@ -47,13 +47,9 @@
         <div class="col-xs-12 m-a-0 p-a-0">
             <c:if test="${not empty pageComponent.templateUri}">
                 <label class="label label-default large-180">组件预览</label>
-                <jsp:include page="${pageComponent.templateUri}"></jsp:include>
+                <jsp:include page="${pageComponent.templateUri}?mode=admin"></jsp:include>
             </c:if>
-            <div class="p-t-2em">
-                <c:if test="${not empty pageComponent.editUri}">
-                    <jsp:include page="${pageComponent.editUri}"></jsp:include>
-                </c:if>
-            </div>
+
         </div>
     </div>
 </div>

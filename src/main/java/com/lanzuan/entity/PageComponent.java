@@ -13,6 +13,10 @@ public class PageComponent<T extends Item> {
     @Id
     private String id;
     private String name;
+    /*
+    模板按理应该是一个类型不限的静态资源，并使用某种模板语言渲染，但这种方式需要引入一门模板语言，所以jsp作为模板，
+    jsp实际上可以看做专门针对web程序的专用模板语言
+     */
     private String templateUri;
     private String editUri;
     private String dataUri;
@@ -22,12 +26,22 @@ public class PageComponent<T extends Item> {
     private String listOperationUri;
     private String deleteUri;
     private String listDataUri;
+    private String previewUri;//预览页面采用angularjs获取数据，在客户端渲染的方式，配合编辑页(editUri)以获得所见即所得的编辑效果，与官网不一样
+    private String websiteUri;//官网使用的uri，采用jstl和el展示和轮询数据，采用这种方式是在服务器渲染数据,主要是为了提高页面响应速度
     @DBRef
     private T data;
     @Transient
     private WebPage webPage;
     //素材上传uri
     private String materialUploadUri;
+
+    public String getWebsiteUri() {
+        return websiteUri;
+    }
+
+    public void setWebsiteUri(String websiteUri) {
+        this.websiteUri = websiteUri;
+    }
 
     private String remark;
 
@@ -62,8 +76,17 @@ public class PageComponent<T extends Item> {
         this.dataUri = dataUri;
     }
 
+    public String getPreviewUri() {
+        return previewUri;
+    }
 
+    public void setVarU(String varU) {
+        this.varU = varU;
+    }
 
+    public void setPreviewUri(String previewUri) {
+        this.previewUri = previewUri;
+    }
 
     public String getId() {
         return id;
