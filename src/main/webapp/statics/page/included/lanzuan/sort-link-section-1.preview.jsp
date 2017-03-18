@@ -1,24 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row p-t-4em p-b-4em m-l-0 m-r-0 md-up-p-l-r-4em bg-very-light">
-    <c:forEach items="${pageComponent.data.items}" var="sortLink">
-        <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em">
-            <h6 class="color-blue text-left">${sortLink.sortName}</h6>
-            <div class="small-90 m-t-1em">
-                <ul class="list-unstyled grey-link">
-                    <c:forEach var="link" items="${sortLink.links}">
-                        <c:if test="${not empty sortLink.links and empty sortLink.image}">
-                            <li class="text-left"><a ng-href="${link.href}">${link.text}</a></li>
-                        </c:if>
-                    </c:forEach>
-                    <c:if test="${not empty sortLink.image and empty sortLink.links}">
-                        <img src="${sortLink.image}" class="img-responsive"/>
-                    </c:if>
-                </ul>
-            </div>
+<div class="row p-t-4em p-b-4em m-l-0 m-r-0 md-up-p-l-r-4em bg-very-light " ng-init="get${pageComponent.varU}()">
+    <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="sortLink in ${pageComponent.var}.items">
+        <h6 class="color-blue text-left">{{sortLink.sortName}}</h6>
+        <div class="small-90 m-t-1em">
+            <ul class="list-unstyled grey-link">
+                <li ng-repeat="link in sortLink.links" class="text-left" ng-if="sortLink.links&&!sortLink.image"><a ng-href="{{link.href}}">{{link.text}}</a></li>
+                <img src="{{sortLink.image}}" ng-if="sortLink.image&&!sortLink.links" class="img-responsive"/>
+            </ul>
         </div>
-    </c:forEach>
-
+    </div>
     <div class="col-xs-6 col-md-4 text-center height-10em  padding-left-2em">
         <h6 class="color-blue text-center">关注我们</h6>
         <div class="row m-t-1em">

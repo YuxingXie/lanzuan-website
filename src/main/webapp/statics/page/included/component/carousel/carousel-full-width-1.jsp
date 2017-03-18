@@ -1,26 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="get${pageComponent.varU}()">
+<%--<div>--%>
+<%--<c:forEach var="item" items="${pageComponent.data.items}" varStatus="index">${item.value}</c:forEach>--%>
+<%--</div>--%>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
     <ol class="carousel-indicators bottom-0">
-        <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${pageComponent.var}.items"></li>
+        <c:forEach var="item" items="${pageComponent.data.items}" varStatus="index">
+            <li data-target="#carousel-example-generic" data-slide-to="${index.index}" ng-class="{'active':${index.index}===0}"></li>
+        </c:forEach>
     </ol>
     <div class="carousel-inner " role="listbox">
-        <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${pageComponent.var}.items">
-            <img ng-if="carouselItem.type==='image'" class="center-block full-width" ng-src="{{carouselItem.value}}"/>
-            <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
-                <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
-                   ng-href="{{carouselItem.carouselCaption.value}}"
-                   class="btn btn-primary hidden-md-down white-link">{{carouselItem.carouselCaption.text}} <i class="fa fa-chevron-right right"></i></a>
-
-
-                <span ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='text'">
-                   {{carouselItem.carouselCaption.text}}
-                </span>
+        <c:forEach var="item" items="${pageComponent.data.items}" varStatus="index">
+            <div class="carousel-item" ng-class="{'active':${index.index}===0}">
+                <c:if test="${item.type eq 'image'}">
+                    <img class="center-block full-width" src="${item.value}"/>
+                </c:if>
+                <c:if test="${not empty item.carouselCaption}">
+                    <div class="carousel-caption">
+                        <c:if test="${item.carouselCaption.type eq 'link'}">
+                            <a href="${item.carouselCaption.value}"
+                               class="btn btn-primary hidden-md-down white-link">${item.carouselCaption.text} <i class="fa fa-chevron-right right"></i></a>
+                        </c:if>
+                        <c:if test="${item.carouselCaption.type eq 'text'}">
+                             <span>
+                               ${item.carouselCaption.text}}
+                            </span>
+                        </c:if>
+                    </div>
+                </c:if>
 
             </div>
-        </div>
+        </c:forEach>
     </div>
     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
         <span class="icon-prev" aria-hidden="true"></span>
