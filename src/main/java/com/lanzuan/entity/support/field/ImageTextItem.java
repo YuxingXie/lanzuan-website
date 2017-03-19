@@ -1,18 +1,18 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.entity.support.Item;
-
-import java.util.List;
+import com.lanzuan.entity.support.LeafItem;
+import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/12.
  */
-public class ImageTextItem implements Item {
+public class ImageTextItem extends LeafItem{
     private String image;
     private String text;
     private String link ;
     private String title;
-
+    @Transient
+    private ImageTextBlock parent;
     public String getImage() {
         return image;
     }
@@ -45,38 +45,26 @@ public class ImageTextItem implements Item {
         this.title = title;
     }
 
-    @Override
-    public String name() {
-        return null;
+    public ImageTextBlock getParent() {
+        return parent;
+    }
+
+    public void setParent(ImageTextBlock parent) {
+        this.parent = parent;
     }
 
     @Override
-    public String text() {
-        return text;
-    }
-
-    @Override
-    public String image() {
-        return image;
-    }
-
-    @Override
-    public String href() {
-        return link;
-    }
-
-    @Override
-    public String title() {
-        return text();
-    }
-
-    @Override
-    public List<? extends Item> childItems() {
-        return null;
+    public String naming() {
+        return "图文块项";
     }
 
     @Override
     public Integer repeatLimit() {
-        return 20;
+        return null;
+    }
+
+    @Override
+    public ImageTextBlock parent() {
+        return parent;
     }
 }

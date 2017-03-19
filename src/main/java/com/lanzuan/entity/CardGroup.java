@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.Card;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/12.
  */
 @Document(collection = "cardGroup")
-public class CardGroup implements Item {
+public class CardGroup extends RootItem {
     @Id
     private String id;
     private String name;
@@ -92,37 +92,17 @@ public class CardGroup implements Item {
     }
 
     @Override
-    public List<? extends Item> childItems() {
+    public List<String> remarks() {
+        return null;
+    }
+
+    @Override
+    public String naming() {
+        return "卡片组";
+    }
+
+    @Override
+    public List<Card> children() {
         return items;
-    }
-
-    @Override
-    public Integer repeatLimit() {
-        return 20;
-    }
-
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
-        return name();
-    }
-
-    @Override
-    public String image() {
-        return null;
-    }
-
-    @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public String title() {
-        return null;
     }
 }

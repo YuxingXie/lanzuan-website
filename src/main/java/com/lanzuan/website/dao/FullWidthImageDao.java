@@ -2,7 +2,6 @@ package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
 import com.lanzuan.entity.FullWidthImage;
-import com.lanzuan.entity.ImageTextBlockGroup;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;

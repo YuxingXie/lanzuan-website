@@ -1,15 +1,25 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.entity.support.Item;
-
-import java.util.List;
+import com.lanzuan.entity.Navbar;
+import com.lanzuan.entity.support.LeafItem;
+import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/6.
  */
-public class NavbarBrand implements Item{
+public class NavbarBrand extends LeafItem{
     private String type;
     private String value;
+    @Transient
+    private Navbar parent;
+
+    public Navbar getParent() {
+        return parent;
+    }
+
+    public void setParent(Navbar parent) {
+        this.parent = parent;
+    }
 
     public String getType() {
         return type;
@@ -27,38 +37,19 @@ public class NavbarBrand implements Item{
         this.value = value;
     }
 
-    @Override
-    public String name() {
-        return null;
-    }
 
     @Override
-    public String text() {
-        return value;
-    }
-
-    @Override
-    public String image() {
-        return value;
-    }
-
-    @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public String title() {
-        return null;
-    }
-
-    @Override
-    public List<? extends Item> childItems() {
-        return null;
+    public String naming() {
+        return "导航条标签";
     }
 
     @Override
     public Integer repeatLimit() {
         return 1;
+    }
+
+    @Override
+    public Navbar parent() {
+        return parent;
     }
 }

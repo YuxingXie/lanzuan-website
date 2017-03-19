@@ -1,32 +1,22 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
-import com.lanzuan.common.constant.Constant;
-import com.lanzuan.common.util.ReflectUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.*;
-import com.lanzuan.entity.support.Item;
 import com.lanzuan.website.service.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.support.ServletContextResource;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -108,19 +98,6 @@ public class IndexController extends BaseRestSpringController {
         }
         if (StringUtils.isNotBlank(componentId)){
             PageComponent component=pageComponentService.findById(componentId);
-            Item data=component.getData();
-
-            if(data!=null&&data.childItems()!=null){
-                StringBuffer sb=new StringBuffer("app.controller('AdminController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {");
-                String insertItemBefore="insert"+component.getVarU()+"Before";
-                sb.append("$scope.").append(insertItemBefore).append("= function (index) {");
-                String varItem="{";
-                List<? extends Item> items=data.childItems();
-                Item item=items.get(0);
-
-
-            }
-
 
 
             modelMap.addAttribute("component",component);

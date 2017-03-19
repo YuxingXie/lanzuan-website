@@ -73,9 +73,6 @@
 </c:if>
 <c:if test="${param.mode eq 'admin'}">
     <div class="row p-a-0 m-a-0">
-
-
-
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑轮播图</label>
             <label class="label label-info large-180">当前方案：{{${pageComponent.var}.name}}</label>

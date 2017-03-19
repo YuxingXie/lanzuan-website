@@ -1,13 +1,23 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.CardGroup;
+import com.lanzuan.entity.support.LeafItem;
+import org.springframework.data.annotation.Transient;
 
-import java.util.List;
-
-public class Card implements Item{
+public class Card extends LeafItem {
     private String image;
     private String text;
     private String link;
+    @Transient
+    private CardGroup parent;
+
+    public CardGroup getParent() {
+        return parent;
+    }
+
+    public void setParent(CardGroup parent) {
+        this.parent = parent;
+    }
 
     public String getImage() {
         return image;
@@ -34,37 +44,19 @@ public class Card implements Item{
     }
 
     @Override
-    public String name() {
-        return name();
-    }
-
-    @Override
-    public String text() {
-        return text;
-    }
-
-    @Override
-    public String image() {
-        return image;
-    }
-
-    @Override
-    public String href() {
-        return link;
-    }
-
-    @Override
-    public String title() {
-        return text();
-    }
-
-    @Override
-    public List<Item> childItems() {
-        return null;
+    public String naming() {
+        return "卡片";
     }
 
     @Override
     public Integer repeatLimit() {
-        return null;
+        return 20;
     }
+
+    @Override
+    public CardGroup parent() {
+        return parent;
+    }
+
+
 }

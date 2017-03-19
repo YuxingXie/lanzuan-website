@@ -1,13 +1,12 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.entity.support.Item;
-
-import java.util.List;
+import com.lanzuan.entity.support.LeafItem;
+import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/10.
  */
-public class CarouselCaption implements Item {
+public class CarouselCaption extends LeafItem {
     //暂时仅{link，text}，应该弄个枚举的
     private String type;
     /**
@@ -20,6 +19,16 @@ public class CarouselCaption implements Item {
      */
     private String captionClass;
     private String link;
+    @Transient
+    private CarouselItem parent;
+
+    public CarouselItem getParent() {
+        return parent;
+    }
+
+    public void setParent(CarouselItem parent) {
+        this.parent = parent;
+    }
 
     public String getLink() {
         return link;
@@ -61,38 +70,19 @@ public class CarouselCaption implements Item {
         this.captionClass = captionClass;
     }
 
-    @Override
-    public String name() {
-        return null;
-    }
 
     @Override
-    public String text() {
-        return text;
-    }
-
-    @Override
-    public String image() {
-        return null;
-    }
-
-    @Override
-    public String href() {
-        return link;
-    }
-
-    @Override
-    public String title() {
-        return text;
-    }
-
-    @Override
-    public List<Item> childItems() {
-        return null;
+    public String naming() {
+        return "轮播项标题";
     }
 
     @Override
     public Integer repeatLimit() {
         return 1;
+    }
+
+    @Override
+    public CarouselItem parent() {
+        return parent;
     }
 }

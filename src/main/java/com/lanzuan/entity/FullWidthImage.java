@@ -1,6 +1,7 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Image;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/13.
  */
 @Document(collection = "fullWidthImage")
-public class FullWidthImage  implements Item{
+public class FullWidthImage extends RootItem{
     @Id
     private String id;
     private Image image;
@@ -71,37 +72,17 @@ public class FullWidthImage  implements Item{
     }
 
     @Override
-    public List<? extends Item> childItems() {
+    public List<String> remarks() {
         return null;
     }
 
     @Override
-    public Integer repeatLimit() {
-        return 20;
+    public String naming() {
+        return "全屏大图";
     }
 
     @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
-        return name;
-    }
-
-    @Override
-    public String image() {
-        return image==null?null:image.getUri();
-    }
-
-    @Override
-    public String href() {
+    public List<? extends Item> children() {
         return null;
-    }
-
-    @Override
-    public String title() {
-        return name();
     }
 }

@@ -1,17 +1,26 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.entity.support.Item;
-
-import java.util.List;
+import com.lanzuan.entity.support.LeafItem;
+import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/15.
  */
-public class Link implements Item{
+public class Link extends LeafItem {
     private String href;
     private String text;
     private String date;
     private String image;
+    @Transient
+    private SortLink parent;
+
+    public SortLink getParent() {
+        return parent;
+    }
+
+    public void setParent(SortLink parent) {
+        this.parent = parent;
+    }
 
     public String getImage() {
         return image;
@@ -46,37 +55,17 @@ public class Link implements Item{
     }
 
     @Override
-    public String name() {
-        return text;
-    }
-
-    @Override
-    public String text() {
-        return text;
-    }
-
-    @Override
-    public String image() {
-        return image;
-    }
-
-    @Override
-    public String href() {
-        return href;
-    }
-
-    @Override
-    public String title() {
-        return text();
-    }
-
-    @Override
-    public List<? extends Item> childItems() {
-        return null;
+    public String naming() {
+        return "链接";
     }
 
     @Override
     public Integer repeatLimit() {
         return 20;
+    }
+
+    @Override
+    public SortLink parent() {
+        return parent;
     }
 }

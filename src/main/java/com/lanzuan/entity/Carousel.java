@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.CarouselItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "carousel")
-public class Carousel  implements Item {
+public class Carousel  extends RootItem {
     @Id
     private String id;
     /**
@@ -116,38 +116,19 @@ public class Carousel  implements Item {
         this.enabled = enabled;
     }
 
+
     @Override
-    public List<? extends Item> childItems() {
+    public List<String> remarks() {
+        return null;
+    }
+
+    @Override
+    public String naming() {
+        return "轮播图";
+    }
+
+    @Override
+    public List<CarouselItem> children() {
         return items;
-    }
-
-    @Override
-    public Integer repeatLimit() {
-        return 20;
-    }
-
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
-        return name;
-    }
-
-    @Override
-    public String image() {
-        return null;
-    }
-
-    @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public String title() {
-        return text();
     }
 }

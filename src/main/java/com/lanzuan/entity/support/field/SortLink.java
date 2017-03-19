@@ -1,6 +1,8 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.entity.support.Item;
+import org.springframework.data.annotation.Transient;
 
 import java.util.List;
 
@@ -13,6 +15,16 @@ public class SortLink implements Item{
     private String image;
     private String imageHref;
     private List<Link> links;
+    @Transient
+    private SortLinkGroup parent;
+
+    public SortLinkGroup getParent() {
+        return parent;
+    }
+
+    public void setParent(SortLinkGroup parent) {
+        this.parent = parent;
+    }
 
     public String getSortName() {
         return sortName;
@@ -54,38 +66,24 @@ public class SortLink implements Item{
         this.imageHref = imageHref;
     }
 
-    @Override
-    public String name() {
-        return name();
-    }
 
     @Override
-    public String text() {
-        return name();
-    }
-
-    @Override
-    public String image() {
-        return image;
-    }
-
-    @Override
-    public String href() {
-        return imageHref;
-    }
-
-    @Override
-    public String title() {
-        return text();
-    }
-
-    @Override
-    public List<? extends Item> childItems() {
-        return links;
+    public String naming() {
+        return "链接分类";
     }
 
     @Override
     public Integer repeatLimit() {
         return 20;
+    }
+
+    @Override
+    public List<? extends Item> children() {
+        return links;
+    }
+
+    @Override
+    public SortLinkGroup parent() {
+        return parent;
     }
 }

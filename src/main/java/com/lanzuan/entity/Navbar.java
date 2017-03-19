@@ -1,19 +1,21 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.NavItem;
 import com.lanzuan.entity.support.field.NavbarBrand;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/11.
  */
 @Document(collection = "navbar")
-public class Navbar  implements Item{
+public class Navbar extends RootItem{
     @Id
     private String id;
     private String uri;
@@ -81,37 +83,27 @@ public class Navbar  implements Item{
     }
 
     @Override
-    public List<? extends Item> childItems() {
-        return items;
-    }
-
-    @Override
-    public Integer repeatLimit() {
-        return 20;
-    }
-
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
+    public List<String> remarks() {
         return null;
     }
 
     @Override
-    public String image() {
-        return null;
+    public String naming() {
+        return "导航条";
     }
 
     @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public String title() {
-        return null;
+    public List<? extends Item> children() {
+        List<Item> itemList=new ArrayList<Item>();
+        if (navbarBrand!=null)
+            itemList.add(navbarBrand);
+        if (items!=null){
+            for(Item item:items){
+                itemList.add(item);
+            }
+        }
+        if (itemList.size()==0)
+            return null;
+        return itemList;
     }
 }

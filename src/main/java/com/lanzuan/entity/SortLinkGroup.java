@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.SortLink;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "sortLinkGroup")
-public class SortLinkGroup  implements Item{
+public class SortLinkGroup extends RootItem {
     @Id
     private String id;
     private String name;
@@ -98,38 +98,19 @@ public class SortLinkGroup  implements Item{
         this.uri = uri;
     }
 
-    @Override
-    public List<? extends Item> childItems() {
-        return items;
-    }
 
     @Override
-    public Integer repeatLimit() {
-        return 20;
-    }
-
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
-        return name;
-    }
-
-    @Override
-    public String image() {
+    public List<String> remarks() {
         return null;
     }
 
     @Override
-    public String href() {
-        return null;
+    public String naming() {
+        return "分类链接组";
     }
 
     @Override
-    public String title() {
-        return text();
+    public List<SortLink> children() {
+            return items;
     }
 }

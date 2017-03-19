@@ -1,6 +1,8 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.entity.Carousel;
 import com.lanzuan.entity.support.Item;
+import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/10.
  */
-public class CarouselItem implements Item{
+public class CarouselItem implements Item {
     /**
      * text,link,image
      */
@@ -16,7 +18,8 @@ public class CarouselItem implements Item{
     private String value;
     private CarouselCaption carouselCaption;
     private String link;
-
+    @Transient
+    private Carousel parent;
     public String getLink() {
         return link;
     }
@@ -48,43 +51,27 @@ public class CarouselItem implements Item{
         this.carouselCaption = carouselCaption;
     }
 
-    @Override
-    public String name() {
-        return carouselCaption==null?null:carouselCaption.getText();
-    }
 
     @Override
-    public String text() {
-        return carouselCaption==null?null:carouselCaption.getText();
-    }
-
-    @Override
-    public String image() {
-        return value;
-    }
-
-    @Override
-    public String href() {
-        return link==null?(carouselCaption==null?null:carouselCaption.getLink()):link;
-    }
-
-    @Override
-    public String title() {
-        return text();
-    }
-
-    @Override
-    public List<CarouselCaption> childItems() {
-        if (carouselCaption!=null){
-            List<CarouselCaption> items=new ArrayList<CarouselCaption>();
-            items.add(carouselCaption);
-            return items;
-        }
-        return null;
+    public String naming() {
+        return "轮播项";
     }
 
     @Override
     public Integer repeatLimit() {
-        return 20;
+        return null;
+    }
+
+    @Override
+    public List<? extends Item> children() {
+        if (carouselCaption==null) return null;
+        List<CarouselCaption> list=new ArrayList<CarouselCaption>();
+        list.add(carouselCaption);
+        return list;
+    }
+
+    @Override
+    public Carousel parent() {
+        return parent;
     }
 }

@@ -1,6 +1,6 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.ImageTextBlock;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/12.
  */
 @Document(collection = "imageTextBlockGroup")
-public class ImageTextBlockGroup  implements Item{
+public class ImageTextBlockGroup extends RootItem{
     @Id
     private String id;
     private String uri;
@@ -102,37 +102,17 @@ public class ImageTextBlockGroup  implements Item{
 
 
     @Override
-    public List<? extends Item> childItems() {
+    public List<String> remarks() {
+        return null;
+    }
+
+    @Override
+    public String naming() {
+        return "图文块组";
+    }
+
+    @Override
+    public List<ImageTextBlock> children() {
         return items;
-    }
-
-    @Override
-    public Integer repeatLimit() {
-        return 20;
-    }
-
-    @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public String text() {
-        return name;
-    }
-
-    @Override
-    public String image() {
-        return null;
-    }
-
-    @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public String title() {
-        return text();
     }
 }
