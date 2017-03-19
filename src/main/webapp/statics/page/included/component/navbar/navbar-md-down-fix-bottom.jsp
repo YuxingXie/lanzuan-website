@@ -44,6 +44,7 @@
         </ul>
     </nav>
 </c:if>
+
 <c:if test="${param.mode eq 'admin' and false}">
     <div class="row p-a-0 m-a-0" ng-init="getIcons()">
 
@@ -51,7 +52,6 @@
             <label class="label label-default large-180">编辑导航条</label>
             <div class="btn-group p-b-10">
                 <label class="btn btn-info cursor-auto">当前方案：{{${pageComponent.var}.name}}</label>
-
                 <button class="btn btn-danger fa fa-save " type="button" ng-click="save${pageComponent.varU}()" >保存</button>
                 <button class="btn btn-primary fa fa-copy" type="button" ng-click="new${pageComponent.varU}()" > 方案另存为</button>
                 <a class="btn btn-primary fa fa-download white-link" ng-href="${path}${pageComponent.listOperationUri}${pageComponent.id}"> 应用其它方案</a>
@@ -71,14 +71,11 @@
         <div class="col-xs-12">
             <div class="btn-group full-width">
                 <button type="button" class="btn btn-secondary btn-sm">更换图标</button>
-                <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
+                <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
                 <div class="dropdown-menu dropdown-full-width">
-                <span ng-repeat="icon in icons" class="dropdown-item-inline" ng-click="${pageComponent.var}.navbarBrand.value=icon">
-                    <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
-                </span>
+                    <span ng-repeat="icon in icons" class="dropdown-item-inline" ng-click="${pageComponent.var}.navbarBrand.value=icon">
+                        <img type="text" ng-src="{{icon}}" class="img-ico-lg img-rounded"/>
+                    </span>
                 </div>
 
             </div>

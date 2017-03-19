@@ -1,11 +1,13 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/15.
  */
+@Naming(value = "链接")
 public class Link extends LeafItem {
     private String href;
     private String text;
@@ -54,10 +56,6 @@ public class Link extends LeafItem {
         this.date = date;
     }
 
-    @Override
-    public String naming() {
-        return "链接";
-    }
 
     @Override
     public Integer repeatLimit() {

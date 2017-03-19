@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.SortLink;
 import org.springframework.data.annotation.Id;
@@ -8,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-
+@Naming(value = "分类链接组")
 @Document(collection = "sortLinkGroup")
 public class SortLinkGroup extends RootItem {
     @Id
@@ -105,9 +106,10 @@ public class SortLinkGroup extends RootItem {
     }
 
     @Override
-    public String naming() {
-        return "分类链接组";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<SortLink> children() {

@@ -1,6 +1,9 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.common.code.InputType;
+import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.NavItem;
 import com.lanzuan.entity.support.field.NavbarBrand;
@@ -15,13 +18,21 @@ import java.util.List;
  * Created by Administrator on 2017/3/11.
  */
 @Document(collection = "navbar")
+@Naming(value = "导航条")
 public class Navbar extends RootItem{
     @Id
     private String id;
+    @Naming(value = "导航路径")
+    @Editable()
     private String uri;
+    @Naming(value = "方案名")
     private String name;
+    @Naming(value = "开启状态")
+    @Editable(inputType = InputType.TOGGLE_BOOLEAN)
     private boolean enabled;
+
     private NavbarBrand navbarBrand;
+
     private List<NavItem> items;
     @DBRef
     private PageComponent pageComponent;
@@ -88,9 +99,10 @@ public class Navbar extends RootItem{
     }
 
     @Override
-    public String naming() {
-        return "导航条";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<? extends Item> children() {

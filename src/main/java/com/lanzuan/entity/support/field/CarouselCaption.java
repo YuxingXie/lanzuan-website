@@ -1,11 +1,10 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
-/**
- * Created by Administrator on 2017/3/10.
- */
+@Naming(value = "轮播项标题")
 public class CarouselCaption extends LeafItem {
     //暂时仅{link，text}，应该弄个枚举的
     private String type;
@@ -71,10 +70,6 @@ public class CarouselCaption extends LeafItem {
     }
 
 
-    @Override
-    public String naming() {
-        return "轮播项标题";
-    }
 
     @Override
     public Integer repeatLimit() {

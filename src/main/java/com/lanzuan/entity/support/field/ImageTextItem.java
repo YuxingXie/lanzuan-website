@@ -1,11 +1,9 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
-
-/**
- * Created by Administrator on 2017/3/12.
- */
+@Naming(value = "图文块项")
 public class ImageTextItem extends LeafItem{
     private String image;
     private String text;
@@ -53,10 +51,6 @@ public class ImageTextItem extends LeafItem{
         this.parent = parent;
     }
 
-    @Override
-    public String naming() {
-        return "图文块项";
-    }
 
     @Override
     public Integer repeatLimit() {

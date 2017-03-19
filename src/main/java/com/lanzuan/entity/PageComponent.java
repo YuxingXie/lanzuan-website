@@ -2,6 +2,7 @@ package com.lanzuan.entity;
 
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.RootItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "pageComponent")
-public class PageComponent<T extends Item> {
+public class PageComponent<T extends RootItem> {
     @Id
     private String id;
     private String name;

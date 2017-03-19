@@ -2,6 +2,7 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.Carousel;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/10.
  */
+@Naming(value = "轮播项")
 public class CarouselItem implements Item {
     /**
      * text,link,image
@@ -52,10 +54,6 @@ public class CarouselItem implements Item {
     }
 
 
-    @Override
-    public String naming() {
-        return "轮播项";
-    }
 
     @Override
     public Integer repeatLimit() {

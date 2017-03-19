@@ -2,13 +2,12 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.ImageTextBlockGroup;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/3/12.
- */
+@Naming(value = "图文块")
 public class ImageTextBlock implements Item {
     private String name;
     private List<ImageTextItem> imageTextItems;
@@ -39,11 +38,6 @@ public class ImageTextBlock implements Item {
         this.imageTextItems = imageTextItems;
     }
 
-
-    @Override
-    public String naming() {
-        return "图文块";
-    }
 
     @Override
     public Integer repeatLimit() {

@@ -9,6 +9,10 @@ import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
 import com.lanzuan.entity.WebPage;
+import com.lanzuan.entity.support.Editable;
+import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
+import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
@@ -37,6 +41,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,16 +173,92 @@ public class AdminController extends BaseRestSpringController {
     }
 
     @RequestMapping(value = "/page_component/edit/{pageComponentId}")
-    public String editPageComponent(@PathVariable String pageComponentId,ModelMap model) {
+    public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
+        RootItem rootItem =pageComponent.getData();
+        StringBuffer stringBuffer=printItem(new StringBuffer(""),rootItem,pageComponent);
+        System.out.println(stringBuffer);
+        model.addAttribute("edit_html", stringBuffer.toString());
 
         return "admin/page-component-edit";
     }
 
+    private StringBuffer printItem(StringBuffer stringBuffer,Item item,PageComponent pageComponent) throws IllegalAccessException, NoSuchFieldException {
+
+        Class<? extends Item> itemClass=item.getClass();
+        Naming itemNaming= itemClass.getAnnotation(Naming.class);
+
+        if (item instanceof RootItem){
+            Field fangAnField=itemClass.getDeclaredField("name");
+            fangAnField.setAccessible(true);
+            stringBuffer.append("<div class=\"col-xs-12 m-a-0 p-a-0\">");
+            stringBuffer.append("   <label class=\"label label-default large-180\">编辑"+itemNaming.value()+"</label>");
+            stringBuffer.append("   <div class=\"btn-group p-b-10\">");
+            stringBuffer.append("       <label class=\"btn btn-info cursor-auto\">当前方案："+fangAnField.get(item)+"</label>");
+            stringBuffer.append("       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save"+pageComponent.getVarU()+"()\" >保存</button>");
+            stringBuffer.append("       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new"+pageComponent.getVarU()+"()\" >方案另存为</button>");
+            stringBuffer.append("       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\""+pageComponent.getListOperationUri()+pageComponent.getId()+"\">应用方案</a>");
+            stringBuffer.append("       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\""+pageComponent.getMaterialUploadUri()+"/"+pageComponent.getId()+"\"> 上传素材</a>");
+            stringBuffer.append("       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset"+pageComponent.getVarU()+"()\">重置</button>");
+            stringBuffer.append("   </div>");
+            stringBuffer.append("</div>");
 
 
+            stringBuffer.append("<div class=\"col-xs-12\">");
+            stringBuffer.append("   <div class=\"alert alert-warning\">");
+            stringBuffer.append("       <ul class=\"list-unstyled\">");
+            stringBuffer.append("           <li><i class=\"fa fa-warning\"></i> 如果没有合适的图标，您可以先<a href='"+pageComponent.getMaterialUploadUri()+"/"+pageComponent.getId()+"' style=\"text-decoration: underline;\"><i>上传素材</i></a>；</li>");
+            stringBuffer.append("           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
+            stringBuffer.append("           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
+            stringBuffer.append("       </ul>");
+            stringBuffer.append("   </div>");
+            stringBuffer.append("</div>");
 
+            stringBuffer.append("<div class=\"col-xs-12\">");
+            stringBuffer.append("   <div class=\"btn-group full-width\">");
+            stringBuffer.append("       <button type=\"button\" class=\"btn btn-secondary btn-sm\">更换图标</button>");
+            stringBuffer.append("       <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><span class=\"sr-only\">Toggle Dropdown</span></button>");
+            stringBuffer.append("       <div class=\"dropdown-menu dropdown-full-width\">");
+            stringBuffer.append("           <span ng-repeat=\"icon in icons\" class=\"dropdown-item-inline\" ng-click=\"${pageComponent.var}.navbarBrand.value=icon\">");
+            stringBuffer.append("               <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-lg img-rounded\"/>");
+            stringBuffer.append("           </span>");
+            stringBuffer.append("       </div>");
+            stringBuffer.append("   </div>");
+            stringBuffer.append("</div>");
+        }
+
+        for(Field field:itemClass.getDeclaredFields()){
+            Naming fieldNaming=field.getAnnotation(Naming.class);
+            if (fieldNaming==null) continue;
+            System.out.println("-------------------------------"+field.getName()+"--------------------------------------");
+            field.setAccessible(true);
+
+            if(fieldNaming!=null){
+                System.out.println("  这是一个：" + fieldNaming.value()+"，命名为："+fieldNaming.value());
+            }
+
+            Editable editable=field.getAnnotation(Editable.class);
+            if (editable!=null){
+
+                System.out.println("  它是一个可编辑字段,输入方式为："+editable.inputType().toCode()+",它的值是："+field.get(item));
+
+
+            }else{
+                System.out.println("  它本身是不可编辑的");
+            }
+        }
+        if (item.children()!=null){
+            System.out.println("它有 " + item.children().size()+"个子项:");
+            for(Item childItem:item.children()){
+                printItem(stringBuffer,childItem,pageComponent);
+            }
+
+        }else{
+            System.out.println("它没有子项:");
+        }
+        return stringBuffer;
+    }
 
 
     @RequestMapping(value = "/article_section/image/input/{pageComponentId}/{articleSectionId}")

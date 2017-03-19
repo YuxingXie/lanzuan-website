@@ -2,6 +2,7 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/15.
  */
+@Naming(value="链接分类")
 public class SortLink implements Item{
     private String sortName;
     private String maxLink;
@@ -66,11 +68,6 @@ public class SortLink implements Item{
         this.imageHref = imageHref;
     }
 
-
-    @Override
-    public String naming() {
-        return "链接分类";
-    }
 
     @Override
     public Integer repeatLimit() {

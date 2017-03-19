@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.CarouselItem;
 import org.springframework.data.annotation.Id;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-
+@Naming(value = "轮播图")
 @Document(collection = "carousel")
 public class Carousel  extends RootItem {
     @Id
@@ -123,9 +124,10 @@ public class Carousel  extends RootItem {
     }
 
     @Override
-    public String naming() {
-        return "轮播图";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<CarouselItem> children() {

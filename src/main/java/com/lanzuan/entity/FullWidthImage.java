@@ -1,6 +1,7 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Image;
 import org.springframework.data.annotation.Id;
@@ -9,9 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/3/13.
- */
+@Naming(value = "全屏大图")
 @Document(collection = "fullWidthImage")
 public class FullWidthImage extends RootItem{
     @Id
@@ -77,9 +76,10 @@ public class FullWidthImage extends RootItem{
     }
 
     @Override
-    public String naming() {
-        return "全屏大图";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<? extends Item> children() {

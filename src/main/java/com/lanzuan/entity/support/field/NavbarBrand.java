@@ -1,14 +1,24 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.common.code.InputType;
+import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.entity.Navbar;
+import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
 
 /**
  * Created by Administrator on 2017/3/6.
  */
+@Naming(value = "导航条标签")
 public class NavbarBrand extends LeafItem{
+    @Naming("类型")
+    @Editable(inputType = InputType.SELECT,optionValues = {"image","text"})
     private String type;
+
+    @Naming("值")
+    @Editable()
     private String value;
     @Transient
     private Navbar parent;
@@ -35,12 +45,6 @@ public class NavbarBrand extends LeafItem{
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-
-    @Override
-    public String naming() {
-        return "导航条标签";
     }
 
     @Override

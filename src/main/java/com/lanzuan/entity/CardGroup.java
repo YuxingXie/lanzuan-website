@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.Card;
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/12.
  */
+@Naming(value = "卡片组")
 @Document(collection = "cardGroup")
 public class CardGroup extends RootItem {
     @Id
@@ -97,9 +99,10 @@ public class CardGroup extends RootItem {
     }
 
     @Override
-    public String naming() {
-        return "卡片组";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<Card> children() {

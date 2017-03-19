@@ -5,14 +5,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/19.
  */
-public abstract class RootItem implements Item{
+public abstract class RootItem extends AbstractItem{
     public abstract List<String> remarks();
     public Item parent(){
         return null;
     }
-    public boolean mustExists(){
-        return true;
-
-    }
+    public abstract String projectName();
     public Integer repeatLimit(){ return 1;}
 }

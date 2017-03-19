@@ -1,14 +1,22 @@
 package com.lanzuan.entity.support.field;
 
 
+import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.Navbar;
+import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
-
+@Naming(value = "导航项")
 public class NavItem  extends LeafItem {
+    @Naming(value = "导航项名")
+    @Editable
     private String name;
+
+    @Editable(inputType = InputType.URL)
+    @Naming("导航项链接")
     private String link;
-    //    font-awesome class
+
     private String faClass;
     private String navItemCass;
     @Transient
@@ -53,12 +61,6 @@ public class NavItem  extends LeafItem {
     public void setNavItemCass(String navItemCass) {
         this.navItemCass = navItemCass;
     }
-
-    @Override
-    public String naming() {
-        return "导航项";
-    }
-
     @Override
     public Integer repeatLimit() {
         return null;

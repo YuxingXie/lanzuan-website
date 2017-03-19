@@ -2,8 +2,9 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.CardGroup;
 import com.lanzuan.entity.support.LeafItem;
+import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
-
+@Naming(value = "卡片")
 public class Card extends LeafItem {
     private String image;
     private String text;
@@ -43,10 +44,6 @@ public class Card extends LeafItem {
         this.link = link;
     }
 
-    @Override
-    public String naming() {
-        return "卡片";
-    }
 
     @Override
     public Integer repeatLimit() {

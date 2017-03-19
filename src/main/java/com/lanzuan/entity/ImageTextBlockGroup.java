@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.ImageTextBlock;
 import org.springframework.data.annotation.Id;
@@ -9,9 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/3/12.
- */
+@Naming(value = "图文块组")
 @Document(collection = "imageTextBlockGroup")
 public class ImageTextBlockGroup extends RootItem{
     @Id
@@ -107,9 +106,10 @@ public class ImageTextBlockGroup extends RootItem{
     }
 
     @Override
-    public String naming() {
-        return "图文块组";
+    public String projectName() {
+        return name;
     }
+
 
     @Override
     public List<ImageTextBlock> children() {
