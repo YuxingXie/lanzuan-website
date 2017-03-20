@@ -5,7 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.StringUtils;
-import com.lanzuan.common.web.AngularjsEntityEditor;
+import com.lanzuan.common.web.AngularEntityEditorBuilder;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
@@ -169,16 +169,17 @@ public class AdminController extends BaseRestSpringController {
     }
 
     @RequestMapping(value = "/page_component/edit/{pageComponentId}")
-    public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException {
+    public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
-        RootItem rootItem =pageComponent.getData();
-        AngularjsEntityEditor.times=0;
-        StringBuffer commonOperationsHtml=AngularjsEntityEditor.commonOperationsHtml(new StringBuffer(), rootItem, pageComponent);
 
-        StringBuffer itemsStringBuffer= AngularjsEntityEditor.printItem(new StringBuffer(""), rootItem, pageComponent, pageComponent.getVar());
-        model.addAttribute("edit_html", commonOperationsHtml.append(itemsStringBuffer).append("\n</hr>").toString());
-        System.out.println("AngularjsEntityEditor.times "+ AngularjsEntityEditor.times);
+        AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);
+        angularEntityEditorBuilder.build();
+        String html= angularEntityEditorBuilder.getHtml();
+
+
+        model.addAttribute("edit_html", html);
+
         return "admin/page-component-edit";
     }
 
