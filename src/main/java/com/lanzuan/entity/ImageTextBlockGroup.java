@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.ImageTextBlock;
@@ -18,8 +19,11 @@ public class ImageTextBlockGroup extends RootItem{
     private String uri;
     private String name;
     private boolean enabled;
+    @Naming(value = "大标题")
+    @Editable()
     private String text;
     //约定字段名
+    @Naming(value = "图文块",ngRepeatVar = "imageTextBlock")
     private List<ImageTextBlock> items;
     @DBRef
     private User creator;

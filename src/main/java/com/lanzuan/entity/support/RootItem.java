@@ -1,5 +1,7 @@
 package com.lanzuan.entity.support;
 
+import com.lanzuan.entity.PageComponent;
+
 import java.util.List;
 
 /**
@@ -12,4 +14,5 @@ public abstract class RootItem extends AbstractItem{
     }
     public abstract String projectName();
     public Integer repeatLimit(){ return 1;}
+
 }

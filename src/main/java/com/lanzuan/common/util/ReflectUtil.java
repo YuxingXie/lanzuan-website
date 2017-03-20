@@ -20,6 +20,30 @@ public class ReflectUtil {
         return false;
     }
 
+    /**
+     * 获得带泛型参数类型的对象的泛型参数class
+     * @param typeCls 对象的class
+     * @param <T>  对象的泛型参数
+     * @return
+     */
+    public static<T> Class<T> getParameterizedType(Class typeCls) {
+
+        Type genType = typeCls.getGenericSuperclass();
+        while (true) {
+            if (!(genType instanceof ParameterizedType)) {
+                typeCls = typeCls.getSuperclass();
+                if(genType==null){
+                    return null;
+                }
+                genType = typeCls.getGenericSuperclass();
+            } else {
+                break;
+            }
+        }
+        return  (Class<T>) ((ParameterizedType) genType).getActualTypeArguments()[0];
+
+    }
+
     public static boolean isWrapClass(Class clz) {
         try {
             return ((Class) clz.getField("TYPE").get(null)).isPrimitive();

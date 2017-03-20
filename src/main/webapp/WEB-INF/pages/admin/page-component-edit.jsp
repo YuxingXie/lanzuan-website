@@ -58,6 +58,21 @@
         </div>
     </div>
     ${edit_html}
+    <%--<div class="col-xs-12 m-a-0 p-a-0">--%>
+        <%--<div class="input-group p-b-5">--%>
+            <%--<span class="input-group-addon bg-info"> 大 标 题 </span>--%>
+            <%--<input type="text" class="form-control disabled" disabled/>--%>
+        <%--</div>--%>
+        <%--<div class="input-group p-b-5">--%>
+            <%--<span class="input-group-addon bg-info"> 大 标 题 </span>--%>
+            <%--<input type="text" class="form-control"/>--%>
+        <%--</div>--%>
+        <%--<div class="input-group p-b-5">--%>
+            <%--<span class="input-group-addon bg-info"> 大 标 题 </span>--%>
+            <%--<input type="text" class="form-control"/>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+
 </div>
 <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>

@@ -1,7 +1,6 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.common.util.StringUtils;
-import com.lanzuan.entity.support.Item;
 import com.lanzuan.entity.support.RootItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -9,11 +8,16 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 @Document(collection = "pageComponent")
 public class PageComponent<T extends RootItem> {
     @Id
     private String id;
     private String name;
+    @Transient
+    private Class<T> dataClass;
     /*
     模板按理应该是一个类型不限的静态资源，并使用某种模板语言渲染，但这种方式需要引入一门模板语言，所以jsp作为模板，
     jsp实际上可以看做专门针对web程序的专用模板语言
@@ -192,5 +196,14 @@ public class PageComponent<T extends RootItem> {
 
     public void setMaterialUploadUri(String materialUploadUri) {
         this.materialUploadUri = materialUploadUri;
+    }
+
+    public Class<T> getDataClass() {
+        return dataClass;
+    }
+
+    public PageComponent() {
+
+
     }
 }

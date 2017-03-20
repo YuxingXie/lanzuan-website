@@ -1,5 +1,7 @@
 package com.lanzuan.entity.support;
 
+import com.lanzuan.entity.PageComponent;
+
 import java.util.List;
 
 /**
@@ -11,6 +13,5 @@ public interface Item {
     List<? extends Item> children();
     Item parent();
 
-   //可编辑项
 
 }

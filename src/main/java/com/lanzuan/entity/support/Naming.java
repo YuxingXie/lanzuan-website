@@ -12,4 +12,6 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD,ElementType.TYPE })
 public @interface Naming {
     public String value() default "";
+    public String ngRepeatVar() default "";
+
 }
