@@ -39,42 +39,61 @@ public class AngularEntityEditorBuilder {
         printItem();
     }
     private void printItem() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-
+        String context=pageComponent.getVar();
         for(Field field:itemClass.getDeclaredFields()){
-            printField( field);
+            printField(context, field);
         }
     }
 
-    private void printField(Field field) throws ClassNotFoundException {
-
+    private void printField(String context,Field field) throws ClassNotFoundException {
         if (field.isAnnotationPresent(Id.class)) return;
         if (field.isAnnotationPresent(Transient.class)) return;
-        if(Item.class.isAssignableFrom(field.getType())){
-            System.out.println("find an item "+field.getName());
-        }
-        if(List.class.isAssignableFrom(field.getType())){
-            System.out.println("find a list "+field.getName());
-            Type typeCls=field.getGenericType();
-            ParameterizedType parameterizedType=(ParameterizedType)typeCls;
-            Type actualType=parameterizedType.getActualTypeArguments()[0];
-            System.out.println("actual type :"+actualType.getTypeName());
-            Class clazz=Class.forName(actualType.getTypeName());
-            if(field.isAnnotationPresent(Naming.class)){
-                Naming naming=field.getAnnotation(Naming.class);
-                System.out.println("has naming:"+naming.value());
-            }
-            for (Field field1:clazz.getDeclaredFields()){
-                printField(field1);
-            }
-
-        }
+        if (!field.isAnnotationPresent(Naming.class)) return;
         Naming fieldNaming=field.getAnnotation(Naming.class);
-        if(field.isAnnotationPresent(Transient.class) ) return;
         if (fieldNaming==null) return;
-        field.setAccessible(true);
-        String ngRepeatVar=fieldNaming.ngRepeatVar();
+        Class fieldClass=field.getClass();
+
         Editable editable=field.getAnnotation(Editable.class);
         String fieldName=field.getName();
+        field.setAccessible(true);
+
+
+        if (field.getType().isPrimitive() ||ReflectUtil.isWrapClass(field.getType()) ||field.getType()==String.class){
+            stringBuffer.append("<div class=input-group>");
+            stringBuffer.append("<label class='input-group-addon'>"+fieldNaming.value()+":"+"</label>");
+            stringBuffer.append("<input class='form-control' type='text' ng-model='"+context+"."+field.getName()+"'/>");
+            stringBuffer.append("</div>");
+        }else{
+            if(Item.class.isAssignableFrom(field.getType())){
+                System.out.println("find an item "+field.getName());
+            }
+            if(List.class.isAssignableFrom(field.getType())){
+                System.out.println("find a list "+field.getName());
+                String ngRepeatVar=fieldNaming.ngRepeatVar();
+                Type typeCls=field.getGenericType();
+                ParameterizedType parameterizedType=(ParameterizedType)typeCls;
+                Type actualType=parameterizedType.getActualTypeArguments()[0];
+                System.out.println("actual type :"+actualType.getTypeName());
+                Class clazz=Class.forName(actualType.getTypeName());
+                if(field.isAnnotationPresent(Naming.class)){
+                    Naming naming=field.getAnnotation(Naming.class);
+                    System.out.println("has naming:"+naming.value());
+                }
+
+                stringBuffer.append("<div ng-repeat='"+ngRepeatVar+" in "+context+"."+field.getName()+"'>");
+                stringBuffer.append("<br/>------------------------");
+                for(Field childField:clazz.getDeclaredFields()){
+                    printField(ngRepeatVar,childField);
+                }
+                stringBuffer.append("</div>");
+
+            }
+        }
+
+
+
+
+
 //        String ngModelInContext=context+"."+fieldName;
     }
 

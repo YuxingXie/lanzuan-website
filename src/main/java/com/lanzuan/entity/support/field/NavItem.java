@@ -7,7 +7,7 @@ import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.LeafItem;
 import com.lanzuan.entity.support.Naming;
 import org.springframework.data.annotation.Transient;
-@Naming(value = "导航项")
+
 public class NavItem  extends LeafItem {
     @Naming(value = "导航项名")
     @Editable

@@ -22,17 +22,17 @@ import java.util.List;
 public class Navbar extends RootItem{
     @Id
     private String id;
-    @Naming(value = "导航路径")
-    @Editable()
+//    @Naming(value = "导航路径")
+//    @Editable()
     private String uri;
     @Naming(value = "方案名")
     private String name;
-    @Naming(value = "开启状态")
-    @Editable(inputType = InputType.TOGGLE_BOOLEAN)
+//    @Naming(value = "开启状态")
+//    @Editable(inputType = InputType.TOGGLE_BOOLEAN)
     private boolean enabled;
-
+    @Naming(value = "导航标签")
     private NavbarBrand navbarBrand;
-
+    @Naming(value = "导航项",ngRepeatVar = "navItem")
     private List<NavItem> items;
     @DBRef
     private PageComponent pageComponent;
