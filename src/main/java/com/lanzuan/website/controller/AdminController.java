@@ -173,10 +173,12 @@ public class AdminController extends BaseRestSpringController {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
         RootItem rootItem =pageComponent.getData();
+        AngularjsEntityEditor.times=0;
         StringBuffer commonOperationsHtml=AngularjsEntityEditor.commonOperationsHtml(new StringBuffer(), rootItem, pageComponent);
 
-        StringBuffer itemsStringBuffer= AngularjsEntityEditor.printItem(new StringBuffer(""), rootItem, pageComponent,pageComponent.getVar());
+        StringBuffer itemsStringBuffer= AngularjsEntityEditor.printItem(new StringBuffer(""), rootItem, pageComponent, pageComponent.getVar());
         model.addAttribute("edit_html", commonOperationsHtml.append(itemsStringBuffer).append("\n</hr>").toString());
+        System.out.println("AngularjsEntityEditor.times "+ AngularjsEntityEditor.times);
         return "admin/page-component-edit";
     }
 

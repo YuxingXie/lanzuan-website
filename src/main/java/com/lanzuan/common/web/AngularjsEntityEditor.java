@@ -17,7 +17,9 @@ import java.util.List;
  * Created by Administrator on 2017/3/20.
  */
 public class AngularjsEntityEditor {
+    public static int times=0;
     public static StringBuffer printItem(StringBuffer stringBuffer,Item item,PageComponent pageComponent,String context) throws IllegalAccessException, NoSuchFieldException {
+        times++;
         Class<? extends Item> itemClass=item.getClass();
         Naming itemNaming= itemClass.getAnnotation(Naming.class);
 
