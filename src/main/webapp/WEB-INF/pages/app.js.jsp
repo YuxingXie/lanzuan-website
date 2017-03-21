@@ -43,9 +43,15 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         });
     }
     $scope.reset${component.varU}=function(){
-    $scope.get${component.varU}();
-    $scope.${component.var}Resetted=true;
+        $scope.get${component.varU}();
+        $scope.${component.var}Resetted=true;
     }
+    $scope.get${component.varU}Material=function(){
+        $http.get('${component.materialUri}').success(function (data) {
+            $scope.${component.var}Images=data;
+        });
+    }
+
     //update
     $scope.save${component.varU}=function(){
         <%--console.log(JSON.stringify($scope.${component.var}));--%>

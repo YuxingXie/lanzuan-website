@@ -26,6 +26,7 @@ public class Navbar extends RootItem{
 //    @Editable()
     private String uri;
     @Naming(value = "方案名")
+    @Editable()
     private String name;
 //    @Naming(value = "开启状态")
 //    @Editable(inputType = InputType.TOGGLE_BOOLEAN)

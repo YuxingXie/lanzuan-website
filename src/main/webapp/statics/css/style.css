@@ -212,7 +212,12 @@ Misc tools
 .padding-30 {
     padding:30px;
 }
-
+.p-t-xs{
+    padding-top: .5rem !important;
+}
+.p-t-sm{
+    padding-top: 1rem !important;
+}
 .p-t-05em {
     padding-top:0.5em;
 }

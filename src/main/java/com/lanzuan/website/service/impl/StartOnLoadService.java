@@ -785,6 +785,14 @@ public class StartOnLoadService {
             pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
             pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
 
+            pageComponent1.setMaterialUri("/admin/icons/data");
+            pageComponent2.setMaterialUri("/admin/carousel-images/data");
+            pageComponent3.setMaterialUri("/admin/card-group/images/data");
+            pageComponent4.setMaterialUri("/admin/image-text-block-group/image/data");
+            pageComponent5.setMaterialUri("/admin/sort-link-group/image/data");
+            pageComponent6.setMaterialUri("/admin/full-width-image//image/data");
+            pageComponent7.setMaterialUri("/admin/sort-link-group/image/data");
+
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);

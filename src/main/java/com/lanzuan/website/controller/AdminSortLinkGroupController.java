@@ -1,6 +1,7 @@
 package com.lanzuan.website.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
+import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
@@ -18,12 +19,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,26 +69,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
 
 
         SortLink articleSectionGroupItem =null;
-//        if(articleSectionId!=null&&!articleSectionId.trim().equals("")){
-//            articleSectionGroupItem =sortLinkGroupService.findById(articleSectionId);
-//            List<Article> articles= articleSectionGroupItem.getArticles();
-//            boolean exists=false;
-//            if (articles==null){
-//                articles=new ArrayList<Article>();
-//            }else{
-//                for (Article article1:articles){
-//                    if (article.getId().equals(article1.getId())){
-//                        exists=true;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (!exists){
-//                articles.add(article);
-//                articleSectionGroupItem.setArticles(articles);
-//                articleSectionService.update(articleSectionGroupItem);
-//            }
-//        }
+
 
         if (pageComponentId!=null){
             return "redirect:/admin/page_component/edit/"+pageComponentId;
@@ -102,7 +87,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
                 String filePath = request.getServletContext().getRealPath("/") + "statics/upload/"+fileName;
                 // 转存文件
                 file.transferTo(new File(filePath));
-                //TODO
+
 //                SortLink articleSectionGroupItem =articleSectionService.findById(articleSectionId);
 //                articleSectionGroupItem.setImage("/statics/upload/"+fileName);
 //                articleSectionService.update(articleSectionGroupItem);
@@ -277,5 +262,27 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
     public ResponseEntity<List<SortLinkGroup>> remove(@PathVariable String id){
         sortLinkGroupService.removeById(id);
         return getSortLinkGroupList();
+    }
+    @RequestMapping(value = "/image/data")
+    public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
+        String fileDirectory= Constant.ARTICLE_COVER_IMAGE_DIR;
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(), fileDirectory);
+        List<String> strings=new ArrayList<String>();
+        if (!resource.exists()){
+            File file=resource.getFile();
+            file.mkdirs();
+            return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
+        }else{
+            if (resource.getFile().isDirectory()){
+                File[] files= resource.getFile().listFiles();
+                for (File file:files){
+                    if (file.isDirectory()) continue;
+                    ServletContextResource fileResource=new ServletContextResource(request.getServletContext(),fileDirectory+"/"+file.getName());
+                    strings.add(fileResource.getPath());
+                }
+            }
+        }
+
+        return new ResponseEntity<List<String>>(strings, HttpStatus.OK);
     }
 }

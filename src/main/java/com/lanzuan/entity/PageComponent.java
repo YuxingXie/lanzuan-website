@@ -1,5 +1,13 @@
 package com.lanzuan.entity;
-
+/**
+db.pageComponent.update({"name":"响应式导航条模板1"},{"$set":{"materialUri":"/admin/icons/data"}},false,true)
+db.pageComponent.update({"name":"响应式轮播图"},{"$set":{"materialUri":"/admin/carousel-images/data"}},false,true)
+db.pageComponent.update({"name":"图文卡片组模板1"},{"$set":{"materialUri":"/admin/card-group/images/data"}},false,true)
+db.pageComponent.update({"name":"蓝钻鼠标掠过类似手风琴模板1"},{"$set":{"materialUri":"/admin/image-text-block-group/image/data"}},false,true)
+db.pageComponent.update({"name":"文章块组件1"},{"$set":{"materialUri":"/admin/sort-link-group/image/data"}},false,true)
+db.pageComponent.update({"name":"全屏宽度图片模板1"},{"$set":{"materialUri":"/admin/full-width-image//image/data"}},false,true)
+db.pageComponent.update({"name":"分类链接模板1"},{"$set":{"materialUri":"/admin/sort-link-group/image/data"}},false,true)
+ */
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.support.RootItem;
 import org.springframework.data.annotation.Id;
@@ -16,8 +24,7 @@ public class PageComponent<T extends RootItem> {
     @Id
     private String id;
     private String name;
-    @Transient
-    private Class<T> dataClass;
+
     /*
     模板按理应该是一个类型不限的静态资源，并使用某种模板语言渲染，但这种方式需要引入一门模板语言，所以jsp作为模板，
     jsp实际上可以看做专门针对web程序的专用模板语言
@@ -37,6 +44,8 @@ public class PageComponent<T extends RootItem> {
     private T data;
     @Transient
     private WebPage webPage;
+    //素材资源uri
+    private String materialUri;
     //素材上传uri
     private String materialUploadUri;
 
@@ -198,9 +207,15 @@ public class PageComponent<T extends RootItem> {
         this.materialUploadUri = materialUploadUri;
     }
 
-    public Class<T> getDataClass() {
-        return dataClass;
+
+    public String getMaterialUri() {
+        return materialUri;
     }
+
+    public void setMaterialUri(String materialUri) {
+        this.materialUri = materialUri;
+    }
+
 
     public PageComponent() {
 

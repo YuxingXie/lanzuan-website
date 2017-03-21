@@ -18,7 +18,7 @@ public class NavbarBrand extends LeafItem{
     private String type;
 
     @Naming("值")
-    @Editable()
+    @Editable(inputType = InputType.IMAGE)
     private String value;
     @Transient
     private Navbar parent;
