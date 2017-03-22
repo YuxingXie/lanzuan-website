@@ -70,23 +70,7 @@ public class AngularEntityEditorBuilder {
 //        buildForwardSubItemMethod();
     }
 
-    private void buildForwardSubItemMethod(String context, String fieldName,String absoluteContext) {
-        /**
-         * $scope.forwardBlockItem=function(imageTextBlock,index){
-          var item=imageTextBlock.imageTextItems[index];
-         imageTextBlock.imageTextItems.splice(index,1);
-         imageTextBlock.imageTextItems.splice(index-1,0,item);
-         */
-        javaScript.append("\n$scope.forward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
 
-        javaScript.append("\n alert('fffffff');");
-        javaScript.append("\n var item=$scope."+absoluteContext+"."+fieldName+"[index];");
-        javaScript.append("\n $scope."+absoluteContext+"."+fieldName+".splice(index,1);");
-        javaScript.append("\n $scope."+absoluteContext+"."+fieldName+".splice(index-1,0,item);");
-        javaScript.append("\n}");
-
-
-    }
 
     private void buildInitAdminMethod() {
         javaScript.append("\n;$scope.initAdmin=function(){");
@@ -337,7 +321,9 @@ public class AngularEntityEditorBuilder {
             deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
             forwardFunctionName="forward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
             backwardFunctionName="backward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
-            buildForwardSubItemMethod(context,fieldName,absoluteContext);
+            buildForwardSubItemMethod(context,fieldName);
+            buildBackwardSubItemMethod(context, fieldName);
+            buildRemoveSubItemMethod(context, fieldName);
         }
         html.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "'>");
         html.append("<button class='fa fa-trash btn " + btnCss + "' ng-click=\"" + deleteFunctionName + "\" >" + deleteText + "</button>");
@@ -346,6 +332,29 @@ public class AngularEntityEditorBuilder {
 //        html.append("<button ng-init=\"showItems=true\" class='fa btn " + btnCss + "'")
 //                .append(" ng-click=\"showItems=!showItems\" >{{showItems?'收起':'展开'}}<i ng-class=\"{'fa-plus-square-o':!showItems,'fa-minus-square-o':showItems}\" ></i></button>");
         html.append("   </div>");
+    }
+    private void buildForwardSubItemMethod(String context, String fieldName) {
+
+        javaScript.append("\n$scope.forward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
+        javaScript.append("\n var item="+context+"."+fieldName+"[index];");
+        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n "+context+"."+fieldName+".splice(index-1,0,item);");
+        javaScript.append("\n}");
+
+
+    }
+    private void buildRemoveSubItemMethod(String context, String fieldName) {
+        javaScript.append("\n$scope.remove"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
+        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n}");
+    }
+
+    private void buildBackwardSubItemMethod(String context, String fieldName) {
+        javaScript.append("\n$scope.backward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
+        javaScript.append("\n var item="+context+"."+fieldName+"[index];");
+        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n "+context+"."+fieldName+".splice(index+1,0,item);");
+        javaScript.append("\n}");
     }
 
 
