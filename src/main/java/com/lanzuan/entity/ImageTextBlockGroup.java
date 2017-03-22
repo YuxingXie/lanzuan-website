@@ -17,6 +17,7 @@ public class ImageTextBlockGroup extends RootItem{
     @Id
     private String id;
     private String uri;
+    @Naming("方案名")
     private String name;
     private boolean enabled;
     @Naming(value = "大标题")

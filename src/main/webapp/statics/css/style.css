@@ -464,6 +464,12 @@ Misc tools
 .p-r-3em {
     padding-right: 3em;
 }
+.p-b-xs{
+    padding-bottom: .5rem !important;
+}
+.p-b-sm{
+    padding-bottom: 1rem !important;
+}
 .p-b-2{
     padding-bottom: 2px;
 }

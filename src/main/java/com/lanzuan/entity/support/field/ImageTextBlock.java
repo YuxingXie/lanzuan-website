@@ -10,7 +10,7 @@ import java.util.List;
 
 @Naming(value = "图文块")
 public class ImageTextBlock implements Item {
-    @Naming(value = "标题")
+    @Naming(value = "块标题")
     @Editable()
     private String name;
     @Naming(ngRepeatVar = "imageTextItem",value = "图文项")
