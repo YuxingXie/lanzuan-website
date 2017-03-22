@@ -15,11 +15,12 @@
 .bg-purple { background-color: #852b99;}
 .bg-light-red { background-color: #ff5400;}
 .bg-sliver-1{background-color:#c0c0c0;}
-.bg--blue-1 { background-color: rgba(194, 216, 253, 0.58);}
-.bg--blue-2 { background-color: #c2d8fd;}
-.bg--blue-3 { background-color: #bfd5fa;}
+.bg-blue-1 { color: #000;background-color: rgba(194, 216, 253, 0.58);}
+.bg-blue-2 { background-color: #c2d8fd;}
+.bg-blue-3 { background-color: #bfd5fa;}
 .bg-very-light-blue { background-color: #bfd5fa;}
-.bg-light-blue { background-color: #0786EA;}
+.bg-blue-4 {color: #fff;background-color: #5bc5ff;}
+.bg-light-blue {color: #fff;background-color: #0786EA;}
 
 .bg-light-green { background-color: #78df1d;}
 .bg-light-primary { background-color: #a4c5ca;}

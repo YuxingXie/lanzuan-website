@@ -16,46 +16,224 @@ import java.util.List;
  * Created by Administrator on 2017/3/20.
  */
 public class AngularEntityEditorBuilder {
-    private StringBuffer stringBuffer;
+    private StringBuffer html;
+    private StringBuffer javaScript;
     private Class<? extends Item> itemClass;
-    private RootItem rootItem;
+
     private  Naming itemNaming;
     private PageComponent<RootItem> pageComponent;
     private AngularEntityEditorBuilder(){
 
     }
     public AngularEntityEditorBuilder(PageComponent pageComponent){
-        this.stringBuffer=new StringBuffer();
+        this.html=new StringBuffer();
+        this.javaScript=new StringBuffer();
         this.itemClass=pageComponent.getData().getClass();
         this.itemNaming= itemClass.getAnnotation(Naming.class);
         this.pageComponent=pageComponent;
-        this.rootItem =pageComponent.getData();
+
 
     }
-    public void build() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+    public void buildHtml() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         commonOperationsHtml();
         printItem(1);
     }
-    private void printItem(int level) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        String context=pageComponent.getVar();
-        stringBuffer.append("<div class='list-group'>");//for 1
-        for(Field field:itemClass.getDeclaredFields()){
-            printField(context, field,level);
+    public void buildJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+
+
+        buildController();
+
+
+
         }
-        stringBuffer.append("</div>");//for 1 end
+
+    private void buildController() {
+
+        buildControllerBody();
+
     }
 
-    private void printField(String context,Field field,int level) throws ClassNotFoundException {
+    private void buildControllerBody() {
+        buildGetMethod();
+        buildResetMethod();
+        buildGetMaterialMethod();
+        buildUpdateMethod();
+        buildSaveAsMethod();
+        buildForwardItemMethod();
+        buildBackwardItemMethod();
+        buildInsertItemTopMethod();
+        buildRemoveItemMethod();
+        buildGetListMethod();
+        buildToggleMethod();
+        buildDeleteItemMethod();
+        buildInitAdminMethod();
+//        buildForwardSubItemMethod();
+    }
+
+    private void buildForwardSubItemMethod(String context, String fieldName,String absoluteContext) {
+        /**
+         * $scope.forwardBlockItem=function(imageTextBlock,index){
+          var item=imageTextBlock.imageTextItems[index];
+         imageTextBlock.imageTextItems.splice(index,1);
+         imageTextBlock.imageTextItems.splice(index-1,0,item);
+         */
+        javaScript.append("\n$scope.forward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
+
+        javaScript.append("\n alert('fffffff');");
+        javaScript.append("\n var item=$scope."+absoluteContext+"."+fieldName+"[index];");
+        javaScript.append("\n $scope."+absoluteContext+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n $scope."+absoluteContext+"."+fieldName+".splice(index-1,0,item);");
+        javaScript.append("\n}");
+
+
+    }
+
+    private void buildInitAdminMethod() {
+        javaScript.append("\n;$scope.initAdmin=function(){");
+        javaScript.append("\n$scope.getMenu();");
+        javaScript.append("\n$scope.editable=false;");
+        javaScript.append("\n}");
+        javaScript.append("\n$scope.getMenu=function(){");
+        javaScript.append("\n$http.get(\"/statics/json/menu.json\").success(function (data) {");
+        javaScript.append("\n$scope.menuItems=data;");
+        javaScript.append("\n});");
+        javaScript.append("\n}");
+    }
+
+    private void buildDeleteItemMethod() {
+        javaScript.append("\n;$scope.delete"+pageComponent.getVarU()+"=function(component){");
+        javaScript.append("\nif(!confirm(\"确定删除?\")) return ;");
+        javaScript.append("\n$http.post(\""+pageComponent.getDeleteUri()+"\"+component.id,JSON.stringify(component)).success(function (data) {");
+        javaScript.append("\n$scope."+pageComponent.getVar()+"List=data;");
+        javaScript.append("\n});}");
+    }
+
+    private void buildToggleMethod() {
+        javaScript.append("\n;$scope."+pageComponent.getVar()+"Toggle=function(component){");
+        javaScript.append("\n $http.post(\""+pageComponent.getToggleUri()+"\",JSON.stringify(component)).success(function (data) {");
+        javaScript.append("\n $scope."+pageComponent.getVar()+"List=data;");
+        javaScript.append("\n}); }");
+    }
+
+    private void buildGetListMethod() {
+        javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"List=function(){");
+        javaScript.append("\n $http.get(\""+pageComponent.getListDataUri()+"\").success(function (data) {");
+        javaScript.append("\n $scope."+pageComponent.getVar()+"List=data;");
+        javaScript.append("\n});}");
+
+    }
+
+    private void buildRemoveItemMethod() {
+        javaScript.append("\n;$scope.remove"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,1);");
+        javaScript.append("\n}");
+    }
+
+    private void buildInsertItemTopMethod() {
+        javaScript.append("\n;$scope.insert"+pageComponent.getVarU()+"ItemBefore=function(index){");
+        javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,0,{});");
+        javaScript.append("\n}");
+    }
+
+    private void buildBackwardItemMethod() {
+        javaScript.append("\n;$scope.backward"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\nvar item=$scope."+pageComponent.getVar()+".items[index];");
+        javaScript.append("\n $scope."+pageComponent.getVar()+".items.splice(index,1);");
+        javaScript.append("\n $scope."+pageComponent.getVar()+".items.splice(index+1,0,item);");
+        javaScript.append("\n }");
+    }
+
+    private void buildForwardItemMethod() {
+        javaScript.append("\n;$scope.forward"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\nvar item=$scope."+pageComponent.getVar()+".items[index];");
+        javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,1);");
+        javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index-1,0,item);");
+        javaScript.append("\n}");
+    }
+
+    private void buildSaveAsMethod() {
+        javaScript.append("\n;$scope.new"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\nvar name = window.prompt(\"请给方案命名\",\"新方案名\");");
+        javaScript.append("\nif(!name) return;");
+        javaScript.append("\n$scope."+pageComponent.getVar()+".name=name;");
+        javaScript.append("\n$http.post(\""+pageComponent.getSaveAsUri()+"\",JSON.stringify( $scope."+pageComponent.getVar()+")).success(function (message) {");
+        javaScript.append("\n$scope."+pageComponent.getVar()+"=message.data;");
+        javaScript.append("\nif(message.success){");
+        javaScript.append("\nalert(\"方案保存成功！\");");
+        javaScript.append("\n }});}");
+
+    }
+
+    private void buildUpdateMethod() {
+        javaScript.append("\n;$scope.save"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n$http.post(\""+pageComponent.getSaveUri()+"\",JSON.stringify($scope."+pageComponent.getVar()+")).success(function (message) {");
+        javaScript.append("\n$scope."+pageComponent.getVar()+"=message.data;");
+        javaScript.append("\nif(message.success){");
+        javaScript.append("\nalert(\"保存成功！\");");
+        javaScript.append("\n }");
+        javaScript.append("\n});");
+        javaScript.append("\n}");
+    }
+
+    private void buildGetMaterialMethod() {
+        javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"Material=function(){");
+        javaScript.append("\n $http.get('"+pageComponent.getMaterialUri()+"').success(function (data) {");
+        javaScript.append("\n $scope."+pageComponent.getVar()+"Images=data;");
+        javaScript.append("\n});");
+        javaScript.append("\n}");
+    }
+
+    private void buildResetMethod() {
+        javaScript.append("\n;$scope.reset"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n $scope.get"+pageComponent.getVarU()+"();");
+        javaScript.append("\n}");
+    }
+
+    private void buildGetMethod() {
+          javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n $http.get('"+pageComponent.getDataUri()+"').success(function (data) {");
+        javaScript.append("\n$scope."+pageComponent.getVar()+"=data;");
+        javaScript.append("\n});");
+        javaScript.append("\n}");
+
+    }
+
+    public String getJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        buildJavaScript();
+        StringBuffer ret = new StringBuffer();
+        ret.append("\n<script>")
+                .append("\n(function () {\"use strict\"; var app = angular.module('app', []);")
+                .append("\napp.controller('AdminController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {")
+                .append(javaScript)
+                .append("\n}])")
+                .append("\n})()")
+                .append("\n</script>");
+
+        return ret.toString();
+    }
+    private void printItem(int level) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        String context=pageComponent.getVar();
+
+        for(Field field:itemClass.getDeclaredFields()){
+
+            printField(context,context, field,level);
+        }
+
+    }
+
+    private void printField(String context,String absoluteContext,Field field,int level) throws ClassNotFoundException {
         if (field.isAnnotationPresent(Id.class)) return;
         if (field.isAnnotationPresent(Transient.class)) return;
         if (!field.isAnnotationPresent(Naming.class)) return;
         Naming fieldNaming=field.getAnnotation(Naming.class);
         if (fieldNaming==null) return;
+        System.out.println(absoluteContext);
+
         Class fieldClass=field.getClass();
         Editable editable=field.getAnnotation(Editable.class);
         String fieldName=field.getName();
         field.setAccessible(true);
-        stringBuffer.append("<div class='list-group-item'>");
+
         if(editable!=null){
             InputType inputType=editable.inputType();
 
@@ -72,7 +250,8 @@ public class AngularEntityEditorBuilder {
                 printItemHeader(fieldNaming);
                 Class childItemClass=field.getType();
                 for (Field childItemField : childItemClass.getDeclaredFields()) {
-                    printField(context+"."+fieldName, childItemField,level+1);
+                    printField(context+"."+fieldName,absoluteContext+"."+context+"."+field.getName(), childItemField,level+1);
+
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
                 printItemListHeader(fieldNaming,level);
@@ -81,140 +260,153 @@ public class AngularEntityEditorBuilder {
                 Type typeCls = field.getGenericType();
                 ParameterizedType parameterizedType = (ParameterizedType) typeCls;
                 Type actualType = parameterizedType.getActualTypeArguments()[0];
-//                System.out.println("actual type :" + actualType.getTypeName());
                 Class clazz = Class.forName(actualType.getTypeName());
 
-                stringBuffer.append("<div class='row p-t-xs p-b-md' ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
-//                stringBuffer.append("<hr/>");
-                stringBuffer.append("<div class='col-xs-12'>");
-                if(level==1) {
-                    printRootItemOperationButtons(context);
-                }else {
-                    printNonRootItemOperationButtons(context);
-                }
+                html.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
+
+                String itemBorderCss="";
+                if (level==1)   itemBorderCss="solid-silver-border p-a-lg";
+                if (level==2)   itemBorderCss="solid-silver-border";
+                html.append("<div class='col-xs-12 " + itemBorderCss + "'>");
+                printItemOperationButtons(context,fieldName,level,absoluteContext);
+
                 for (Field childField : clazz.getDeclaredFields()) {
-                    printField(ngRepeatVar, childField,level+1);
+                    printField(ngRepeatVar,absoluteContext+"."+ngRepeatVar, childField,level+1);
                 }
-                stringBuffer.append("</div>");
-                stringBuffer.append("</div>");
+                html.append("\n</div>");
+                html.append("</div>");
+
             }else {//
 
-                stringBuffer.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
-                stringBuffer.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
-                stringBuffer.append("</div>");
-                stringBuffer.append("<label></label>");
+                html.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
+                html.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
+                html.append("</div>");
+                html.append("<label></label>");
             }
 
         }
         if (Item.class.isAssignableFrom(field.getType())) {
-//            stringBuffer.append("\n</div>");//for 3
+//            html.append("\n</div>");//for 3
         }
 
+//
 
-        stringBuffer.append("</div>");
     }
 
     private void printItemHeader(Naming fieldNaming) {
-        stringBuffer.append("<div class='text-left label label-info col-xs-12 large-150 fa fa-edit m-t-md m-b-md'>编辑 ");
-        stringBuffer.append(fieldNaming.value());
-        stringBuffer.append(" </div>");
+        html.append("<div class='text-left label label-info col-xs-12 large-150 fa fa-edit m-t-md m-b-md'>编辑 ");
+        html.append(fieldNaming.value());
+        html.append(" </div>");
     }
     private void printItemListHeader(Naming fieldNaming,int level) {
         String fontSizeCss="";
         if(level==1) fontSizeCss="large-150";
         if(level==2) fontSizeCss="large-120";
-        stringBuffer.append("<div class='text-left label label-info col-xs-12 "+fontSizeCss+" fa fa-list m-t-md m-b-md'> ");
-        stringBuffer.append(fieldNaming.value());
-        stringBuffer.append("列表</div>");
+        html.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
+        html.append(fieldNaming.value());
+        html.append("列表</div>");
     }
 
 
-    private void printNonRootItemOperationButtons(String context) {
-        stringBuffer.append("<div class='btn-group btn-group-sm pull-right'>");
-        stringBuffer.append("<button class='fa fa-trash btn  btn-primary' ng-click='remove")
-                .append(StringUtils.firstUpperCase(context))
-                .append("Item(" + pageComponent.getVar() + "," + context + ",$index)' >删除</button>");
-        stringBuffer.append("<button class='fa fa-caret-up btn btn-primary' ng-click='forward")
-                .append(StringUtils.firstUpperCase(context))
-                .append("Item(" + pageComponent.getVar() + "," + context + ",$index)'ng-if='$index!==0'>前移</button>");
-        stringBuffer.append("<button class='fa fa-caret-down btn btn-primary' ng-click='backward")
-                .append(StringUtils.firstUpperCase(context))
-                .append("Item(" + pageComponent.getVar() + "," + context + ",$index)' ng-if='$index!==" + context + ".items.length-1'>后移</button>");
-        stringBuffer.append("   </div>");
+    private void printItemOperationButtons(String context,String fieldName,int level,String absoluteContext) {
+        String deleteText="";
+        String forwardText="";
+        String backwardText="";
+        String paddingRightCss="";
+        String btnCss="";
+        String btnGroupCss="";
+        String deleteFunctionName="";
+        String forwardFunctionName="";
+        String backwardFunctionName="";
+        if(level==1) {
+            deleteText="删除整块";
+            deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item($index)";
+            forwardFunctionName="forward"+StringUtils.firstUpperCase(context)+"Item($index)";
+            backwardFunctionName="backward"+StringUtils.firstUpperCase(context)+"Item($index)";
+            forwardText="整块前移";
+            backwardText="整块后移";
+            paddingRightCss="p-r-0";
+            btnCss="btn-primary";
+        }else {
+            deleteText="删除";
+            forwardText="前移";
+            backwardText="后移";
+            paddingRightCss="p-r-xl";
+            btnCss="btn-info";
+            btnGroupCss="btn-group-sm";
+            deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
+            forwardFunctionName="forward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
+            backwardFunctionName="backward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
+            buildForwardSubItemMethod(context,fieldName,absoluteContext);
+        }
+        html.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "'>");
+        html.append("<button class='fa fa-trash btn " + btnCss + "' ng-click=\"" + deleteFunctionName + "\" >" + deleteText + "</button>");
+        html.append("<button class='fa fa-caret-up btn " + btnCss + "' ng-click='" + forwardFunctionName + "' ng-if='$index!==0'>" + forwardText + "</button>");
+        html.append("<button class='fa fa-caret-down btn " + btnCss + "' ng-click='" + backwardFunctionName + "' ng-if='$index!==" + context + ".items.length-1'>" + backwardText + "</button>");
+//        html.append("<button ng-init=\"showItems=true\" class='fa btn " + btnCss + "'")
+//                .append(" ng-click=\"showItems=!showItems\" >{{showItems?'收起':'展开'}}<i ng-class=\"{'fa-plus-square-o':!showItems,'fa-minus-square-o':showItems}\" ></i></button>");
+        html.append("   </div>");
     }
 
-    private void printRootItemOperationButtons(String context) {
-        stringBuffer.append("<div class='btn-group btn-group-sm pull-right'>");
-        stringBuffer.append("<button class='fa fa-trash btn  btn-primary' ng-click='remove" + StringUtils.firstUpperCase(context) + "Item($index)' >删除整块</button>");
-        stringBuffer.append("<button class='fa fa-caret-up btn btn-primary' ng-click='forward" + StringUtils.firstUpperCase(context) + "Item($index)'ng-if='$index!==0'>整块前移</button>");
-        stringBuffer.append("<button class='fa fa-caret-down btn btn-primary' ng-click='backward" + StringUtils.firstUpperCase(context) + "Item($index)' ng-if='$index!==" + context + ".items.length-1'>整块后移</button>");
-        stringBuffer.append("   </div>");
-    }
 
     private void printTextInputGroup(String context, Field field, Naming fieldNaming) {
 
-        stringBuffer.append("\n<div class='col-xs-12 p-b-xs'>");
-        stringBuffer.append("\n<div class='input-group input-group-sm'>");
-        stringBuffer.append("\n    <label class=\"input-group-addon fa fa-edit\">"+fieldNaming.value()+"</label>");
-        stringBuffer.append("\n<input class='form-control' type='text' ng-model='"+context+"."+field.getName()+"'/>");
-        stringBuffer.append("\n</div>");
-        stringBuffer.append("\n</div>");
+        html.append("\n<div class='col-xs-12 p-b-xs'>");
+        html.append("\n<div class='input-group input-group-sm'>");
+        html.append("\n    <label class=\"input-group-addon fa fa-edit\">" + fieldNaming.value() + "</label>");
+        html.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
+        html.append("\n</div>");
+        html.append("\n</div>");
     }
 
     private void printImageChooserDiv(String context, Field field) {
-        stringBuffer.append("\n<div class='col-xs-12 p-b-xs'>");
-        stringBuffer.append("\n<div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
-        stringBuffer.append("\n <button type=\"button\" class=\"btn btn-secondary btn-sm p-l-0 m-l-0\">更换图片</button>");
-        stringBuffer.append("\n <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
-        stringBuffer.append("\n     <span class=\"sr-only\">Toggle Dropdown</span>");
-        stringBuffer.append("\n </button>");
-        stringBuffer.append("\n <div class=\"dropdown-menu bg-light-grey\">");
-        stringBuffer.append("\n     <span ng-repeat=\"icon in "+pageComponent.getVar()+"Images\" class=\"dropdown-item-inline\" ng-click=\""+context+"."+field.getName()+"=icon\">");
-        stringBuffer.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
-        stringBuffer.append("\n     </span>");
-        stringBuffer.append("\n </div>");
-        stringBuffer.append("\n</div>");
-        stringBuffer.append("\n</div>");
+        html.append("\n<div class='col-xs-12 p-b-xs'>");
+        html.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
+        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\"> 更换图片</button>");
+        html.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
+        html.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
+        html.append("\n     </button>");
+        html.append("\n     <img ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+
+        html.append("\n <div class=\"dropdown-menu bg-light-grey\">");
+        html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+        html.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
+        html.append("\n     </span>");
+        html.append("\n </div>");
+        html.append("\n </div>");
+        html.append("\n</div>");
     }
 
     private void commonOperationsHtml() throws NoSuchFieldException, IllegalAccessException {
             Field fangAnField=itemClass.getDeclaredField("name");
             fangAnField.setAccessible(true);
 
-            stringBuffer.append("\n<div class=\"row m-a-0 p-a-0\" ng-init=\"get"+pageComponent.getVarU()+"Material()\">");
-            stringBuffer.append("\n   <div class=\"btn-group p-b-10\">");
-        stringBuffer.append("\n<label class=\"btn btn-info cursor-auto\">编辑"+itemNaming.value()+"</label>");
-//            stringBuffer.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
-            stringBuffer.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save"+pageComponent.getVarU()+"()\" >保存</button>");
-            stringBuffer.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new"+pageComponent.getVarU()+"()\" >方案另存为</button>");
-            stringBuffer.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\""+pageComponent.getListOperationUri()+pageComponent.getId()+"\">应用方案</a>");
-            stringBuffer.append("\n       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\""+pageComponent.getMaterialUploadUri()+"/"+pageComponent.getId()+"\"> 上传素材</a>");
-            stringBuffer.append("\n       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset"+pageComponent.getVarU()+"()\">重置</button>");
-            stringBuffer.append("\n   </div>");
-            stringBuffer.append("\n</div>");
-
-
-            stringBuffer.append("\n<div class=\"row\">");
-            stringBuffer.append("\n   <div class=\"alert alert-warning\">");
-            stringBuffer.append("\n       <ul class=\"list-unstyled\">");
-            stringBuffer.append("\n           <li><i class=\"fa fa-warning\"></i> 如果没有合适的图标，您可以先<a href='"+pageComponent.getMaterialUploadUri()+"/"+pageComponent.getId()+"' style=\"text-decoration: underline;\"><i>上传素材</i></a>；</li>");
-            stringBuffer.append("\n           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
-            stringBuffer.append("\n           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
-            stringBuffer.append("\n       </ul>");
-            stringBuffer.append("\n   </div>");
-            stringBuffer.append("\n</div>");
+            html.append("\n<div class=\"row m-a-0 p-a-0\" ng-init=\"get" + pageComponent.getVarU() + "Material()\">");
+            html.append("\n   <div class=\"btn-group p-b-10\">");
+        html.append("\n<label class=\"btn btn-info cursor-auto\">编辑" + itemNaming.value() + "</label>");
+//            html.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
+            html.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save" + pageComponent.getVarU() + "()\" >保存</button>");
+            html.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new" + pageComponent.getVarU() + "()\" >方案另存为</button>");
+            html.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\"" + pageComponent.getListOperationUri() + pageComponent.getId() + "\">应用方案</a>");
+            html.append("\n       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
+            html.append("\n       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset" + pageComponent.getVarU() + "()\">重置</button>");
+            html.append("\n   </div>");
+            html.append("\n</div>");
+            html.append("\n<div class=\"row\">");
+            html.append("\n   <div class=\"alert alert-warning\">");
+            html.append("\n       <ul class=\"list-unstyled\">");
+            html.append("\n           <li><i class=\"fa fa-warning\"></i> 如果没有合适的图标，您可以先<a href='" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "' style=\"text-decoration: underline;\"><i>上传素材</i></a>；</li>");
+            html.append("\n           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
+            html.append("\n           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
+            html.append("\n       </ul>");
+            html.append("\n   </div>");
+            html.append("\n</div>");
 
     }
     public String getHtml(){
-        return stringBuffer.toString();
+        return html.toString();
     }
 
-    private String itemVar(Item item,PageComponent pageComponent) {
-        if (item instanceof RootItem){
-            return pageComponent.getVar();
-        }
-        return StringUtils.firstLowerCase(item.getClass().getSimpleName());
 
-    }
 
 }

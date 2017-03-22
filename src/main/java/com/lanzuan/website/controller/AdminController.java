@@ -174,11 +174,11 @@ public class AdminController extends BaseRestSpringController {
         model.addAttribute("pageComponent", pageComponent);
 
         AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);
-        angularEntityEditorBuilder.build();
+        angularEntityEditorBuilder.buildHtml();
         String html= angularEntityEditorBuilder.getHtml();
-
-
+        String js=angularEntityEditorBuilder.getJavaScript();
         model.addAttribute("edit_html", html);
+        model.addAttribute("js", js);
 
         return "admin/page-component-edit";
     }

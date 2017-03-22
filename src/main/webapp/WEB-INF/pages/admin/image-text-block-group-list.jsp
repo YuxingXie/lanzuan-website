@@ -45,7 +45,7 @@
                         <div class="col-xs-2">
                             <i  ng-class="{'color-red':!group.name}">{{group.name?group.name:"未命名"}}</i></div>
                         <div class="col-xs-4">
-                            <div ng-repeat="block in group.items" ng-class-even="'bg--blue-1'"ng-class-odd="'bg--blue-3'"
+                            <div ng-repeat="block in group.items" ng-class-even="'bg-blue-1'"ng-class-odd="'bg-blue-3'"
                                  class="row p-t-15 p-b-10">
                                 <div class="col-xs-12">{{block.name}}</div>
                                 <div class="col-xs-3" ng-repeat="item in block.imageTextItems">

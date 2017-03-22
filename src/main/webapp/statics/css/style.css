@@ -378,38 +378,38 @@ Misc tools
     margin-right: 20px;
 }
 .m-r-20em {
-    margin-right: 20em;
+    margin-right: 20em !important;
 }
 .m-l--20 {
-    margin-left: -20px;
+    margin-left: -20px !important;
 }
 .m-l--10 {
-    margin-left: -10px;
+    margin-left: -10px !important;
 }
 
 .m-l-2px {
-    margin-left:2px;
+    margin-left:2px !important;
 }
 .m-l-2em {
-    margin-left:2em;
+    margin-left:2em !important;
 }
 .m-l-5px {
-    margin-left:5px;
+    margin-left:5px !important;
 }
 .m-l-5em {
-    margin-left:5em;
+    margin-left:5em !important;
 }
 .m-l-8em {
-    margin-left: 8em;
+    margin-left: 8em !important;
 }
 .m-l-10 {
-    margin-left: 10px;
+    margin-left: 10px !important;
 }
 .m-l-15 {
-    margin-left: 15px;
+    margin-left: 15px !important;
 }
 .m-l-20 {
-    margin-left: 20px;
+    margin-left: 20px !important;
 }
 .m-l-r-0 {
     margin-left: 0 !important;
@@ -420,34 +420,37 @@ Misc tools
     margin-right: 1px !important;
 }
 .p-l-2 {
-    padding-left: 2px;
+    padding-left: 2px !important;
 }
 .p-l-3 {
-    padding-left: 3px;
+    padding-left: 3px !important;
 }
 .p-l-5 {
-    padding-left: 5px;
+    padding-left: 5px !important;
 }
 .p-l-10 {
-    padding-left: 10px;
+    padding-left: 10px !important;
 }
 .p-l-20 {
-    padding-left: 20px;
+    padding-left: 20px !important;
 }
 .p-l-30 {
-    padding-left: 30px;
+    padding-left: 30px !important;
 }
 .p-l-1em {
-    padding-left: 1em;
+    padding-left: 1em !important;
 }
 .p-l-2em {
-    padding-left: 2em;
+    padding-left: 2em !important;
 }
 .p-l-4em {
-    padding-left: 4em;
+    padding-left: 4em !important;
 }
 .p-l-5em {
-    padding-left: 5em;
+    padding-left: 5em !important;
+}
+.p-l-xl {
+    padding-left: 5rem !important;
 }
 .p-r-2 {
     padding-right: 2px;
@@ -463,6 +466,15 @@ Misc tools
 }
 .p-r-3em {
     padding-right: 3em;
+}
+.p-r-sm {
+    padding-right: 1rem !important;
+}
+.p-r-xs {
+    padding-right: .5rem !important;
+}
+.p-r-xl {
+    padding-right: 5rem !important;
 }
 .p-b-xs{
     padding-bottom: .5rem !important;
