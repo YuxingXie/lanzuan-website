@@ -184,20 +184,21 @@ public class AngularEntityEditorBuilder {
     }
     private void printItem(int level) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         String context=pageComponent.getVar();
+        boolean fieldInScope=true;
 
         for(Field field:itemClass.getDeclaredFields()){
-            printField(context,context, field,level);
+            printField(context,context, field,level,fieldInScope);
         }
 
     }
 
-    private void printField(String context,String absoluteContext,Field field,int level) throws ClassNotFoundException {
+    private void printField(String context,String absoluteContext,Field field,int level,boolean fieldInScope) throws ClassNotFoundException {
         if (field.isAnnotationPresent(Id.class)) return;
         if (field.isAnnotationPresent(Transient.class)) return;
         if (!field.isAnnotationPresent(Naming.class)) return;
         Naming fieldNaming=field.getAnnotation(Naming.class);
         if (fieldNaming==null) return;
-        System.out.println(absoluteContext);
+//        System.out.println(absoluteContext);
 
         Class fieldClass=field.getClass();
         Editable editable=field.getAnnotation(Editable.class);
@@ -208,7 +209,7 @@ public class AngularEntityEditorBuilder {
             InputType inputType=editable.inputType();
 
             if(InputType.IMAGE==inputType){
-                printImageChooserDiv(context,absoluteContext, field);
+                printImageChooserDiv(context,absoluteContext, field,fieldInScope);
 
             }else if(InputType.SELECT==inputType){
                 printSelectDiv(context, field, fieldNaming,editable);
@@ -222,7 +223,7 @@ public class AngularEntityEditorBuilder {
                 printItemHeader(fieldNaming);
                 Class childItemClass=field.getType();
                 for (Field childItemField : childItemClass.getDeclaredFields()) {
-                    printField(context,absoluteContext+"."+field.getName(), childItemField,level+1);
+                    printField(context,absoluteContext+"."+field.getName(), childItemField,level+1,true);
 
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
@@ -246,7 +247,7 @@ public class AngularEntityEditorBuilder {
                 printItemOperationButtons(context,fieldName,level,absoluteContext);
 
                 for (Field childField : clazz.getDeclaredFields()) {
-                    printField(ngRepeatVar,absoluteContext+"."+ngRepeatVar, childField,level+1);
+                    printField(ngRepeatVar,absoluteContext+"."+ngRepeatVar, childField,level+1,false);
                 }
                 html.append("\n</div>");
                 html.append("</div>");
@@ -307,7 +308,7 @@ public class AngularEntityEditorBuilder {
         if(level==1) fontSizeCss="large-150";
         else fontSizeCss="large-120";
         String addItemFunctionName="add"+StringUtils.firstUpperCase(context)+"Item";
-        System.out.println(addItemFunctionName);
+//        System.out.println(addItemFunctionName);
         html.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
         html.append(fieldNaming.value());
         html.append("<span ng-if='!"+context+"."+fieldName+"' class='label label-info label-pill'>暂无数据</span>");
@@ -405,25 +406,45 @@ public class AngularEntityEditorBuilder {
         html.append("\n</div>");
     }
 
-    private void printImageChooserDiv(String context,String absoluteContext, Field field) {
+    private void printImageChooserDiv(String context, String absoluteContext, Field field, boolean fieldInScope) {
         String clearImageFunction="clear"+StringUtils.firstUpperCase(context)+StringUtils.firstUpperCase(field.getName());
         html.append("\n<div class='col-xs-12 p-b-xs'>");
         html.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
-        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
+//        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
         html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
         html.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
         html.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
         html.append("\n     </button>");
-        html.append("\n     <img ng-if='"+ absoluteContext + "." + field.getName()+"' ng-src='{{" + absoluteContext + "." + field.getName() + "}}' class='img-ico-md'/>");
+
+        if(fieldInScope){
+            html.append("\n     <img ng-if='"+ absoluteContext + "." + field.getName()+"' ng-src='{{" + absoluteContext + "." + field.getName() + "}}' class='img-ico-md'/>");
+        }else {
+            html.append("\n     <img ng-if='"+ context + "." + field.getName()+"' ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+        }
+
 
         html.append("\n <div class=\"dropdown-menu bg-light-grey\">");
-        html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+        if(fieldInScope){
+            html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + absoluteContext + "." + field.getName() + "=icon\">");
+        }else {
+            html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+        }
+
         html.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
         html.append("\n     </span>");
         html.append("\n </div>");
         html.append("\n </div>");
         html.append("\n</div>");
-        javaScript.append("\n$scope."+clearImageFunction+"=function(){\nalert('fuccccc');$scope."+absoluteContext+"."+field.getName()+"='';\n}");
+
+        if(fieldInScope){
+            javaScript.append("\n$scope."+clearImageFunction+"=function(){");
+            javaScript.append("\n$scope." + absoluteContext + "." + field.getName() + "='';");
+        }else{
+            javaScript.append("\n$scope."+clearImageFunction+"=function("+context+"){");
+            javaScript.append("\n" + context + "." + field.getName() + "='';");
+        }
+
+        javaScript.append( "\n}");
     }
 
     private void commonOperationsHtml() throws NoSuchFieldException, IllegalAccessException {

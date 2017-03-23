@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${param.mode eq 'site'}">
+<c:if test="${param.mode eq 'site' and false}">
     <div class="card-group m-l-r-0">
         <c:forEach items="${pageComponent.data.items}" var="card">
             <div class="card">
@@ -17,7 +17,7 @@
 
     </div>
 </c:if>
-<c:if test="${param.mode eq 'admin'or param.mode eq 'prev'}">
+<c:if test="${param.mode eq 'admin'or param.mode eq 'prev' or param.mode eq 'site'}">
     <div class="card-group m-l-r-0" ng-init="get${pageComponent.varU}()">
         <div class="card" ng-repeat="card in ${pageComponent.var}.items">
             <div class="card-block padding-1">
@@ -34,7 +34,7 @@
 
     </div>
 </c:if>
-<c:if test="${param.mode eq 'admin'}">
+<c:if test="${param.mode eq 'admin' and false}">
     <div class="row p-a-0 m-a-0">
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑图文卡片组</label>

@@ -18,9 +18,11 @@ import java.util.List;
 public class CardGroup extends RootItem {
     @Id
     private String id;
+    @Naming(value = "方案名")
     private String name;
     private String uri;
     //约定字段
+    @Naming(value = "卡片项列表",ngRepeatVar = "card")
     private List<Card> items;
     private boolean enabled;
     @DBRef
