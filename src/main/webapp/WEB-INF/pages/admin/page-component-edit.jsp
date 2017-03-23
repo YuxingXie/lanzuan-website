@@ -44,6 +44,7 @@
                     <div class="list-group-item">素材uri:${pageComponent.materialUploadUri}</div>
                     <div class="list-group-item">另存uri:${pageComponent.saveAsUri}</div>
                     <div class="list-group-item">保存uri:${pageComponent.saveUri}</div>
+                    <div class="list-group-item">data:{{${pageComponent.var}}}</div>
 
                 </div>
             </div>

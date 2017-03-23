@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${param.mode eq 'site'}">
+<c:if test="${param.mode eq 'site' and false}">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
         <ol class="carousel-indicators bottom-0">
             <c:forEach var="item" items="${pageComponent.data.items}" varStatus="index">
@@ -40,14 +40,14 @@
         </a>
     </div>
 </c:if>
-<c:if test="${param.mode eq 'admin'or param.mode eq 'prev'}">
+<c:if test="${param.mode eq 'admin'or param.mode eq 'prev' or param.mode eq 'site'}">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="get${pageComponent.varU}()">
         <ol class="carousel-indicators bottom-0">
             <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${pageComponent.var}.items"></li>
         </ol>
         <div class="carousel-inner " role="listbox">
             <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${pageComponent.var}.items">
-                <img ng-if="carouselItem.type==='image'" class="center-block full-width" ng-src="{{carouselItem.value}}"/>
+                <img  class="center-block full-width" ng-src="{{carouselItem.value}}"/>
                 <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
                     <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
                        ng-href="{{carouselItem.carouselCaption.value}}"
@@ -71,7 +71,7 @@
         </a>
     </div>
 </c:if>
-<c:if test="${param.mode eq 'admin'}">
+<c:if test="${param.mode eq 'admin' and false}">
     <div class="row p-a-0 m-a-0">
         <div class="col-xs-12 m-a-0 p-a-0">
             <label class="label label-default large-180">编辑轮播图</label>

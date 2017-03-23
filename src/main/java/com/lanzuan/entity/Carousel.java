@@ -10,14 +10,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-@Naming(value = "轮播图")
+
 @Document(collection = "carousel")
+@Naming(value = "轮播图")
 public class Carousel  extends RootItem {
     @Id
     private String id;
     /**
      * 轮播方案名
      */
+    @Naming(value="方案名")
     private String name;
     @DBRef
     private User creator;
@@ -31,7 +33,7 @@ public class Carousel  extends RootItem {
     private boolean enabled;
     @DBRef
     private User lastModifyUser;
-
+    @Naming(value = "轮播项列表",ngRepeatVar = "carouselItem")
     private List<CarouselItem> items;
     @Transient
     private PageComponent pageComponent;

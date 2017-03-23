@@ -4,6 +4,8 @@ import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.support.*;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
@@ -28,6 +30,7 @@ public class AngularEntityEditorBuilder {
         this.javaScript=new StringBuffer();
         this.itemClass=pageComponent.getData().getClass();
         this.itemNaming= itemClass.getAnnotation(Naming.class);
+
         this.pageComponent=pageComponent;
 
 
@@ -205,8 +208,10 @@ public class AngularEntityEditorBuilder {
             InputType inputType=editable.inputType();
 
             if(InputType.IMAGE==inputType){
-                printImageChooserDiv(context, field);
+                printImageChooserDiv(context,absoluteContext, field);
 
+            }else if(InputType.SELECT==inputType){
+                printSelectDiv(context, field, fieldNaming,editable);
             }else{
                 printTextInputGroup(context, field, fieldNaming);
             }
@@ -217,7 +222,7 @@ public class AngularEntityEditorBuilder {
                 printItemHeader(fieldNaming);
                 Class childItemClass=field.getType();
                 for (Field childItemField : childItemClass.getDeclaredFields()) {
-                    printField(context+"."+fieldName,absoluteContext+"."+context+"."+field.getName(), childItemField,level+1);
+                    printField(context,absoluteContext+"."+field.getName(), childItemField,level+1);
 
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
@@ -259,6 +264,31 @@ public class AngularEntityEditorBuilder {
 
 //
 
+    }
+
+    private void printSelectDiv(String context, Field field, Naming fieldNaming, Editable editable) {
+        String[] options=editable.optionValues();
+        if(options==null) return;
+        html.append("<div class=\"col-xs-12 p-b-xs\">");
+        html.append("<div class=\"input-group input-group-sm\">");
+        html.append("<label class=\"input-group-addon\">");
+        html.append(fieldNaming.value());
+        html.append("</label>");
+        html.append("<select type='select' ng-model=\""+context+"."+field.getName()+"\" class='form-control'>");
+        for(String option:options){
+            JSONObject jsonObject=JSONObject.fromObject(option);
+            html.append("<option value='" + jsonObject.get("value")+"'>"+jsonObject.get("text")+"</option>");
+
+        }
+        html.append("</select>");
+        html.append("</div> ");
+        html.append("</div> ");
+        /**
+          "{value:\"link\",text:\"链接\"}","{value:\"text\",text:\"文字\"}"
+
+
+
+         */
     }
 
     private void printReadOnlyField(String context, Naming fieldNaming, String fieldName) {
@@ -375,15 +405,16 @@ public class AngularEntityEditorBuilder {
         html.append("\n</div>");
     }
 
-    private void printImageChooserDiv(String context, Field field) {
+    private void printImageChooserDiv(String context,String absoluteContext, Field field) {
+        String clearImageFunction="clear"+StringUtils.firstUpperCase(context)+StringUtils.firstUpperCase(field.getName());
         html.append("\n<div class='col-xs-12 p-b-xs'>");
         html.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
-        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+context + "." + field.getName()+"=undefined\">清除图片</button>");
+        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
         html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
         html.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
         html.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
         html.append("\n     </button>");
-        html.append("\n     <img ng-if='"+ context + "." + field.getName()+"' ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+        html.append("\n     <img ng-if='"+ absoluteContext + "." + field.getName()+"' ng-src='{{" + absoluteContext + "." + field.getName() + "}}' class='img-ico-md'/>");
 
         html.append("\n <div class=\"dropdown-menu bg-light-grey\">");
         html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
@@ -392,6 +423,7 @@ public class AngularEntityEditorBuilder {
         html.append("\n </div>");
         html.append("\n </div>");
         html.append("\n</div>");
+        javaScript.append("\n$scope."+clearImageFunction+"=function(){\nalert('fuccccc');$scope."+absoluteContext+"."+field.getName()+"='';\n}");
     }
 
     private void commonOperationsHtml() throws NoSuchFieldException, IllegalAccessException {
@@ -400,7 +432,8 @@ public class AngularEntityEditorBuilder {
 
             html.append("\n<div class=\"row m-a-0 p-a-0\" ng-init=\"get" + pageComponent.getVarU() + "Material()\">");
             html.append("\n   <div class=\"btn-group p-b-10\">");
-        html.append("\n<label class=\"btn btn-info cursor-auto\">编辑" + itemNaming.value() + "</label>");
+        String itemName=itemNaming==null?StringUtils.firstLowerCase(itemClass.getSimpleName()):itemNaming.value();
+        html.append("\n<label class=\"btn btn-info cursor-auto\">编辑" + itemName + "</label>");
 //            html.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
             html.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save" + pageComponent.getVarU() + "()\" >保存</button>");
             html.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new" + pageComponent.getVarU() + "()\" >方案另存为</button>");

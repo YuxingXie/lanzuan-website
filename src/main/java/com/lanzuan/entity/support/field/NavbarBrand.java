@@ -13,8 +13,8 @@ import org.springframework.data.annotation.Transient;
  */
 @Naming(value = "导航条标签")
 public class NavbarBrand extends LeafItem{
-    @Naming("类型")
-    @Editable(inputType = InputType.SELECT,optionValues = {"image","text"})
+//    @Naming("类型")
+//    @Editable(inputType = InputType.SELECT,optionValues = {"image","text"})
     private String type;
 
     @Naming("值")
