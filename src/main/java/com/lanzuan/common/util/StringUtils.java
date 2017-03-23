@@ -7,7 +7,7 @@ public class StringUtils {
 	
 	private StringUtils(){}
     public static String firstUpperCase(String word) {
-        if (word==null) return null;
+        if (isBlank(word)) return null;
         if (word.length()==1) return word.substring(0, 1).toUpperCase();
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }

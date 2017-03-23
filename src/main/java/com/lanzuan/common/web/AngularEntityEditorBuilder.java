@@ -12,9 +12,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/3/20.
- */
+
 public class AngularEntityEditorBuilder {
     private StringBuffer html;
     private StringBuffer javaScript;
@@ -38,22 +36,9 @@ public class AngularEntityEditorBuilder {
         commonOperationsHtml();
         printItem(1);
     }
-    public void buildJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
 
 
-        buildController();
-
-
-
-        }
-
-    private void buildController() {
-
-        buildControllerBody();
-
-    }
-
-    private void buildControllerBody() {
+    private void buildJavaScript() {
         buildGetMethod();
         buildResetMethod();
         buildGetMaterialMethod();
@@ -67,7 +52,6 @@ public class AngularEntityEditorBuilder {
         buildToggleMethod();
         buildDeleteItemMethod();
         buildInitAdminMethod();
-//        buildForwardSubItemMethod();
     }
 
 
@@ -199,7 +183,6 @@ public class AngularEntityEditorBuilder {
         String context=pageComponent.getVar();
 
         for(Field field:itemClass.getDeclaredFields()){
-
             printField(context,context, field,level);
         }
 
@@ -238,9 +221,12 @@ public class AngularEntityEditorBuilder {
 
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
-                printItemListHeader(fieldNaming,level);
+                printItemListHeader(fieldNaming,fieldName,context,level);
 
                 String ngRepeatVar = fieldNaming.ngRepeatVar();
+                if(StringUtils.isBlank(ngRepeatVar)){
+                    ngRepeatVar=fieldName;
+                }
                 Type typeCls = field.getGenericType();
                 ParameterizedType parameterizedType = (ParameterizedType) typeCls;
                 Type actualType = parameterizedType.getActualTypeArguments()[0];
@@ -262,10 +248,8 @@ public class AngularEntityEditorBuilder {
 
             }else {//
 
-                html.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
-                html.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
-                html.append("</div>");
-                html.append("<label></label>");
+                printReadOnlyField(context, fieldNaming, fieldName);
+
             }
 
         }
@@ -277,18 +261,41 @@ public class AngularEntityEditorBuilder {
 
     }
 
+    private void printReadOnlyField(String context, Naming fieldNaming, String fieldName) {
+        html.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
+        html.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
+        html.append("</div>");
+    }
+
     private void printItemHeader(Naming fieldNaming) {
         html.append("<div class='text-left label label-info col-xs-12 large-150 fa fa-edit m-t-md m-b-md'>编辑 ");
         html.append(fieldNaming.value());
         html.append(" </div>");
     }
-    private void printItemListHeader(Naming fieldNaming,int level) {
+    private void printItemListHeader(Naming fieldNaming,String fieldName,String context,int level) {
         String fontSizeCss="";
         if(level==1) fontSizeCss="large-150";
-        if(level==2) fontSizeCss="large-120";
+        else fontSizeCss="large-120";
+        String addItemFunctionName="add"+StringUtils.firstUpperCase(context)+"Item";
+        System.out.println(addItemFunctionName);
         html.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
         html.append(fieldNaming.value());
-        html.append("列表</div>");
+        html.append("<span ng-if='!"+context+"."+fieldName+"' class='label label-info label-pill'>暂无数据</span>");
+        html.append("<button class='btn btn-info btn-sm  pull-right' ng-click='"+addItemFunctionName+"("+context+")'>增加一项 <i class='fa fa-plus-circle'></i></button>");
+        html.append("</div>");
+        buildAddItemFunction(fieldName, context, addItemFunctionName);
+
+
+    }
+
+    private void buildAddItemFunction(String fieldName, String context, String addItemFunctionName) {
+        javaScript.append("\n$scope."+addItemFunctionName+"=function("+context+"){");
+        javaScript.append("\n   if(!"+context+"."+fieldName+"){");
+        javaScript.append("\n       "+context+"."+fieldName+"=[]");
+        javaScript.append("\n   }");
+        javaScript.append("\n var item={}");
+        javaScript.append("\n "+context+"."+fieldName+".splice(0,0,item);");
+        javaScript.append("\n}");
     }
 
 
@@ -371,11 +378,12 @@ public class AngularEntityEditorBuilder {
     private void printImageChooserDiv(String context, Field field) {
         html.append("\n<div class='col-xs-12 p-b-xs'>");
         html.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
-        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\"> 更换图片</button>");
+        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+context + "." + field.getName()+"=undefined\">清除图片</button>");
+        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
         html.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
         html.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
         html.append("\n     </button>");
-        html.append("\n     <img ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+        html.append("\n     <img ng-if='"+ context + "." + field.getName()+"' ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
 
         html.append("\n <div class=\"dropdown-menu bg-light-grey\">");
         html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");

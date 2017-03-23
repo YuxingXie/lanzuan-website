@@ -14,13 +14,16 @@ import java.util.List;
 public class SortLinkGroup extends RootItem {
     @Id
     private String id;
+    @Naming(value = "方案名")
     private String name;
+//    @Naming(value = "创建日期")
     private Date createDate;
     private boolean enabled;
     private int indexOfPage;//如果页面有多个同类组件，用此字段分别
     private String uri;
 
     //约定字段
+    @Naming(value = "文章分类列表")
     private List<SortLink> items;
     @DBRef
     private User creator;

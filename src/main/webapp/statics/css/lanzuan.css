@@ -5,3 +5,9 @@ a, a:focus, a:hover, a:active {
     text-decoration: none;
     color: #314c97;
 }
+.btn-padding-little {
+    padding:0.125rem .225rem 0 .225rem;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+}
