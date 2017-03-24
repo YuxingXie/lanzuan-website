@@ -48,41 +48,14 @@ public class IndexController extends BaseRestSpringController {
     IFullWidthImageService fullWidthImageService;
     @Resource(name = "pageComponentService")
     private IPageComponentService pageComponentService;
-    @Resource(name = "configuration")
-    private Configuration configuration;
+
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         String uri=request.getRequestURI();
         WebPage webPage=webPageService.findByUri("/home");
-
-//        map.addAttribute("webPage",webPage);
-//        PageComponent pageComponent=pageComponentService.findById("58ccc1e489b6fb121cd55c4c");
+        map.addAttribute("webPage",webPage);
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(webPage.getPageComponents());
-        Map root=new HashMap();
-        for (PageComponent pageComponent:webPage.getPageComponents()){
-            root.put(pageComponent.getVar(),pageComponent);
-            Template template=configuration.getTemplate("img-card-group-1.ftl");
-        }
-
-        StringBuffer templates=new StringBuffer();
-//        for (PageComponent pageComponent:webPage.getPageComponents()){
-//            String templateUri=pageComponent.getTemplateUri();
-//            org.springframework.core.io.Resource resource=new ServletContextResource(request.getServletContext(),templateUri);
-//            File file=resource.getFile();
-//            BufferedReader br=new BufferedReader(new FileReader(file));
-//            String temp=null;
-//
-//            temp=br.readLine();
-//            while(temp!=null){
-//
-//                templates.append(temp);
-//                temp=br.readLine();
-//            }
-//            templates.toString().replaceAll("pageComponent.varU",pageComponent.getVarU()).replaceAll("pageComponent.var",pageComponent.getVar());
-//        }
-
         String js=builder.getWebsiteJavaScript();
-//        map.addAttribute("templates",templates);
         map.addAttribute("js",js);
         return "index";
     }

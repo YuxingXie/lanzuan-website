@@ -1,9 +1,10 @@
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="getpageComponent.varU()">
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="get${param.varU}()">
         <ol class="carousel-indicators bottom-0">
-            <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in pageComponent.var.items"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${param.var}.items"></li>
         </ol>
         <div class="carousel-inner " role="listbox">
-            <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in pageComponent.var.items">
+            <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${param.var}.items">
                 <img  class="center-block full-width" ng-src="{{carouselItem.value}}"/>
                 <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
                     <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"

@@ -23,27 +23,13 @@
 
     </head>
     <body ng-app="app">
-        <%--<jsp:include page="${path}/website/visit-data"></jsp:include>--%>
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                <%--<jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>--%>
-                <#include "${pageComponent.templateUri}" parse=true encoding="utf-8">
-
-                </c:forEach>
-
-                ${templates}
-            <%--<jsp:include page="${webPage.pageComponents[0].templateUri}"></jsp:include>--%>
-            <%--<jsp:include page="${webPage.pageComponents[1].templateUri}"></jsp:include>--%>
-            <%--<jsp:include page="${webPage.pageComponents[2].templateUri}"></jsp:include>--%>
-            <%--<jsp:include page="${webPage.pageComponents[3].templateUri}"></jsp:include>--%>
-            <%--<jsp:include page="${path}/component/${webPage.pageComponents[4].id}"></jsp:include>--%>
-
-
-
-                <%--problems--%>
-            <%--<jsp:include page="${path}/component/${webPage.pageComponents[5].id}"></jsp:include>--%>
-            <%--<jsp:include page="${webPage.pageComponents[6].templateUri}"></jsp:include>--%>
-
+                <c:import  url="${path}/${pageComponent.websiteUri}">
+                    <c:param name="var" value="${pageComponent.var}" />
+                    <c:param name="varU" value="${pageComponent.varU}"/>
+                </c:import>
+            </c:forEach>
         </div>
         <div ng-include="'/statics/page/included/footer.html'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>

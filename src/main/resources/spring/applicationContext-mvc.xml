@@ -72,6 +72,10 @@
             <!--</list>-->
         <!--</property>-->
     <!--</bean>-->
+    <!-- freemaker配置 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker-templates/"/>
+    </bean>
     <bean id="contentNegotiatingViewResolverExt" class="com.lanzuan.common.web.ContentNegotiatingViewResolverExt">
             <!--p:ignoreAcceptHeader="true" p:defaultContentType="text/html" p:favorParameter="false"-->
 
@@ -90,11 +94,12 @@
                       p:viewClass="org.springframework.web.servlet.view.JstlView"
                       p:prefix="/WEB-INF/pages/" p:suffix=".jsp">
                 </bean>
+                <!-- 针对freemarker的视图配置 -->
                 <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-                    <property name="suffix">
-                        <value>.ftl</value>
-                    </property>
-                    <property name="contentType" value="text/html;charset=UTF-8"></property>
+                    <property name="cache" value="true"/>
+                    <property name="prefix" value=""/>
+                    <property name="suffix" value=".ftl"/>
+                    <property name="order" value="1"/>
                 </bean>
                 <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
                     <!--<property emailOrPhone="order" value="1" />-->
