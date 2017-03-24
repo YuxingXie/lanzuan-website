@@ -90,6 +90,12 @@
                       p:viewClass="org.springframework.web.servlet.view.JstlView"
                       p:prefix="/WEB-INF/pages/" p:suffix=".jsp">
                 </bean>
+                <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                    <property name="suffix">
+                        <value>.ftl</value>
+                    </property>
+                    <property name="contentType" value="text/html;charset=UTF-8"></property>
+                </bean>
                 <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
                     <!--<property emailOrPhone="order" value="1" />-->
                     <!--<property emailOrPhone="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>-->

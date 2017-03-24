@@ -16,14 +16,28 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
        default-autowire="byName">
 
-    <bean id="configuration" class="freemarker.template.Configuration">
-        <property name="directoryForTemplateLoading" ref="directory"/>
-        <property name="objectWrapper" ref="objectWrapper"/>
-    </bean>
-    <bean class="java.io.File" id="directory">
-        <constructor-arg type="java.lang.String" value="/statics/page/included/component/freemaker-template"/>
-    </bean>
-    <bean class="freemarker.template.DefaultObjectWrapper" id="objectWrapper">
+    <!--<bean id="configuration" class="freemarker.template.Configuration">-->
+        <!--<property name="directoryForTemplateLoading" ref="directory"/>-->
+        <!--<property name="objectWrapper" ref="objectWrapper"/>-->
+    <!--</bean>-->
+    <!--<bean class="java.io.File" id="directory">-->
+        <!--<constructor-arg type="java.lang.String" value="/statics/page/included/component/freemaker-template"/>-->
+    <!--</bean>-->
+    <!--<bean class="freemarker.template.DefaultObjectWrapper" id="objectWrapper">-->
+    <!--</bean>-->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/statics/page/included/component/freemaker-template/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+            </props>
+        </property>
     </bean>
 
 </beans>
