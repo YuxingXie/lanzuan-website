@@ -22,4 +22,13 @@ public class ArticleService extends BaseEntityManager<Article> implements IArtic
     }
 
 
+    @Override
+    public void praise(String id) {
+        articleDao.praise(id);
+    }
+
+    @Override
+    public Article increaseReadTimes(String id) {
+        return articleDao.increaseReadTimes(id);
+    }
 }

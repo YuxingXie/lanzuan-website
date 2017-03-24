@@ -4,7 +4,6 @@ import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.support.*;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -22,6 +21,7 @@ public class AngularEntityEditorBuilder {
 
     private  Naming itemNaming;
     private PageComponent<RootItem> pageComponent;
+    private List<PageComponent> pageComponents;
     private AngularEntityEditorBuilder(){
 
     }
@@ -30,9 +30,12 @@ public class AngularEntityEditorBuilder {
         this.javaScript=new StringBuffer();
         this.itemClass=pageComponent.getData().getClass();
         this.itemNaming= itemClass.getAnnotation(Naming.class);
-
         this.pageComponent=pageComponent;
-
+    }
+    public AngularEntityEditorBuilder(List<PageComponent> pageComponents){
+        this.html=new StringBuffer();
+        this.javaScript=new StringBuffer();
+        this.pageComponents=pageComponents;
 
     }
     public void buildHtml() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
@@ -41,7 +44,7 @@ public class AngularEntityEditorBuilder {
     }
 
 
-    private void buildJavaScript() {
+    private void buildAdminJavaScript() {
         buildGetMethod();
         buildResetMethod();
         buildGetMaterialMethod();
@@ -56,6 +59,7 @@ public class AngularEntityEditorBuilder {
         buildDeleteItemMethod();
         buildInitAdminMethod();
     }
+
 
 
 
@@ -169,12 +173,29 @@ public class AngularEntityEditorBuilder {
 
     }
 
-    public String getJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        buildJavaScript();
+    public String getAdminJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        buildAdminJavaScript();
         StringBuffer ret = new StringBuffer();
         ret.append("\n<script>")
                 .append("\n(function () {\"use strict\"; var app = angular.module('app', []);")
                 .append("\napp.controller('AdminController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {")
+                .append(javaScript)
+                .append("\n}])")
+                .append("\n})()")
+                .append("\n</script>");
+
+        return ret.toString();
+    }
+    public String getWebsiteJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        for(PageComponent pageComponent1:pageComponents){
+            this.pageComponent=pageComponent1;
+            buildGetMethod();
+        }
+
+        StringBuffer ret = new StringBuffer();
+        ret.append("\n<script>")
+                .append("\n(function () {\"use strict\"; var app = angular.module('app', []);")
+                .append("\napp.controller('HomeController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {")
                 .append(javaScript)
                 .append("\n}])")
                 .append("\n})()")

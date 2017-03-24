@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="${path}/statics/css/style.css"/>
         <link rel="stylesheet" href="${path}/statics/css/color.css"/>
+        <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.min.css"/>
         <link rel="stylesheet" href="${path}/statics/css/bootstrap.custom.css"/>
         <link rel="stylesheet" href="${path}/statics/css/responsive.css3.css"/>
         <style>
@@ -25,7 +26,7 @@
         </style>
     </head>
     <body ng-app="app" class="bg-very-light-1">
-    <div ng-controller="AdminController" >
+    <div ng-controller="ArticleController" >
         <div class="container-fluid">
             <div class="row p-a-0 m-a-0">
                 <%--<div style="width: 10%"></div>--%>
@@ -43,11 +44,7 @@
                             </ol>
                         </div>
                         <a href="#content" class="list-group-item hidden-sm-down" >${article.title}</a>
-
-                        <%--<div class="list-group-item p-a-0 hidden-sm-down" >--%>
-                            <%--<img src="${path}/statics/image/lanzuan/con_01.jpg" class="full-width"/>--%>
-                        <%--</div>--%>
-                    </div>'
+                    </div>
                 </div>
                 <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                   <div class="col-xs-12 p-a-0 m-a-0" >
@@ -57,10 +54,19 @@
                           <div class="col-xs-8 p-r-lg"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4>${article.title}</h4>
-                                  <label class="pull-right m-b-2em label label-pill label-default">
-                                      <c:if test="${not empty article.author}">作者:${article.author}</c:if>
-                                      发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
-                                  </label>
+                                  <div class="pull-left m-b-2em ">
+                                      <label class="label label-info p-t-xs p-b-xs">本文已被阅读：${article.readTimes}次</label>
+                                      <a href="#" ng-click="praise()">
+                                          <i ng-class="{'animated bounceIn text-danger':animate}" class="fa fa-thumbs-o-up">({{praises}})</i></a>
+                                  </div>
+                                  <div class="pull-right m-b-2em ">
+
+                                      <label class="label label-pill label-default">
+                                          <c:if test="${not empty article.author}">作者:${article.author}</c:if>
+                                          发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
+                                      </label>
+                                  </div>
+
                               </div>
                               <div class="col-xs-12 bg-white ">
                               ${article.content}
@@ -68,18 +74,12 @@
                           </div>
                           <div class="col-xs-1"></div>
                       </div>
-                      <div class="col-xs-12 p-a-0 m-a-0">
-
+                      <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-xl">
                               <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
-
                       </div>
                   </div>
-
                 </div>
-
             </div>
-
-
         </div>
     </div>
     <div class="col-xs-12 p-t-50">
@@ -88,6 +88,26 @@
     <%--<script src="${path}/statics/js/jquery-3.1.1.min.js"></script>--%>
     <%--<script src="${path}/statics/js/tether.min.js"></script>--%>
     <%--<script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>--%>
+    <script>
+        (function () {
+            "use strict";
+            var app = angular.module('app', []);
+            app.controller('ArticleController', ["$rootScope", "$scope", "$http", "$location","$window",function ($rootScope, $scope, $http, $location, $window) {
+                $scope.animate=false;
+                $scope.praises=${empty article.praises?0:article.praises};
+                $scope.praise=function(){
+                    if($scope.animate) return;
+                   $http.get("/article/praise/${article.id}").success(function(data){
+                       if(data.success){
+                           $scope.animate=true;
+                           $scope.praises++;
+                       }
+                   })
+                }
+            }])
+        })()
+
+    </script>
     </body>
 </html>
 

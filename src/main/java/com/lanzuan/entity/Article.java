@@ -13,6 +13,8 @@ public class Article {
     private String title;
     private Date date;
     private String content;
+    private int praises;
+    private int readTimes;
     /**
      * 可能某些文章不使用文字标题，而可能是一张图片作为封面
      * 如果仅仅为了展示封面图片，此文章可以没有内容、标题等等其它属性
@@ -32,6 +34,22 @@ public class Article {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getPraises() {
+        return praises;
+    }
+
+    public void setPraises(int praises) {
+        this.praises = praises;
+    }
+
+    public int getReadTimes() {
+        return readTimes;
+    }
+
+    public void setReadTimes(int readTimes) {
+        this.readTimes = readTimes;
     }
 
     public String getTitle() {

@@ -26,8 +26,12 @@
         <%--<jsp:include page="${path}/website/visit-data"></jsp:include>--%>
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
-                <jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>
-            </c:forEach>
+                <%--<jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>--%>
+                <#include "${pageComponent.templateUri}" parse=true encoding="utf-8">
+
+                </c:forEach>
+
+                ${templates}
             <%--<jsp:include page="${webPage.pageComponents[0].templateUri}"></jsp:include>--%>
             <%--<jsp:include page="${webPage.pageComponents[1].templateUri}"></jsp:include>--%>
             <%--<jsp:include page="${webPage.pageComponents[2].templateUri}"></jsp:include>--%>
@@ -45,6 +49,7 @@
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
         <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.min.js"></script>
         <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
-        <script src="/app-js?pageId=${webPage.id}"></script>
+        <%--<script src="/app-js?pageId=${webPage.id}"></script>--%>
+    ${js}
     </body>
 </html>

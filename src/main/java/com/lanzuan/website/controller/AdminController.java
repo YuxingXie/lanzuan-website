@@ -10,7 +10,6 @@ import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
 import com.lanzuan.entity.WebPage;
-import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IPageComponentService;
@@ -75,6 +74,11 @@ public class AdminController extends BaseRestSpringController {
     public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
         PageComponent pageComponent=pageComponentService.findById(componentId);
         modelMap.addAttribute("pageComponent",pageComponent);
+
+
+
+
+
         return "forward:"+pageComponent.getTemplateUri();
     }
     @RequestMapping(value = "/sign_up")
@@ -176,7 +180,7 @@ public class AdminController extends BaseRestSpringController {
         AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);
         angularEntityEditorBuilder.buildHtml();
         String html= angularEntityEditorBuilder.getHtml();
-        String js=angularEntityEditorBuilder.getJavaScript();
+        String js=angularEntityEditorBuilder.getAdminJavaScript();
         model.addAttribute("edit_html", html);
         model.addAttribute("js", js);
 

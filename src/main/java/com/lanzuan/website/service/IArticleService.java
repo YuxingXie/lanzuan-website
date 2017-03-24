@@ -8,4 +8,7 @@ import com.lanzuan.entity.Article;
  */
 public interface IArticleService extends IBaseEntityManager<Article> {
 
+    void praise(String id);
+
+    Article increaseReadTimes(String id);
 }
