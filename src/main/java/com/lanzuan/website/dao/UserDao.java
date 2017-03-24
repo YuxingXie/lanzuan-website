@@ -28,7 +28,6 @@ import java.util.List;
 @Repository
 public class UserDao extends BaseMongoDao<User>  {
     private static Logger logger = LogManager.getLogger();
-    //单个插入
     @Resource
     private MongoOperations mongoTemplate;
 

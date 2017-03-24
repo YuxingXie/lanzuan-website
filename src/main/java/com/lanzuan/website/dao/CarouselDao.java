@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @Repository
 public class CarouselDao extends BaseMongoDao<Carousel>  {
     private static Logger logger = LogManager.getLogger();
-    //单个插入
+
     @Resource
     private MongoOperations mongoTemplate;
 

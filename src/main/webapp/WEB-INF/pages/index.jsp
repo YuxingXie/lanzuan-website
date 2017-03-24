@@ -23,6 +23,7 @@
 
     </head>
     <body ng-app="app">
+        <%--<jsp:include page="${path}/website/visit-data"></jsp:include>--%>
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                 <jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>

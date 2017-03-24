@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Repository
 public class ErrorReportDao extends BaseMongoDao<ErrorReport>  {
     private static Logger logger = LogManager.getLogger();
-    //单个插入
+
     @Resource
     private MongoOperations mongoTemplate;
 

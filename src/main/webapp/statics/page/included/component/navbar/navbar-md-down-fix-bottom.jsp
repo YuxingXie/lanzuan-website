@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${param.mode eq 'site'}">
+<c:if test="${param.mode eq 'site' and false}">
     <nav class="navbar navbar-md-down-fix-bottom p-t-1-5em p-b-1em" role="navigation">
         <div class="navbar-brand col-md-2 hidden-md-down m-r-6-5em m-l-2em">
 
@@ -25,7 +25,7 @@
         </ul>
     </nav>
 </c:if>
-<c:if test="${param.mode eq 'admin'or param.mode eq 'prev'}">
+<c:if test="${param.mode eq 'admin'or param.mode eq 'prev' or param.mode eq 'site'}">
     <nav class="navbar navbar-md-down-fix-bottom p-t-1-5em p-b-1em" role="navigation"
          ng-init="get${pageComponent.varU}()">
         <div class="navbar-brand col-md-2 hidden-md-down m-r-6-5em m-l-2em">
@@ -40,7 +40,6 @@
                     {{navItem.name}}
                 </a>
             </li>
-            <li class="nav-item"></li>
         </ul>
     </nav>
 </c:if>

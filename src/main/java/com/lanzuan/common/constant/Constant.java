@@ -16,4 +16,6 @@ public class Constant {
     public static final String U_EDITOR_FILE_UPLOAD_DIR ="/statics/ue/upload/file";
     public static final String U_EDITOR_IMAGE_UPLOAD_DIR ="/statics/ue/upload/image";
     public static final String U_EDITOR_VIDEO_UPLOAD_DIR ="/statics/ue/upload/video";
+    public static int totalVisit;
+    public static int totalClick;
 }

@@ -18,7 +18,6 @@ import java.util.List;
 @Repository
 public class SortLinkGroupDao extends BaseMongoDao<SortLinkGroup>  {
     private static Logger logger = LogManager.getLogger();
-    //单个插入
     @Resource
     private MongoOperations mongoTemplate;
 

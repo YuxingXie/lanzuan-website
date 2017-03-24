@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CommonInterceptor  implements HandlerInterceptor {
     private static Logger logger = LogManager.getLogger();
+    private int totalVisit=0;
+    private int totalClick=0;
     /**
      * 该方法也是需要当前对应的Interceptor的preHandle方法的返回值为true时才会执行。该方法将在整个请求完成之后，也就是DispatcherServlet渲染了视图执行，
      * 这个方法的主要作用是用于清理资源的，当然这个方法也只能在当前这个Interceptor的preHandle方法的返回值为true时才会执行。
@@ -30,7 +32,15 @@ public class CommonInterceptor  implements HandlerInterceptor {
      * 或者是调用action，然后要在Interceptor之前调用的内容都写在调用invoke之前，要在Interceptor之后调用的内容都写在调用invoke方法之后。
      */
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+        if(request.getAttribute("visitor")!=null){
+            totalClick++;
+        }
+        request.setAttribute("totalClick",totalClick);
+        if (request.getSession().isNew()){
+            request.setAttribute("totalVisit",++totalVisit);
+        }else {
+            request.setAttribute("totalVisit",totalVisit);
+        }
     }
 
     /**
