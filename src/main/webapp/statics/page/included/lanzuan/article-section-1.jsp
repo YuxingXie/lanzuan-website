@@ -5,7 +5,7 @@
             <c:forEach varStatus="index" items="${pageComponent.data.items}" var="sortLink">
                 <div class="col-xs-12 col-md-4">
                     <div class="row">
-                        <h4 class="col-xs-8 large-180">${sortLink.sortName}</h4>
+                        <h4 class="col-xs-8 large-110 xl-large-180 lg-large-165 md-large-150 sm-large-135">${sortLink.sortName}</h4>
                         <c:if test="${not empty sortLink.image}">
                             <a target="_blank" href="${sortLink.imageHref}"><img src="${sortLink.image}" class="col-xs-12 p-t-1em" /></a>
                         </c:if>

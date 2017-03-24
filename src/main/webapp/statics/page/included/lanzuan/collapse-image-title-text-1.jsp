@@ -4,7 +4,7 @@
     <div class="row  m-l-r-0 m-t-2-4em m-b-1-6em md-up-p-l-r-4em" ng-init="_active=0">
         <div class="col-xs-12 col-md-9 p-a-0 m-a-0">
         <span class="col-xs-12 col-md-4 col-lg-3 col-xl-2 p-r-0">
-            <h4 class="md-down-no-padding-left large-180" >${pageComponent.data.text}</h4>
+            <h4 class="md-down-no-padding-left large-110  xl-large-180 lg-large-165 md-large-150 sm-large-135" >${pageComponent.data.text}</h4>
         </span>
         <span class="col-xs-12 col-md-8 col-lg-9 col-xl-10 text-left m-a-0">
 

@@ -22,6 +22,14 @@
         left: 1%;
         width: 7%;
     }
+    .sm-large-135{
+        font-size: 135%;
+        font-weight: normal;
+    }
+    .sm-large-150{
+        font-size: 150%;
+        font-weight: normal;
+    }
 }
 @media (min-width: 48em) {
     .fixed-left-menu{
@@ -44,10 +52,26 @@
          padding-left: 1.5em;
          padding-right: 1.5em;
      }
+    .md-large-150{
+        font-size: 150%;
+        font-weight: normal;
+    }
+    .md-large-160{
+        font-size: 160%;
+        font-weight: normal;
+    }
 }
 
 
 @media (min-width: 62em) {
+    .lg-large-165{
+        font-size: 165%;
+        font-weight: normal;
+    }
+    .lg-large-170{
+        font-size: 170%;
+        font-weight: normal;
+    }
     .fixed-left-menu{
         left: 3%;
         width: 10%;
@@ -87,6 +111,10 @@
     .fixed-left-menu{
         left: 4%;
         width: 12%;
+    }
+    .xl-large-180{
+        font-size: 180%;
+        font-weight: normal;
     }
 }
 @media (max-width: 33.9em) {
