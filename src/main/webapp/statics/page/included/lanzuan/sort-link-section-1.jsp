@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
     <div class="row p-t-4em p-b-4em m-l-0 m-r-0 md-up-p-l-r-4em bg-very-light " ng-init="get${param.varU}()">
         <div class="col-xs-6 col-md-2 text-center dash-silver-right-border height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.items">
-            <h6 class="color-blue text-left">{{sortLink.sortName}}</h6>
+            <h6 class="color-blue text-left p-l-2em">{{sortLink.sortName}}</h6>
             <div class="small-90 m-t-1em">
                 <ul class="list-unstyled grey-link">
-                    <li ng-repeat="link in sortLink.links" class="text-left" ng-if="sortLink.links&&!sortLink.image"><a ng-href="{{link.href}}">{{link.text}}</a></li>
+                    <li ng-repeat="link in sortLink.links" class="text-left p-l-2em" ng-if="sortLink.links&&!sortLink.image"><a ng-href="{{link.href}}">{{link.text}}</a></li>
                     <img ng-src="{{sortLink.image}}" ng-if="sortLink.image" class="img-responsive"/>
                 </ul>
             </div>

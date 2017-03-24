@@ -50,9 +50,12 @@
             </div>
         </div>
         <div class="col-xs-12 m-a-0 p-a-0">
-            <c:if test="${not empty pageComponent.templateUri}">
+            <c:if test="${not empty pageComponent.websiteUri}">
                 <label class="label label-default large-180">组件预览</label>
-                <jsp:include page="/component/${pageComponent.id}?mode=admin"></jsp:include>
+                <jsp:include page="/${pageComponent.websiteUri}">
+                    <jsp:param name="var" value="${pageComponent.var}"/>
+                    <jsp:param name="varU" value="${pageComponent.varU}"/>
+                </jsp:include>
 
             </c:if>
 

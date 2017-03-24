@@ -76,6 +76,9 @@
         left: 3%;
         width: 10%;
     }
+    .lg-m-b-2em {
+        margin-bottom: 2em !important;
+    }
     .lg-p-r-5em{
         padding-right: 5em;
     }
@@ -147,7 +150,7 @@
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
     }
-    .md-down-no-padding-left{
+    .md-down-p-l-0{
         padding-left: 0;
     }
     .md-down-no-padding-right{
@@ -256,9 +259,16 @@
         margin-right: 0;
     }
 
-
+    .sm-down-text-75-percent{
+        font-size: 75%;
+        font-weight: normal;
+    }
     .sm-down-text-80-percent{
         font-size: 80%;
+        font-weight: normal;
+    }
+    .sm-down-text-85-percent{
+        font-size: 85%;
         font-weight: normal;
     }
     .sm-down-text-100-percent{
@@ -283,8 +293,8 @@
         -ms-user-select: none;
         user-select: none;
         border: .0425rem solid transparent;
-        padding: .15rem .15rem;
-        font-size: .55rem;
+        padding: .10rem .10rem;
+        font-size: .25rem;
         line-height: 1.5;
         border-radius: .6rem;
     }

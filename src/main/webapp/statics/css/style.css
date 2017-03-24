@@ -47,6 +47,9 @@
     /*34px和.form-controller同高*/
     max-height:34px;
 }
+.img-nav-brand{
+    max-height:75px !important;
+}
 .img-ico-md{
     max-width: 75px;
     max-height:75px;

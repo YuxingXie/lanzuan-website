@@ -46,7 +46,10 @@
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                 <div class="row p-t-2em p-b-2em"style="border-top: solid #000 1px">
                     <div class="col-xs-9 m-a-0 p-a-0">
-                        <jsp:include page="${path}/component/${pageComponent.id}?mode=site"></jsp:include>
+                        <jsp:include page="${path}/${pageComponent.websiteUri}">
+                            <jsp:param name="var" value="${pageComponent.var}"/>
+                            <jsp:param name="varU" value="${pageComponent.varU}"/>
+                        </jsp:include>
                     </div>
 
                     <div class="col-xs-3 m-a-0 padding-left-2em small-90" >
