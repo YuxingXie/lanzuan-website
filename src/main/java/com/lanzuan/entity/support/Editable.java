@@ -1,6 +1,7 @@
 package com.lanzuan.entity.support;
 
 import com.lanzuan.common.code.InputType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

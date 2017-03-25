@@ -6,24 +6,19 @@ import com.lanzuan.common.web.AngularEntityEditorBuilder;
 import com.lanzuan.entity.*;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.*;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.support.ServletContextResource;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 
 @Controller

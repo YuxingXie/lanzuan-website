@@ -1,7 +1,6 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
-import com.lanzuan.entity.Article;
 import com.lanzuan.entity.ErrorReport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

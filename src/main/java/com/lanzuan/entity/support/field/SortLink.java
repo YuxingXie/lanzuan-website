@@ -1,7 +1,7 @@
 package com.lanzuan.entity.support.field;
 
-import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.code.Expression;
+import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.Item;

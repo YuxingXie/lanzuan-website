@@ -3,11 +3,8 @@ package com.lanzuan.website.service.impl;
 import com.lanzuan.common.base.BaseEntityManager;
 import com.lanzuan.common.base.EntityDao;
 import com.lanzuan.common.constant.Constant;
-import com.lanzuan.entity.Article;
 import com.lanzuan.entity.VisitInfo;
-import com.lanzuan.website.dao.ArticleDao;
 import com.lanzuan.website.dao.VisitInfoDao;
-import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IVisitInfoService;
 import org.springframework.stereotype.Service;
 

@@ -667,7 +667,7 @@ public class AngularEntityEditorBuilder {
                     listOperationHtml.append("<div ng-repeat=\"item in "+pageComponent.getVar()+"."+field.getName()+"\">");
 
                     if (inputType==InputType.IMAGE){
-                        listOperationHtml.append("<img ng-src=\"{{item."+fieldOfValue+"}}\" class=\"img-ico-md col-xs-3 p-a-1 m-a-0\"/>");
+                        listOperationHtml.append("<img ng-src=\"{{item."+fieldOfValue+"}}\" class=\"img-ico-xl col-xs-3 p-a-1 m-a-0\"/>");
                     }else{
                         listOperationHtml.append("{{item."+fieldOfValue+"}}");
                     }

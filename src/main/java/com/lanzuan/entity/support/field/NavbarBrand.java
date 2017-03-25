@@ -1,7 +1,6 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
-import com.lanzuan.common.code.NavbarBrandTypeEnum;
 import com.lanzuan.entity.Navbar;
 import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.LeafItem;

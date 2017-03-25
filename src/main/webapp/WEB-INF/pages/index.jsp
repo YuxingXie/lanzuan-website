@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="${path}/statics/css/lanzuan.css"/>
 
     </head>
-    <body ng-app="app">
+    <body ng-app="app" ng-cloak="">
         <div ng-controller="HomeController">
             <c:forEach items="${webPage.pageComponents}" var="pageComponent">
                 <c:import  url="${path}/${pageComponent.websiteUri}">
@@ -35,7 +35,7 @@
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
         <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.min.js"></script>
         <script src="/statics/plugin/angular/1.4.8/angular.min.js"></script>
-        <%--<script src="/app-js?pageId=${webPage.id}"></script>--%>
+
     ${js}
     </body>
 </html>

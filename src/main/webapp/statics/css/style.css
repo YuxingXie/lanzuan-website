@@ -59,8 +59,12 @@
     max-height:100px;
 }
 .img-ico-larger{
-    max-width: 185px;
-    max-height:185px;
+    max-width: 140px;
+    max-height:140px;
+}
+.img-ico-xl{
+    max-width: 180px;
+    max-height:180px;
 }
 .img-320-240px{
     max-width: 320px;

@@ -1,7 +1,5 @@
 package com.lanzuan.entity.support;
 
-import com.lanzuan.entity.PageComponent;
-
 import java.util.List;
 
 /**

@@ -8,6 +8,7 @@ db.pageComponent.update({"name":"文章块组件1"},{"$set":{"materialUri":"/adm
 db.pageComponent.update({"name":"全屏宽度图片模板1"},{"$set":{"materialUri":"/admin/full-width-image//image/data"}},false,true)
 db.pageComponent.update({"name":"分类链接模板1"},{"$set":{"materialUri":"/admin/sort-link-group/image/data"}},false,true)
  */
+
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.support.RootItem;
 import org.springframework.data.annotation.Id;
@@ -16,8 +17,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Document(collection = "pageComponent")

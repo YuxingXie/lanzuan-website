@@ -2,11 +2,8 @@ package com.lanzuan.website.service.impl;
 
 import com.lanzuan.common.base.BaseEntityManager;
 import com.lanzuan.common.base.EntityDao;
-import com.lanzuan.entity.Article;
 import com.lanzuan.entity.ErrorReport;
-import com.lanzuan.website.dao.ArticleDao;
 import com.lanzuan.website.dao.ErrorReportDao;
-import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.IErrorReportService;
 import org.springframework.stereotype.Service;
 
