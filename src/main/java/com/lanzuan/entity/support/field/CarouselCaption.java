@@ -1,5 +1,6 @@
 package com.lanzuan.entity.support.field;
 
+import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.LeafItem;
@@ -12,22 +13,22 @@ public class CarouselCaption extends LeafItem {
     @Naming(value = "标题类型")
     @Editable(inputType = InputType.SELECT,optionValues ={"{value:\"link\",text:\"链接\"}","{value:\"text\",text:\"文字\"}"} )
     private String type;
-    /**
-     * 如果type为link，则需要value表示链接地址，text表示链接文字，如果type为text,则没有value只有text
-     */
-    @Naming("标题链接")
-    @Editable
+
+    @Naming("显示文字")
+    @Editable(inputType = InputType.TEXT)
     private String  value;
-    @Naming("标题文字")
-    @Editable()
+    /**
+     * 废弃，统一用value
+     */
     private String text;
     /**
      * 标题css样式名
      */
     private String captionClass;
-    @Naming(value = "链接")
-    @Editable
-    private String link;
+
+    @Naming(value = "标题链接" ,when ="type",expression = Expression.EQ,params= {"link"})
+    @Editable(inputType = InputType.URL)
+    private String href;
     @Transient
     private CarouselItem parent;
 
@@ -39,12 +40,12 @@ public class CarouselCaption extends LeafItem {
         this.parent = parent;
     }
 
-    public String getLink() {
-        return link;
+    public String getHref() {
+        return href;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setHref(String href) {
+        this.href = href;
     }
 
     public String getType() {

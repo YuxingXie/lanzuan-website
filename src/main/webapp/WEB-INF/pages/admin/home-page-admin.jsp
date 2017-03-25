@@ -57,7 +57,7 @@
                         <div>${pageComponent.remark}</div>
 
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary white-link" href="${path}/admin/page_component/edit/${pageComponent.id}?mode=admin">直接修改</a>
+                            <a class="btn btn-primary white-link" href="${path}/admin/page-component/edit/${pageComponent.id}?mode=admin">直接修改</a>
                             <a class="btn btn-primary white-link" href="#" onclick="alert('\n\n\n功能开发中......\n\n')">安全模式</a>
                         </div>
 

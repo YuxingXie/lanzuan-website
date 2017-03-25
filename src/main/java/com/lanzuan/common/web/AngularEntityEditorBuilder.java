@@ -1,5 +1,6 @@
 package com.lanzuan.common.web;
 
+import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.PageComponent;
@@ -15,7 +16,9 @@ import java.util.List;
 
 
 public class AngularEntityEditorBuilder {
-    private StringBuffer html;
+    private StringBuffer editorHtml;
+    private StringBuffer listOperationHtml;
+    private StringBuffer listOperationJavaScript;
     private StringBuffer javaScript;
     private Class<? extends Item> itemClass;
 
@@ -26,14 +29,17 @@ public class AngularEntityEditorBuilder {
 
     }
     public AngularEntityEditorBuilder(PageComponent pageComponent){
-        this.html=new StringBuffer();
+        this.editorHtml=new StringBuffer();
+
         this.javaScript=new StringBuffer();
         this.itemClass=pageComponent.getData().getClass();
         this.itemNaming= itemClass.getAnnotation(Naming.class);
         this.pageComponent=pageComponent;
+        this.listOperationHtml=new StringBuffer();
+        this.listOperationJavaScript=new StringBuffer();
     }
     public AngularEntityEditorBuilder(List<PageComponent> pageComponents){
-        this.html=new StringBuffer();
+        this.editorHtml=new StringBuffer();
         this.javaScript=new StringBuffer();
         this.pageComponents=pageComponents;
 
@@ -59,9 +65,6 @@ public class AngularEntityEditorBuilder {
         buildDeleteItemMethod();
         buildInitAdminMethod();
     }
-
-
-
 
     private void buildInitAdminMethod() {
         javaScript.append("\n;$scope.initAdmin=function(){");
@@ -221,57 +224,51 @@ public class AngularEntityEditorBuilder {
         if (fieldNaming==null) return;
 //        System.out.println(absoluteContext);
 
-        Class fieldClass=field.getClass();
+
         Editable editable=field.getAnnotation(Editable.class);
         String fieldName=field.getName();
         field.setAccessible(true);
-
         if(editable!=null){
             InputType inputType=editable.inputType();
-
             if(InputType.IMAGE==inputType){
-                printImageChooserDiv(context,absoluteContext, field,fieldInScope);
-
+                printImageChooserDiv(context,absoluteContext, field,fieldInScope,fieldNaming);
             }else if(InputType.SELECT==inputType){
-                printSelectDiv(context, field, fieldNaming,editable);
-            }else{
-                printTextInputGroup(context, field, fieldNaming);
+                printSelectDiv(context,fieldInScope,field, fieldNaming,editable);
+            }else if(InputType.URL==inputType){
+                printUrlInputGroup(context,fieldInScope, field, fieldNaming);
+            }else {
+                printTextInputGroup(context,fieldInScope,field, fieldNaming);
             }
-
         }else {//不可编辑的naming field,可能是Item或List,或者是只读文本
-
             if (Item.class.isAssignableFrom(field.getType())) {//field is an Item
                 printItemHeader(fieldNaming);
                 Class childItemClass=field.getType();
                 for (Field childItemField : childItemClass.getDeclaredFields()) {
-                    printField(context,absoluteContext+"."+field.getName(), childItemField,level+1,true);
-
+                    printField(context+"."+field.getName(),absoluteContext+"."+field.getName(), childItemField,level+1,true);
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
                 printItemListHeader(fieldNaming,fieldName,context,level);
-
-                String ngRepeatVar = fieldNaming.ngRepeatVar();
-                if(StringUtils.isBlank(ngRepeatVar)){
-                    ngRepeatVar=fieldName;
-                }
                 Type typeCls = field.getGenericType();
                 ParameterizedType parameterizedType = (ParameterizedType) typeCls;
                 Type actualType = parameterizedType.getActualTypeArguments()[0];
                 Class clazz = Class.forName(actualType.getTypeName());
-
-                html.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
+                String ngRepeatVar = fieldNaming.ngRepeatVar();
+                if(StringUtils.isBlank(ngRepeatVar)){
+                    ngRepeatVar=StringUtils.firstLowerCase(clazz.getSimpleName());
+                }
+                editorHtml.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
 
                 String itemBorderCss="";
                 if (level==1)   itemBorderCss="solid-silver-border p-a-lg";
                 if (level==2)   itemBorderCss="solid-silver-border";
-                html.append("<div class='col-xs-12 " + itemBorderCss + "'>");
+                editorHtml.append("<div class='col-xs-12 " + itemBorderCss + "'>");
                 printItemOperationButtons(context,fieldName,level,absoluteContext);
 
                 for (Field childField : clazz.getDeclaredFields()) {
-                    printField(ngRepeatVar,absoluteContext+"."+ngRepeatVar, childField,level+1,false);
+                    printField(ngRepeatVar,ngRepeatVar, childField,level+1,false);
                 }
-                html.append("\n</div>");
-                html.append("</div>");
+                editorHtml.append("\n</div>");
+                editorHtml.append("</div>");
 
             }else {//
 
@@ -281,30 +278,36 @@ public class AngularEntityEditorBuilder {
 
         }
         if (Item.class.isAssignableFrom(field.getType())) {
-//            html.append("\n</div>");//for 3
+//            editorHtml.append("\n</div>");//for 3
         }
 
 //
 
     }
 
-    private void printSelectDiv(String context, Field field, Naming fieldNaming, Editable editable) {
+    private void printSelectDiv(String context,boolean inScope,Field field, Naming fieldNaming, Editable editable) {
         String[] options=editable.optionValues();
         if(options==null) return;
-        html.append("<div class=\"col-xs-12 p-b-xs\">");
-        html.append("<div class=\"input-group input-group-sm\">");
-        html.append("<label class=\"input-group-addon\">");
-        html.append(fieldNaming.value());
-        html.append("</label>");
-        html.append("<select type='select' ng-model=\""+context+"."+field.getName()+"\" class='form-control'>");
+        String ng_if=getNgIfExpression(context,inScope,fieldNaming);
+        if(ng_if==null){
+            editorHtml.append("<div class=\"col-xs-12 p-b-xs\">");
+        }else {
+            editorHtml.append("<div class=\"col-xs-12 p-b-xs\" ng-if=\"" + ng_if + "\">");
+        }
+
+        editorHtml.append("<div class=\"input-group input-group-sm\">");
+        editorHtml.append("<label class=\"input-group-addon fa fa-reorder\">");
+        editorHtml.append(fieldNaming.value());
+        editorHtml.append("</label>");
+        editorHtml.append("<select type='select' ng-model=\"" + context + "." + field.getName() + "\" class='form-control'>");
         for(String option:options){
             JSONObject jsonObject=JSONObject.fromObject(option);
-            html.append("<option value='" + jsonObject.get("value")+"'>"+jsonObject.get("text")+"</option>");
+            editorHtml.append("<option value='" + jsonObject.get("value") + "'>" + jsonObject.get("text") + "</option>");
 
         }
-        html.append("</select>");
-        html.append("</div> ");
-        html.append("</div> ");
+        editorHtml.append("</select>");
+        editorHtml.append("</div> ");
+        editorHtml.append("</div> ");
         /**
           "{value:\"link\",text:\"链接\"}","{value:\"text\",text:\"文字\"}"
 
@@ -314,15 +317,15 @@ public class AngularEntityEditorBuilder {
     }
 
     private void printReadOnlyField(String context, Naming fieldNaming, String fieldName) {
-        html.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
-        html.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
-        html.append("</div>");
+        editorHtml.append("<div class='text-left label label-info large-110 fa fa-info-circle m-t-md m-b-md'> ");
+        editorHtml.append(fieldNaming.value()).append(":{{"+context+"."+fieldName+"}}");
+        editorHtml.append("</div>");
     }
 
     private void printItemHeader(Naming fieldNaming) {
-        html.append("<div class='text-left label label-info col-xs-12 large-150 fa fa-edit m-t-md m-b-md'>编辑 ");
-        html.append(fieldNaming.value());
-        html.append(" </div>");
+        editorHtml.append("<div class='text-left label label-info col-xs-12 large-150 fa fa-edit m-t-md m-b-md'>编辑 ");
+        editorHtml.append(fieldNaming.value());
+        editorHtml.append(" </div>");
     }
     private void printItemListHeader(Naming fieldNaming,String fieldName,String context,int level) {
         String fontSizeCss="";
@@ -330,11 +333,11 @@ public class AngularEntityEditorBuilder {
         else fontSizeCss="large-120";
         String addItemFunctionName="add"+StringUtils.firstUpperCase(context)+"Item";
 //        System.out.println(addItemFunctionName);
-        html.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
-        html.append(fieldNaming.value());
-        html.append("<span ng-if='!"+context+"."+fieldName+"' class='label label-info label-pill'>暂无数据</span>");
-        html.append("<button class='btn btn-info btn-sm  pull-right' ng-click='"+addItemFunctionName+"("+context+")'>增加一项 <i class='fa fa-plus-circle'></i></button>");
-        html.append("</div>");
+        editorHtml.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
+        editorHtml.append(fieldNaming.value());
+        editorHtml.append("<span ng-if='!" + context + "." + fieldName + "' class='label label-info label-pill'>暂无数据</span>");
+        editorHtml.append("<button class='btn btn-info btn-sm  pull-right' ng-click='" + addItemFunctionName + "(" + context + ")'>增加一项 <i class='fa fa-plus-circle'></i></button>");
+        editorHtml.append("</div>");
         buildAddItemFunction(fieldName, context, addItemFunctionName);
 
 
@@ -384,13 +387,13 @@ public class AngularEntityEditorBuilder {
             buildBackwardSubItemMethod(context, fieldName);
             buildRemoveSubItemMethod(context, fieldName);
         }
-        html.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "'>");
-        html.append("<button class='fa fa-trash btn " + btnCss + "' ng-click=\"" + deleteFunctionName + "\" >" + deleteText + "</button>");
-        html.append("<button class='fa fa-caret-up btn " + btnCss + "' ng-click='" + forwardFunctionName + "' ng-if='$index!==0'>" + forwardText + "</button>");
-        html.append("<button class='fa fa-caret-down btn " + btnCss + "' ng-click='" + backwardFunctionName + "' ng-if='$index!==" + context + ".items.length-1'>" + backwardText + "</button>");
-//        html.append("<button ng-init=\"showItems=true\" class='fa btn " + btnCss + "'")
+        editorHtml.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "'>");
+        editorHtml.append("<button class='fa fa-trash btn " + btnCss + "' ng-click=\"" + deleteFunctionName + "\" >" + deleteText + "</button>");
+        editorHtml.append("<button class='fa fa-caret-up btn " + btnCss + "' ng-click='" + forwardFunctionName + "' ng-if='$index!==0'>" + forwardText + "</button>");
+        editorHtml.append("<button class='fa fa-caret-down btn " + btnCss + "' ng-click='" + backwardFunctionName + "' ng-if='$index!==" + context + ".items.length-1'>" + backwardText + "</button>");
+//        editorHtml.append("<button ng-init=\"showItems=true\" class='fa btn " + btnCss + "'")
 //                .append(" ng-click=\"showItems=!showItems\" >{{showItems?'收起':'展开'}}<i ng-class=\"{'fa-plus-square-o':!showItems,'fa-minus-square-o':showItems}\" ></i></button>");
-        html.append("   </div>");
+        editorHtml.append("   </div>");
     }
     private void buildForwardSubItemMethod(String context, String fieldName) {
 
@@ -417,88 +420,201 @@ public class AngularEntityEditorBuilder {
     }
 
 
-    private void printTextInputGroup(String context, Field field, Naming fieldNaming) {
+    private void printTextInputGroup(String context,boolean inScope,Field field, Naming fieldNaming) {
+        String ng_if=getNgIfExpression(context,inScope,fieldNaming);
+        if(ng_if==null){
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs'>");
+        }else {
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs' ng-if=\"" + ng_if + "\">");
+        }
 
-        html.append("\n<div class='col-xs-12 p-b-xs'>");
-        html.append("\n<div class='input-group input-group-sm'>");
-        html.append("\n    <label class=\"input-group-addon fa fa-edit\">" + fieldNaming.value() + "</label>");
-        html.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
-        html.append("\n</div>");
-        html.append("\n</div>");
+        editorHtml.append("\n<div class='input-group input-group-sm'>");
+        editorHtml.append("\n    <label class=\"input-group-addon fa fa-edit\">" + fieldNaming.value() + "</label>");
+        editorHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
+        editorHtml.append("\n</div>");
+        editorHtml.append("\n</div>");
+    }
+    private void printUrlInputGroup(String context,boolean inScope,Field field, Naming fieldNaming) {
+        String ng_if=getNgIfExpression(context,inScope,fieldNaming);
+        if(ng_if==null){
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs'>");
+        }else {
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs' ng-if=\"" + ng_if + "\">");
+        }
+
+        editorHtml.append("\n<div class='input-group input-group-sm'>");
+        editorHtml.append("\n    <label class=\"input-group-addon fa fa-anchor\">" + fieldNaming.value() + "</label>");
+        editorHtml.append("\n<input class='form-control' type='url' ng-model='" + context + "." + field.getName() + "'/>");
+        editorHtml.append("\n    <a class=\"input-group-addon fa fa-question\" ng-href=\"/admin/article/list\" target=\"_blank\"></a>");
+        editorHtml.append("\n</div>");
+        editorHtml.append("\n</div>");
+    }
+    private void printImageChooserDiv(String context, String absoluteContext, Field field, boolean fieldInScope,Naming fieldNaming) {
+        String ng_condition = getNgIfExpression(context,fieldInScope,fieldNaming);
+
+        String clearImageFunction="clear"+StringUtils.firstUpperCase(context)+StringUtils.firstUpperCase(field.getName());
+        if (ng_condition==null){
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs'>");
+        }else {
+            editorHtml.append("\n<div class='col-xs-12 p-b-xs' ng-if=\"" + ng_condition + "\">");
+        }
+
+        editorHtml.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
+//        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
+        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
+        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
+        editorHtml.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
+        editorHtml.append("\n     </button>");
+
+        if(fieldInScope){
+            editorHtml.append("\n     <img ng-if='" + absoluteContext + "." + field.getName() + "' ng-src='{{" + absoluteContext + "." + field.getName() + "}}' class='img-ico-md'/>");
+        }else {
+            editorHtml.append("\n     <img ng-if='" + context + "." + field.getName() + "' ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+        }
+
+
+        editorHtml.append("\n <div class=\"dropdown-menu bg-light-grey\">");
+        if(fieldInScope){
+            editorHtml.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + absoluteContext + "." + field.getName() + "=icon\">");
+        }else {
+            editorHtml.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+        }
+
+        editorHtml.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
+        editorHtml.append("\n     </span>");
+        editorHtml.append("\n </div>");
+        editorHtml.append("\n </div>");
+        editorHtml.append("\n</div>");
+
+//        if(fieldInScope){
+//            javaScript.append("\n$scope."+clearImageFunction+"=function(){");
+//            javaScript.append("\n$scope." + absoluteContext + "." + field.getName() + "='';");
+//        }else{
+//            javaScript.append("\n$scope."+clearImageFunction+"=function("+context+"){");
+//            javaScript.append("\n" + context + "." + field.getName() + "='';");
+//        }
+
+//        javaScript.append( "\n}");
     }
 
-    private void printImageChooserDiv(String context, String absoluteContext, Field field, boolean fieldInScope) {
-        String clearImageFunction="clear"+StringUtils.firstUpperCase(context)+StringUtils.firstUpperCase(field.getName());
-        html.append("\n<div class='col-xs-12 p-b-xs'>");
-        html.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
-//        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
-        html.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
-        html.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
-        html.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
-        html.append("\n     </button>");
+    private String getNgIfExpression(String context,boolean fieldInScope , Naming fieldNaming) {
+        String ng_field=fieldNaming.when();
+        Expression expression=fieldNaming.expression();
+        String[] params=fieldNaming.params();
+        String ng_condition=null;
+        if (StringUtils.isNotBlank(ng_field)){
+            if (Expression.IS_NOT_EMPTY ==expression){
+                ng_condition=context+"."+ng_field;
+            }else if (Expression.IS_EMPTY ==expression){
+                ng_condition="!"+context+"."+ng_field+"||!"+context+"."+ng_field+".length";
+            }else if (Expression.EQ==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+"==='"+params[0]+"'";
+                }
 
-        if(fieldInScope){
-            html.append("\n     <img ng-if='"+ absoluteContext + "." + field.getName()+"' ng-src='{{" + absoluteContext + "." + field.getName() + "}}' class='img-ico-md'/>");
-        }else {
-            html.append("\n     <img ng-if='"+ context + "." + field.getName()+"' ng-src='{{" + context + "." + field.getName() + "}}' class='img-ico-md'/>");
+            }else if (Expression.NE==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+"!=='"+params[0]+"'";
+                }
+
+            }else if (Expression.GET==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+">="+params[0];
+                }
+
+            }else if (Expression.GT==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+">"+params[0];
+                }
+
+            }else if (Expression.LET==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+"<="+params[0];
+                }
+
+            }else if (Expression.LT==expression){
+                if (params!=null&&params.length>0){
+                    ng_condition=context+"."+ng_field+"<"+params[0];
+                }
+
+            }else if (Expression.WITH_LENGTH==expression){
+                ng_condition=context+"."+ng_field+"&&"+context+"."+ng_field+".length";
+            }else if (Expression.WITHOUT_LENGTH==expression){
+                ng_condition="!"+context+"."+ng_field+"||!"+context+"."+ng_field+".length";
+            }
         }
-
-
-        html.append("\n <div class=\"dropdown-menu bg-light-grey\">");
-        if(fieldInScope){
-            html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + absoluteContext + "." + field.getName() + "=icon\">");
-        }else {
-            html.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
-        }
-
-        html.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
-        html.append("\n     </span>");
-        html.append("\n </div>");
-        html.append("\n </div>");
-        html.append("\n</div>");
-
-        if(fieldInScope){
-            javaScript.append("\n$scope."+clearImageFunction+"=function(){");
-            javaScript.append("\n$scope." + absoluteContext + "." + field.getName() + "='';");
-        }else{
-            javaScript.append("\n$scope."+clearImageFunction+"=function("+context+"){");
-            javaScript.append("\n" + context + "." + field.getName() + "='';");
-        }
-
-        javaScript.append( "\n}");
+            return ng_condition;
     }
 
     private void commonOperationsHtml() throws NoSuchFieldException, IllegalAccessException {
             Field fangAnField=itemClass.getDeclaredField("name");
             fangAnField.setAccessible(true);
 
-            html.append("\n<div class=\"row m-a-0 p-a-0\" ng-init=\"get" + pageComponent.getVarU() + "Material()\">");
-            html.append("\n   <div class=\"btn-group p-b-10\">");
+            editorHtml.append("\n<div class=\"row m-a-0 p-a-0\" ng-init=\"get" + pageComponent.getVarU() + "Material()\">");
+            editorHtml.append("\n   <div class=\"btn-group p-b-10\">");
         String itemName=itemNaming==null?StringUtils.firstLowerCase(itemClass.getSimpleName()):itemNaming.value();
-        html.append("\n<label class=\"btn btn-info cursor-auto\">编辑" + itemName + "</label>");
-//            html.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
-            html.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save" + pageComponent.getVarU() + "()\" >保存</button>");
-            html.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new" + pageComponent.getVarU() + "()\" >方案另存为</button>");
-            html.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\"" + pageComponent.getListOperationUri() + pageComponent.getId() + "\">应用方案</a>");
-            html.append("\n       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
-            html.append("\n       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset" + pageComponent.getVarU() + "()\">重置</button>");
-            html.append("\n   </div>");
-            html.append("\n</div>");
-            html.append("\n<div class=\"row\">");
-            html.append("\n   <div class=\"alert alert-warning\">");
-            html.append("\n       <ul class=\"list-unstyled\">");
-            html.append("\n           <li><i class=\"fa fa-warning\"></i> 如果没有合适的图标，您可以先<a href='" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "' style=\"text-decoration: underline;\"><i>上传素材</i></a>；</li>");
-            html.append("\n           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
-            html.append("\n           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
-            html.append("\n       </ul>");
-            html.append("\n   </div>");
-            html.append("\n</div>");
+        editorHtml.append("\n<label class=\"btn btn-info cursor-auto\">编辑" + itemName + "</label>");
+//            editorHtml.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
+            editorHtml.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save" + pageComponent.getVarU() + "()\" >保存</button>");
+            editorHtml.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new" + pageComponent.getVarU() + "()\" >方案另存为</button>");
+            editorHtml.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\"" + pageComponent.getListOperationUri() + pageComponent.getId() + "\">应用方案</a>");
+            editorHtml.append("\n       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
+            editorHtml.append("\n       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset" + pageComponent.getVarU() + "()\">重置</button>");
+            editorHtml.append("\n   </div>");
+            editorHtml.append("\n</div>");
+            editorHtml.append("\n<div class=\"row\">");
+            editorHtml.append("\n   <div class=\"alert alert-warning\">");
+            editorHtml.append("\n       <ul class=\"list-unstyled\">");
+//            editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
+//            editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
+        if (pageComponent.getNotes()!=null)
+        for(String note:pageComponent.getNotes()){
+                editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i>" + note + "</li>");
+            }
+            editorHtml.append("\n       </ul>");
+            editorHtml.append("\n   </div>");
+            editorHtml.append("\n</div>");
 
     }
-    public String getHtml(){
-        return html.toString();
+    public String getEditHtml(){
+        return editorHtml.toString();
     }
 
+    public String getListHtml() {
+        listOperationHtml.append("<div class=\"container-fluid\" ng-controller=\"AdminController\" ng-init=\"getNavbarList()\">");
+        listOperationHtml.append("<div class=\"row\">");
+        printListPageHeader();
+        listOperationHtml.append("</div>");
+        listOperationHtml.append("</div>");
+        return null;
+    }
+
+    private void printListPageHeader() {
+        /**
+         <div class="alert alert-warning">
+         <ul class="list-unstyled">
+
+         <li><i class="fa fa-graduation-cap fa-fw"></i>如果多个方案都为“可用”状态，我们只会应用查到的第一个方案，为了确保使用到正确的方案，请把不用的其它方案设为“禁用”。</li>
+
+         </ul>
+         </div>
+         */
+        listOperationHtml.append("<div class=\"alert alert-info\">");
+        listOperationHtml.append(" <h5 class=\"text-center\">应用导航条方案</h5>");
+        listOperationHtml.append("<a class=\"fa fa-reply btn btn-primary btn-sm white-link\" href=\"${path}/admin/page-component/edit/${pageComponentId}\">返回编辑页</a>");
+        listOperationHtml.append("</div>");
 
 
+
+        listOperationHtml.append("<div class=\"alert alert-warning\">");
+        listOperationHtml.append("<ul class=\"list-unstyled\">");
+
+
+
+        listOperationHtml.append("<li><i class=\"fa fa-graduation-cap fa-fw\"></i>如果多个方案都为“可用”状态，我们只会应用查到的第一个方案，为了确保使用到正确的方案，请把不用的其它方案设为“禁用”。</li>");
+        listOperationHtml.append("</ul>");
+
+
+        listOperationHtml.append("</div>");
+    }
 }

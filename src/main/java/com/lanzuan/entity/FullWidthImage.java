@@ -15,6 +15,7 @@ import java.util.List;
 public class FullWidthImage extends RootItem{
     @Id
     private String id;
+    @Naming("图片信息")
     private Image image;
     private String name;
     private boolean enabled;

@@ -22,7 +22,7 @@
     <div class="row">
         <div class="alert alert-info">
             <h5 class="text-center">分类链接组方案列表</h5>
-            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page_component/edit/${pageComponent.id}">返回编辑页</a>
+            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page-component/edit/${pageComponent.id}">返回编辑页</a>
         </div>
         <div class="alert alert-warning">
             <ul class="list-unstyled">

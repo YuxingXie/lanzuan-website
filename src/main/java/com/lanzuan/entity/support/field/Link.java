@@ -19,8 +19,8 @@ public class Link extends LeafItem {
     @Naming("日期")
     @Editable(inputType = InputType.DATE)
     private String date;
-    @Naming("图片链接")
-    @Editable(inputType = InputType.IMAGE)
+//    @Naming("图片链接")
+//    @Editable(inputType = InputType.IMAGE)
     private String image;
     @Transient
     private SortLink parent;

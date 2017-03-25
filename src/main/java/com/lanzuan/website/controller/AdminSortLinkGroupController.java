@@ -72,7 +72,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
 
 
         if (pageComponentId!=null){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
+            return "redirect:/admin/page-component/edit/"+pageComponentId;
         }
         return "redirect:/admin/index";
     }
@@ -97,7 +97,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         }
 
         if (StringUtils.isNotBlank(pageComponentId)){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
+            return "redirect:/admin/page-component/edit/"+pageComponentId;
         }
         return "redirect:/admin/index";
     }

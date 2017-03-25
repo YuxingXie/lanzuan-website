@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>轮播方案列表</title>
+    <title>蓝钻科技--组件方案列表</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="alert alert-info">
             <h5 class="text-center">应用导航条方案</h5>
-            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page_component/edit/${pageComponentId}">返回编辑页</a>
+            <a class="fa fa-reply btn btn-primary btn-sm white-link" href="${path}/admin/page-component/edit/${pageComponentId}">返回编辑页</a>
         </div>
         <div class="alert alert-warning">
             <ul class="list-unstyled">
@@ -82,7 +82,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-<script src="${path}/app-js?componentId=${pageComponentId}"></script>
+<%--<script src="${path}/app-js?componentId=${pageComponentId}"></script>--%>
 
 </body>
 

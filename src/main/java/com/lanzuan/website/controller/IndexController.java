@@ -131,4 +131,5 @@ public class IndexController extends BaseRestSpringController {
         message.setSuccess(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+
 }

@@ -14,7 +14,7 @@ public class Card extends LeafItem {
     @Naming(value = "文字")
     @Editable()
     private String text;
-    @Editable()
+    @Editable(inputType = InputType.URL)
     @Naming("链接")
     private String link;
     @Transient

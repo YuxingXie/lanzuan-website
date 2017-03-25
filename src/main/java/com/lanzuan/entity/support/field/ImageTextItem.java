@@ -14,7 +14,7 @@ public class ImageTextItem extends LeafItem{
     @Editable()
     private String text;
     @Naming(value = "链接")
-    @Editable(inputType = InputType.TEXT)
+    @Editable(inputType = InputType.URL)
     private String link ;
     @Naming("标题")
     @Editable()

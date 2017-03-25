@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 @Document(collection = "pageComponent")
 public class PageComponent<T extends RootItem> {
@@ -48,7 +49,8 @@ public class PageComponent<T extends RootItem> {
     private String materialUri;
     //素材上传uri
     private String materialUploadUri;
-
+    private String remark;
+    private List<String> notes;
     public String getWebsiteUri() {
         return websiteUri;
     }
@@ -57,7 +59,13 @@ public class PageComponent<T extends RootItem> {
         this.websiteUri = websiteUri;
     }
 
-    private String remark;
+    public List<String> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<String> notes) {
+        this.notes = notes;
+    }
 
     @Field(value = "jsonVariableName")
     private String var;

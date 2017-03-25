@@ -5,15 +5,16 @@
         </ol>
         <div class="carousel-inner " role="listbox">
             <div class="carousel-item" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${param.var}.items">
-                <img  class="center-block full-width" ng-src="{{carouselItem.value}}"/>
+                <a ng-if="carouselItem.imageLink" ng-href="{{carouselItem.imageLink}}" target="_blank"><img  class="center-block full-width" ng-src="{{carouselItem.value}}"/></a>
+                <img ng-if="!carouselItem.imageLink"  class="center-block full-width" ng-src="{{carouselItem.value}}"/>
                 <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
                     <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
-                       ng-href="{{carouselItem.carouselCaption.value}}"
-                       class="btn btn-primary hidden-md-down white-link">{{carouselItem.carouselCaption.text}} <i class="fa fa-chevron-right right"></i></a>
+                       ng-href="{{carouselItem.carouselCaption.href}}"
+                       class="btn btn-primary hidden-md-down white-link">{{carouselItem.carouselCaption.value}} <i class="fa fa-chevron-right right"></i></a>
 
 
-                <span ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='text'">
-                   {{carouselItem.carouselCaption.text}}
+                <span ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='text'" class="p-a-xs bg-info rounded-3">
+                   <i>{{carouselItem.carouselCaption.value}}</i>
                 </span>
 
                 </div>

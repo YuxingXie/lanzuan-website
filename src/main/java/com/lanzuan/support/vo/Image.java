@@ -1,9 +1,18 @@
 package com.lanzuan.support.vo;
 
+import com.lanzuan.common.code.InputType;
+import com.lanzuan.entity.support.Editable;
+import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.Naming;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/13.
  */
-public class Image {
+public class Image implements Item {
+    @Naming(value = "图片路径")
+    @Editable(inputType = InputType.IMAGE)
     private String uri;
     private String name;
     private String suffix;
@@ -48,5 +57,20 @@ public class Image {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return null;
+    }
+
+    @Override
+    public List<? extends Item> children() {
+        return null;
+    }
+
+    @Override
+    public Item parent() {
+        return null;
     }
 }

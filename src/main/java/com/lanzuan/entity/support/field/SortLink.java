@@ -1,6 +1,7 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
+import com.lanzuan.common.code.Expression;
 import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.entity.support.Editable;
 import com.lanzuan.entity.support.Item;
@@ -17,11 +18,11 @@ public class SortLink implements Item{
     @Editable
     private String sortName;
     private String maxLink;
-    @Naming("封面")
+    @Naming(value = "封面" ,when = "links" ,expression = Expression.WITHOUT_LENGTH)
     @Editable(inputType = InputType.IMAGE)
     private String image;
-    @Naming("封面链接")
-    @Editable
+    @Naming(value = "封面链接",when = "links" ,expression = Expression.WITHOUT_LENGTH)
+    @Editable(inputType = InputType.URL)
     private String imageHref;
     @Naming(value = "链接项列表",ngRepeatVar = "links")
     private List<Link> links;

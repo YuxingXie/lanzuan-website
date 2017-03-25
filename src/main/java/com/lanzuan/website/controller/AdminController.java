@@ -172,14 +172,14 @@ public class AdminController extends BaseRestSpringController {
         return "admin/page-component/new";
     }
 
-    @RequestMapping(value = "/page_component/edit/{pageComponentId}")
+    @RequestMapping(value = "/page-component/edit/{pageComponentId}")
     public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
 
         AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);
         angularEntityEditorBuilder.buildHtml();
-        String html= angularEntityEditorBuilder.getHtml();
+        String html= angularEntityEditorBuilder.getEditHtml();
         String js=angularEntityEditorBuilder.getAdminJavaScript();
         model.addAttribute("edit_html", html);
         model.addAttribute("js", js);
@@ -225,11 +225,19 @@ public class AdminController extends BaseRestSpringController {
         }
 
         if (StringUtils.isNotBlank(pageComponentId)){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
+            return "redirect:/admin/page-component/edit/"+pageComponentId;
         }
         return "redirect:/admin/index";
     }
 
-
+    @RequestMapping(value = "/list-page/{pageComponentId}")
+    public String listPage(ModelMap modelMap,@PathVariable String pageComponentId){
+//        List<Carousel> carousels=carouselService.findAll();
+//        modelMap.addAttribute("carousels",carousels);
+        AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(pageComponentService.findById(pageComponentId));
+        String listHtml=builder.getListHtml();
+        modelMap.addAttribute("pageComponentId",pageComponentId);
+        return "admin/component-list";
+    }
 
 }

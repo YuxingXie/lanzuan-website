@@ -23,17 +23,29 @@ public class CarouselItem implements Item {
     @Naming("图片路径")
     @Editable(inputType = InputType.IMAGE)
     private String value;
+
+    @Naming("图片链接")
+    @Editable(inputType = InputType.URL)
+    private String imageLink;
     @Naming(value = "轮播项标题")
     private CarouselCaption carouselCaption;
-    private String link;
     @Transient
     private Carousel parent;
-    public String getLink() {
-        return link;
+
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public Carousel getParent() {
+        return parent;
+    }
+
+    public void setParent(Carousel parent) {
+        this.parent = parent;
     }
 
     public String getType() {

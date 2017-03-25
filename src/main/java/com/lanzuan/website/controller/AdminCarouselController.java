@@ -121,7 +121,7 @@ public class AdminCarouselController extends BaseRestSpringController {
         }
 
         if (StringUtils.isNotBlank(pageComponentId)){
-            return "redirect:/admin/page_component/edit/"+pageComponentId;
+            return "redirect:/admin/page-component/edit/"+pageComponentId;
         }
         return "redirect:/admin/index";
     }
