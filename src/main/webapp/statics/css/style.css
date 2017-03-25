@@ -266,6 +266,9 @@ Misc tools
 .margin-1{
     margin: 1px;
 }
+.m-a-1 {
+    margin: 1px !important;
+}
 /*navbar height=4.9rem*/
 .m-b-xl {
     margin-bottom: 4.9rem !important;
@@ -511,6 +514,9 @@ Misc tools
 }
 .p-b-sm {
     padding-bottom: 1rem !important;
+}
+.p-a-1 {
+    padding: 1px !important;
 }
 .p-a-sm {
     padding: 1rem !important;

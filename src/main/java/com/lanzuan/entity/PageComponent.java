@@ -50,7 +50,12 @@ public class PageComponent<T extends RootItem> {
     //素材上传uri
     private String materialUploadUri;
     private String remark;
-    private List<String> notes;
+    @Field(value = "jsonVariableName")
+    private String var;
+    private List<String> editNotes;
+    private List<String> listOperationNotes;
+    @Transient
+    private String varU;
     public String getWebsiteUri() {
         return websiteUri;
     }
@@ -59,18 +64,23 @@ public class PageComponent<T extends RootItem> {
         this.websiteUri = websiteUri;
     }
 
-    public List<String> getNotes() {
-        return notes;
+
+    public List<String> getEditNotes() {
+        return editNotes;
     }
 
-    public void setNotes(List<String> notes) {
-        this.notes = notes;
+    public void setEditNotes(List<String> editNotes) {
+        this.editNotes = editNotes;
     }
 
-    @Field(value = "jsonVariableName")
-    private String var;
-    @Transient
-    private String varU;
+    public List<String> getListOperationNotes() {
+        return listOperationNotes;
+    }
+
+    public void setListOperationNotes(List<String> listOperationNotes) {
+        this.listOperationNotes = listOperationNotes;
+    }
+
     public String getVar() {
         return var;
     }

@@ -1,5 +1,7 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.common.code.InputType;
+import com.lanzuan.entity.support.ListColumn;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.Card;
@@ -19,14 +21,19 @@ public class CardGroup extends RootItem {
     @Id
     private String id;
     @Naming(value = "方案名")
+    @ListColumn(columnName = "方案名")
     private String name;
     private String uri;
     //约定字段
+    @ListColumn(columnName = "卡片项列表",inputType = InputType.IMAGE,fieldOfValue = "image")
     @Naming(value = "卡片项列表",ngRepeatVar = "card")
     private List<Card> items;
+    @ListColumn(columnName = "启用状态")
     private boolean enabled;
     @DBRef
+    @ListColumn(columnName = "创建人",fieldOfValue = "name")
     private User creator;
+    @ListColumn(columnName = "创建日期")
     private Date createDate;
     @DBRef
     private PageComponent pageComponent;

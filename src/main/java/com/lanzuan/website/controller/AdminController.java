@@ -235,9 +235,11 @@ public class AdminController extends BaseRestSpringController {
 //        List<Carousel> carousels=carouselService.findAll();
 //        modelMap.addAttribute("carousels",carousels);
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(pageComponentService.findById(pageComponentId));
-        String listHtml=builder.getListHtml();
-        modelMap.addAttribute("pageComponentId",pageComponentId);
-        return "admin/component-list";
+        String html=builder.getListOperationHtml();
+        String js=builder.getListOperationJavascript();
+        modelMap.addAttribute("html",html);
+        modelMap.addAttribute("js",js);
+        return "admin/component-project-list";
     }
 
 }

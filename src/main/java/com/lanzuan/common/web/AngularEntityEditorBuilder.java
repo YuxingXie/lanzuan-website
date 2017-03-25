@@ -2,6 +2,7 @@ package com.lanzuan.common.web;
 
 import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
+import com.lanzuan.common.util.ReflectUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.support.*;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.Transient;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 
 
@@ -557,7 +559,7 @@ public class AngularEntityEditorBuilder {
 //            editorHtml.append("\n       <label class=\"btn btn-info cursor-auto\">当前方案：" + fangAnField.get(rootItem)+"</label>");
             editorHtml.append("\n       <button class=\"btn btn-danger fa fa-save \" type=\"button\" ng-click=\"save" + pageComponent.getVarU() + "()\" >保存</button>");
             editorHtml.append("\n       <button class=\"btn btn-primary fa fa-copy\" type=\"button\" ng-click=\"new" + pageComponent.getVarU() + "()\" >方案另存为</button>");
-            editorHtml.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\"" + pageComponent.getListOperationUri() + pageComponent.getId() + "\">应用方案</a>");
+            editorHtml.append("\n       <a class=\"btn btn-primary fa fa-download white-link\" ng-href=\"/admin/list-page/" +  pageComponent.getId() + "\">应用方案</a>");
             editorHtml.append("\n       <a class=\"btn btn-primary fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
             editorHtml.append("\n       <button class=\"btn btn-primary fa fa-refresh\" type=\"button\" ng-click=\"reset" + pageComponent.getVarU() + "()\">重置</button>");
             editorHtml.append("\n   </div>");
@@ -567,8 +569,8 @@ public class AngularEntityEditorBuilder {
             editorHtml.append("\n       <ul class=\"list-unstyled\">");
 //            editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i> “另存方案”后，如果想应用该方案，可点击“应用其它方案”；</li>");
 //            editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i> 修改导航项名称，链接，更换图标以及“前面插入一条”、“删除词条”仅在客户端修改，点击上方的“保存”按钮才会保存修改。</li>");
-        if (pageComponent.getNotes()!=null)
-        for(String note:pageComponent.getNotes()){
+        if (pageComponent.getEditNotes()!=null)
+        for(String note:pageComponent.getEditNotes()){
                 editorHtml.append("\n           <li><i class=\"fa fa-warning\"></i>" + note + "</li>");
             }
             editorHtml.append("\n       </ul>");
@@ -580,41 +582,151 @@ public class AngularEntityEditorBuilder {
         return editorHtml.toString();
     }
 
-    public String getListHtml() {
-        listOperationHtml.append("<div class=\"container-fluid\" ng-controller=\"AdminController\" ng-init=\"getNavbarList()\">");
+    public String getListOperationHtml() {
+        listOperationHtml.append("<div class=\"container-" +
+                "fluid\" ng-controller=\"AdminController\" ng-init=\"get"+pageComponent.getVarU()+"List()\">");
         listOperationHtml.append("<div class=\"row\">");
         printListPageHeader();
+        printTable();
+
         listOperationHtml.append("</div>");
         listOperationHtml.append("</div>");
-        return null;
+        return listOperationHtml.toString();
+    }
+    public String getListOperationJavascript() {
+
+        listOperationJavaScript.append("\n$scope.get"+pageComponent.getVarU()+"List=function(){");
+        listOperationJavaScript.append("\n$http.get(\""+pageComponent.getListDataUri()+"\").success(function (data) {");
+        listOperationJavaScript.append("\n$scope."+pageComponent.getVar()+"List=data;");
+        listOperationJavaScript.append("\n});");
+        listOperationJavaScript.append("\n}");
+        //启用/禁用
+        listOperationJavaScript.append("\n$scope."+pageComponent.getVar()+"Toggle=function("+pageComponent.getVar()+"){");
+        listOperationJavaScript.append("\n$http.post(\""+pageComponent.getToggleUri()+"\",JSON.stringify("+pageComponent.getVar()+")).success(function (data) {");
+        listOperationJavaScript.append("\n$scope."+pageComponent.getVar()+"List=data;");
+        listOperationJavaScript.append("\n });");
+        listOperationJavaScript.append("\n}");
+        //删除
+        listOperationJavaScript.append("\n$scope.delete"+pageComponent.getVarU()+"=function("+pageComponent.getVar()+"){");
+        listOperationJavaScript.append("\nif(!confirm(\"确定删除?\"))");
+        listOperationJavaScript.append("\nreturn ;");
+        listOperationJavaScript.append("\n$http.post(\"" + pageComponent.getDeleteUri() +"\"+"+ pageComponent.getVar()+".id" + ",JSON.stringify("+pageComponent.getVar()+")).success(function (data) {");
+        listOperationJavaScript.append("\n$scope." + pageComponent.getVar()+"List=data;");
+        listOperationJavaScript.append("\n});");
+        listOperationJavaScript.append("\n}");
+        StringBuffer ret = new StringBuffer();
+        ret.append("\n<script>")
+                .append("\n(function () {\"use strict\"; var app = angular.module('app', []);")
+                .append("\napp.controller('AdminController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {")
+                .append(listOperationJavaScript)
+                .append("\n}])")
+                .append("\n})()")
+                .append("\n</script>");
+
+        return ret.toString();
+
+    }
+    private void printTable() {
+        listOperationHtml.append("<table class=\"table table-hover col-xs-12\">");
+        printTableHeader();
+        printTableData();
+        listOperationHtml.append("</table>");
+    }
+
+    private void printTableData() {
+        listOperationHtml.append("<tr ng-repeat=\""+pageComponent.getVar() +" in "+pageComponent.getVar()+"List\">");
+        for(Field field:itemClass.getDeclaredFields()){
+            if(!field.isAnnotationPresent(ListColumn.class)){
+                continue;
+            }
+            ListColumn column=field.getAnnotation(ListColumn.class);
+            String columnName=column.columnName();
+
+            listOperationHtml.append("<td>");
+            InputType inputType=column.inputType();
+            if (field.getType().isPrimitive() || ReflectUtil.isWrapClass(field.getType()) ||field.getType()==String.class|| field.getType()==Date.class){
+                if (inputType== InputType.DATE||field.getType()==Date.class){
+                    listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"|date:'yy-MM-dd'}}");
+                }else if(field.getType()==boolean.class||field.getType()==Boolean.class){
+                    if(!field.getName().equals("enabled")){
+                        listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"?\"是\":\"否\"}}");
+                    }else {
+                        listOperationHtml.append("<span ng-class=\"{'text-danger':!"+pageComponent.getVar()+"."+field.getName()+",'text-primary':"+pageComponent.getVar()+"."+field.getName()+"}\">{{"+pageComponent.getVar()+"."+field.getName()+"?\"启用\":\"禁用\"}}</span>");
+                    }
+
+                }else{
+                    listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"}}");
+                }
+
+            }else {
+                String fieldOfValue=column.fieldOfValue();
+
+
+
+                if (List.class.isAssignableFrom(field.getType())){
+                    listOperationHtml.append("<div ng-repeat=\"item in "+pageComponent.getVar()+"."+field.getName()+"\">");
+
+                    if (inputType==InputType.IMAGE){
+                        listOperationHtml.append("<img ng-src=\"{{item."+fieldOfValue+"}}\" class=\"img-ico-md col-xs-3 p-a-1 m-a-0\"/>");
+                    }else{
+                        listOperationHtml.append("{{item."+fieldOfValue+"}}");
+                    }
+
+                    listOperationHtml.append("</div>");
+                }else{
+                    listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"."+fieldOfValue+"}}");
+                }
+
+            }
+
+            listOperationHtml.append("</td>");
+        }
+        listOperationHtml.append("<td>");
+        listOperationHtml.append("  <div class='btn-group btn-group-sm'>");
+        listOperationHtml.append("      <button class=\"btn btn-danger p-t-0 p-b-0 fa fa-trash\" ng-click=\"delete" + pageComponent.getVarU()+"("+pageComponent.getVar()+")\">");
+        listOperationHtml.append("          删除");
+        listOperationHtml.append("      </button>");
+        listOperationHtml.append("      <button class=\"btn no-bg p-t-0 p-b-0 fa \" ")
+                .append("ng-class=\"{'btn-danger fa-toggle-off':!" + pageComponent.getVar() + ".enabled" + ",'btn-primary fa-toggle-on':" + pageComponent.getVar()+".enabled"+"}\"")
+                .append(" ng-click=\""+pageComponent.getVar()+"Toggle("+pageComponent.getVar()+")\">");
+        listOperationHtml.append("          开关");
+        listOperationHtml.append("      </button>");
+        listOperationHtml.append("  </div>");
+        listOperationHtml.append("</td>");
+    }
+
+    private void printTableHeader() {
+        listOperationHtml.append("<tr>");
+        for(Field field:itemClass.getDeclaredFields()){
+            if(!field.isAnnotationPresent(ListColumn.class)){
+                continue;
+            }
+            ListColumn column=field.getAnnotation(ListColumn.class);
+            String columnName=column.columnName();
+            String fieldOfValue=column.fieldOfValue();
+            listOperationHtml.append("<th>");
+            listOperationHtml.append(columnName);
+            listOperationHtml.append("</th>");
+        }
+        listOperationHtml.append("<th>");
+        listOperationHtml.append("操作");
+        listOperationHtml.append("</th>");
+        listOperationHtml.append("</tr>");
     }
 
     private void printListPageHeader() {
-        /**
-         <div class="alert alert-warning">
-         <ul class="list-unstyled">
 
-         <li><i class="fa fa-graduation-cap fa-fw"></i>如果多个方案都为“可用”状态，我们只会应用查到的第一个方案，为了确保使用到正确的方案，请把不用的其它方案设为“禁用”。</li>
-
-         </ul>
-         </div>
-         */
         listOperationHtml.append("<div class=\"alert alert-info\">");
-        listOperationHtml.append(" <h5 class=\"text-center\">应用导航条方案</h5>");
-        listOperationHtml.append("<a class=\"fa fa-reply btn btn-primary btn-sm white-link\" href=\"${path}/admin/page-component/edit/${pageComponentId}\">返回编辑页</a>");
+        listOperationHtml.append(" <h5 class=\"text-center\">应用 "+pageComponent.getName()+" 方案</h5>");
+        listOperationHtml.append("<a class=\"fa fa-reply btn btn-primary btn-sm white-link\" href=\"/admin/page-component/edit/"+pageComponent.getId()+"\">返回编辑页</a>");
         listOperationHtml.append("</div>");
 
 
 
         listOperationHtml.append("<div class=\"alert alert-warning\">");
         listOperationHtml.append("<ul class=\"list-unstyled\">");
-
-
-
         listOperationHtml.append("<li><i class=\"fa fa-graduation-cap fa-fw\"></i>如果多个方案都为“可用”状态，我们只会应用查到的第一个方案，为了确保使用到正确的方案，请把不用的其它方案设为“禁用”。</li>");
         listOperationHtml.append("</ul>");
-
-
         listOperationHtml.append("</div>");
     }
 }
