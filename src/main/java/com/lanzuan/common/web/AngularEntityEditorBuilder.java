@@ -478,13 +478,24 @@ public class AngularEntityEditorBuilder {
 
         editorHtml.append("\n <div class=\"dropdown-menu bg-light-grey\">");
         if(fieldInScope){
-            editorHtml.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + absoluteContext + "." + field.getName() + "=icon\">");
+            editorHtml.append("\n     <span ng-if=\""+pageComponent.getVar()+"Images&&"+pageComponent.getVar()+"Images.length"+"\" ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + absoluteContext + "." + field.getName() + "=icon\">");
+            editorHtml.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
+            editorHtml.append("\n     </span>");
+            editorHtml.append("\n     <span ng-if=\"!"+pageComponent.getVar()+"Images||!"+pageComponent.getVar()+"Images.length"+"\" class=\"dropdown-item-inline\">")
+                    .append("还没有图片素材");
+            editorHtml.append("\n       <a class=\"btn btn-primary btn-sm fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
+            editorHtml.append("\n     </span>");
         }else {
-            editorHtml.append("\n     <span ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+            editorHtml.append("\n     <span ng-if=\""+pageComponent.getVar()+"Images&&"+pageComponent.getVar()+"Images.length"+"\" ng-repeat=\"icon in " + pageComponent.getVar() + "Images\" class=\"dropdown-item-inline\" ng-click=\"" + context + "." + field.getName() + "=icon\">");
+            editorHtml.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
+            editorHtml.append("\n     </span>");
+            editorHtml.append("\n     <span ng-if=\"!"+pageComponent.getVar()+"Images||!"+pageComponent.getVar()+"Images.length"+"\" class=\"dropdown-item-inline\">")
+                    .append("还没有图片素材");
+            editorHtml.append("\n       <a class=\"btn btn-primary btn-sm fa fa-camera white-link\" ng-href=\"" + pageComponent.getMaterialUploadUri() + "/" + pageComponent.getId() + "\"> 上传素材</a>");
+            editorHtml.append("\n     </span>");
         }
 
-        editorHtml.append("\n         <img type=\"text\" ng-src=\"{{icon}}\" class=\"img-ico-larger img-rounded\"/>");
-        editorHtml.append("\n     </span>");
+
         editorHtml.append("\n </div>");
         editorHtml.append("\n </div>");
         editorHtml.append("\n</div>");
