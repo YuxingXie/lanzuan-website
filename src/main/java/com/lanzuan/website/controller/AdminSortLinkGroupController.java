@@ -8,6 +8,7 @@ import com.lanzuan.entity.Article;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.entity.User;
+import com.lanzuan.entity.support.field.Link;
 import com.lanzuan.entity.support.field.SortLink;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
@@ -208,6 +209,17 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         }
         sortLinkGroup.setLastModifyDate(now);
         sortLinkGroup.setLastModifyUser(user);
+        if(sortLinkGroup!=null&&sortLinkGroup.getItems()!=null){
+            for(SortLink sortLink:sortLinkGroup.getItems()){
+                if (sortLink.getLinks()!=null){
+                    for(Link link:sortLink.getLinks()){
+                        if(link.getDate()==null){
+                            link.setDate(now);
+                        }
+                    }
+                }
+            }
+        }
         sortLinkGroupService.update(sortLinkGroup);
         message.setSuccess(true);
         message.setData(sortLinkGroup);
