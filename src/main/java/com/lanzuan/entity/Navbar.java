@@ -1,6 +1,8 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.ListColumn;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.NavItem;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,16 +27,54 @@ public class Navbar extends RootItem{
 //    @Editable()
     private String uri;
     @Naming(value = "方案名")
+    @ListColumn(columnName = "方案名")
     private String name;
 //    @Naming(value = "开启状态")
 //    @Editable(inputType = InputType.TOGGLE_BOOLEAN)
+    @ListColumn(columnName = "开启状态")
     private boolean enabled;
+
+    private Date lastModifyDate;
+    @DBRef
+    private User creator;
+    @DBRef
+    private User lastModifyUser;
+
     @Naming(value = "导航标签")
+    @ListColumn(columnName = "导航标签",fieldOfValue = "value",inputType = InputType.IMAGE)
     private NavbarBrand navbarBrand;
     @Naming(value = "导航项",ngRepeatVar = "navItem")
+    @ListColumn(columnName = "导航项",fieldOfValue = "name")
     private List<NavItem> items;
     @DBRef
     private PageComponent pageComponent;
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    @Override
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    @Override
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    @Override
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
+    }
 
     public PageComponent getPageComponent() {
         return pageComponent;
@@ -46,6 +87,8 @@ public class Navbar extends RootItem{
     public String getId() {
         return id;
     }
+
+
 
     public void setId(String id) {
         this.id = id;

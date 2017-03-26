@@ -17,7 +17,7 @@
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" class=" m-a-0">
-<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/admin/admin-navbar"></jsp:include>
     ${html}
 <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>

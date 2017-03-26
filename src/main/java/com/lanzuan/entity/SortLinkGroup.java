@@ -1,5 +1,6 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.ListColumn;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.SortLink;
@@ -15,18 +16,28 @@ public class SortLinkGroup extends RootItem {
     @Id
     private String id;
     @Naming(value = "方案名")
+    @ListColumn(columnName = "方案名")
     private String name;
 //    @Naming(value = "创建日期")
+    @ListColumn(columnName = "创建日期")
     private Date createDate;
+    @ListColumn(columnName = "开启状态")
     private boolean enabled;
     private int indexOfPage;//如果页面有多个同类组件，用此字段分别
     private String uri;
 
     //约定字段
     @Naming(value = "文章分类列表")
+    @ListColumn(columnName = "文章分类列表",fieldOfValue = "sortName")
     private List<SortLink> items;
+    @ListColumn(columnName = "最后修改日期")
+    private Date lastModifyDate;
     @DBRef
+    @ListColumn(columnName = "创建人",fieldOfValue = "name")
     private User creator;
+    @DBRef
+    @ListColumn(columnName = "最后修改人",fieldOfValue = "name")
+    private User lastModifyUser;
     @DBRef
     private PageComponent pageComponent;
 
@@ -52,6 +63,24 @@ public class SortLinkGroup extends RootItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    @Override
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    @Override
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
     }
 
     public Date getCreateDate() {

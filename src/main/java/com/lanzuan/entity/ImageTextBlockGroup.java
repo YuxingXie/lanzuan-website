@@ -1,6 +1,8 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.support.Editable;
+import com.lanzuan.entity.support.ListColumn;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.ImageTextBlock;
@@ -17,20 +19,48 @@ public class ImageTextBlockGroup extends RootItem{
     @Id
     private String id;
     private String uri;
-    @Naming("方案名")
+    @Naming(value = "方案名")
+    @ListColumn(columnName = "方案名")
     private String name;
+
+    @ListColumn(columnName = "启用状态")
     private boolean enabled;
+    @ListColumn(columnName = "大标题")
     @Naming(value = "大标题")
     @Editable()
     private String text;
     //约定字段名
     @Naming(value = "图文块",ngRepeatVar = "imageTextBlock")
+    @ListColumn(columnName = "块标题" ,fieldOfValue = "name")
     private List<ImageTextBlock> items;
-    @DBRef
-    private User creator;
+    @ListColumn(columnName = "创建日期" ,inputType = InputType.DATE)
     private Date createDate;
+    private Date lastModifyDate;
+    @DBRef
+    @ListColumn(columnName = "创建人" ,fieldOfValue = "name")
+    private User creator;
+    @DBRef
+    private User lastModifyUser;
     @DBRef
     private PageComponent pageComponent;
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    @Override
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    @Override
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
+    }
 
     public PageComponent getPageComponent() {
         return pageComponent;

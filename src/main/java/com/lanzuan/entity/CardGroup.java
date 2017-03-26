@@ -30,6 +30,11 @@ public class CardGroup extends RootItem {
     private List<Card> items;
     @ListColumn(columnName = "启用状态")
     private boolean enabled;
+
+    private Date lastModifyDate;
+    @DBRef
+    private User lastModifyUser;
+
     @DBRef
     @ListColumn(columnName = "创建人",fieldOfValue = "name")
     private User creator;
@@ -64,6 +69,24 @@ public class CardGroup extends RootItem {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    @Override
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    @Override
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
     }
 
     public void setEnabled(boolean enabled) {

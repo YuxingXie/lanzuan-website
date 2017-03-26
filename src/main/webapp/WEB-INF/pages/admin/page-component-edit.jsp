@@ -25,7 +25,7 @@
 </head>
 
 <body ng-app="app">
-<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 <div class="container" ng-controller="AdminController">
 
     <div class="row p-t-2em p-a-0 m-a-0">

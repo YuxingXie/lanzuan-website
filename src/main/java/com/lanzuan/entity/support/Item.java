@@ -1,5 +1,8 @@
 package com.lanzuan.entity.support;
 
+import com.lanzuan.entity.User;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,6 +13,8 @@ public interface Item {
     Integer repeatLimit();
     List<? extends Item> children();
     Item parent();
+
+
 
 
 }

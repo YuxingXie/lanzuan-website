@@ -2,18 +2,22 @@ package com.lanzuan.common.util;
 
 
 import com.lanzuan.entity.User;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.commons.beanutils.BeanUtils;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MongoDbUtil {
 
@@ -71,7 +75,117 @@ public class MongoDbUtil {
         }
         return dbObject;
     }
+    public static<T> Update getUpdateFromEntity(T e,boolean ignoreNullValue,Class<?> collectionClass) {
+        Update update = new Update();
+        String id=MongoDbUtil.getId(e);
+        for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Transient.class)||field.isAnnotationPresent(Id.class)) continue;
+            String setterMethodName = ReflectUtil.getSetterMethodName(field.getName());
+            Class fieldType = field.getType();
+            try {
+                field.setAccessible(true);
+                String fieldName=field.getName();
+                Object fieldValue = field.get(e);
+                if (fieldValue == null){
+                    if(!ignoreNullValue){
+                        update.set(fieldName, null);
+                    }
+                    continue;
+                }
+                if (field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class)) {
+                    org.springframework.data.mongodb.core.mapping.Field docField = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class);
+                    fieldName = docField.value() == null || docField.value().equals("") ? field.getName() : docField.value();
+                    update.set(fieldName, fieldValue);
 
+                }else if(field.isAnnotationPresent(DBRef.class)){
+                    //such as //[{"$id":"theId1",$ref:"a db"},{"$id":"theId2",$ref:"a db"}]
+                    DBRef dbRef=field.getAnnotation(DBRef.class);
+                    String db=dbRef.db();
+                    if (fieldValue.getClass().isArray()){
+                        Object[] objects=(Object[]) fieldValue;
+                        BasicDBList dbListObject=new BasicDBList();
+                        for (Object object:objects){
+                            DBObject dbObject=new BasicDBObject();
+                            if (org.apache.commons.lang.StringUtils.isEmpty(db)){
+                                db=MongoDbUtil.getDbName(object);
+                            }
+                            dbObject.put("$ref",db);
+                            String objectId=MongoDbUtil.getId(object);
+                            dbObject.put("$id",new ObjectId(objectId));
+                            dbListObject.add(dbObject);
+                        }
+                        update.set(fieldName,dbListObject);
+                    }else if (Collection.class.isAssignableFrom(fieldValue.getClass())){
+                        Collection collection=(Collection) fieldValue;
+                        Iterator iterator=collection.iterator();
+                        BasicDBList dbListObject=new BasicDBList();
+                        while (iterator.hasNext()){
+                            Object valueObject=iterator.next();
+                            DBObject dbObject=new BasicDBObject();
+                            if (org.apache.commons.lang.StringUtils.isEmpty(db)){
+                                db=MongoDbUtil.getDbName(valueObject);
+                            }
+                            dbObject.put("$ref",db);
+                            String objectId=MongoDbUtil.getId(valueObject);
+                            dbObject.put("$id",new ObjectId(objectId));
+                            dbListObject.add(dbObject);
+                        }
+                        update.set(fieldName,dbListObject);
+                    }else{//such as //{"$id":"theId1",$ref:"a db"}
+
+                        DBObject dbObject=new BasicDBObject();
+                        if (org.apache.commons.lang.StringUtils.isEmpty(db)){
+                            db=MongoDbUtil.getDbName(fieldValue);
+                        }
+                        dbObject.put("$ref",db);
+                        String objectId=MongoDbUtil.getId(fieldValue);
+                        dbObject.put("$id",new ObjectId(objectId));
+                        update.set(fieldName,dbObject);
+                    }
+                }else{
+                    fieldName = field.getName();
+                    update.set(fieldName, fieldValue);
+                }
+
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return update;
+    }
+    public static<T> Query getEqualsQuery(T e) {
+        Class<?> collectionClass=e.getClass();
+        if (e == null) return null;
+        Criteria criteria = null;
+        boolean firstCriteriaAdded = false;
+        for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
+            if (!field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class) && !field.isAnnotationPresent(Id.class))
+                continue;
+            String fieldName = field.getName();
+            Object fieldValue = ReflectUtil.getValue(e, fieldName,field.getType()==boolean.class);
+            if (fieldValue == null) continue;
+            if (fieldValue.toString().trim().equals("")) continue;
+            if (field.isAnnotationPresent(Id.class)) {
+                String key = "_id";
+                criteria = null;
+                criteria = Criteria.where(key).is(fieldValue);
+                break;
+            } else {
+                String key = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class).value();
+                if (key == null || key.equals("")) key = fieldName;
+                if (firstCriteriaAdded == false) {
+                    criteria = Criteria.where(key).is(fieldValue);
+                    firstCriteriaAdded = true;
+                } else {
+                    criteria.and(key).is(fieldValue);
+                }
+            }
+        }
+        if (criteria == null) return null;
+        Query query = Query.query(criteria);
+//        System.out.println(query);
+        return query;
+    }
     /**
      * 把DBObject转换成bean对象
      *

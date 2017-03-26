@@ -24,6 +24,9 @@
       <a class="nav-link white-link" href="${path}/admin/index"><i class="fa fa-gears"></i>管理首页 </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link white-link" href="${path}/admin/home-page-admin"><i class="fa fa-edit"></i>编辑官网首页 </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link white-link" href="${path}/admin/file-editor"><i class="fa fa-pencil-square-o"></i>写文章 </a>
     </li>
     <li class="nav-item">

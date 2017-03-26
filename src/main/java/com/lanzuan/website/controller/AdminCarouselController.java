@@ -5,6 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Carousel;
+import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
 import com.lanzuan.website.service.ICarouselService;
@@ -25,7 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,23 +58,18 @@ public class AdminCarouselController extends BaseRestSpringController {
 
 
     @RequestMapping(value = "/insert-all")
-    public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel){
+    public ResponseEntity<Message> insertAll(@RequestBody Carousel carousel,HttpSession session){
         Message message=new Message();
-//        List<CarouselItem> carouselItems=carousel.getItems();
-//        if(carouselItems!=null&&carouselItems.size()>0){
-//            for (CarouselItem carouselItem:carouselItems){
-//                if (carouselItem.getId()==null){
-//                    carouselItemService.insert(carouselItem);
-//                }else{
-//                    carouselItemService.update(carouselItem);
-//                }
-//            }
-//        }else {
-//            carousel.setItems(null);
-//        }
+        Date now=new Date();
+        User user=getLoginUser(session);
         if (carousel.getId()==null){
+            carousel.setLastModifyDate(now);
+            carousel.setLastModifyDate(now);
+            carousel.setCreator(user);
             carouselService.insert(carousel);
         }else{
+            carousel.setLastModifyDate(now);
+            carousel.setLastModifyUser(user);
             carouselService.update(carousel);
         }
         message.setSuccess(true);
@@ -82,15 +80,6 @@ public class AdminCarouselController extends BaseRestSpringController {
     public ResponseEntity<Message> saveAs(@RequestBody Carousel carousel){
         Carousel old=carouselService.findById(carousel.getId());
         Message message=new Message();
-//        List<CarouselItem> carouselItems=carousel.getItems();
-//        if(carouselItems!=null&&carouselItems.size()>0){
-//            for (CarouselItem carouselItem:carouselItems){
-//                carouselItem.setId(null);
-//                carouselItemService.insert(carouselItem);
-//            }
-//        }else {
-//            carousel.setItems(null);
-//        }
         carousel.setEnabled(false);
         carousel.setId(null);
         carouselService.insert(carousel);

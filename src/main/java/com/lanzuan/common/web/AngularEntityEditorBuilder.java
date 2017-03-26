@@ -146,6 +146,7 @@ public class AngularEntityEditorBuilder {
 
     private void buildUpdateMethod() {
         javaScript.append("\n;$scope.save"+pageComponent.getVarU()+"=function(){");
+//        javaScript.append("\n$http.post(\""+pageComponent.getSaveUri()+"\",JSON.stringify($scope."+pageComponent.getVar()+")).success(function (message) {");
         javaScript.append("\n$http.post(\""+pageComponent.getSaveUri()+"\",JSON.stringify($scope."+pageComponent.getVar()+")).success(function (message) {");
         javaScript.append("\n$scope."+pageComponent.getVar()+"=message.data;");
         javaScript.append("\nif(message.success){");
@@ -446,7 +447,7 @@ public class AngularEntityEditorBuilder {
 
         editorHtml.append("\n<div class='input-group input-group-sm'>");
         editorHtml.append("\n    <label class=\"input-group-addon fa fa-anchor\">" + fieldNaming.value() + "</label>");
-        editorHtml.append("\n<input class='form-control' type='url' ng-model='" + context + "." + field.getName() + "'/>");
+        editorHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
         editorHtml.append("\n    <a class=\"input-group-addon fa fa-question\" ng-href=\"/admin/article/list\" target=\"_blank\"></a>");
         editorHtml.append("\n</div>");
         editorHtml.append("\n</div>");
@@ -634,7 +635,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void printTableData() {
-        listOperationHtml.append("<tr ng-repeat=\""+pageComponent.getVar() +" in "+pageComponent.getVar()+"List\">");
+        listOperationHtml.append("<tr class='small-90' ng-repeat=\""+pageComponent.getVar() +" in "+pageComponent.getVar()+"List\">");
         for(Field field:itemClass.getDeclaredFields()){
             if(!field.isAnnotationPresent(ListColumn.class)){
                 continue;
@@ -674,7 +675,13 @@ public class AngularEntityEditorBuilder {
 
                     listOperationHtml.append("</div>");
                 }else{
-                    listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"."+fieldOfValue+"}}");
+
+
+                    if (inputType==InputType.IMAGE){
+                        listOperationHtml.append("<img ng-src=\"{{"+pageComponent.getVar()+"."+field.getName()+"."+fieldOfValue+"}}\" class=\"img-ico-xl col-xs-3 p-a-1 m-a-0\"/>");
+                    }else{
+                        listOperationHtml.append("{{"+pageComponent.getVar()+"."+field.getName()+"."+fieldOfValue+"}}");
+                    }
                 }
 
             }

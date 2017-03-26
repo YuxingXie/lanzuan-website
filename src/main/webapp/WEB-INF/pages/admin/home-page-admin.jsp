@@ -19,7 +19,7 @@
 </head>
 <body ng-app="app" >
     <div class="" ng-controller="AdminController">
-        <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+        <jsp:include page="${path}/admin/admin-navbar"></jsp:include>
         <div class="alert alert-info m-t-md">
             <h5 class="text-center">网站首页管理</h5>
         </div>

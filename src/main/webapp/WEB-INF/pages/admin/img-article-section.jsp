@@ -18,7 +18,7 @@
 </head>
 <body ng-app="app" >
     <div class="container-fluid  p-a-0 m-a-0" ng-controller="AdminController" ng-init="initAdmin()">
-        <jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+        <jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 
 
         <div class="row p-t-2em m-a-0">

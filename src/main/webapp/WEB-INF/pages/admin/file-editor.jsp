@@ -26,7 +26,7 @@
 
 </head>
 <body ng-app="app" ng-controller="AdminController">
-<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 <div class="container">
     <h1 class="p-t-md p-b-md">文本编辑器</h1>
 

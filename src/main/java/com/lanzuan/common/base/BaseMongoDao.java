@@ -35,10 +35,11 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
     private Class<E> collectionClass;
 
     public BaseMongoDao() {
-        Class typeCls = getClass();
-        Type genType = typeCls.getGenericSuperclass();
+        Class typeCls = getClass();//XXDao.class
+        Type genType = typeCls.getGenericSuperclass();//BaseMongoDao<XXEntity>
+        boolean genTypeInstanceOfParameterizedType=genType instanceof ParameterizedType;
         while (true) {
-            if (!(genType instanceof ParameterizedType)) {
+            if (!(genTypeInstanceOfParameterizedType)) {
                 typeCls = typeCls.getSuperclass();
                 genType = typeCls.getGenericSuperclass();
             } else {
@@ -149,7 +150,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
 
     @Override
     public List<E> findEquals(E e) {
-        Query query = getEqualsQuery(e);
+        Query query = MongoDbUtil.getEqualsQuery(e);
         if (!collectionExists()) return null;
         if (query == null) return findAll();
         return mongoTemplate.find(query, collectionClass);
@@ -225,7 +226,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
 
     @Override
     public E findOne(E condition) {
-        return mongoTemplate.findOne(getEqualsQuery(condition), collectionClass);
+        return mongoTemplate.findOne(MongoDbUtil.getEqualsQuery(condition), collectionClass);
     }
 
     @Override
@@ -328,8 +329,8 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         } catch (IllegalAccessException e1) {
             e1.printStackTrace();
         }
-        Update update = getUpdateFromEntity(e,ignoreNullValue);
-        mongoTemplate.updateFirst(getEqualsQuery(qe), update, collectionClass);
+        Update update = MongoDbUtil.getUpdateFromEntity(e,ignoreNullValue,collectionClass);
+        mongoTemplate.updateFirst(MongoDbUtil.getEqualsQuery(qe), update, collectionClass);
 
     }
 
@@ -354,38 +355,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         return mongoTemplate.getDb().collectionExists(getCollectionName());
     }
 
-    private Query getEqualsQuery(E e) {
-        if (e == null) return null;
-        Criteria criteria = null;
-        boolean firstCriteriaAdded = false;
-        for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
-            if (!field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class) && !field.isAnnotationPresent(Id.class))
-                continue;
-            String fieldName = field.getName();
-            Object fieldValue = ReflectUtil.getValue(e, fieldName,field.getType()==boolean.class);
-            if (fieldValue == null) continue;
-            if (fieldValue.toString().trim().equals("")) continue;
-            if (field.isAnnotationPresent(Id.class)) {
-                String key = "_id";
-                criteria = null;
-                criteria = Criteria.where(key).is(fieldValue);
-                break;
-            } else {
-                String key = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class).value();
-                if (key == null || key.equals("")) key = fieldName;
-                if (firstCriteriaAdded == false) {
-                    criteria = Criteria.where(key).is(fieldValue);
-                    firstCriteriaAdded = true;
-                } else {
-                    criteria.and(key).is(fieldValue);
-                }
-            }
-        }
-        if (criteria == null) return null;
-        Query query = Query.query(criteria);
-//        System.out.println(query);
-        return query;
-    }
+
 
     private Query getNotEqualsQuery(E e) {
         Criteria criteria = null;
@@ -412,84 +382,7 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         return query;
 
     }
-    private Update getUpdateFromEntity(E e,boolean ignoreNullValue) {
-        Update update = new Update();
-        String id=MongoDbUtil.getId(e);
-        for (java.lang.reflect.Field field : collectionClass.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Transient.class)||field.isAnnotationPresent(Id.class)) continue;
-            String setterMethodName = ReflectUtil.getSetterMethodName(field.getName());
-            Class fieldType = field.getType();
-            try {
-                field.setAccessible(true);
-                String fieldName=field.getName();
-                Object fieldValue = field.get(e);
-                if (fieldValue == null){
-                    if(!ignoreNullValue){
-                        update.set(fieldName, null);
-                    }
-                    continue;
-                }
-                if (field.isAnnotationPresent(org.springframework.data.mongodb.core.mapping.Field.class)) {
-                    org.springframework.data.mongodb.core.mapping.Field docField = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class);
-                    fieldName = docField.value() == null || docField.value().equals("") ? field.getName() : docField.value();
-                    update.set(fieldName, fieldValue);
 
-                }else if(field.isAnnotationPresent(DBRef.class)){
-                    //such as //[{"$id":"theId1",$ref:"a db"},{"$id":"theId2",$ref:"a db"}]
-                    DBRef dbRef=field.getAnnotation(DBRef.class);
-                    String db=dbRef.db();
-                    if (fieldValue.getClass().isArray()){
-                        Object[] objects=(Object[]) fieldValue;
-                        BasicDBList dbListObject=new BasicDBList();
-                        for (Object object:objects){
-                            DBObject dbObject=new BasicDBObject();
-                            if (StringUtils.isEmpty(db)){
-                                db=MongoDbUtil.getDbName(object);
-                            }
-                            dbObject.put("$ref",db);
-                            String objectId=MongoDbUtil.getId(object);
-                            dbObject.put("$id",new ObjectId(objectId));
-                            dbListObject.add(dbObject);
-                        }
-                        update.set(fieldName,dbListObject);
-                    }else if (Collection.class.isAssignableFrom(fieldValue.getClass())){
-                        Collection collection=(Collection) fieldValue;
-                        Iterator iterator=collection.iterator();
-                        BasicDBList dbListObject=new BasicDBList();
-                        while (iterator.hasNext()){
-                            Object valueObject=iterator.next();
-                            DBObject dbObject=new BasicDBObject();
-                            if (StringUtils.isEmpty(db)){
-                                db=MongoDbUtil.getDbName(valueObject);
-                            }
-                            dbObject.put("$ref",db);
-                            String objectId=MongoDbUtil.getId(valueObject);
-                            dbObject.put("$id",new ObjectId(objectId));
-                            dbListObject.add(dbObject);
-                        }
-                        update.set(fieldName,dbListObject);
-                    }else{//such as //{"$id":"theId1",$ref:"a db"}
-
-                        DBObject dbObject=new BasicDBObject();
-                        if (StringUtils.isEmpty(db)){
-                            db=MongoDbUtil.getDbName(fieldValue);
-                        }
-                        dbObject.put("$ref",db);
-                        String objectId=MongoDbUtil.getId(fieldValue);
-                        dbObject.put("$id",new ObjectId(objectId));
-                        update.set(fieldName,dbObject);
-                    }
-                }else{
-                    fieldName = field.getName();
-                    update.set(fieldName, fieldValue);
-                }
-
-            } catch (IllegalAccessException e1) {
-                e1.printStackTrace();
-            }
-        }
-        return update;
-    }
     @Override
     public void removeById(String id){
         DBObject dbObject=new BasicDBObject();

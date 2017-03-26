@@ -19,7 +19,7 @@
     <link href="${path}/statics/css/responsive.css3.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" ng-controller="AdminController">
-<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 <div class="alert alert-info">
     <h5 class="text-center">一些文章和页面的链接，需要填写链接地址时可以拷贝这些值</h5>
 

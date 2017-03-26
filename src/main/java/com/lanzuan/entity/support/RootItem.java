@@ -1,5 +1,8 @@
 package com.lanzuan.entity.support;
 
+import com.lanzuan.entity.User;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,5 +15,11 @@ public abstract class RootItem extends AbstractItem{
     }
     public abstract String projectName();
     public Integer repeatLimit(){ return 1;}
-
+    public abstract String getId();
+    public abstract void setLastModifyDate(Date date);
+    public abstract void setCreator(User user);
+    public abstract void setLastModifyUser(User user);
+    public abstract Date getLastModifyDate();
+    public abstract User getCreator();
+    public abstract User getLastModifyUser();
 }

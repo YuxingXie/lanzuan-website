@@ -19,7 +19,7 @@
     <link href="${path}/statics/css/responsive.css3.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" ng-controller="AdminController">
-<jsp:include page="${path}/statics/page/included/admin/navbar.jsp"></jsp:include>
+<jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 <div class="alert alert-info">
     <h5 class="text-center">网站资源汇总</h5>
 
@@ -119,6 +119,7 @@
 
             </div>
         </div>
+    </div>
     </div>
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
     <script src="${path}/app-js"></script>

@@ -1,6 +1,8 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.ListColumn;
 import com.lanzuan.entity.support.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Image;
@@ -8,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @Naming(value = "全屏大图")
@@ -16,12 +19,49 @@ public class FullWidthImage extends RootItem{
     @Id
     private String id;
     @Naming("图片信息")
+    @ListColumn(columnName = "图片",fieldOfValue = "uri",inputType = InputType.IMAGE)
     private Image image;
     private String name;
+    @ListColumn(columnName = "开启状态")
     private boolean enabled;
     private String uri;
+    @ListColumn(columnName = "最后修改日期" ,inputType = InputType.DATE)
+    private Date lastModifyDate;
+    @DBRef
+    @ListColumn(columnName = "创建人" ,fieldOfValue = "name")
+    private User creator;
+    @DBRef
+    @ListColumn(columnName = "最后修改人" ,fieldOfValue = "name")
+    private User lastModifyUser;
     @DBRef
     private PageComponent pageComponent;
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    @Override
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    @Override
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public User getLastModifyUser() {
+        return lastModifyUser;
+    }
+
+    @Override
+    public void setLastModifyUser(User lastModifyUser) {
+        this.lastModifyUser = lastModifyUser;
+    }
 
     public PageComponent getPageComponent() {
         return pageComponent;
