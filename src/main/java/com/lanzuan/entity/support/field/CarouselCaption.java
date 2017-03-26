@@ -14,19 +14,19 @@ public class CarouselCaption extends LeafItem {
     @Editable(inputType = InputType.SELECT,optionValues ={"{value:\"link\",text:\"链接\"}","{value:\"text\",text:\"文字\"}"} )
     private String type;
 
+//    @Naming("显示文字")
+//    @Editable(inputType = InputType.TEXT)
+//    private String  value;
+
     @Naming("显示文字")
     @Editable(inputType = InputType.TEXT)
-    private String  value;
-    /**
-     * 废弃，统一用value
-     */
     private String text;
     /**
      * 标题css样式名
      */
     private String captionClass;
 
-    @Naming(value = "标题链接" ,when ="type",expression = Expression.EQ,params= {"link"})
+    @Naming(value = "标题链接到" ,when ="type",expression = Expression.EQ,params= {"link"})
     @Editable(inputType = InputType.URL)
     private String href;
     @Transient
@@ -56,13 +56,13 @@ public class CarouselCaption extends LeafItem {
         this.type = type;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+//    public String getValue() {
+//        return value;
+//    }
+//
+//    public void setValue(String value) {
+//        this.value = value;
+//    }
 
     public String getText() {
         return text;

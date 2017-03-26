@@ -36,6 +36,9 @@
         left: 2%;
         width: 8%;
     }
+    .md-fix-top-menu{
+        position:fixed;top:0;left:9%;width: 17%;z-index: 100;
+    }
     .md-up-p-l-r-4em{
         padding-left: 4em;
         padding-right: 4em;
@@ -64,6 +67,7 @@
 
 
 @media (min-width: 62em) {
+
     .lg-large-165{
         font-size: 165%;
         font-weight: normal;
@@ -133,6 +137,10 @@
         text-indent: 0;
         text-align: center;
         /*padding-bottom: .2rem;*/
+    }
+    .md-down-fixed-top{
+        position: fixed;
+        top:0;
     }
     .md-down-text-small-70{
         font-size: 70%;

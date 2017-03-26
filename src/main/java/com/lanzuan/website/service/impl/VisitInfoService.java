@@ -23,9 +23,5 @@ public class VisitInfoService extends BaseEntityManager<VisitInfo> implements IV
     }
 
 
-    @Override
-    public void print() {
-        System.out.println(Constant.totalClick);
-        System.out.println(Constant.totalVisit);
-    }
+
 }

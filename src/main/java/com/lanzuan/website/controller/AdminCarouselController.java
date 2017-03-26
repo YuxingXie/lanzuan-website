@@ -63,15 +63,12 @@ public class AdminCarouselController extends BaseRestSpringController {
         Date now=new Date();
         User user=getLoginUser(session);
         if (carousel.getId()==null){
-            carousel.setLastModifyDate(now);
-            carousel.setLastModifyDate(now);
             carousel.setCreator(user);
-            carouselService.insert(carousel);
-        }else{
-            carousel.setLastModifyDate(now);
-            carousel.setLastModifyUser(user);
-            carouselService.update(carousel);
         }
+        carousel.setLastModifyDate(now);
+        carousel.setLastModifyUser(user);
+        carouselService.update(carousel);
+
         message.setSuccess(true);
         message.setData(carousel);
         return new ResponseEntity<Message>(message,HttpStatus.OK);

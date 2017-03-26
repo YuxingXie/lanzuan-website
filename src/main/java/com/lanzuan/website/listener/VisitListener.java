@@ -15,13 +15,12 @@ public class VisitListener implements HttpSessionListener{
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-        Constant.totalVisit++;
-        System.out.println("session created");
+
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-        System.out.println(httpSessionEvent.getSource());
-        System.out.println("session destroyed");
+
+
     }
 }

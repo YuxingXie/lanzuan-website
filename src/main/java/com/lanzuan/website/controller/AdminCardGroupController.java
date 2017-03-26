@@ -5,6 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.CardGroup;
+import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.ICardGroupService;
 import org.apache.logging.log4j.LogManager;
@@ -41,8 +42,15 @@ public class AdminCardGroupController extends BaseRestSpringController {
 
 
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody CardGroup cardGroup){
+    public ResponseEntity<Message> update(@RequestBody CardGroup cardGroup,HttpSession session){
         Message message=new Message();
+        Date now=new Date();
+        User user=getLoginUser(session);
+        if (cardGroup.getId()==null){
+            cardGroup.setCreator(user);
+        }
+        cardGroup.setLastModifyDate(now);
+        cardGroup.setLastModifyUser(user);
         cardGroupService.update(cardGroup);
         message.setSuccess(true);
         message.setData(cardGroup);

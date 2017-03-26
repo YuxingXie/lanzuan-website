@@ -7,6 +7,7 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.SortLinkGroup;
+import com.lanzuan.entity.User;
 import com.lanzuan.entity.support.field.SortLink;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IArticleService;
@@ -113,18 +114,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
 //        message.setData(articleSectionService.findHomePageArticleSections());
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value = "/new")
-    public ResponseEntity<Message> saveNewArticleSections(@RequestBody SortLinkGroup sortLinkGroup){
 
-        Message message=new Message();
-
-        Date now=new Date();
-        sortLinkGroup.setCreateDate(now);
-        sortLinkGroupService.update(sortLinkGroup);
-        message.setData(sortLinkGroup);
-        message.setSuccess(true);
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
     @RequestMapping(value = "/sort-link/remove")
     public ResponseEntity<Message> removeArticleSection(@RequestBody SortLinkGroup sortLinkGroup){
 
@@ -209,8 +199,15 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         return "admin/img-article-cover-input";
     }
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody SortLinkGroup sortLinkGroup){
+    public ResponseEntity<Message> update(@RequestBody SortLinkGroup sortLinkGroup,HttpSession session){
         Message message=new Message();
+        Date now=new Date();
+        User user=getLoginUser(session);
+        if (sortLinkGroup.getId()==null){
+            sortLinkGroup.setCreator(user);
+        }
+        sortLinkGroup.setLastModifyDate(now);
+        sortLinkGroup.setLastModifyUser(user);
         sortLinkGroupService.update(sortLinkGroup);
         message.setSuccess(true);
         message.setData(sortLinkGroup);

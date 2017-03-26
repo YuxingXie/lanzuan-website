@@ -5,6 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.ImageTextBlockGroup;
+import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IImageTextBlockGroupService;
 import org.apache.logging.log4j.LogManager;
@@ -41,8 +42,16 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
 
 
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody ImageTextBlockGroup imageTextBlockGroup){
+    public ResponseEntity<Message> update(@RequestBody ImageTextBlockGroup imageTextBlockGroup,HttpSession session){
         Message message=new Message();
+        Date now=new Date();
+        User user=getLoginUser(session);
+        if (imageTextBlockGroup.getId()==null){
+            imageTextBlockGroup.setCreator(user);
+        }
+        imageTextBlockGroup.setLastModifyDate(now);
+        imageTextBlockGroup.setLastModifyUser(user);
+
         imageTextBlockGroupService.update(imageTextBlockGroup);
         message.setSuccess(true);
         message.setData(imageTextBlockGroup);

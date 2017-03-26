@@ -6,5 +6,4 @@ db.fullWidthImage.drop()
 db.navbar.drop()
 db.sortLinkGroup.drop()
 db.imageTextBlockGroup.drop()
-db.article.drop()
 show collections

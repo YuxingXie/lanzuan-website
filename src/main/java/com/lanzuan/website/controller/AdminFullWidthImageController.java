@@ -5,6 +5,7 @@ import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.FullWidthImage;
+import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
 import com.lanzuan.website.service.IFullWidthImageService;
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,8 +44,15 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
 
 
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody FullWidthImage fullWidthImage){
+    public ResponseEntity<Message> update(@RequestBody FullWidthImage fullWidthImage,HttpSession session){
         Message message=new Message();
+        Date now=new Date();
+        User user=getLoginUser(session);
+        if (fullWidthImage.getId()==null){
+            fullWidthImage.setCreator(user);
+        }
+        fullWidthImage.setLastModifyDate(now);
+        fullWidthImage.setLastModifyUser(user);
         fullWidthImageService.update(fullWidthImage);
         message.setSuccess(true);
         message.setData(fullWidthImage);

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,8 +32,12 @@ public class AdminNavbarController extends BaseRestSpringController {
     INavbarService navbarService;
 
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody Navbar navbar){
+    public ResponseEntity<Message> update(@RequestBody Navbar navbar,HttpSession session){
         Message message=new Message();
+        navbar.setLastModifyUser(getLoginUser(session));
+        navbar.setLastModifyDate(new Date());
+        if(navbar.getId()==null)
+            navbar.setCreator(getLoginUser(session));
         navbarService.update(navbar);
         message.setSuccess(true);
         message.setData(navbar);

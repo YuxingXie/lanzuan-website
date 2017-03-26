@@ -20,11 +20,11 @@ public class CarouselItem implements Item {
      */
 
     private String type;
-    @Naming("图片路径")
-    @Editable(inputType = InputType.IMAGE)
-    private String value;
+//    @Naming("图片路径")
+//    @Editable(inputType = InputType.IMAGE)
+//    private String value;
 
-    @Naming("图片链接")
+    @Naming("图片链接到")
     @Editable(inputType = InputType.URL)
     private String imageLink;
     @Naming(value = "轮播项标题")
@@ -55,13 +55,13 @@ public class CarouselItem implements Item {
         this.type = type;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+//    public String getValue() {
+//        return value;
+//    }
+//
+//    public void setValue(String value) {
+//        this.value = value;
+//    }
 
     public CarouselCaption getCarouselCaption() {
         return carouselCaption;
