@@ -55,6 +55,8 @@ public class PageComponent<T extends RootItem> {
     private List<String> listOperationNotes;
     @Transient
     private String varU;
+    @Transient
+    private String jsGetterMethods;
     public String getWebsiteUri() {
         return websiteUri;
     }
@@ -63,6 +65,13 @@ public class PageComponent<T extends RootItem> {
         this.websiteUri = websiteUri;
     }
 
+    public String getJsGetterMethods() {
+        return jsGetterMethods;
+    }
+
+    public void setJsGetterMethods(String jsGetterMethods) {
+        this.jsGetterMethods = jsGetterMethods;
+    }
 
     public List<String> getEditNotes() {
         return editNotes;
