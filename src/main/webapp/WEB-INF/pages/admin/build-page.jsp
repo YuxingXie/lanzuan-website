@@ -11,10 +11,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="yes"/>
-    <link href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="${path}/statics/css/style.css" rel="stylesheet" type="text/css">
-    <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="${path}/statics/css/pace.css"/>
+    <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.css"/>
+    <link rel="stylesheet" href="${path}/statics/css/animate.css"/>
+    <link rel="stylesheet" href="${path}/statics/css/style.css"/>
+    <link rel="stylesheet" href="${path}/statics/css/color.css"/>
+    <link rel="stylesheet" href="${path}/statics/css/bootstrap.custom.css"/>
+    <link rel="stylesheet" href="${path}/statics/css/responsive.css3.css"/>
+    <%--<link rel="stylesheet" href="${path}/statics/css/lanzuan.css"/>--%>
 </head>
 <body ng-app="app" class=" m-a-0" ng-controller="AdminController" ng-init="getWebPage()">
 <jsp:include page="${path}/admin/admin-navbar"></jsp:include>
@@ -37,25 +43,44 @@
                 <div ng-view style="height: 400px;" ng-show="showPrev"></div>
             </div>
         </div>
+        <div class="row p-t-lg p-b-lg">
+            <div class="col-xs-12">
+                <h5>将左边的组件拖拽到右侧组装成一个页面</h5>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-3">组件列表</div>
+            <div class="col-xs-3">拖拽到下方</div>
+            <div class="col-xs-6 ">页面效果预览<small>(这只是粗略效果，因为预览区域并不代表真正的设备大小，如果要预览在真实设备的效果请点击
+                <a href="#" target="_blank">这里</a>)</small></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
                 <ul ui-on-Drop="onDrop($event,$data,pageComponents)" class="list-group">
-                    <li ui-draggable="true" drag="pageComponent" class="list-group-item"
+                    <li ui-draggable="true" drag="pageComponent" class="list-group-item" style="cursor: move"
                         on-drop-success="dropSuccessHandler($event,$index,pageComponents)"
                         ng-repeat="pageComponent in pageComponents track by $index">
-                        {{pageComponent.name}}<a ng-href="#/{{pageComponent.var}}">预览</a>
+                        {{pageComponent.name}}<a ng-href="#/{{pageComponent.var}}" ng-click="$parent.showPrev=true">预览</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-3">
                 <ul  class="list-group">
                     <li ui-on-Drop="onDrop($event,$data,webPage.pageComponents,$index)"
                         ui-draggable="false" drag="pageComponent" class="list-group-item dash-silver-border img-nav-brand"
                         on-drop-success="dropSuccessHandler($event,$index,webPage.pageComponents)"
                         ng-repeat="pageComponent in webPage.pageComponents track by $index">
-                        {{pageComponent.name}}
+                        {{pageComponent.var}}
                     </li>
                 </ul>
+            </div>
+            <div class="col-xs-6 solid-silver-border">
+                    {{webPage.pageComponents.length}}
+                <div  ng-repeat="pageComponent in webPage.pageComponents track by $index">
+                        <%--<span ng-init="src=pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></span>--%>
+                    {{src}}
+                    <div ng-include src="pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -66,6 +91,7 @@
 <script src="${path}/statics/plugin/angular/1.4.8/angular-route.min.js"></script>
 <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
 <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
+<script src="${path}/statics/js/tether.min.js"></script>
 <script src="${path}/statics/js/draganddrop.min.js"></script>
 <script src="${path}/admin/pageComponent/build-page-js"></script>
 

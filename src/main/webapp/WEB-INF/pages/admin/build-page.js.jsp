@@ -37,7 +37,7 @@
 
             }else{
                 ;$scope.webPage={"pageComponents":[
-                    {name:" "}
+                    {name:"my navbar",var:"navbar",varU:"Navbar",websiteUri : "/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp" }
                 ]};
             };
         };
