@@ -212,7 +212,6 @@ public class AngularEntityEditorBuilder {
     private void printItem(int level) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         String context=pageComponent.getVar();
         boolean fieldInScope=true;
-
         for(Field field:itemClass.getDeclaredFields()){
             printField(context,context, field,level,fieldInScope);
         }
@@ -265,11 +264,12 @@ public class AngularEntityEditorBuilder {
                 if (level==1)   itemBorderCss="solid-silver-border p-a-lg";
                 if (level==2)   itemBorderCss="solid-silver-border";
                 editorHtml.append("<div class='col-xs-12 " + itemBorderCss + "'>");
-                printItemOperationButtons(context,fieldName,level,absoluteContext);
-
+                String toggleVarName=printItemOperationButtons(context,fieldName,level,absoluteContext);
+                editorHtml.append("<div ng-if=\""+toggleVarName+"\">");
                 for (Field childField : clazz.getDeclaredFields()) {
                     printField(ngRepeatVar,ngRepeatVar, childField,level+1,false);
                 }
+                editorHtml.append("\n</div>");
                 editorHtml.append("\n</div>");
                 editorHtml.append("</div>");
 
@@ -357,7 +357,7 @@ public class AngularEntityEditorBuilder {
     }
 
 
-    private void printItemOperationButtons(String context,String fieldName,int level,String absoluteContext) {
+    private String  printItemOperationButtons(String context,String fieldName,int level,String absoluteContext) {
         String deleteText="";
         String forwardText="";
         String backwardText="";
@@ -367,6 +367,7 @@ public class AngularEntityEditorBuilder {
         String deleteFunctionName="";
         String forwardFunctionName="";
         String backwardFunctionName="";
+        String toggleVarName="show"+StringUtils.firstUpperCase(context)+"Items";
         if(level==1) {
             deleteText="删除整块";
             deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item($index)";
@@ -390,13 +391,15 @@ public class AngularEntityEditorBuilder {
             buildBackwardSubItemMethod(context, fieldName);
             buildRemoveSubItemMethod(context, fieldName);
         }
-        editorHtml.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "'>");
+        editorHtml.append("<div class='btn-group " + btnGroupCss + " pull-right p-b-xs p-t-xs " + paddingRightCss + "' ng-init=\""+toggleVarName+"=true\">");
         editorHtml.append("<button class='fa fa-trash btn " + btnCss + "' ng-click=\"" + deleteFunctionName + "\" >" + deleteText + "</button>");
         editorHtml.append("<button class='fa fa-caret-up btn " + btnCss + "' ng-click='" + forwardFunctionName + "' ng-if='$index!==0'>" + forwardText + "</button>");
-        editorHtml.append("<button class='fa fa-caret-down btn " + btnCss + "' ng-click='" + backwardFunctionName + "' ng-if='$index!==" + context + ".items.length-1'>" + backwardText + "</button>");
+        editorHtml.append("<button class='fa fa-caret-down btn " + btnCss + "' ng-click='" + backwardFunctionName + "' ng-if='$index!==" + context + "."+fieldName+".length-1'>" + backwardText + "</button>");
+        editorHtml.append("<button class='fa btn " + btnCss + "' ng-class=\"{'fa-folder-o':!"+toggleVarName+",'fa-folder-open-o':"+toggleVarName+"}\" ng-click='" + toggleVarName + "=!"+toggleVarName+"' ></button>");
 //        editorHtml.append("<button ng-init=\"showItems=true\" class='fa btn " + btnCss + "'")
 //                .append(" ng-click=\"showItems=!showItems\" >{{showItems?'收起':'展开'}}<i ng-class=\"{'fa-plus-square-o':!showItems,'fa-minus-square-o':showItems}\" ></i></button>");
         editorHtml.append("   </div>");
+        return toggleVarName;
     }
     private void buildForwardSubItemMethod(String context, String fieldName) {
 

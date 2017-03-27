@@ -15,17 +15,15 @@ import java.util.List;
  */
 @Naming(value = "轮播项")
 public class CarouselItem implements Item {
-    /**
-     * text,link,image
-     */
+
 
     private String type;
 //    @Naming("图片路径")
 //    @Editable(inputType = InputType.IMAGE)
 //    private String value;
 
-    @Naming("图片链接到")
-    @Editable(inputType = InputType.URL)
+    @Naming("图片链接")
+    @Editable(inputType = InputType.IMAGE)
     private String imageLink;
     @Naming(value = "轮播项标题")
     private CarouselCaption carouselCaption;
