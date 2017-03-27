@@ -49,6 +49,7 @@
 }
 .img-nav-brand{
     max-height:75px !important;
+    min-height:45px !important;
 }
 .img-ico-md{
     max-width: 75px;
@@ -454,7 +455,7 @@ Misc tools
     padding-left: 5rem !important;
 }
 .p-r-2 {
-    padding-right: 2px;
+    padding-right: 2px !important;
 }
 .p-r-10 {
     padding-right: 10px;

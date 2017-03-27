@@ -4,7 +4,8 @@
     "class":"fa fa-files-o",
     "collapse":true,
     "menuItem":[
-      {"name":"网站首页管理","link":"/admin/home-page-admin","class":"fa fa-home"}
+      {"name":"网站首页管理","link":"/admin/home-page-admin","class":"fa fa-home"},
+      {"name":"组装页面","link":"/admin/pageComponent/build-page","class":"fa fa-home"}
     ]
   },
   {

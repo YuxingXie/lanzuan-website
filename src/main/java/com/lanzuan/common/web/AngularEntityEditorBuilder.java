@@ -22,6 +22,7 @@ public class AngularEntityEditorBuilder {
     private StringBuffer listOperationHtml;
     private StringBuffer listOperationJavaScript;
     private StringBuffer javaScript;
+    private StringBuffer getterMethodsJavascript;
     private Class<? extends Item> itemClass;
 
     private  Naming itemNaming;
@@ -39,6 +40,7 @@ public class AngularEntityEditorBuilder {
         this.pageComponent=pageComponent;
         this.listOperationHtml=new StringBuffer();
         this.listOperationJavaScript=new StringBuffer();
+        this.getterMethodsJavascript=new StringBuffer();
     }
     public AngularEntityEditorBuilder(List<PageComponent> pageComponents){
         this.editorHtml=new StringBuffer();
@@ -53,7 +55,7 @@ public class AngularEntityEditorBuilder {
 
 
     private void buildAdminJavaScript() {
-        buildGetMethod();
+        buildGetMethodMerged();
         buildResetMethod();
         buildGetMaterialMethod();
         buildUpdateMethod();
@@ -66,6 +68,11 @@ public class AngularEntityEditorBuilder {
         buildToggleMethod();
         buildDeleteItemMethod();
         buildInitAdminMethod();
+    }
+
+    private void buildGetMethodMerged() {
+        buildGetMethod();
+        merge(javaScript,getterMethodsJavascript);
     }
 
     private void buildInitAdminMethod() {
@@ -171,12 +178,21 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildGetMethod() {
-          javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"=function(){");
-        javaScript.append("\n $http.get('"+pageComponent.getDataUri()+"').success(function (data) {");
-        javaScript.append("\n$scope."+pageComponent.getVar()+"=data;");
-        javaScript.append("\n});");
-        javaScript.append("\n}");
 
+        getterMethodsJavascript.append("\n;$scope.get" + pageComponent.getVarU() + "=function(){");
+        getterMethodsJavascript.append("\n $http.get('" + pageComponent.getDataUri() + "').success(function (data) {");
+        getterMethodsJavascript.append("\n$scope." + pageComponent.getVar() + "=data;");
+        getterMethodsJavascript.append("\n});");
+        getterMethodsJavascript.append("\n}");
+
+    }
+    private void merge(StringBuffer oldStringBuffer,StringBuffer newStringBuffer){
+        oldStringBuffer.append(newStringBuffer);
+    }
+
+    public String getGetterMethodsJavascript(){
+        buildGetMethod();
+        return getterMethodsJavascript.toString();
     }
 
     public String getAdminJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
@@ -195,7 +211,7 @@ public class AngularEntityEditorBuilder {
     public String getWebsiteJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         for(PageComponent pageComponent1:pageComponents){
             this.pageComponent=pageComponent1;
-            buildGetMethod();
+            buildGetMethodMerged();
         }
 
         StringBuffer ret = new StringBuffer();
