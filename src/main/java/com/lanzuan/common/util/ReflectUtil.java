@@ -190,33 +190,6 @@ public class ReflectUtil {
         }
     }
 
-    public static void main(String[] args) {
-//        logger.info(isWrapClass(String.class));//false
-//        logger.info(isWrapClass(Integer.class));//true
-//        logger.info(isWrapClass(int.class));//false
-//        logger.info(int.class==Integer.class);//false
-//        logger.info(int.class.isPrimitive());//true
-//        logger.info(Integer.class.isPrimitive());//false
-        List<User> users = new ArrayList<User>();
-        User user1 = new User();
-        User user2 = new User();
-        user1.setName("John");
-        user2.setName("Marry");
-        users.add(user1);
-        users.add(user2);
-        User user3=new User();
-        User user4=new User();
-        user3.setName("papa");
-        user4.setName("mama");
-        User[] papamama=new User[]{user3,user4};
-        Person person = new Person();
-        person.setChildren(users);
-        person.setParents(papamama);
-        try {
-            analysisBean(person);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }
