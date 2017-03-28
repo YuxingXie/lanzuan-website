@@ -1,4 +1,4 @@
-package com.lanzuan.entity.support;
+package com.lanzuan.common.base.annotation.entity;
 
 import com.lanzuan.common.code.Expression;
 
@@ -14,6 +14,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD,ElementType.TYPE })
 public @interface Naming {
     public String value() default "";
+    public String cssClass() default "";
     public String ngRepeatVar() default "";
     /**
      * when和expression一起使用，用javascript表达式表示依赖某个字段，用于联动编辑

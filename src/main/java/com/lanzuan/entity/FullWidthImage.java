@@ -2,8 +2,8 @@ package com.lanzuan.entity;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.support.Item;
-import com.lanzuan.entity.support.ListColumn;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.ListColumn;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.support.vo.Image;
 import org.springframework.data.annotation.Id;

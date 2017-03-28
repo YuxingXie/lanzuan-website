@@ -3,9 +3,9 @@ package com.lanzuan.entity.support.field;
 import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.SortLinkGroup;
-import com.lanzuan.entity.support.Editable;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.entity.support.Item;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class SortLink implements Item{
     @Naming(value = "分类名称")
-    @Editable
+    @FormAttributes
     private String sortName;
     private String maxLink;
     @Naming(value = "封面" ,when = "links" ,expression = Expression.WITHOUT_LENGTH)
-    @Editable(inputType = InputType.IMAGE)
+    @FormAttributes(inputType = InputType.IMAGE)
     private String image;
     @Naming(value = "封面链接",when = "links" ,expression = Expression.WITHOUT_LENGTH)
-    @Editable(inputType = InputType.URL)
+    @FormAttributes(inputType = InputType.URL)
     private String imageHref;
     @Naming(value = "链接项列表",ngRepeatVar = "links")
     private List<Link> links;

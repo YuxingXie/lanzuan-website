@@ -28,34 +28,30 @@
 
         <div class="container-fluid">
             <div class="row p-a-0 m-a-0">
-                <ol class="breadcrumb col-xs-12 m-a-0 navbar-fixed-top hidden-md-up">
-                    当前位置:
-                    <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                    <li class="small active">文章</li>
-                </ol>
-                <%--<div style="width: 10%"></div>--%>
-                <div class="hidden-md-down" style="position:fixed;top:0;left:9%;width: 17%;z-index: 100;">
-                    <%--<div class="list-group fixed-left-menu">--%>
-                    <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
-                        <div class="card-header p-a-0 list">
-                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
+
+                <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
+
+                    <div class="col-xs-12 col-md-push-2 col-md-10 m-a-0 p-a-0">
+                        <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
+                            <div class="card-header p-a-0 list hidden-md-down">
+                                <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
+                            </div>
+                            <div class="card-block p-a-0 m-a-0" >
+                                <ol class="breadcrumb m-a-0 p-a-xs">
+                                    当前位置:
+                                    <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
+                                    <li class="small active">文章</li>
+                                </ol>
+                            </div>
+                            <a href="#content" class="list-group-item hidden-md-down">${article.title}</a>
                         </div>
-                        <div class="card-block p-a-0" >
-                            <ol class="breadcrumb m-a-0">
-                                当前位置:
-                                <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                                <li class="small active">文章</li>
-                            </ol>
-                        </div>
-                        <a href="#content" class="list-group-item" >${article.title}</a>
                     </div>
+
                 </div>
                 <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                   <div class="col-xs-12 p-a-0 m-a-0" >
                       <div class="col-xs-12">
-
-                          <div class="col-xs-3"></div>
-                          <div class="col-xs-8 p-r-lg"   >
+                          <div class="col-md-8 col-md-push-3 col-xs-12"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4>${article.title}</h4>
                                   <div class="pull-left m-b-2em ">
@@ -76,7 +72,6 @@
                               ${article.content}
                               </div>
                           </div>
-                          <div class="col-xs-1"></div>
                       </div>
                       <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-xl">
                               <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
@@ -86,8 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 p-t-50">
-    </div>
+
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
     <%--<script src="${path}/statics/js/jquery-3.1.1.min.js"></script>--%>
     <%--<script src="${path}/statics/js/tether.min.js"></script>--%>

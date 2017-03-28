@@ -1,7 +1,7 @@
 <%@ page import="com.lanzuan.entity.PageComponent" %>
 <%@ page import="com.lanzuan.entity.support.RootItem" %>
 <%@ page import="com.lanzuan.entity.support.Item" %>
-<%@ page import="com.lanzuan.entity.support.Naming" %>
+<%@ page import="com.lanzuan.common.base.annotation.entity.Naming" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="<%=request.getContextPath() %>"/>

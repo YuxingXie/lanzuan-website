@@ -240,43 +240,6 @@ public class UserDao extends BaseMongoDao<User>  {
         mongoTemplate.insert(user);
     }
 
-    /**
-     *
-     * @param user
-     * @param maxRelativeLevel <0找上级，大于0找下级
-     * @return
-     */
-
-
-    public List<User> findUpperUsers(User user, int maxRelativeLevel) {
-        if (user==null ||user.getId()==null) return null;
-        // membershipPath is  such as /aa/bb/bbc/dd/userId
-        String membershipPath=user.getMembershipPath();
-        if (membershipPath==null) return null;
-        if (membershipPath.indexOf("/")<0) return null;
-        if (membershipPath.indexOf(user.getId())<0) return null;
-        if (membershipPath.startsWith("/"+user.getId())) return null;
-        if (!membershipPath.endsWith("/"+user.getId())) return null;
-        // upperUserIdsStr is  such as /aa/bb/bbc/dd
-        String upperUserIdsStr=membershipPath.substring(0, membershipPath.indexOf("/"+user.getId()));
-        DBObject dbObject=new BasicDBObject();
-        BasicDBList dbList=new BasicDBList();
-        for(int i=0;i<Math.abs(maxRelativeLevel);i++){
-            String upperUserId=upperUserIdsStr.substring(upperUserIdsStr.lastIndexOf("/")+1);
-            if (upperUserId.equals("")) break;
-            upperUserIdsStr=upperUserIdsStr.substring(0,upperUserIdsStr.lastIndexOf("/"));
-//            System.out.println(i+":"+upperUserId);
-            dbList.add(new BasicDBObject("id", new ObjectId(upperUserId)));
-            if (upperUserIdsStr.lastIndexOf("/")==0){
-                dbList.add(new BasicDBObject("id", new ObjectId(upperUserIdsStr.substring(1))));
-//                System.out.println("last id:"+upperUserIdsStr.substring(1));
-                break;
-            }
-        }
-        dbObject.put("$or",dbList);
-        List<User> ret = findAll(dbObject);
-        return ret;
-    }
 
     public static  void main(String[] args){
     }
@@ -284,25 +247,6 @@ public class UserDao extends BaseMongoDao<User>  {
 
 
 
-
-
-    public List<User> getDirectUpperUsers(List<User> newMemberUsers) {
-        if (newMemberUsers==null||newMemberUsers.size()==0) return null;
-        BasicDBList dbList=new BasicDBList();
-        for (User newMemberUser:newMemberUsers){
-            if (newMemberUser.getMembershipPath()==null) continue;
-            if (newMemberUser.getMembershipPath().trim().equals("")) continue;
-            if (newMemberUser.getMembershipPath().equalsIgnoreCase("/" + newMemberUser.getId())) continue;
-            //membershipPath such as: /aaa/bbb/ccc/ddd/eee/id
-            String membershipPath=newMemberUser.getMembershipPath();
-            String abcde=membershipPath.substring(0,membershipPath.lastIndexOf("/"));
-            String directUpperUserId=abcde.substring(abcde.lastIndexOf("/") + 1);
-//            directUpperUserIds.add(new ObjectId(directUpperUserId));
-            System.out.println(directUpperUserId);
-            dbList.add(new ObjectId(directUpperUserId));
-        }
-        return findAll(new BasicDBObject("id",new BasicDBObject("$in",dbList)));
-    }
 //TODO 有问题
     public List<User> findAllLowerUsers(User user) {
         if (user==null) return null;
@@ -340,17 +284,7 @@ public class UserDao extends BaseMongoDao<User>  {
         return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("membershipPath").ne("/"+user.getId()).and("becomeMemberDate").lt(date)), User.class);
 //        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
-    public User getDirectUpperUser(User membershipUser) {
-        if (membershipUser==null) return null;
-        if (membershipUser.getMembershipPath()==null) return null;
-        if (membershipUser.getMembershipPath().trim().equals(""))  return null;
-        if (membershipUser.getMembershipPath().equalsIgnoreCase("/" + membershipUser.getId()))  return null;
-        //membershipPath such as: /aaa/bbb/ccc/ddd/eee/id
-        String membershipPath=membershipUser.getMembershipPath();
-        String abcde=membershipPath.substring(0,membershipPath.lastIndexOf("/"));
-        String directUpperUserId=abcde.substring(abcde.lastIndexOf("/") + 1);
-        return findById(directUpperUserId);
-    }
+
 
 
 

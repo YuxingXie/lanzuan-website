@@ -1,5 +1,9 @@
 package com.lanzuan.common.web;
 
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.entity.support.Item;
+import com.lanzuan.common.base.annotation.entity.ListColumn;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.util.ReflectUtil;
@@ -25,7 +29,7 @@ public class AngularEntityEditorBuilder {
     private StringBuffer getterMethodsJavascript;
     private Class<? extends Item> itemClass;
 
-    private  Naming itemNaming;
+    private Naming itemNaming;
     private PageComponent<RootItem> pageComponent;
     private List<PageComponent> pageComponents;
     private AngularEntityEditorBuilder(){
@@ -46,7 +50,7 @@ public class AngularEntityEditorBuilder {
         this.editorHtml=new StringBuffer();
         this.javaScript=new StringBuffer();
         this.pageComponents=pageComponents;
-
+        this.getterMethodsJavascript=new StringBuffer();
     }
     public void buildHtml() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         commonOperationsHtml();
@@ -243,15 +247,15 @@ public class AngularEntityEditorBuilder {
 //        System.out.println(absoluteContext);
 
 
-        Editable editable=field.getAnnotation(Editable.class);
+        FormAttributes formAttributes =field.getAnnotation(FormAttributes.class);
         String fieldName=field.getName();
         field.setAccessible(true);
-        if(editable!=null){
-            InputType inputType=editable.inputType();
+        if(formAttributes !=null){
+            InputType inputType= formAttributes.inputType();
             if(InputType.IMAGE==inputType){
                 printImageChooserDiv(context,absoluteContext, field,fieldInScope,fieldNaming);
             }else if(InputType.SELECT==inputType){
-                printSelectDiv(context,fieldInScope,field, fieldNaming,editable);
+                printSelectDiv(context,fieldInScope,field, fieldNaming, formAttributes);
             }else if(InputType.URL==inputType){
                 printUrlInputGroup(context,fieldInScope, field, fieldNaming);
             }else {
@@ -304,8 +308,8 @@ public class AngularEntityEditorBuilder {
 
     }
 
-    private void printSelectDiv(String context,boolean inScope,Field field, Naming fieldNaming, Editable editable) {
-        String[] options=editable.optionValues();
+    private void printSelectDiv(String context,boolean inScope,Field field, Naming fieldNaming, FormAttributes formAttributes) {
+        String[] options= formAttributes.optionValues();
         if(options==null) return;
         String ng_if=getNgIfExpression(context,inScope,fieldNaming);
         if(ng_if==null){

@@ -1,9 +1,9 @@
 package com.lanzuan.entity;
 
 import com.lanzuan.common.code.InputType;
-import com.lanzuan.entity.support.Editable;
-import com.lanzuan.entity.support.ListColumn;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.common.base.annotation.entity.ListColumn;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.entity.support.RootItem;
 import com.lanzuan.entity.support.field.ImageTextBlock;
 import org.springframework.data.annotation.Id;
@@ -27,7 +27,7 @@ public class ImageTextBlockGroup extends RootItem{
     private boolean enabled;
     @ListColumn(columnName = "大标题")
     @Naming(value = "大标题")
-    @Editable()
+    @FormAttributes()
     private String text;
     //约定字段名
     @Naming(value = "图文块",ngRepeatVar = "imageTextBlock")

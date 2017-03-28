@@ -1,6 +1,8 @@
 package com.lanzuan.entity;
 
-import com.lanzuan.common.support.Pair;
+import com.lanzuan.common.code.InputType;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
@@ -12,17 +14,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-//db.mallUser.update({"phone":"18888888888"},{"$set":{"email":"haha12345678987456325565225525@qq.com"}},false,true)
-//db.mallUser.update({"phone":"18888888888"},{"$set":{"name":"买光你茶叶"}},false,true)
-//db.mallUser.update({},{"$set":{"becomeMemberDate":new Date("2016-10-03")}},false,true)
-//db.mallUser.update({},{"$set":{"directSaleMember":true}},false,true)
-
-//db.mallUser.insert({"password" : "96e79218965eb72c92a549dd5a330112","phone" : "13000000000","registerInviteCode" : "111111","activated" : true,"directSaleMember":true,"becomeMemberDate" : new Date("2016-10-03")})
-//db.mallUser.insert({"password" : "96e79218965eb72c92a549dd5a330112","phone" : "13666666666","registerInviteCode" : "111111","activated" : true,"becomeMemberDate" : new Date("2016-10-03")})
-//db.mallUser.update({"phone":"13666666666"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57b8c0ed2a0a9820f0a2e6cf/57f3d8413c46b7660c653942"}},false,true)
-//db.mallUser.update({"phone":"13000000000"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57f3df3d3c46b7660c653943"}},false,true)
-//db.mallUser.find({ "directSaleMember" : true , "becomeMemberDate" : { "$gte" : new Date("2016-10-13T03:59:59.996Z") , "$lt" : new Date("2016-10-13T04:00:00.996Z")}})
-//db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
 @Document(collection = "user")
 public class User {
 
@@ -30,6 +21,9 @@ public class User {
     @Field(value = "name")
     @Length(min=2,max=20)
     private String name;
+    @Naming(value = "姓名",cssClass = "fa fa-user")
+    @FormAttributes()
+    private String loginName;
     @Field
     private String realName;
     @Field(value = "sex")
@@ -38,13 +32,14 @@ public class User {
     private Integer height;
     @Length(min=6)
     @Field("password")
+    @Naming(value = "密码")
+    @FormAttributes(inputType = InputType.PASSWORD)
     private String password;
     @Field("email")
     @Email
     @Indexed
     private String email;
-    @Field(value = "userCategory")
-    private String userCategory;//1注册用户 2,。经销商
+
 //    @DBRef private Set<Address> address;
     @Field("registerTime")
     private Date registerTime;
@@ -62,84 +57,13 @@ public class User {
     @Field private Boolean disabled;//禁用
     @Field(value = "idCardNo")
     private String idCardNo;
-    @Field
-    private String registerInviteCode;
-    @Field
-    private boolean directSaleMember;
 
     @Field
     private Boolean activated;//激活
 
-    private User directUpperUser;
-
-    /**
-     *     在会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
-     *     每个下一级会员的membershipPath都会在上一级的membershipPath基础上加上自己的id连接，用"/"分隔
-     */
-
-    @Field
-    private String membershipPath;
-    @Field
-    private Date becomeMemberDate;//成为会员的日期
-
-    @Transient
-    private String showName;
-
-    @Transient
-    private Pair<User> directLowerUsers;
-
-
     public String[] getAddresses() {
         return addresses;
     }
-
-    public String getMembershipPath() {
-        return membershipPath;
-    }
-
-    public void setMembershipPath(String membershipPath) {
-        this.membershipPath = membershipPath;
-    }
-
-
-
-    public Pair<User> getDirectLowerUsers() {
-        return directLowerUsers;
-    }
-
-    public void setDirectLowerUsers(Pair<User> directLowerUsers) {
-        this.directLowerUsers = directLowerUsers;
-    }
-
-
-
-
-
-    public User getDirectUpperUser() {
-        return directUpperUser;
-    }
-
-    public void setDirectUpperUser(User directUpperUser) {
-        this.directUpperUser = directUpperUser;
-    }
-
-    public Date getBecomeMemberDate() {
-        return becomeMemberDate;
-    }
-
-    public void setBecomeMemberDate(Date becomeMemberDate) {
-        this.becomeMemberDate = becomeMemberDate;
-    }
-
-
-    public String getRegisterInviteCode() {
-        return registerInviteCode;
-    }
-
-    public void setRegisterInviteCode(String registerInviteCode) {
-        this.registerInviteCode = registerInviteCode;
-    }
-
 
     public void setAddresses(String[] addresses) {
         this.addresses = addresses;
@@ -254,13 +178,6 @@ public class User {
 
 
 
-    public String getUserCategory() {
-        return userCategory;
-    }
-
-    public void setUserCategory(String userCategory) {
-        this.userCategory = userCategory;
-    }
 
     public Boolean getDisabled() {
         return disabled;
@@ -291,29 +208,9 @@ public class User {
     private String rePassword;
     @Transient
     private String loginStr;
-    private String loginName;
-    @Transient
-    private Boolean mergeCart;
 
-    public boolean isDirectSaleMember() {
-        return directSaleMember;
-    }
 
-    public void setDirectSaleMember(boolean directSaleMember) {
-        this.directSaleMember = directSaleMember;
-    }
 
-    public void setShowName(String showName) {
-        this.showName = showName;
-    }
-
-    public Boolean getMergeCart() {
-        return mergeCart;
-    }
-
-    public void setMergeCart(Boolean mergeCart) {
-        this.mergeCart = mergeCart;
-    }
 
     public Boolean getRemember() {
         return remember;

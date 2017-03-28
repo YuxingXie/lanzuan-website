@@ -320,22 +320,12 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
             mongoTemplate.insert(e);
             return;
         }
-        E qe = null;
-        try {
-            qe = collectionClass.newInstance();
-            ReflectUtil.invokeSetter(qe, "id", id);
-        } catch (InstantiationException e1) {
-            e1.printStackTrace();
-        } catch (IllegalAccessException e1) {
-            e1.printStackTrace();
-        }
+        Query query=new BasicQuery(new BasicDBObject("_id",new ObjectId(id)));
         Update update = MongoDbUtil.getUpdateFromEntity(e,ignoreNullValue,collectionClass);
-        mongoTemplate.updateFirst(MongoDbUtil.getEqualsQuery(qe), update, collectionClass);
-
+        mongoTemplate.updateFirst(query,update, collectionClass) ;
     }
 
     public CommandResult runCommand(String command) {
-
         return  mongoTemplate.executeCommand(command);
     }
 

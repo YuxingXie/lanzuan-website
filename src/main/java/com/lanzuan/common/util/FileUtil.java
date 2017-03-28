@@ -11,31 +11,33 @@ import java.io.*;
  * To change this template use File | Settings | File Templates.
  */
 public class FileUtil {
-    public static void fileDownload(HttpServletResponse response, String filePath) throws IOException{
-                       // path是指欲下载的文件的路径。
-                       File file = new File(filePath);
-                       // 取得文件名。
-                       String filename = file.getName();
-                       // 取得文件的后缀名。
-                       //String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
+    public static void fileDownload(HttpServletResponse response, String filePath) throws IOException {
+        // path是指欲下载的文件的路径。
 
-                       // 以流的形式下载文件。
-                       InputStream fis = new BufferedInputStream(new FileInputStream(file));
-                       byte[] buffer = new byte[fis.available()];
-                       fis.read(buffer);
-                       fis.close();
-                       // 清空response
-                       response.reset();
-                       // 设置response的Header
-                       response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("utf-8"),"ISO-8859-1"));
-                       response.addHeader("Content-Length", "" + file.length());
-                       OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-                       response.setContentType("application/octet-stream");
-                       toClient.write(buffer);
-                       toClient.flush();
-                       toClient.close();
+        File file = new File(filePath);
+        // 取得文件名。
+        String filename = file.getName();
+        // 取得文件的后缀名。
+        //String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
 
-       }
+        // 以流的形式下载文件。
+        InputStream fis = new BufferedInputStream(new FileInputStream(file));
+        byte[] buffer = new byte[fis.available()];
+        fis.read(buffer);
+        fis.close();
+        // 清空response
+        response.reset();
+        // 设置response的Header
+        response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("utf-8"), "ISO-8859-1"));
+        response.addHeader("Content-Length", "" + file.length());
+        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+        response.setContentType("application/octet-stream");
+        toClient.write(buffer);
+        toClient.flush();
+        toClient.close();
+
+    }
+
     public static byte[] getBytesFromFile(File file) throws IOException {
 
         InputStream is = new FileInputStream(file);
@@ -48,13 +50,13 @@ public class FileUtil {
 
             // 文件太大，无法读取
 
-            throw new IOException("File is to large "+file.getName());
+            throw new IOException("File is to large " + file.getName());
 
         }
 
 // 创建一个数据来保存文件数据
 
-        byte[] bytes = new byte[(int)length];
+        byte[] bytes = new byte[(int) length];
 
 // 读取数据到byte数组中
 
@@ -64,7 +66,7 @@ public class FileUtil {
 
         while (offset < bytes.length
 
-                && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
 
             offset += numRead;
 
@@ -74,7 +76,7 @@ public class FileUtil {
 
         if (offset < bytes.length) {
 
-            throw new IOException("Could not completely read file "+file.getName());
+            throw new IOException("Could not completely read file " + file.getName());
 
         }
 
@@ -87,7 +89,7 @@ public class FileUtil {
     }
 
     public static String getFileTypeByOriginalFilename(String originalFilename) {
-        if (originalFilename.indexOf(".")<0){
+        if (originalFilename.indexOf(".") < 0) {
             return "";
         }
         return originalFilename.substring(originalFilename.lastIndexOf("."));

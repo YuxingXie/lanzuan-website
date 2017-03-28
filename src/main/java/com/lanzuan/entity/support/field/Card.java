@@ -2,23 +2,20 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.CardGroup;
-import com.lanzuan.entity.User;
-import com.lanzuan.entity.support.Editable;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.entity.support.LeafItem;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
-
-import java.util.Date;
 
 @Naming(value = "卡片")
 public class Card extends LeafItem {
     @Naming(value = "图片")
-    @Editable(inputType = InputType.IMAGE)
+    @FormAttributes(inputType = InputType.IMAGE)
     private String image;
     @Naming(value = "文字")
-    @Editable()
+    @FormAttributes()
     private String text;
-    @Editable(inputType = InputType.URL)
+    @FormAttributes(inputType = InputType.URL)
     @Naming("链接")
     private String link;
 
