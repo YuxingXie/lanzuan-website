@@ -1,7 +1,7 @@
 package com.lanzuan.common.web;
 
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
-import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.common.base.annotation.entity.ListColumn;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.common.code.Expression;

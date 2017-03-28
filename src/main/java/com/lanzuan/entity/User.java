@@ -20,9 +20,10 @@ public class User {
     @Id private String id;
     @Field(value = "name")
     @Length(min=2,max=20)
-    @Naming(value = "姓名")
-    @FormAttributes()
     private String name;
+    @Naming(value = "姓名",cssClass = "fa fa-user")
+    @FormAttributes()
+    private String loginName;
     @Field
     private String realName;
     @Field(value = "sex")
@@ -207,7 +208,7 @@ public class User {
     private String rePassword;
     @Transient
     private String loginStr;
-    private String loginName;
+
 
 
 

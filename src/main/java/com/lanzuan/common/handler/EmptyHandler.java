@@ -22,8 +22,8 @@ public class EmptyHandler {
     public void emptyHandler() throws ServletException, IOException {
     }
 
-    @RequestMapping(value = "/admin")
-    public void admin(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
-            request.getRequestDispatcher("/statics/page/admin/login.html").forward(request,response);
-    }
+//    @RequestMapping(value = "/admin")
+//    public void admin(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
+//            request.getRequestDispatcher("/statics/page/admin/login.html").forward(request,response);
+//    }
 }

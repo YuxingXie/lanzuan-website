@@ -1,7 +1,7 @@
 package com.lanzuan.common.web;
 
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
-import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
@@ -19,20 +19,18 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 
-public class EntityFormBuilder<E> {
+public class EntityFormBuilder {
     private StringBuffer formHtml;
-    private Class<E> itemClass;
+    private Class<?> itemClass;
 
     private  String itemNaming;
     private String itemVar;
     private EntityFormBuilder(){
 
     }
-    public EntityFormBuilder(Class<E> itemClass) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+    public EntityFormBuilder(Class<?> itemClass) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         this.formHtml =new StringBuffer();
-        Class typeCls = getClass();//
         this.itemClass=itemClass;
-
         this.itemVar=StringUtils.firstLowerCase(itemClass.getSimpleName());
         Assert.isTrue(itemClass.isAnnotationPresent(Document.class));
         if (itemClass.isAnnotationPresent(Naming.class)){
@@ -43,9 +41,8 @@ public class EntityFormBuilder<E> {
         printItem(1);
     }
     public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        CardGroup user=new CardGroup();
         EntityFormBuilder builder=new EntityFormBuilder(Class.forName("com.lanzuan.entity.User"));
-        System.out.println(builder.getEditHtml());
+        System.out.println(builder.getFormHtml());
     }
 
 
@@ -79,6 +76,8 @@ public class EntityFormBuilder<E> {
                 printSelectDiv(context,fieldInScope,field, fieldNaming, formAttributes);
             }else if(InputType.URL==inputType){
                 printUrlInputGroup(context,fieldInScope, field, fieldNaming);
+            }else if(InputType.PASSWORD==inputType){
+                printPasswordInputGroup(context, fieldInScope, field, fieldNaming);
             }else {
                 printTextInputGroup(context,fieldInScope,field, fieldNaming);
             }
@@ -125,6 +124,18 @@ public class EntityFormBuilder<E> {
 
     }
 
+    private void printPasswordInputGroup(String context, boolean fieldInScope, Field field, Naming fieldNaming) {
+
+        formHtml.append("\n<div class='input-group input-group-sm p-a-xs'>");
+        formHtml.append("\n    <label class=\"input-group-addon fa fa-lock\">" + fieldNaming.value() + "</label>");
+        formHtml.append("\n<input class='form-control' type='password' ng-model='" + context + "." + field.getName() + "' name='"+field.getName()+"'/>");
+
+        formHtml.append("\n</div>");
+
+
+
+    }
+
     private void printSelectDiv(String context,boolean inScope,Field field, Naming fieldNaming, FormAttributes formAttributes) {
         String[] options= formAttributes.optionValues();
         if(options==null) return;
@@ -139,7 +150,7 @@ public class EntityFormBuilder<E> {
         formHtml.append("<label class=\"input-group-addon fa fa-reorder\">");
         formHtml.append(fieldNaming.value());
         formHtml.append("</label>");
-        formHtml.append("<select type='select' ng-model=\"" + context + "." + field.getName() + "\" class='form-control'>");
+        formHtml.append("<select type='select' ng-model=\"" + context + "." + field.getName() + "\" class='form-control' name='"+field.getName()+"'>");
         for(String option:options){
             JSONObject jsonObject=JSONObject.fromObject(option);
             formHtml.append("<option value='" + jsonObject.get("value") + "'>" + jsonObject.get("text") + "</option>");
@@ -227,18 +238,14 @@ public class EntityFormBuilder<E> {
 
 
     private void printTextInputGroup(String context,boolean inScope,Field field, Naming fieldNaming) {
-        String ng_if=getNgIfExpression(context,inScope,fieldNaming);
-        if(ng_if==null){
-            formHtml.append("\n<div class='col-xs-12 p-b-xs'>");
-        }else {
-            formHtml.append("\n<div class='col-xs-12 p-b-xs' ng-if=\"" + ng_if + "\">");
-        }
 
-        formHtml.append("\n<div class='input-group input-group-sm'>");
-        formHtml.append("\n    <label class=\"input-group-addon fa fa-edit\">" + fieldNaming.value() + "</label>");
-        formHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
+        formHtml.append("\n<div class='input-group input-group-sm p-a-xs'>");
+        String cssClass=fieldNaming.cssClass();
+        if (StringUtils.isBlank(cssClass)) cssClass="fa fa-edit";
+        formHtml.append("\n    <label class=\"input-group-addon "+cssClass+"\">" + fieldNaming.value() + "</label>");
+        formHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "' name='"+field.getName()+"'/>");
         formHtml.append("\n</div>");
-        formHtml.append("\n</div>");
+
     }
     private void printUrlInputGroup(String context,boolean inScope,Field field, Naming fieldNaming) {
         String ng_if=getNgIfExpression(context,inScope,fieldNaming);
@@ -250,7 +257,7 @@ public class EntityFormBuilder<E> {
 
         formHtml.append("\n<div class='input-group input-group-sm'>");
         formHtml.append("\n    <label class=\"input-group-addon fa fa-anchor\">" + fieldNaming.value() + "</label>");
-        formHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "'/>");
+        formHtml.append("\n<input class='form-control' type='text' ng-model='" + context + "." + field.getName() + "' name='"+field.getName()+"'/>");
         formHtml.append("\n    <a class=\"input-group-addon fa fa-question\" ng-href=\"/admin/article/list\" target=\"_blank\"></a>");
         formHtml.append("\n</div>");
         formHtml.append("\n</div>");
@@ -377,7 +384,7 @@ public class EntityFormBuilder<E> {
             return ng_condition;
     }
 
-    public String getEditHtml(){
+    public String getFormHtml(){
         return formHtml.toString();
     }
 

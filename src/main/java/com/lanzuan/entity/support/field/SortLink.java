@@ -4,7 +4,7 @@ import com.lanzuan.common.code.Expression;
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.SortLinkGroup;
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
-import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 

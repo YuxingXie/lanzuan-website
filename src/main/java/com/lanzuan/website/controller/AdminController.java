@@ -7,6 +7,7 @@ import com.lanzuan.common.util.MD5;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.AngularEntityEditorBuilder;
 import com.lanzuan.common.web.CookieTool;
+import com.lanzuan.common.web.EntityFormBuilder;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
 import com.lanzuan.entity.WebPage;
@@ -54,6 +55,15 @@ public class AdminController extends BaseRestSpringController {
     @Resource(name = "webPageService")
     IWebPageService webPageService;
 
+
+
+
+    @RequestMapping()
+    public String admin(HttpSession session,ModelMap modelMap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        EntityFormBuilder entityFormBuilder=new EntityFormBuilder(User.class);
+        modelMap.addAttribute("form",entityFormBuilder.getFormHtml());
+        return "admin/login";
+    }
     @RequestMapping(value = "/index")
     public String index(HttpSession session,ModelMap modelMap){
 
@@ -77,10 +87,10 @@ public class AdminController extends BaseRestSpringController {
         return "forward:"+pageComponent.getTemplateUri();
     }
     @RequestMapping(value = "/sign_up")
-    public String signUp(@ModelAttribute User user,final RedirectAttributes redirectAttributes,HttpSession session) throws UnsupportedEncodingException {
-        Assert.notNull(user);
-        Assert.isTrue(StringUtils.isNotBlank(user.getLoginName()));
-        Assert.notNull(StringUtils.isNotBlank(user.getPassword()));
+    public String signUp(@ModelAttribute User user,HttpSession session) throws UnsupportedEncodingException {
+        if(user==null)return "redirect:/admin";
+        if(StringUtils.isBlank(user.getLoginName()))return "redirect:/admin";
+        if(StringUtils.isBlank(user.getPassword()))return "redirect:/admin";
         User find=userService.findByLoginName(user.getLoginName());
         if (find==null){
             return "redirect:/admin";

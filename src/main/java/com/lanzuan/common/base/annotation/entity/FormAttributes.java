@@ -19,4 +19,5 @@ public @interface FormAttributes {
     public String newAction() default "";
     public String editAction() default "";
     public String modelName() default "";
+    public boolean required() default false;
 }

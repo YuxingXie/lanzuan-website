@@ -2,7 +2,7 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.ImageTextBlockGroup;
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
-import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.entity.support.Item;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 

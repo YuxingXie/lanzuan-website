@@ -1,4 +1,4 @@
-package com.lanzuan.common.base.annotation.entity;
+package com.lanzuan.entity.support;
 
 import java.util.List;
 
