@@ -52,7 +52,7 @@
 
         $scope.onDrop = function($event,$data,array,index){
 
-            ;array.splice(index,0,$data);
+            ;array.splice(index+1,0,$data);
         };
 
     }])

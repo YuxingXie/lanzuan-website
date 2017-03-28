@@ -27,12 +27,11 @@
 <div class="alert alert-info">
     <h5 class="text-center">组装页面</h5>
 </div>
-<div class="container-fluid">
-    <div class="container" >
+<div class="container-fluid p-a-md">
 
         <div class="row">
             <div class="col-xs-12 img-thumbnail p-a-0 ">
-                <div class="alert alert-info p-r-2">组件预览
+                <div class="alert alert-info p-r-2">组装效果预览<small class="text-danger"> (预览区域并不代表真正的设备大小,与实际效果会稍有出入)</small>
                     <div class="btn-group btn-group-sm pull-right" ng-init="showPrev=true">
                         <button class="btn btn-info fa fa-minus" ng-click="showPrev=!showPrev"></button>
                         <button class="btn btn-info fa fa-square-o" ng-click="showPrev=!showPrev"></button>
@@ -40,7 +39,13 @@
                     </div>
                 </div>
 
-                <div ng-view style="height: 400px;" ng-show="showPrev"></div>
+                <div style="height: 400px;overflow: scroll" ng-show="showPrev">
+                    <div  ng-repeat="pageComponent in webPage.pageComponents track by $index">
+                        <%--<span ng-init="src=pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></span>--%>
+                        {{src}}
+                        <div ng-include src="pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row p-t-lg p-b-lg">
@@ -49,22 +54,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-3">组件列表</div>
-            <div class="col-xs-3">拖拽到下方</div>
-            <div class="col-xs-6 ">页面效果预览<small>(这只是粗略效果，因为预览区域并不代表真正的设备大小，如果要预览在真实设备的效果请点击
-                <a href="#" target="_blank">这里</a>)</small></div>
+            <div class="col-xs-12 solid-silver-border">
+                <div ng-view style="height: 300px;overflow-y: scroll;" ></div>
+
+            </div>
+            <div class="col-xs-6">组件列表</div>
+            <div class="col-xs-6">拖拽到下方</div>
+
         </div>
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-6">
                 <ul ui-on-Drop="onDrop($event,$data,pageComponents)" class="list-group">
                     <li ui-draggable="true" drag="pageComponent" class="list-group-item" style="cursor: move"
                         on-drop-success="dropSuccessHandler($event,$index,pageComponents)"
                         ng-repeat="pageComponent in pageComponents track by $index">
-                        {{pageComponent.name}}<a ng-href="#/{{pageComponent.var}}" ng-click="$parent.showPrev=true">预览</a>
+                        {{pageComponent.name}}<a ng-href="#/{{pageComponent.var}}" >预览</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-6">
                 <ul  class="list-group">
                     <li ui-on-Drop="onDrop($event,$data,webPage.pageComponents,$index)"
                         ui-draggable="false" drag="pageComponent" class="list-group-item dash-silver-border img-nav-brand"
@@ -74,16 +82,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-6 solid-silver-border">
-                    {{webPage.pageComponents.length}}
-                <div  ng-repeat="pageComponent in webPage.pageComponents track by $index">
-                        <%--<span ng-init="src=pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></span>--%>
-                    {{src}}
-                    <div ng-include src="pageComponent.websiteUri+'?var='+pageComponent.var+'&varU='+pageComponent.varU"></div>
-                </div>
-            </div>
+
         </div>
-    </div>
+
 </div>
 
 
