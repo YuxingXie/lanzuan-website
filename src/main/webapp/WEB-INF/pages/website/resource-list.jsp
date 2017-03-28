@@ -63,11 +63,26 @@
 
                             </div>
                             <div class="col-xs-12 bg-white ">
-
+                                <c:if test="${empty webResourceList}">暂时没有资源</c:if>
                                 <c:if test="${not empty webResourceList}">
+                                    <div class="col-xs-12 bg-white ">
+                                        <div class="col-xs-3 padding-1"></div>
+                                        <div class="col-xs-3 padding-1"></div>
+                                        <div class="col-xs-3 padding-1"></div>
+                                    </div>
                                     <c:forEach var="resource" items="${webResourceList}">
-                                        <div class="col-xs-12 padding-1">
-                                                ${resource.name},类别:${resource.type},
+                                        <div class="col-xs-3 padding-1">
+
+                                                ${resource.name}
+                                        </div>
+                                        <div class="col-xs-3 padding-1">
+
+                                       类别:${resource.type}
+
+                                        </div>
+                                        <div class="col-xs-3 padding-1">
+
+
                                             下载路径：/file-download?path=${resource.path}
                                         </div>
                                     </c:forEach>
