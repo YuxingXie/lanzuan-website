@@ -1,8 +1,5 @@
-package com.lanzuan.entity.support;
+package com.lanzuan.common.base.annotation.entity;
 
-import com.lanzuan.entity.User;
-
-import java.util.Date;
 import java.util.List;
 
 /**

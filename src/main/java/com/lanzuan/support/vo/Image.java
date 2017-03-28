@@ -1,9 +1,9 @@
 package com.lanzuan.support.vo;
 
 import com.lanzuan.common.code.InputType;
-import com.lanzuan.entity.support.Editable;
-import com.lanzuan.entity.support.Item;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.common.base.annotation.entity.Naming;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Image implements Item {
     @Naming(value = "图片路径")
-    @Editable(inputType = InputType.IMAGE)
+    @FormAttributes(inputType = InputType.IMAGE)
     private String uri;
     private String name;
     private String suffix;

@@ -2,9 +2,9 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.Carousel;
-import com.lanzuan.entity.support.Editable;
-import com.lanzuan.entity.support.Item;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class CarouselItem implements Item {
 //    private String value;
 
     @Naming("图片链接")
-    @Editable(inputType = InputType.IMAGE)
+    @FormAttributes(inputType = InputType.IMAGE)
     private String imageLink;
     @Naming(value = "轮播项标题")
     private CarouselCaption carouselCaption;

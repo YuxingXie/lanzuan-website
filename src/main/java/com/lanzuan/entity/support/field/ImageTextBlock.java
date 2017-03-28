@@ -1,9 +1,9 @@
 package com.lanzuan.entity.support.field;
 
 import com.lanzuan.entity.ImageTextBlockGroup;
-import com.lanzuan.entity.support.Editable;
-import com.lanzuan.entity.support.Item;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.common.base.annotation.entity.Item;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @Naming(value = "图文块")
 public class ImageTextBlock implements Item {
     @Naming(value = "块标题")
-    @Editable()
+    @FormAttributes()
     private String name;
     @Naming(ngRepeatVar = "imageTextItem",value = "图文项")
     private List<ImageTextItem> imageTextItems;

@@ -2,9 +2,9 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.Navbar;
-import com.lanzuan.entity.support.Editable;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.entity.support.LeafItem;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 
 /**
@@ -17,7 +17,7 @@ public class NavbarBrand extends LeafItem{
     private String type;
 
     @Naming("值")
-    @Editable(inputType = InputType.IMAGE)
+    @FormAttributes(inputType = InputType.IMAGE)
     private String value;
     @Transient
     private Navbar parent;

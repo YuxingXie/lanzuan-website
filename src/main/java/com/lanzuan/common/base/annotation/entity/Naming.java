@@ -1,4 +1,4 @@
-package com.lanzuan.entity.support;
+package com.lanzuan.common.base.annotation.entity;
 
 import com.lanzuan.common.code.Expression;
 

@@ -3,17 +3,17 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.entity.Navbar;
-import com.lanzuan.entity.support.Editable;
+import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.entity.support.LeafItem;
-import com.lanzuan.entity.support.Naming;
+import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;
 
 public class NavItem  extends LeafItem {
     @Naming(value = "导航项名")
-    @Editable
+    @FormAttributes
     private String name;
 
-    @Editable(inputType = InputType.URL)
+    @FormAttributes(inputType = InputType.URL)
     @Naming("导航项链接")
     private String link;
 

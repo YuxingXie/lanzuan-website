@@ -1,5 +1,7 @@
 package com.lanzuan.entity.support;
 
+import com.lanzuan.common.base.annotation.entity.Item;
+
 import java.util.List;
 
 /**
