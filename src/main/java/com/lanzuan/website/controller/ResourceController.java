@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.ServletContextResource;
 
@@ -49,6 +50,11 @@ public class ResourceController extends BaseRestSpringController {
         List<Article> articles=articleService.findAll();
         return new ResponseEntity<List<Article>>(articles,HttpStatus.OK);
     }
-
+    @RequestMapping(value = "/list")
+    public String articleList(HttpServletRequest request,ModelMap modelMap) throws IOException {
+        List<WebResource> webResourceList = getWebResources(request);
+        modelMap.addAttribute("webResourceList", webResourceList);
+        return "admin/resource-list";
+    }
 
 }
