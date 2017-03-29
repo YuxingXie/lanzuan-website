@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div>
+            <div ng-init="bengin=0;end=2">
                 <div class="row large-180 bg-light-grey">
 
                     <div class="col-xs-4">标题</div>
@@ -40,7 +40,7 @@
                     <div class="col-xs-4">操作</div>
                 </div>
 
-                <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in articles">
+                <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
 
                     <div class="col-xs-4">
                         {{article.title}}
@@ -58,6 +58,29 @@
                     </div>
                 </div>
 
+                <nav>
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="active" ng-repeat="page in pagination.total">
+                            <a href="#" ng-bind="page"></a>
+                        </li>
+                        <%--<li><a href="#">2</a></li>--%>
+                        <%--<li><a href="#">3</a></li>--%>
+                        <%--<li><a href="#">4</a></li>--%>
+                        <%--<li><a href="#">5</a></li>--%>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
