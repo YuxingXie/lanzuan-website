@@ -3,6 +3,7 @@ package com.lanzuan.website.controller;
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
+import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.entity.Article;
 import com.lanzuan.entity.WebResource;
 import com.lanzuan.website.service.IArticleService;
@@ -16,8 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +59,40 @@ public class ResourceController extends BaseRestSpringController {
     public String articleList(HttpServletRequest request,ModelMap modelMap) throws IOException {
         List<WebResource> webResourceList = getWebResources(request);
         modelMap.addAttribute("webResourceList", webResourceList);
+        String msg=modelMap.get("msg")==null?null:modelMap.get("msg").toString();
+        if(msg!=null) modelMap.addAttribute("msg",msg);
         return "admin/resource-list";
     }
+    @RequestMapping(value = "/upload")
+    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@RequestParam("type") String type,HttpServletRequest request,RedirectAttributes redirectAttributes) throws IOException {
+
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+                String suffix= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
+                String fileName=file.getOriginalFilename();
+                String dir=request.getServletContext().getRealPath("/") +Constant.ICO_DIR;
+                if (StringUtils.isBlank(type)){
+                    dir=request.getServletContext().getRealPath("/")+Constant.DOCUMENT_DIR;
+                }else if(type.equals("image")){
+                    dir=request.getServletContext().getRealPath("/")+Constant.DOCUMENT_IMAGE_DIR;
+                }else if(type.equals("video")){
+                    dir=request.getServletContext().getRealPath("/")+Constant.DOCUMENT_VIDEO_DIR;
+                }else if(type.equals("file")){
+                    dir=request.getServletContext().getRealPath("/")+Constant.DOCUMENT_FILE_DIR;
+                }else{
+                    redirectAttributes.addFlashAttribute("msg","没有选定资源类型或资源类型不正确，请重新上传!");
+                    return "redirect:/admin/resource/list";
+                }
+                String filePath = dir+"/"+fileName;
+                File fileDir=new File(dir);
+                if (!fileDir.exists()){
+                    fileDir.mkdirs();
+                }
+                // 转存文件
+                file.transferTo(new File(filePath));
+        }
+        return "redirect:/admin/resource/list";
+    }
+
 
 }

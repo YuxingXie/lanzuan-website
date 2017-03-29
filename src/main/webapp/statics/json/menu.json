@@ -17,13 +17,12 @@
       {"name":"修改文章","link":"/admin/article/list","class":"fa fa-cog"}]
   },
   {
-    "name":"全局配置",
+    "name":"资源管理",
     "class":"fa fa-wrench",
     "collapse":true,
     "menuItem":[
-      {"name":"aaa","link":"/admin/abc","class":"fa fa-cog"},
-      {"name":"aaaa","link":"/admin/abc","class":"fa fa-cog"},
-      {"name":"aaaaba","link":"/admin/abc","class":"fa fa-cog"}]
+      {"name":"网站资源列表","link":"/admin/resource/list","class":"fa fa-cog"}
+      ]
   },
   {
     "name":"关于本系统",

@@ -135,6 +135,9 @@ public class IndexController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/file-download")
     public void fileDownload(@RequestParam String path,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        byte bb[];
+        bb = path.getBytes("ISO-8859-1");
+        path= new String(bb, "UTF-8");
         ServletContextResource resource=new ServletContextResource(request.getServletContext(),path);
         FileUtil.fileDownload(response,resource.getFile().getAbsolutePath());
     }

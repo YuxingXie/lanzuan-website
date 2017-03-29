@@ -12,6 +12,10 @@
     /*border: solid 1px #000000;*/
     /*background-color: #003300;*/
 }
+.relative{position: relative;}
+.absolute{position:absolute;}
+.fixed{position:fixed;}
+
 .overflow-scroll{overflow: scroll}
 .overflow-hidden{overflow: hidden}
 .pictureWithWords img{
@@ -617,6 +621,10 @@ Misc tools
 .hover-color-grey:hover{
      color: lightgrey;
  }
+.hover-inverse:hover{
+    background-color: #fff;
+    color: #000;
+}
 .hover-bg-color-grey:hover{
     background-color: #f6f6f6;
 }

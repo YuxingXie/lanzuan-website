@@ -25,6 +25,10 @@
         <h5 class="text-center">网站资源列表，需要填写下载地址时可以拷贝这些值</h5>
     </div>
     <div class="container-fluid">
+        <div class="row p-b-md">
+            <a href="/admin/resource-input" class="btn btn-primary fa fa-upload">上传资源</a>
+            <c:if test="${not empty msg}"><label class="label label-info"></label></c:if>
+        </div>
         <div class="row">
             <div class="col-xs-12 large-120 bg-light-grey">
                 <div class="col-xs-4">文件名</div>

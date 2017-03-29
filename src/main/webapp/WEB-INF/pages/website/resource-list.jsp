@@ -28,69 +28,54 @@
 
     <div class="container-fluid">
         <div class="row p-a-0 m-a-0">
-            <ol class="breadcrumb col-xs-12 m-a-0 navbar-fixed-top hidden-md-up">
-                当前位置:
-                <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                <li class="small active">资源下载</li>
-            </ol>
-            <%--<div style="width: 10%"></div>--%>
-            <div class="hidden-md-down" style="position:fixed;top:0;left:9%;width: 17%;z-index: 100;">
-                <%--<div class="list-group fixed-left-menu">--%>
-                <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
-                    <div class="card-header p-a-0 list">
-                        <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
+            <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
+                <div class="col-xs-12 col-md-push-2 col-md-10 m-a-0 p-a-0">
+                    <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
+                        <div class="card-header p-a-0 list hidden-md-down">
+                            <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
+                        </div>
+                        <div class="card-block p-a-0 m-a-0" >
+                            <ol class="breadcrumb m-a-0 p-a-xs">
+                                当前位置:
+                                <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
+                                <li class="small active">资源下载</li>
+                            </ol>
+                        </div>
+                        <a href="#content" class="list-group-item hidden-md-down">${article.title}</a>
                     </div>
-                    <div class="card-block p-a-0" >
-                        <ol class="breadcrumb m-a-0">
-                            当前位置:
-                            <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                            <li class="small active">资源下载</li>
-                        </ol>
-                    </div>
-
                 </div>
             </div>
             <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                 <div class="col-xs-12 p-a-0 m-a-0" >
                     <div class="col-xs-12">
-
-                        <div class="col-xs-3"></div>
-                        <div class="col-xs-8 p-r-lg"   >
+                        <div class="col-md-8 col-md-push-3 col-xs-12"   >
                             <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                 <h4>资源下载</h4>
-
-
-
                             </div>
                             <div class="col-xs-12 bg-white ">
                                 <c:if test="${empty webResourceList}">暂时没有资源</c:if>
                                 <c:if test="${not empty webResourceList}">
-                                    <div class="col-xs-12 bg-white ">
-                                        <div class="col-xs-3 padding-1"></div>
-                                        <div class="col-xs-3 padding-1"></div>
-                                        <div class="col-xs-3 padding-1"></div>
+                                    <div class="col-xs-12 large-120 bg-light-grey">
+                                        <div class="col-xs-4">文件名</div>
+                                        <div class="col-xs-4">类别</div>
+                                        <div class="col-xs-4">下载路径(uri)</div>
                                     </div>
                                     <c:forEach var="resource" items="${webResourceList}">
-                                        <div class="col-xs-3 padding-1">
-
-                                                ${resource.name}
-                                        </div>
-                                        <div class="col-xs-3 padding-1">
-
-                                       类别:${resource.type}
-
-                                        </div>
-                                        <div class="col-xs-3 padding-1">
-
-
-                                            下载路径：/file-download?path=${resource.path}
+                                        <div class="col-xs-12 hover-bg-color-grey p-t p-b">
+                                            <div class="col-xs-4">
+                                                    ${resource.name}
+                                            </div>
+                                            <div class="col-xs-4">
+                                                    ${resource.type}
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <a href="/file-download?path=${resource.path}">点击下载</a>
+                                            </div>
                                         </div>
                                     </c:forEach>
                                 </c:if>
-
                             </div>
                         </div>
-                        <div class="col-xs-1"></div>
                     </div>
                     <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-xl">
                         <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>

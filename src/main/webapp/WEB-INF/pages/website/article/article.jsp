@@ -51,7 +51,7 @@
                 <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                   <div class="col-xs-12 p-a-0 m-a-0" >
                       <div class="col-xs-12">
-                          <div class="col-md-8 col-md-push-3 col-xs-12"   >
+                          <div class="col-md-7 col-md-push-4 col-xs-12"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4>${article.title}</h4>
                                   <div class="pull-left m-b-2em ">
@@ -74,7 +74,7 @@
                           </div>
                       </div>
                       <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-xl">
-                              <jsp:include page="${path}/statics/page/included/footer.html"></jsp:include>
+                              <jsp:include page="${path}/statics/page/included/footer.jsp"></jsp:include>
                       </div>
                   </div>
                 </div>

@@ -2,12 +2,12 @@
     <div class="row  m-l-r-0 m-t-2-4em m-b-1-6em md-up-p-l-r-4em " ng-init="get${param.varU}();_active=0">
         <div class="col-xs-12 p-a-0 m-a-0">
                     <span class="col-xs-12 col-md-4 col-lg-3 col-xl-2 p-r-0">
-                        <h4 class="md-down-p-l-0 large-120 xl-large-180 lg-large-165 md-large-150 sm-large-135" >{{${param.var}.text}}</h4>
+                        <h4 ng-cloak class="md-down-p-l-0 large-120 xl-large-180 lg-large-165 md-large-150 sm-large-135" ng-bind="${param.var}.text"></h4>
                     </span>
                     <span class="col-xs-12 col-md-8 col-lg-9 col-xl-10 text-left m-a-0">
                         <span ng-repeat="block in ${param.var}.items">
                             <span  ng-mouseover="$parent._active=$index" class="btn btn-padding-little bg-none sm-down-btn" ng-class="{'active bg-light-blue color-white':_active===$index}">
-                            <span class="sm-down-text-85-percent">{{block.name}}</span>
+                            <span class="sm-down-text-85-percent" ng-bind="block.name"></span>
                             </span>
                             <span ng-if="$index!==${param.var}.items.length-1" class="divider hidden-sm-down"></span>
                         </span>
@@ -22,11 +22,11 @@
                 <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"
                      ng-src="{{imageTextItem.image}}"/>
                 <div class="absolute-center small-90 hidden-md-down" ng-class="{'block':show,'hidden':!show}">
-                    <div class="text-indent-1em">{{imageTextItem.text}}</div>
+                    <div class="text-indent-1em" ng-bind="imageTextItem.text"></div>
                     <button class="btn btn-primary m-t-05em btn-padding-little" ng-href="{{imageTextItem.link}}">了解详情</button>
                 </div>
             </a>
-            <p class="img-title">{{imageTextItem.title}}</p>
+            <p class="img-title" ng-bind="imageTextItem.title"></p>
         </div>
     </div>
 

@@ -145,6 +145,9 @@
     .md-down-text-small-70{
         font-size: 70%;
     }
+    .md-down-text-small-80{
+        font-size: 80%;
+    }
     .md-down-img-thumbnail {
         display: inline-block;
         max-width: 100%;
@@ -175,6 +178,10 @@
     }
     .md-down-m-b-2em{
         margin-bottom: 2em;
+    }
+    .md-down-m-l-r-0{
+        padding-left: 0;
+        padding-right: 0;
     }
     .md-down-margin-1{
         margin: 1px;

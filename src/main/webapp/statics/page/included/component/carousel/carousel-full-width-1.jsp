@@ -10,13 +10,12 @@
                 <div ng-if="carouselItem.carouselCaption" class="carousel-caption">
                     <a ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='link'"
                        ng-href="{{carouselItem.carouselCaption.href}}"
-                       class="btn btn-primary hidden-md-down white-link">{{carouselItem.carouselCaption.text}} <i class="fa fa-chevron-right right"></i></a>
-
-
-                <span ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='text'" class="p-a-xs bg-info rounded-3">
-                   <i>{{carouselItem.carouselCaption.text}}</i>
-                </span>
-
+                       class="btn btn-primary hidden-md-down white-link" ng-bind="carouselItem.carouselCaption.text">
+                        <i class="fa fa-chevron-right right"></i>
+                    </a>
+                    <span ng-if="carouselItem.carouselCaption.type &&carouselItem.carouselCaption.type==='text'" class="p-a-xs bg-info rounded-3">
+                       <i class="carouselItem.carouselCaption.text"></i>
+                    </span>
                 </div>
             </div>
         </div>
