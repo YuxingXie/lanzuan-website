@@ -64,7 +64,7 @@ public class ResourceController extends BaseRestSpringController {
         return "admin/resource-list";
     }
     @RequestMapping(value = "/upload")
-    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@RequestParam("type") String type,HttpServletRequest request,RedirectAttributes redirectAttributes) throws IOException {
+    public String uploadResource(@RequestParam("file") MultipartFile file,@RequestParam("type") String type,HttpServletRequest request,RedirectAttributes redirectAttributes) throws IOException {
 
         // 判断文件是否为空
         if (!file.isEmpty()) {
@@ -91,6 +91,18 @@ public class ResourceController extends BaseRestSpringController {
                 // 转存文件
                 file.transferTo(new File(filePath));
         }
+        return "redirect:/admin/resource/list";
+    }
+
+    @RequestMapping(value = "/remove")
+    public String removeResource(@RequestParam String path,HttpServletRequest request,RedirectAttributes redirectAttributes) throws IOException {
+        byte bb[];
+        bb = path.getBytes("ISO-8859-1");
+        path= new String(bb, "UTF-8");
+        ServletContextResource resource=new ServletContextResource(request.getServletContext(),path);
+        File file=resource.getFile();
+        if (file.exists())
+            file.delete();
         return "redirect:/admin/resource/list";
     }
 

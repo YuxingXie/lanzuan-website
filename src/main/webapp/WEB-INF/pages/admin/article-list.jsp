@@ -22,7 +22,6 @@
 <jsp:include page="${path}/admin/admin-navbar"></jsp:include>
 <div class="alert alert-info">
     <h5 class="text-center">一些文章和页面的链接，需要填写链接地址时可以拷贝这些值</h5>
-
 </div>
 <div class="container"  ng-init="getArticles()">
     <div class="row">
@@ -32,56 +31,48 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div ng-init="bengin=0;end=2">
-                <div class="row large-180 bg-light-grey">
-
-                    <div class="col-xs-4">标题</div>
-                    <div class="col-xs-4">地址(uri)</div>
-                    <div class="col-xs-4">操作</div>
-                </div>
-
-                <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
-
-                    <div class="col-xs-4">
-                        {{article.title}}
-                    </div>
-                    <div class="col-xs-4">
-                       /article/{{article.id}} <a class="blue-link" ng-href="/article/{{article.id}}" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="btn-group btn-group-sm" >
-                            <a class="btn btn-primary fa fa-edit" ng-href="/admin/article/file-editor/{{article.id}}" ng-if="article.byEditor">修改</a>
-
-                            <a class="btn btn-danger fa fa-trash" ng-click="removeArticle(article.id)">删除</a>
-                        </div>
-                        <label class="label label-danger label-pill" ng-if="!article.byEditor">该文章不是由编辑器生成，不能被编辑器修改</label>
-                    </div>
-                </div>
-
-                <nav>
-                    <ul class="pagination">
-                        <li class="disabled">
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="active" ng-repeat="page in pagination.total">
-                            <a href="#" ng-bind="page"></a>
-                        </li>
-                        <%--<li><a href="#">2</a></li>--%>
-                        <%--<li><a href="#">3</a></li>--%>
-                        <%--<li><a href="#">4</a></li>--%>
-                        <%--<li><a href="#">5</a></li>--%>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="row large-180 bg-light-grey">
+                <div class="col-xs-4">标题</div>
+                <div class="col-xs-4">地址(uri)</div>
+                <div class="col-xs-4">操作</div>
             </div>
+            <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
+
+                <div class="col-xs-4">
+                    {{article.title}}
+                </div>
+                <div class="col-xs-4">
+                   /article/{{article.id}} <a class="blue-link" ng-href="/article/{{article.id}}" target="_blank"><i class="small-90 " style="text-decoration: underline">Go...</i></a>
+                </div>
+                <div class="col-xs-4">
+                    <div class="btn-group btn-group-sm" >
+                        <a class="btn btn-primary fa fa-edit" ng-href="/admin/article/file-editor/{{article.id}}" ng-if="article.byEditor">修改</a>
+
+                        <a class="btn btn-danger fa fa-trash" ng-click="removeArticle(article.id)">删除</a>
+                    </div>
+                    <label class="label label-danger label-pill" ng-if="!article.byEditor">该文章不是由编辑器生成，不能被编辑器修改</label>
+                </div>
+            </div>
+
+            <nav >
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li  ng-class="{'active':$index===active}" ng-repeat="page in pagination.pages track by $index">
+                        <a href="#" ng-bind="$index+1" ng-click="toPage($index+1)"></a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="Next" ng-click="nextPage()">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

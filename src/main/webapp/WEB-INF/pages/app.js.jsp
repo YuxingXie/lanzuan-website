@@ -144,11 +144,11 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
         <%--}--%>
 <%--</c:if>--%>
 
-    <%--$scope.initAdmin=function(){--%>
+    $scope.initAdmin=function(){
 
-    <%--$scope.getMenu();--%>
-    <%--$scope.editable=false;--%>
-    <%--}--%>
+    $scope.getMenu();
+    $scope.editable=false;
+    }
     <%--$scope.getArticleSectionsAddDuplicated=function(uri){--%>
         <%--$http.get(uri).success(function (data) {--%>
 
@@ -227,20 +227,41 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
 //    }
     $scope.getArticles=function(){
         $http.get("/admin/article/list/data").success(function (data) {
+            $scope.active=0;
             $scope.articles=data;
-            $scope.pagination={size:3,total:data.length};
+            var size=2;
+            var totalPage=0;
+            totalPage=Math.ceil(data.length/size);
+            console.log(data.length)
+            console.log(totalPage)
+            var pages=new Array(totalPage);
+            $scope.pagination={size:size,total:data.length,totalPage:totalPage,pages:pages};
 
             $scope.pagination.data=data.slice(0,$scope.pagination.size);
 
         });
     }
+
+
+    $scope.toPage=function(index){
+        $scope.active=index-1;
+        var begin=(index-1)*$scope.pagination.size;
+        var end=index*$scope.pagination.size;
+        $scope.pagination.data=$scope.articles.slice(begin,end);
+    }
+    $scope.nextPage=function(){
+        $scope.pagination.data=$scope.articles.slice($scope.pagination.size+1);
+    }
+    $scope.prevPage=function(){
+    $scope.pagination.data=$scope.articles.slice($scope.pagination.size+1);
+    }
 //
 //
-//$scope.getMenu=function(){
-//$http.get("/statics/json/menu.json").success(function (data) {
-//$scope.menuItems=data;
-//});
-//}
+$scope.getMenu=function(){
+$http.get("/statics/json/menu.json").success(function (data) {
+$scope.menuItems=data;
+});
+}
 
 
 

@@ -31,23 +31,28 @@
         </div>
         <div class="row">
             <div class="col-xs-12 large-120 bg-light-grey">
-                <div class="col-xs-4">文件名</div>
-                <div class="col-xs-4">类别</div>
-                <div class="col-xs-4">下载路径(uri)</div>
+                <div class="col-xs-3">文件名</div>
+                <div class="col-xs-2">类别</div>
+                <div class="col-xs-5">下载路径(uri)</div>
+                <div class="col-xs-2">操作</div>
             </div>
             <div class="col-xs-12 small-90 solid-silver-border-bottom">
                 <c:if test="${empty webResourceList}">暂时没有资源</c:if>
                 <c:if test="${not empty webResourceList}">
                     <c:forEach var="resource" items="${webResourceList}">
                     <div class=" hover-bg-color-grey p-t p-b">
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             ${resource.name}
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-2">
                             ${resource.type}
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-5">
                             /file-download?path=${resource.path}
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="/admin/resource/remove?path=${resource.path}" class="btn btn-danger btn-sm">删除</a>
+
                         </div>
                     </div>
                     </c:forEach>
