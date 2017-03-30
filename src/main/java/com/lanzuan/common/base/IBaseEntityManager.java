@@ -26,8 +26,7 @@ public interface IBaseEntityManager<E> {
    List<E> findNotEquals(E e);
    List<E> textQuery(String keyWord);
    List<E> findAll();
-   List<E> findFields(List<String> fields);
-   List<E> findFields(DBObject dbObject,List<String> fields);
+
    List<E> findAll(Integer limit);
 //   public int upsert(E queryEntity,E updateEntity);
    E findById(ObjectId id);;
@@ -70,8 +69,12 @@ public interface IBaseEntityManager<E> {
 
    E getMax(String field, String fieldQuery, Object fieldQueryValue);
 
-   List<E> findFields(DBObject dbObject, List<String> fields, int limit);
-   List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc);
+   List<E> findAllOrderBy(List<String> fields);
+   List<E> findAllOrderBy(String field,boolean asc);
+   List<E> findAllOrderBy(DBObject dbObject, List<String> fields);
+   List<E> findAllOrderBy(DBObject dbObject, List<String> fields,boolean asc);
+   List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit);
+   List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit, String sortField, boolean asc);
 
    long count();
 }

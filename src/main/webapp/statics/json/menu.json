@@ -21,7 +21,8 @@
     "class":"fa fa-wrench",
     "collapse":true,
     "menuItem":[
-      {"name":"网站资源列表","link":"/admin/resource/list","class":"fa fa-cog"}
+      {"name":"网站文档资源","link":"/admin/resource/list","class":"fa fa-cog"},
+      {"name":"Canvas资源","link":"/admin/canvas/list","class":"fa fa-cog"}
       ]
   },
   {

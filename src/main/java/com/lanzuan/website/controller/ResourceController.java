@@ -56,13 +56,16 @@ public class ResourceController extends BaseRestSpringController {
         return new ResponseEntity<List<Article>>(articles,HttpStatus.OK);
     }
     @RequestMapping(value = "/list")
-    public String articleList(HttpServletRequest request,ModelMap modelMap) throws IOException {
+    public String resourceList(HttpServletRequest request,ModelMap modelMap) throws IOException {
         List<WebResource> webResourceList = getWebResources(request);
         modelMap.addAttribute("webResourceList", webResourceList);
         String msg=modelMap.get("msg")==null?null:modelMap.get("msg").toString();
         if(msg!=null) modelMap.addAttribute("msg",msg);
         return "admin/resource-list";
     }
+
+
+
     @RequestMapping(value = "/upload")
     public String uploadResource(@RequestParam("file") MultipartFile file,@RequestParam("type") String type,HttpServletRequest request,RedirectAttributes redirectAttributes) throws IOException {
 

@@ -1,13 +1,13 @@
-package com.lanzuan.website.controller;
+package com.lanzuan.admin.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
 import com.lanzuan.common.util.StringUtils;
-import com.lanzuan.entity.ImageTextBlockGroup;
+import com.lanzuan.entity.FullWidthImage;
 import com.lanzuan.entity.User;
 import com.lanzuan.support.vo.Message;
-import com.lanzuan.website.service.IImageTextBlockGroupService;
+import com.lanzuan.website.service.IFullWidthImageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -34,38 +34,39 @@ import java.util.List;
  * Created by Administrator on 2015/6/11.
  */
 @Controller
-@RequestMapping("/admin/image-text-block-group")
-public class AdminImageTextBlockGroupController extends BaseRestSpringController {
+@RequestMapping("/admin/full-width-image")
+
+public class AdminFullWidthImageController extends BaseRestSpringController {
     private static Logger logger = LogManager.getLogger();
-    @Resource(name = "imageTextBlockGroupService")
-    IImageTextBlockGroupService imageTextBlockGroupService;
+
+    @Resource(name = "fullWidthImageService")
+    IFullWidthImageService fullWidthImageService;
 
 
     @RequestMapping(value = "/update")
-    public ResponseEntity<Message> update(@RequestBody ImageTextBlockGroup imageTextBlockGroup,HttpSession session){
+    public ResponseEntity<Message> update(@RequestBody FullWidthImage fullWidthImage,HttpSession session){
         Message message=new Message();
         Date now=new Date();
         User user=getLoginUser(session);
-        if (imageTextBlockGroup.getId()==null){
-            imageTextBlockGroup.setCreator(user);
+        if (fullWidthImage.getId()==null){
+            fullWidthImage.setCreator(user);
         }
-        imageTextBlockGroup.setLastModifyDate(now);
-        imageTextBlockGroup.setLastModifyUser(user);
-
-        imageTextBlockGroupService.update(imageTextBlockGroup);
+        fullWidthImage.setLastModifyDate(now);
+        fullWidthImage.setLastModifyUser(user);
+        fullWidthImageService.update(fullWidthImage);
         message.setSuccess(true);
-        message.setData(imageTextBlockGroup);
+        message.setData(fullWidthImage);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/save-as")
-    public ResponseEntity<Message> saveAs(@RequestBody ImageTextBlockGroup imageTextBlockGroup,HttpSession session){
+    public ResponseEntity<Message> saveAs(@RequestBody FullWidthImage fullWidthImage,HttpSession session){
         Message message=new Message();
-        ImageTextBlockGroup old=imageTextBlockGroupService.findById(imageTextBlockGroup.getId());
-        imageTextBlockGroup.setId(null);
-        imageTextBlockGroup.setEnabled(false);
-//        imageTextBlockGroup.setCreator(getLoginAdministrator(session));
-        imageTextBlockGroup.setCreateDate(new Date());
-        imageTextBlockGroupService.insert(imageTextBlockGroup);
+        FullWidthImage old=fullWidthImageService.findById(fullWidthImage.getId());
+        fullWidthImage.setId(null);
+        fullWidthImage.setEnabled(false);
+//        fullWidthImage.setCreator(getLoginAdministrator(session));
+//        fullWidthImage.setCreateDate(new Date());
+        fullWidthImageService.insert(fullWidthImage);
         message.setSuccess(true);
         message.setData(old);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
@@ -76,36 +77,36 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
         return "admin/image-text-block-group-list";
     }
     @RequestMapping(value = "/list/data")
-    public ResponseEntity<List<ImageTextBlockGroup>> getCardGroupList(){
-        List<ImageTextBlockGroup> groups=imageTextBlockGroupService.findAll();
-        return new ResponseEntity<List<ImageTextBlockGroup>>(groups, HttpStatus.OK);
+    public ResponseEntity<List<FullWidthImage>> getCardGroupList(){
+        List<FullWidthImage> groups=fullWidthImageService.findAll();
+        return new ResponseEntity<List<FullWidthImage>>(groups, HttpStatus.OK);
     }
     @RequestMapping(value = "/status-change")
-    public ResponseEntity<List<ImageTextBlockGroup>> statusChange(@RequestBody ImageTextBlockGroup imageTextBlockGroup){
-        imageTextBlockGroup.setEnabled(!imageTextBlockGroup.isEnabled());
-        imageTextBlockGroupService.update(imageTextBlockGroup, false);
+    public ResponseEntity<List<FullWidthImage>> statusChange(@RequestBody FullWidthImage fullWidthImage){
+        fullWidthImage.setEnabled(!fullWidthImage.isEnabled());
+        fullWidthImageService.update(fullWidthImage, false);
         return getCardGroupList();
     }
     @RequestMapping(value = "/delete/{id}")
-    public ResponseEntity<List<ImageTextBlockGroup>> remove(@PathVariable String id){
-        imageTextBlockGroupService.removeById(id);
+    public ResponseEntity<List<FullWidthImage>> remove(@PathVariable String id){
+        fullWidthImageService.removeById(id);
         return getCardGroupList();
     }
     @RequestMapping(value = "/image/upload-input/{pageComponentId}")
     public String iconUploadInput(ModelMap modelMap,@PathVariable String pageComponentId){
         modelMap.addAttribute("pageComponentId",pageComponentId);
-        return "admin/img-text-block-group-item-image-input";
+        return "admin/img-full-width-input";
     }
     @RequestMapping(value = "/image/add/{pageComponentId}")
-    public String articleSectionAddImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
+    public String addFullWidthImage(@RequestParam("file") MultipartFile file,@PathVariable String pageComponentId,HttpServletRequest request){
 
         // 判断文件是否为空
         if (!file.isEmpty()) {
             try {
                 String type= FileUtil.getFileTypeByOriginalFilename(file.getOriginalFilename());
                 String fileName=System.currentTimeMillis()+ type;
-                String dir=request.getServletContext().getRealPath("/") + Constant.IMAGE_TEXT_BLOCK_GROUP_ITEM_IMAGE_DIR;
-                String filePath =dir +"/"+fileName;
+                String dir=request.getServletContext().getRealPath("/") + Constant.FULL_WIDTH_IMAGE_DIR;
+                String filePath = dir+"/"+fileName;
                 File dirFile=new File(dir);
                 if (!dirFile.exists()){
                     dirFile.mkdirs();
@@ -124,7 +125,7 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
     }
     @RequestMapping(value = "/image/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
-        String fileDirectory=Constant.IMAGE_TEXT_BLOCK_GROUP_ITEM_IMAGE_DIR;
+        String fileDirectory= Constant.FULL_WIDTH_IMAGE_DIR;
         ServletContextResource resource=new ServletContextResource(request.getServletContext(), fileDirectory);
         List<String> strings=new ArrayList<String>();
         if (!resource.exists()){

@@ -54,18 +54,19 @@
                 </div>
             </div>
 
-            <nav >
+            <nav>
                 <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#" aria-label="Previous">
+                    <%--<li ng-if="pagination.pages&&pagination.pages.length&&pagination.pages.length>pagination.displayable&&pagination.displayable*pagination.times<=pagination.pages.length">--%>
+                    <li ng-if="pagination.times>1">
+                        <a href="#" aria-label="Previous" ng-click="prevPage()">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
                         </a>
                     </li>
-                    <li  ng-class="{'active':$index===active}" ng-repeat="page in pagination.pages track by $index">
-                        <a href="#" ng-bind="$index+1" ng-click="toPage($index+1)"></a>
+                    <li  ng-class="{'active':($index)+(pagination.times-1)*pagination.displayable===pagination.active}" ng-if="$index+1<=pagination.displayable&&($index+1)+(pagination.times-1)*pagination.displayable<=pagination.totalPage" ng-repeat="page in pagination.pages track by $index">
+                        <a href="#" ng-bind="($index+1)+(pagination.times-1)*pagination.displayable" ng-click="toPage(($index+1)+(pagination.times-1)*pagination.displayable)"></a>
                     </li>
-                    <li>
+                    <li ng-if="pagination.pages&&pagination.pages.length&&pagination.pages.length>pagination.displayable&&pagination.displayable*pagination.times<=pagination.pages.length">
                         <a href="#" aria-label="Next" ng-click="nextPage()">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>

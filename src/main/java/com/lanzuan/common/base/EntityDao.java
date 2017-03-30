@@ -69,10 +69,11 @@ public interface EntityDao <E>{
 
     void removeAll();
 
-    List<E> findFields(List<String> fields);
+    List<E> findAllOrderBy(List<String> fields);
+    List<E> findAllOrderBy(String field, boolean asc);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, boolean asc);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit, String sortField, boolean asc);
 
-    List<E> findFields(DBObject dbObject, List<String> fields);
-
-    List<E> findFields(DBObject dbObject, List<String> fields, int limit);
-    List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc);
 }

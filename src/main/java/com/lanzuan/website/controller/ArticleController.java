@@ -53,7 +53,7 @@ public class ArticleController extends BaseRestSpringController {
 
     @RequestMapping(value = "/list/data")
     public ResponseEntity<List<Article>> getAllArts(){
-        List<Article> articles=articleService.findAll();
+        List<Article> articles=articleService.findAllOrderBy("date",false);
         return new ResponseEntity<List<Article>>(articles,HttpStatus.OK);
     }
     @RequestMapping(value = "/list")

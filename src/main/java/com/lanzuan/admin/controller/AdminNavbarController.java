@@ -1,4 +1,4 @@
-package com.lanzuan.website.controller;
+package com.lanzuan.admin.controller;
 
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.util.StringUtils;

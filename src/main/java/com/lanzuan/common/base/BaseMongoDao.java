@@ -2,16 +2,14 @@ package com.lanzuan.common.base;
 
 import com.lanzuan.common.util.MongoDbUtil;
 import com.lanzuan.common.util.ReflectUtil;
+import com.lanzuan.common.util.StringUtils;
 import com.mongodb.*;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
-import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -393,24 +391,38 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         mongoTemplate.findAllAndRemove(new BasicQuery(new BasicDBObject()),collectionClass);
     }
     @Override
-    public List<E> findFields(List<String> fields){
-        return findFields(null,fields);
+    public List<E> findAllOrderBy(List<String> fields){
+        return findAllOrderBy(null, fields);
     }
     @Override
-    public List<E> findFields(DBObject dbObject, List<String> fields){
-        return findFields(dbObject,fields,0);
+    public List<E> findAllOrderBy(String field,boolean asc){
+        return findAllOrderBy(null, null,0,field,asc);
     }
-     public List<E> findFields(DBObject dbObject, List<String> fields, int limit){
-        return findFields(dbObject,fields,limit,null,false);
+    @Override
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields){
+        return findAllOrderBy(dbObject, fields, 0);
     }
-    public List<E> findFields(DBObject dbObject, List<String> fields, int limit,String sortField,boolean asc){
+    @Override
+     public List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit){
+        return findAllOrderBy(dbObject, fields, limit, null, false);
+    }
+    @Override
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields, boolean asc){
+        return findAllOrderBy(null, fields, 0, null, asc);
+    }
+    @Override
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit, String sortField, boolean asc){
+        if (dbObject==null){
+            dbObject=new BasicDBObject();
+        }
         Query query=new BasicQuery(dbObject);
-        for(String field:fields){
-            query.fields().include(field);
+        if (fields!=null&&fields.size()>0){
+            for(String field:fields){
+                query.fields().include(field);
+            }
         }
         if (limit!=0){
             query.limit(limit);
-
         }
         if (sortField!=null){
             Sort.Direction direction=asc? Sort.Direction.ASC: Sort.Direction.DESC;

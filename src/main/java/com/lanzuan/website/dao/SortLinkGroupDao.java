@@ -62,7 +62,7 @@ public class SortLinkGroupDao extends BaseMongoDao<SortLinkGroup>  {
 ////        fields.add("articles.$.title");
 //        fields.add("articles");
 //        int limit= Constant.ARTICLE_SECTION_NUM;
-//        List<ArticleSectionGroupItem> articleSectionGroup =findFields(dbObject,fields,limit,"createDate",false);
+//        List<ArticleSectionGroupItem> articleSectionGroup =findAllOrderBy(dbObject,fields,limit,"createDate",false);
 //        for (ArticleSectionGroupItem articleSectionGroupItem : articleSectionGroup){
 //            //首页并不需要文章内容，设为空提高页面速度
 //            if (articleSectionGroupItem !=null&& articleSectionGroupItem.getArticles()!=null){

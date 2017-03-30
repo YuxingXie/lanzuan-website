@@ -8,6 +8,7 @@ import com.lanzuan.website.service.IArticleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/6.
@@ -30,5 +31,10 @@ public class ArticleService extends BaseEntityManager<Article> implements IArtic
     @Override
     public Article increaseReadTimes(String id) {
         return articleDao.increaseReadTimes(id);
+    }
+
+    @Override
+    public List<Article> findAllArticles() {
+        return articleDao.findAllArticles();
     }
 }

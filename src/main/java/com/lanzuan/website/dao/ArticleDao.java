@@ -6,6 +6,7 @@ import com.mongodb.BasicDBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/22.
@@ -37,5 +39,11 @@ public class ArticleDao extends BaseMongoDao<Article>  {
         Update update=new Update().inc("readTimes", 1);
         Article article=mongoTemplate.findAndModify(query, update, Article.class);
         return article;
+    }
+
+    public List<Article> findAllArticles() {
+        Query query=new BasicQuery(new BasicDBObject());
+        query.with(new Sort(Sort.Direction.DESC,"date"));
+        return findAll(query);
     }
 }

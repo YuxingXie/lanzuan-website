@@ -227,16 +227,13 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
 //    }
     $scope.getArticles=function(){
         $http.get("/admin/article/list/data").success(function (data) {
-            $scope.active=0;
             $scope.articles=data;
-            var size=2;
-            var totalPage=0;
-            totalPage=Math.ceil(data.length/size);
-            console.log(data.length)
-            console.log(totalPage)
+            var size=4;
+            var totalPage=Math.ceil(data.length/size);
+//            console.log(data.length)
+//            console.log(totalPage)
             var pages=new Array(totalPage);
-            $scope.pagination={size:size,total:data.length,totalPage:totalPage,pages:pages};
-
+            $scope.pagination={size:size,total:data.length,totalPage:totalPage,pages:pages,displayable:4,times:1,active:0};
             $scope.pagination.data=data.slice(0,$scope.pagination.size);
 
         });
@@ -244,16 +241,22 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
 
 
     $scope.toPage=function(index){
-        $scope.active=index-1;
         var begin=(index-1)*$scope.pagination.size;
         var end=index*$scope.pagination.size;
         $scope.pagination.data=$scope.articles.slice(begin,end);
+        $scope.pagination.active=index-1;
     }
     $scope.nextPage=function(){
-        $scope.pagination.data=$scope.articles.slice($scope.pagination.size+1);
+        var firstDisplayable=$scope.pagination.times*$scope.pagination.displayable;
+        $scope.pagination.times++;
+        $scope.pagination.data=$scope.articles.slice($scope.pagination.size*firstDisplayable,$scope.pagination.size*(firstDisplayable+1));
+        $scope.pagination.active=firstDisplayable;
     }
     $scope.prevPage=function(){
-    $scope.pagination.data=$scope.articles.slice($scope.pagination.size+1);
+        var firstDisplayable=($scope.pagination.times-2)*$scope.pagination.displayable;
+        $scope.pagination.times--;
+        $scope.pagination.data=$scope.articles.slice($scope.pagination.size*firstDisplayable,$scope.pagination.size*(firstDisplayable+1));
+        $scope.pagination.active=firstDisplayable;
     }
 //
 //
