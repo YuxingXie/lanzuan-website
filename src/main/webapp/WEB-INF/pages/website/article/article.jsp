@@ -61,7 +61,7 @@
                                   </div>
                                   <div class="pull-right m-b-2em ">
 
-                                      <label class="label label-pill label-default">
+                                      <label class="label label-pill bg-grey-2">
                                           <c:if test="${not empty article.author}">作者:${article.author}</c:if>
                                           发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
                                       </label>

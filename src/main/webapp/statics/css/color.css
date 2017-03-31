@@ -2,10 +2,13 @@
 .bg-white{background: #ffffff}
 .bg-red { background-color: #e02222;}
 .bg-blue { background-color: #0da3e2;}
+
 .bg-grey { background-color: #9c9c9c;}
-.bg-medium-grey { background-color: #eeecec;}
+.bg-grey-1 {  background-color: #818a91;}
+.bg-grey-2 { background-color: #c6c6c6;}
 .bg-medium-grey-2 { background-color: #d4d2d2;}
 .bg-light-grey {color: #000; background-color: #e6e4e4;}
+.bg-medium-grey { background-color: #eeecec;}
 .bg-dark-grey{  background-color: #e8e8e8;  }
 .bg-very-light {color: #000;background-color: #f6f6f6;}
 .bg-very-light-1 {color: #000;background-color: #f9f9f9;}
