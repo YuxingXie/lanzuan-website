@@ -1,14 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-    <div class="row p-t-4em p-b-4em m-l-0 m-r-0 bg-very-light " ng-init="get${param.varU}();toggle=-1;startToggle=false;">
+    <div class="row p-t-4em p-b-4em m-l-0 m-r-0 bg-very-light " ng-init="get${param.varU}();toggle=-1;startToggle=false;prevToggle=-1;prevDisplay=true;">
         <div class="col-md-2 text-center md-down-text-left md-dash-silver-right-border md-height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.items">
-            <div class="md-down-hover-cursor-hand"  ng-click="$parent.toggle=$index;$parent.startToggle=true;">
+            <div class="md-down-hover-cursor-hand"  ng-click="$parent.prevToggle=$parent.toggle;$parent.toggle=$index;$parent.prevDisplay=$parent.prevToggle===$parent.toggle?(!$parent.prevDisplay):false;$parent.startToggle=true;">
                 <i class="pull-right hidden-md-up p-r">+</i>
                 <h6 class="color-blue text-left p-l-2em md-down-bg-primary p-t-05em p-b-05em rounded-2"
                     ng-bind="sortLink.sortName"></h6>
             </div>
 
-            <ul class="list-unstyled grey-link small-90 md-down-text-small-80 md-down-m-y-0 hidden-md-down" ng-class="{'block':$parent.startToggle&&$parent.toggle===$index}" >
-                <li ng-repeat="link in sortLink.links" class="text-left p-l-2em md-down-p-y-5" ng-if="sortLink.links&&!sortLink.image">
+            <ul class="list-unstyled grey-link small-90 md-down-text-small-80 md-down-m-y-0 hidden-md-down"
+                ng-class="{'block animated slideInLeft':$parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle!=$parent.toggle||($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle===$parent.toggle&&!$parent.prevDisplay)}" >
+                <li ng-repeat="link in sortLink.links" class="text-left p-l-2em md-down-p-y-5 " ng-if="sortLink.links&&!sortLink.image">
                     <a ng-href="{{link.href}}" ng-bind="link.text"></a>
                 </li>
                 <img ng-src="{{sortLink.image}}" ng-if="sortLink.image" class="img-responsive"/>

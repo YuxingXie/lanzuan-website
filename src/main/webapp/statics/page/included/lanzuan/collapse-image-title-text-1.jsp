@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-    <div class="row  m-l-r-0 m-t-2-4em m-b-1-6em md-up-p-l-r-4em " ng-init="get${param.varU}();_active=0">
+    <div class="row  m-x-0 m-t-2-4em m-b-1-6em md-up-p-x-4em" ng-init="get${param.varU}();_active=0">
         <div class="col-xs-12 p-a-0 m-a-0">
                     <span class="col-xs-12 col-md-4 col-lg-3 col-xl-2 p-r-0">
                         <h4 ng-cloak class="md-down-p-l-0 large-120 xl-large-180 lg-large-165 md-large-150 sm-large-135" ng-bind="${param.var}.text"></h4>
@@ -15,9 +15,9 @@
         </div>
 
     </div>
-    <div class="row m-l-r-0 md-up-p-l-r-4em lg-m-b-2em" ng-repeat="block in ${param.var}.items"
+    <div class="row m-x-0 md-up-p-x-4em lg-m-b-2em" ng-repeat="block in ${param.var}.items"
          ng-class="{'active in':$parent._active===$index,'collapse':$parent._active!==$index}">
-        <div class="col-xs-6 col-md-3 md-down-p-l-r-0" ng-repeat="imageTextItem in block.imageTextItems">
+        <div class="col-xs-6 col-md-3 md-down-p-x-0" ng-repeat="imageTextItem in block.imageTextItems">
             <a ng-href="{{imageTextItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">
                 <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"
                      ng-src="{{imageTextItem.image}}"/>

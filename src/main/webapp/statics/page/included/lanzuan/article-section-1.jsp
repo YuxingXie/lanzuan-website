@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<div class="row m-l-0 m-r-0 m-t-1em md-up-p-l-r-4em p-t-4em p-b-2em  bg-very-light"
+<div class="row m-l-0 m-r-0 m-t-1em md-up-p-x-4em p-t-4em p-b-2em  bg-very-light"
      ng-init="get${param.varU}()">
     <div class="col-xs-12 col-md-4" ng-repeat="sortLink in ${param.var}.items">
         <div class="row">

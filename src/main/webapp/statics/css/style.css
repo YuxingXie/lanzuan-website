@@ -417,11 +417,11 @@ Misc tools
 .m-l-20 {
     margin-left: 20px !important;
 }
-.m-l-r-0 {
+.m-x-0 {
     margin-left: 0 !important;
     margin-right: 0!important;
 }
-.m-l-r-1 {
+.m-x-1 {
     margin-left: 1px !important;
     margin-right: 1px !important;
 }
@@ -533,16 +533,16 @@ Misc tools
 .p-a-xs {
     padding: .5rem !important;
 }
-.p-l-r-2{
+.p-x-2{
     padding-left: 2px !important;
     padding-right: 2px !important;
 }
-.p-l-r-10{
+.p-x-10{
     padding-left:10px !important;
     padding-right:10px !important;
 }
-.p-l-r-2em{padding:0 2em!important;}
-.p-l-r-4em{padding:0 4em!important;}
+.p-x-2em{padding:0 2em!important;}
+.p-x-4em{padding:0 4em!important;}
 
 .height-50px{height:50px!important;}
 .height-260px{height:260px!important;}
@@ -594,14 +594,19 @@ Misc tools
 }
 .sticker {
     position: absolute;
-    /*top: 0;*/
-    /*right: 0;*/
-    /*width: 63px;*/
-    /*height: 63px;*/
+    right: 15%;
+    bottom: 20px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+
 }
 .sticker-bottom{
     bottom:0;
-    left: 40%;
+    /*left: 40%;*/
 }
 .hover-cursor-hand{
     cursor: pointer;
