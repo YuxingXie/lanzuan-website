@@ -36,6 +36,10 @@
         left: 2%;
         width: 8%;
     }
+    .md-height-10em{height:10em!important;}
+    .md-dash-silver-right-border{
+        border-right: dashed #c0c0c0 1px;
+    }
     .md-fix-top-menu{
         position:fixed;top:0;left:9%;width: 17%;z-index: 100;
     }
@@ -153,6 +157,17 @@
     .md-down-block{
        display: block !important;
     }
+
+    .md-down-bg-medium-grey{
+        background-color: #eeecec;
+    }
+    .md-down-hover-cursor-hand{
+        cursor: pointer;
+    }
+    .md-down-bg-primary{
+        color: #fff;
+        background-color: #0275d8;
+    }
     .md-down-fixed-top{
         position: fixed;
         top:0;
@@ -176,6 +191,29 @@
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
     }
+    .md-down-p-y-0{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .md-down-p-y-5{
+        padding-top: 5px!important;
+        padding-bottom: 5px!important;
+    }
+    .md-down-p-y-10{
+        padding-top: 10px!important;
+        padding-bottom: 10px!important;
+    }
+    .md-down-p-x-0{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .md-down-text-left {
+        text-align: left;
+    }
+    .md-down-m-y-0{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     .md-down-p-l-0{
         padding-left: 0;
     }
@@ -196,6 +234,15 @@
     }
     .md-down-m-l-0{
         margin-left: 0;
+    }
+    .md-down-m-l-2em{
+        margin-left: 2em !important;
+    }
+    .md-down-m-l-3em{
+        margin-left: 3em !important;
+    }
+    .md-down-m-l-4em{
+        margin-left: 4em !important;
     }
     .md-down-m-r-0{
         margin-right: 0;

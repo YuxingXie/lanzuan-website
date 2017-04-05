@@ -247,5 +247,19 @@ public class AdminController extends BaseRestSpringController {
         return "admin/component-project-list";
     }
 
+    @RequestMapping(value = "/home-page-admin-js")
+    public String app_js(ModelMap modelMap,String pageId){
+        if (StringUtils.isNotBlank(pageId)){
+            WebPage page=webPageService.findById(pageId);
 
+            modelMap.addAttribute("page",page);
+        }
+//        if (StringUtils.isNotBlank(componentId)){
+//            PageComponent component=pageComponentService.findById(componentId);
+//
+//
+//            modelMap.addAttribute("component",component);
+//        }
+        return "admin/js/home-page-admin.js";
+    }
 }

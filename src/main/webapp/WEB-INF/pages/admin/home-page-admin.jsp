@@ -24,7 +24,7 @@
             <h5 class="text-center">网站首页管理</h5>
         </div>
 
-        <div class="container" ng-controller="HomeController">
+        <div class="container">
             <div class="alert alert-warning m-t-md small-90">
                 <ul class="list-unstyled ">
                     <li class="">
@@ -69,6 +69,6 @@
     <script src="${path}/statics/plugin/angular/1.4.8/angular.min.js"></script>
     <script src="${path}/statics/js/jquery-3.1.1.min.js"></script>
     <script src="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.js"></script>
-    <script src="${path}/app-js?pageId=${webPage.id}&componentId=${webPage.pageComponents[0].id}"></script>
+    <script src="${path}/admin/home-page-admin-js?pageId=${webPage.id}"></script>
 </body>
 

@@ -666,7 +666,7 @@ Misc tools
     display:inline-block;
 }
 .block{
-    display:block;
+    display:block !important;
 }
 .dash-silver-border{
     border: dashed #c0c0c0 1px;
