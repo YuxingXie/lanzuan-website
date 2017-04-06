@@ -1,5 +1,6 @@
 package com.lanzuan.common.util;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2015/11/12.
  */
-public class OuterRequestUtil {
+public class RequestUtil {
     public static String sendGet(String url) {
         String result = "";
         BufferedReader in = null;
@@ -171,6 +172,67 @@ public class OuterRequestUtil {
         reader.close();
         connection.disconnect();
         return result;
+    }
+
+    /**
+     * 判断请求是否来自搜索引擎爬虫
+     * @param request
+     * @return
+     */
+
+    public static boolean isRobotRequest(HttpServletRequest request) {
+        String userAgent = request.getHeader("user-agent");
+        if (userAgent == null)
+            return false;
+
+        userAgent = userAgent.toLowerCase();
+
+        if (userAgent.contains("spider")) {
+            return true;
+        } else if (userAgent.contains("bot")) {
+            return true;
+        } else if (userAgent.contains("nutch")) {
+            return true;
+        } else if (userAgent.contains("yahoo")) {
+            return true;
+        } else if (userAgent.contains("gougou")) {
+            return true;
+        } else if (userAgent.contains("scooter")) {
+            return true;
+        } else if (userAgent.contains("lilina")) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * 根据useAgent判断浏览器类型
+     * @param agent
+     * @return
+     */
+    public static String getBrowserName(String agent) {
+        if (agent.indexOf("msie 7") > 0) {
+            return "ie7";
+        } else if (agent.indexOf("msie 8") > 0) {
+            return "ie8";
+        } else if (agent.indexOf("msie 9") > 0) {
+            return "ie9";
+        } else if (agent.indexOf("msie 10") > 0) {
+            return "ie10";
+        } else if (agent.indexOf("msie") > 0) {
+            return "ie";
+        } else if (agent.indexOf("opera") > 0) {
+            return "opera";
+        } else if (agent.indexOf("opera") > 0) {
+            return "opera";
+        } else if (agent.indexOf("firefox") > 0) {
+            return "firefox";
+        } else if (agent.indexOf("webkit") > 0) {
+            return "webkit";
+        } else if (agent.indexOf("gecko") > 0 && agent.indexOf("rv:11") > 0) {
+            return "ie11";
+        } else {
+            return "Others";
+        }
     }
     public static void main(String[] args) throws IOException {
         Map<String,String[]> params=new LinkedHashMap<String, String[]>();

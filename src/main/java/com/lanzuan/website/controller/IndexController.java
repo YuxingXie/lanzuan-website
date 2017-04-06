@@ -3,6 +3,7 @@ package com.lanzuan.website.controller;
 import com.lanzuan.common.base.BaseRestSpringController;
 import com.lanzuan.common.constant.Constant;
 import com.lanzuan.common.util.FileUtil;
+import com.lanzuan.common.util.RequestUtil;
 import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.AngularEntityEditorBuilder;
 import com.lanzuan.entity.*;
@@ -59,16 +60,18 @@ public class IndexController extends BaseRestSpringController {
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(webPage.getPageComponents());
         String js=builder.getWebsiteJavaScript();
         map.addAttribute("js",js);
-        String agent=request.getHeader("User-Agent").toLowerCase();
-        System.out.println(agent);
-        System.out.println("浏览器版本："+getBrowserName(agent));
-        String browser=getBrowserName(agent);
-        if (browser.equals("ie7")||browser.equals("ie8")||browser.equals("ie9") ){
-            map.addAttribute("browser",getBrowserName(agent));
-            return "browser";
-        }
+        if (RequestUtil.isRobotRequest(request)){
+            return "bot";
 
-        return "index";
+        }else{
+            String agent=request.getHeader("User-Agent").toLowerCase();
+            String browser= RequestUtil.getBrowserName(agent);
+            if (browser.equals("ie7")||browser.equals("ie8")||browser.equals("ie9") ){
+                map.addAttribute("browser",browser);
+                return "browser";
+            }
+            return "index";
+        }
     }
     @RequestMapping(value = "/component/{componentId}")
     public String pageComponent(@PathVariable String componentId,ModelMap modelMap){

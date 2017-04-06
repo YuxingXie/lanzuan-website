@@ -32,10 +32,6 @@
             </c:forEach>
         </div>
 
-        <c:if test="${browser eq 'ie7' or browser eq 'ie8' or browser eq 'ie9'}">
-            <script>alert("您使用的浏览器核心较低，可能导致网站显示不正常。")</script>
-        </c:if>
-
         <div ng-include="'/statics/page/included/footer.jsp'"></div>
         <script src="/statics/js/jquery-3.1.1.min.js"></script>
         <script src="/statics/plugin/bootstrap-4.0.0-alpha/dist/js/bootstrap.min.js"></script>

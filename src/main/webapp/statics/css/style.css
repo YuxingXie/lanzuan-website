@@ -576,7 +576,10 @@ Misc tools
     min-height: 500px;
 }
 
-.no-border{border: none;}
+.no-border,.no-border:hover,.no-border:active,.no-border:link,.no-border:focus{
+    border: none;
+    outline: none;
+}
 .no-background{background: none;}
 .new-arrivals1 {
     padding-left: 0;

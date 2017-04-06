@@ -21,7 +21,7 @@
             <a ng-href="{{imageTextItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">
                 <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"
                      ng-src="{{imageTextItem.image}}"/>
-                <div class="absolute-center small-90 hidden-md-down" ng-class="{'block':show,'hidden':!show}">
+                <div class="carousel-caption small-90 hidden-md-down" ng-class="{'block':show,'hidden':!show}">
                     <div class="text-indent-1em" ng-bind="imageTextItem.text"></div>
                     <button class="btn btn-primary m-t-05em btn-padding-little" ng-href="{{imageTextItem.link}}">了解详情</button>
                 </div>

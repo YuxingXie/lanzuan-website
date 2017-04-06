@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
-<nav class="navbar" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
-    <div class="hidden-md-up" ng-click="toggleNav=true;showNav=!showNav;">
-        <button class="btn btn-sm btn-primary-outline" type="button">
-            &#9776;
-        </button>
+<nav class="navbar md-down-fixed-top bg-white" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
+    <div class="hidden-md-up hover-cursor-hand rotateOut" ng-click="toggleNav=true;showNav=!showNav;">
+        <a ng-class="{'animated rotateOut':toggleNav&&showNav}">
+            <span>&#9776;</span>
+        </a>
         <img ng-if="${param.var}.navbarBrand&&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.type==='image' &&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.value"
              ng-src="{{${param.var}.navbarBrand.value}}" class="img-ico-md m-l-5em">
     </div>
@@ -25,5 +25,6 @@
         </ul>
     </div>
 </nav>
+<div class="md-down-m-y-46"></div>
 
 
