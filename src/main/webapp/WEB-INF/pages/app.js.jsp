@@ -228,7 +228,7 @@ app.controller('AdminController', ["$rootScope", "$scope", "$http", "$location",
     $scope.getArticles=function(){
         $http.get("/admin/article/list/data").success(function (data) {
             $scope.articles=data;
-            var size=4;
+            var size=6;
             var totalPage=Math.ceil(data.length/size);
 //            console.log(data.length)
 //            console.log(totalPage)

@@ -52,13 +52,22 @@ public class IndexController extends BaseRestSpringController {
     private IPageComponentService pageComponentService;
 
     @RequestMapping(value = "/home")
-    public String  index(ModelMap map,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+    public String  index(ModelMap map,HttpServletRequest request) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         String uri=request.getRequestURI();
         WebPage webPage=webPageService.findByUri("/home");
         map.addAttribute("webPage",webPage);
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(webPage.getPageComponents());
         String js=builder.getWebsiteJavaScript();
         map.addAttribute("js",js);
+        String agent=request.getHeader("User-Agent").toLowerCase();
+        System.out.println(agent);
+        System.out.println("浏览器版本："+getBrowserName(agent));
+        String browser=getBrowserName(agent);
+        if (browser.equals("ie7")||browser.equals("ie8")||browser.equals("ie9") ){
+            map.addAttribute("browser",getBrowserName(agent));
+            return "browser";
+        }
+
         return "index";
     }
     @RequestMapping(value = "/component/{componentId}")

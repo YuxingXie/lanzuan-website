@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
-<nav class="navbar md-down-fixed-top" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
+<nav class="navbar" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
     <div class="hidden-md-up" ng-click="toggleNav=true;showNav=!showNav;">
         <button class="btn btn-sm btn-primary-outline" type="button">
             &#9776;

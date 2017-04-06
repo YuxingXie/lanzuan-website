@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" ng-init="get${param.varU}()">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2000" ng-init="get${param.varU}()">
         <ol class="carousel-indicators bottom-0">
             <li data-target="#carousel-example-generic" data-slide-to="{{$index}}" ng-class="{'active':$index===0}" ng-repeat="carouselItem in ${param.var}.items"></li>
         </ol>

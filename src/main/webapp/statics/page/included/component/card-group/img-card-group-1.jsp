@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<div class="md-card-group m-x-0" ng-init="get${param.varU}()">
-        <div class="card m-y-0" ng-repeat="card in ${param.var}.items">
+<div class="card-group m-x-0" ng-init="get${param.varU}()">
+        <div class="card " ng-repeat="card in ${param.var}.items">
             <div class="card-block padding-1">
                 <a ng-if="card.link" ng-href="{{card.link}}">
                     <img ng-src="{{card.image}}" class="full-width "/>
