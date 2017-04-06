@@ -269,6 +269,12 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+    .md-down-p-b-05em{
+        padding-bottom:.5em;
+    }
+    .md-down-p-b-1em{
+        padding-bottom:1em;
+    }
     .md-down-p-l-0{
         padding-left: 0;
     }

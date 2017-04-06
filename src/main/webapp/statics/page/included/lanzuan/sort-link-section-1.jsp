@@ -2,9 +2,9 @@
     <div class="row p-t-4em p-b-4em m-l-0 m-r-0 bg-very-light " ng-init="get${param.varU}();toggle=-1;startToggle=false;prevToggle=-1;prevDisplay=true;">
         <div class="col-md-2 text-center md-down-text-left md-dash-silver-right-border md-height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.items">
             <div class="md-down-hover-cursor-hand"  ng-click="$parent.prevToggle=$parent.toggle;$parent.toggle=$index;$parent.prevDisplay=$parent.prevToggle===$parent.toggle?(!$parent.prevDisplay):false;$parent.startToggle=true;">
-                <span class="pull-right hidden-md-up p-r">+</span>
-                <h6 class="color-blue text-left p-l-2em p-t-05em p-b-05em md-down-solid-silver-border-top"
-                    ng-class="{'md-down-solid-silver-border-bottom':$last&&!($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle!=$parent.toggle||($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle===$parent.toggle&&!$parent.prevDisplay))}"
+                <span class="pull-right hidden-md-up p-r m-t-05em">+</span>
+                <h6 class="color-blue text-left p-l-2em p-t-05em md-down-solid-silver-border-top"
+                    ng-class="{'md-down-p-b-05em md-down-solid-silver-border-bottom':$last&&!($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle!=$parent.toggle||($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle===$parent.toggle&&!$parent.prevDisplay))}"
                     ng-bind="sortLink.sortName"></h6>
             </div>
 
