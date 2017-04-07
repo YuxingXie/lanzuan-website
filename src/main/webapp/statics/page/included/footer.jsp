@@ -2,7 +2,7 @@
 <footer>
     <div class="row bg-black-2 small-90 md-down-text-small-70 m-l-0 m-r-0 p-b-sm m-t-lg">
                 <span class="col-md-offset-2 col-xs-12 col-md-3 color-light-grey-2 text-center m-t-md">
-                    ©2000-2017&nbsp;&nbsp;&nbsp;&nbsp;湖南蓝钻科技有限公司&nbsp;&nbsp;版x权所有
+                    ©2000-2017&nbsp;&nbsp;&nbsp;&nbsp;湖南蓝钻科技有限公司&nbsp;&nbsp;版权所有
                </span>
                 <span class="col-xs-12 col-md-2 text-center m-t-md">
                     <a href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank" class="color-grey-10">湘ICP备17004457号-1</a>
