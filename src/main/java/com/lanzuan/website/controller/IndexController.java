@@ -138,6 +138,16 @@ public class IndexController extends BaseRestSpringController {
         modelMap.addAttribute("article",article);
         return "website/article/article";
     }
+    @RequestMapping(value = "/article/list")
+    public String articleList(){
+
+        return "website/article/article-list";
+    }
+    @RequestMapping(value = "/article/list/data")
+    public ResponseEntity<List<Article>> getAllArts(){
+        List<Article> articles=articleService.findAllOrderBy("date",false);
+        return new ResponseEntity<List<Article>>(articles,HttpStatus.OK);
+    }
     @RequestMapping(value = "/article/praise/{id}")
     public ResponseEntity<Message> praise(@PathVariable String id,ModelMap modelMap){
         Message message=new Message();

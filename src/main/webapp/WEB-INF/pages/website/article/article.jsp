@@ -73,7 +73,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-xl">
+                      <div class="col-xs-12 p-l-0 p-r-0 m-l-0 m-r-0 m-t-0">
                               <jsp:include page="${path}/statics/page/included/footer.jsp"></jsp:include>
                       </div>
                   </div>
