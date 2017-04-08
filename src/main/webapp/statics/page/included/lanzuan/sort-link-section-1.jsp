@@ -30,5 +30,6 @@
                     <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="img-ico-lg"/>
                 </a>
             </div>
+
         </div>
     </div>

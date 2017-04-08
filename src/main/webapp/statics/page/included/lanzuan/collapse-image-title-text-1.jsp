@@ -21,12 +21,13 @@
             <a ng-href="{{imageTextItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">
                 <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"
                      ng-src="{{imageTextItem.image}}"/>
-                <div ng-class="{'block':show,'hidden':!show}" class="img-caption small-90 md-down-text-small-70" >
-                    <div ng-bind="imageTextItem.text" class="hidden-md-down"></div>
-                    <button class="btn btn-primary m-t-0 btn-padding-little hidden-md-down" ng-href="{{imageTextItem.link}}">了解详情</button>
+                <div class="img-caption small-90 md-down-text-small-70" ng-class="{'block':show,'hidden':!show}">
+                    <div ng-bind="imageTextItem.text" ></div>
+                    <button class="btn btn-primary m-t-0 btn-padding-little">了解详情</button>
                 </div>
             </a>
             <p class="img-title" ng-bind="imageTextItem.title"></p>
+
         </div>
     </div>
 

@@ -175,6 +175,9 @@
     }
 }
 @media (max-width: 47.9em) {
+    .img-caption {
+        padding-bottom: 20px;
+    }
     .md-down-block-item {
         display: block;
         width: 100%;
