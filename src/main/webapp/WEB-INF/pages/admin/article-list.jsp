@@ -36,7 +36,7 @@
                 <div class="col-xs-4">地址(uri)</div>
                 <div class="col-xs-4">操作</div>
             </div>
-            <div class="small-90 row solid-silver-border-bottom hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
+            <div class="small-90 row border-b-s-silver hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
 
                 <div class="col-xs-4">
                     {{article.title}}

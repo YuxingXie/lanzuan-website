@@ -17,19 +17,30 @@
             </ul>
 
         </div>
-        <div class="col-xs-12 col-md-4 md-down-m-y-20 text-center padding-left-2em">
+        <div class="col-xs-12 col-md-4 md-down-m-y-20 padding-left-2em">
             <h6 class="color-blue text-center">关注我们</h6>
-            <div class="m-t-1em">
-                <a href="#" target="_blank" >
-                    <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="img-ico-lg"/>
-                </a>
-                <a href="http://weibo.com/sangfor" target="_blank" >
-                    <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif"  class="img-ico-lg"/>
-                </a>
-                <a href="" target="_blank" >
-                    <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="img-ico-lg"/>
-                </a>
+            <div class="col-xs-2" ng-init="showPic=1">
+                <div class="row p-a-0">
+                    <i class="fa fa-angle-double-right pull-right hidden" ng-class="{'block animated fadeIn':showPic==1}"></i>
+                    <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="img-responsive" ng-click="showPic=1"/>
+                </div>
+                <div class="row p-a-0">
+                    <i class="fa fa-angle-double-right pull-right hidden" ng-class="{'block animated fadeIn':showPic==2}"></i>
+                    <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif"  class="img-responsive"  ng-click="showPic=2"/>
+                </div>
+                <div class="row p-a-0">
+                    <i class="fa fa-angle-double-right pull-right hidden" ng-class="{'block animated fadeIn':showPic==3}"></i>
+                    <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="img-responsive" ng-click="showPic=3"/>
+                </div>
             </div>
 
+            <div class="col-md-8 col-xs-9 p-a-0 border-a-s-silver">
+                <img src="/statics/image/icon/1489631134133.jpg" class="img-responsive animated zoomIn" ng-if="showPic==1"/>
+                <img src="/statics/image/icon/1490414980180.jpg" class="img-responsive animated fadeIn" ng-if="showPic==2"/>
+                <img src="/statics/image/icon/1490414985456.jpg" class="img-responsive animated slideInDown" ng-if="showPic==3"/>
+            </div>
         </div>
     </div>
+<script>
+
+</script>

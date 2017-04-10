@@ -8,7 +8,7 @@
                     <a href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank" class="color-grey-10">湘ICP备17004457号-1</a>
                 </span>
                 <div class="col-xs-12 col-md-3">
-                    <span class="col-xs-6 col-md-4 text-right color-light-grey-2 solid-silver-right-border m-t-md">
+                    <span class="col-xs-6 col-md-4 text-right color-light-grey-2 border-r-s-silver m-t-md">
                         <a  href="/statics/page/building.html" target="_blank" class="color-grey-10">法律声明</a>
                     </span>
                     <span class="col-xs-6 col-md-4 text-left color-light-grey-2 m-t-md">

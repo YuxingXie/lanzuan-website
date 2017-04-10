@@ -45,7 +45,9 @@
 }
 
 
-
+.img-hidden img{
+    display: none;
+}
 .img-ico-sm{
     max-width: 43px;
     /*34px和.form-controller同高*/
@@ -582,10 +584,7 @@ Misc tools
     min-height: 500px;
 }
 
-.no-border,.no-border:hover,.no-border:active,.no-border:link,.no-border:focus{
-    border: none;
-    outline: none;
-}
+
 .no-background{background: none;}
 .new-arrivals1 {
     padding-left: 0;
@@ -667,26 +666,14 @@ Misc tools
     padding-top: 7px;
     color: #868c93;
 }
-.easyzoom-thumbnails {
-    overflow: hidden;
-    margin: 1em 0;
-    padding: 0;
-    text-align: center;
-}
 
-.easyzoom-thumbnails li {
-    display: inline-block;
-    /*width: 140px;*/
-    margin: 0 5px;
-}
-
-.easyzoom-thumbnails img {
-    display: block;
- }
 .vertical-center {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+.inline{
+    display:inline;
 }
 .inline-block{
     display:inline-block;
@@ -694,26 +681,30 @@ Misc tools
 .block{
     display:block !important;
 }
-.dash-silver-border{
+.no-border,.no-border:hover,.no-border:active,.no-border:link,.no-border:focus{
+    border: none;
+    outline: none;
+}
+.border-a-d-silver{
     border: dashed #c0c0c0 1px;
 }
 
-.dash-silver-right-border{
+.border-r-d-silver{
     border-right: dashed #c0c0c0 1px;
 }
-.solid-dark-border{
-    border-right: solid #000 4px;
+.border-a-s-dark{
+    border: solid #000 4px;
 }
-.solid-silver-border{
+.border-a-s-silver{
     border: solid #c0c0c0 1px;
 }
-.solid-silver-right-border{
+.border-r-s-silver{
     border-right: solid #c0c0c0 1px;
 }
-.solid-silver-border-top{
+.border-t-s-silver{
     border-top: solid #c0c0c0 1px;
 }
-.solid-silver-border-bottom{
+.border-b-s-silver{
     border-bottom: solid #c0c0c0 1px;
 }
 .text-indent-1em{text-indent: 1em}
@@ -740,11 +731,4 @@ Misc tools
     top:0;
 }
 
-/* font-awesome的扩展*/
-.fa-ext-dot:before {
-    content: url("css-img/dot2.png");
-}
-.fa-ext-dot-blue:before {
-    content: url("css-img/dot.png");
-}
 

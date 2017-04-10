@@ -56,7 +56,7 @@
                 好奇 <i class="fa" ng-class="{'fa-angle-double-right':!showErr,'fa-angle-double-down':showErr}"> </i></button>
             </div>
 
-            <div class="solid-silver-border rounded-3 p-a-md m-b-lg" ng-class="{'hidden':!showErr,'block':showErr}">
+            <div class="border-a-s-silver rounded-3 p-a-md m-b-lg" ng-class="{'hidden':!showErr,'block':showErr}">
               <form action="/error/report" autocomplete="off" method="post" accept-charset="UTF-8" role="form">
                 <fieldset>
                   <div class="form-group input-group input-group-sm">

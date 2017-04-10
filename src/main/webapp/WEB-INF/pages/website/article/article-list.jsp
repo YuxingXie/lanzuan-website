@@ -24,13 +24,12 @@
     </style>
 </head>
 <body ng-app="app" class="bg-very-light-1">
-<div ng-controller="ArticleController"  ng-init="getArticles()">
+<div ng-controller="ArticleController" >
 
-    <div class="container-fluid">
+    <div class="container-fluid " ng-init="getArticles()">
         <div class="row p-a-0 m-a-0">
 
             <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
-
                 <div class="col-xs-12 col-md-push-2 col-md-10 m-a-0 p-a-0">
                     <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
                         <div class="card-header p-a-0 list hidden-md-down">
@@ -42,41 +41,34 @@
                                 <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
                                 <li class="small active">文章中心</li>
                             </ol>
-
-
                         </div>
-
-
 
                     </div>
                 </div>
 
             </div>
-            <div style="position:absolute;top:50px;left:0;width: 100%;"  >
+            <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                 <div class="col-xs-12 p-a-0 m-a-0" >
                     <div class="col-xs-12">
                         <div class="col-md-7 col-md-push-4 col-xs-12"   >
-                            <div class="col-xs-12 text-center p-a-0 m-a-0 ">
-                                <h4>{{article.title}}</h4>
-                                <div class="pull-left m-b-2em ">
-                                    <label class="label label-info p-t-xs p-b-xs">本文已被阅读：<span ng-bind="article.readTimes"></span>次</label>
-                                    <a href="#" ng-click="praise()">
-                                        <i ng-class="{'animated bounceIn text-danger':animate}" class="fa fa-thumbs-o-up">({{praises}})</i></a>
-                                </div>
-                                <div class="pull-right m-b-2em ">
 
-                                    <label class="label label-pill bg-grey-2" ng-if="article.author ||article.date">
-                                        <span ng-if="article.author">作者:{{article.author}}</span>
-                                        <span ng-if="article.date">发布于:<span ng-bind="article.date"></span></span>
-                                    </label>
+                            <div class="row border-b-s-silver hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
+
+                                <div class="col-xs-12 large-110">
+                                    {{article.title}}
+                                </div>
+
+                                <div class="col-xs-12 img-hidden" style="height: 4em;overflow: hidden;text-indent: 2em">
+                                    <span ng-bind-html="article.content| to_trusted"></span>
+                                </div>
+                                <div class="col-xs-12  small-90 text-right">
+                                    <span ng-if="article.author">作者:{{article.author}}</span>
+                                    <span ng-if="article.date">发布于:{{article.date|date:'yyyy-MM-dd'}}</span>
+                                    阅读：{{article.readTimes}}次 <a ng-href="/article/{{article.id}}" target="_blank">[详细]</a>
                                 </div>
 
                             </div>
-                            <div class="col-xs-12 bg-white" id="content">
-
-                            </div>
-                            <a class="list-group-item hidden-md-down" ng-repeat="article in pagination.data"  href="#" ng-click="showArticle(article)" ng-bind="article.title"></a>
-                            <nav class="p-l-md">
+                            <nav class="pull-right">
                                 <ul class="pagination">
                                     <%--<li ng-if="pagination.pages&&pagination.pages.length&&pagination.pages.length>pagination.displayable&&pagination.displayable*pagination.times<=pagination.pages.length">--%>
                                     <li ng-if="pagination.times>1">
@@ -113,6 +105,11 @@
     (function () {
         "use strict";
         var app = angular.module('app', []);
+        app.filter('to_trusted', ['$sce', function($sce){
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }]);
         app.controller('ArticleController', ["$scope", "$http",function ( $scope, $http) {
             $scope.animate=false;
             $scope.praises=${empty article.praises?0:article.praises};

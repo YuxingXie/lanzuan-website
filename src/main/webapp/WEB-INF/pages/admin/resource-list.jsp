@@ -36,7 +36,7 @@
                 <div class="col-xs-5">下载路径(uri)</div>
                 <div class="col-xs-2">操作</div>
             </div>
-            <div class="col-xs-12 small-90 solid-silver-border-bottom">
+            <div class="col-xs-12 small-90 border-b-s-silver">
                 <c:if test="${empty webResourceList}">暂时没有资源</c:if>
                 <c:if test="${not empty webResourceList}">
                     <c:forEach var="resource" items="${webResourceList}">

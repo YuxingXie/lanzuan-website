@@ -101,8 +101,8 @@ public class EntityFormBuilder {
                 formHtml.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
 
                 String itemBorderCss="";
-                if (level==1)   itemBorderCss="solid-silver-border p-a-lg";
-                if (level==2)   itemBorderCss="solid-silver-border";
+                if (level==1)   itemBorderCss="border-a-s-silver p-a-lg";
+                if (level==2)   itemBorderCss="border-a-s-silver";
                 formHtml.append("<div class='col-xs-12 " + itemBorderCss + "'>");
                 String toggleVarName=printItemOperationButtons(context,fieldName,level,absoluteContext);
                 formHtml.append("<div ng-if=\"" + toggleVarName + "\">");

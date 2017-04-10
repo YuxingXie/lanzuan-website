@@ -30,7 +30,7 @@
 
 
         <div class="list-group small-90 p-r-3em" ng-if="!sortLink.links &&!sortLink.image">
-    <span class="list-group-item p-l-0 p-r-0 text-center p-t-2em text-primary dash-silver-border"
+    <span class="list-group-item p-l-0 p-r-0 text-center p-t-2em text-primary border-a-d-silver"
           ng-if="!sortLink.links">暂无文章</span>
         </div>
     </div>

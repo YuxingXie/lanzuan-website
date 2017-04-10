@@ -46,7 +46,7 @@
                         ${canvas.creator.loginName}
                 </div>
                 <div class="col-xs-8 ">
-                    <canvas width="300" height="200" id="${canvas.id}" class="solid-silver-border">
+                    <canvas width="300" height="200" id="${canvas.id}" class="border-a-s-silver">
                         您使用的浏览器不支持Canvas
                     </canvas>
 

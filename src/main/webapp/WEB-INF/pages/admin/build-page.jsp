@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 solid-silver-border">
+            <div class="col-xs-12 border-a-s-silver">
                 <div ng-view style="height: 300px;overflow-y: scroll;" ></div>
 
             </div>
@@ -75,7 +75,7 @@
             <div class="col-xs-6">
                 <ul  class="list-group">
                     <li ui-on-Drop="onDrop($event,$data,webPage.pageComponents,$index)"
-                        ui-draggable="false" drag="pageComponent" class="list-group-item dash-silver-border img-nav-brand"
+                        ui-draggable="false" drag="pageComponent" class="list-group-item border-a-d-silver img-nav-brand"
                         on-drop-success="dropSuccessHandler($event,$index,webPage.pageComponents)"
                         ng-repeat="pageComponent in webPage.pageComponents track by $index">
                         {{pageComponent.var}}

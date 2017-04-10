@@ -40,7 +40,7 @@
                                 <ol class="breadcrumb m-a-0 p-a-xs">
                                     当前位置:
                                     <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                                    <li class="small active">文章</li>
+                                    <li class="small active"><a href="/website/article/article-list">文章中心</a></li>
                                 </ol>
                             </div>
                             <a href="#content" class="list-group-item hidden-md-down">${article.title}</a>

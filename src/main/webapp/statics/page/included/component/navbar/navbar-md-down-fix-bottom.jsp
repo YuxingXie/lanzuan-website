@@ -2,7 +2,7 @@
 
 <nav class="navbar md-down-fixed-top bg-white" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
     <div class="hidden-md-up rotateIn" ng-click="toggleNav=true;showNav=!showNav;">
-        <span class="rounded-2 solid-silver-border p-x-2 hover-cursor-hand" ng-class="{'animated rotateIn':toggleNav&&showNav}">&#9776;</span>
+        <span class="rounded-2 border-a-s-silver p-x-2 hover-cursor-hand" ng-class="{'animated rotateIn':toggleNav&&showNav}">&#9776;</span>
         <img ng-if="${param.var}.navbarBrand&&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.type==='image' &&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.value"
              ng-src="{{${param.var}.navbarBrand.value}}" class="img-ico-md m-l-5em">
     </div>
