@@ -27,7 +27,7 @@
     <div ng-controller="ArticleController" >
 
         <div class="container-fluid">
-            <div class="row p-a-0 m-a-0">
+            <div class="row p-a-0">
 
                 <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
 
