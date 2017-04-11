@@ -30,15 +30,14 @@
         <div class="row p-a-0">
 
             <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
-                <div class="col-xs-12 col-md-push-2 col-md-10 m-a-0 p-a-0">
+                <div class="col-xs-12 col-md-push-3 col-md-9 m-a-0 p-a-0">
                     <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
                         <div class="card-header p-a-0 list hidden-md-down">
                             <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
                         </div>
                         <div class="card-block p-a-0 m-a-0" >
                             <ol class="breadcrumb m-a-0 p-a-xs">
-                                当前位置:
-                                <li class="small-90 fa fa-home color-grey"><a href="/"> 首页</a></li>
+                                <li class="small-90 fa fa-home color-grey-2"><a href="/"> 首页</a></li>
                                 <li class="small active">文章中心</li>
                             </ol>
                         </div>

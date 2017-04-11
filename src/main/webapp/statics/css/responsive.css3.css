@@ -222,6 +222,7 @@
         left: 0;
         right: 0;
         z-index: 1030;
+        opacity: .95;
     }
 
     .md-down-solid-silver-border-top{

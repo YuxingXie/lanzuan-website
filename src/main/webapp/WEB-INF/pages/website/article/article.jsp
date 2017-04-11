@@ -25,21 +25,17 @@
     </head>
     <body ng-app="app" class="bg-very-light-1">
     <div ng-controller="ArticleController" >
-
         <div class="container-fluid">
             <div class="row p-a-0">
-
-                <div class="col-xs-12 col-md-3 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
-
-                    <div class="col-xs-12 col-md-push-2 col-md-10 m-a-0 p-a-0">
+                <div class="col-xs-12 col-md-4 p-a-0 m-a-0" style="position:fixed;top:0;z-index:100;">
+                    <div class="col-xs-12 col-md-push-3 col-md-9 m-a-0 p-a-0">
                         <div class="card" style="border-top-left-radius: 0;border-top-right-radius: 0">
                             <div class="card-header p-a-0 list hidden-md-down">
                                 <img src="${path}/statics/image/lanzuan/icons/ico.jpg" class="card-img-top img-responsive">
                             </div>
                             <div class="card-block p-a-0 m-a-0" >
                                 <ol class="breadcrumb m-a-0 p-a-xs">
-                                    当前位置:
-                                    <li class="small-90 fa fa-home color-grey"><a href="/"> 首页</a></li>
+                                    <li class="small-90 fa fa-home color-grey-2"><a href="/"> 首页</a></li>
                                     <li class="small active"><a href="/website/article/list">文章中心</a></li>
                                 </ol>
                             </div>
@@ -51,18 +47,18 @@
                 <div style="position:absolute;top:50px;left:0;width: 100%;" id="content" >
                   <div class="col-xs-12 p-a-0 m-a-0" >
                       <div class="col-xs-12">
-                          <div class="col-md-7 col-md-push-4 col-xs-12"   >
+                          <div class="col-md-8 col-md-push-4 col-xs-12"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
                                   <h4 class="color-grey" style="letter-spacing: 3px">${article.title}</h4>
-                                  <div class="pull-left">
-                                      <label class="label label-info p-t-xs p-b-xs">已阅读：${article.readTimes}次</label>
+                                  <div>
+                                      <label class="label label-info">已阅读：${article.readTimes}次</label>
                                       <a href="#" ng-click="praise()">
-                                          <i ng-class="{'animated bounceIn text-danger':animate}" class="fa fa-thumbs-o-up">({{praises}})</i></a>
+                                          <i ng-class="{'animated bounceIn text-danger':animate}" class="fa fa-thumbs-o-up" ></i></a>
+                                      <span ng-bind="praises" class="text-primary"></span>
                                   </div>
-                                  <div class="pull-right">
+                                  <div>
                                       <span class="small-70 color-grey">
                                           <c:if test="${not empty article.author}">作者:${article.author}</c:if>
-                                          发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
                                       </span>
                                   </div>
                               </div>
