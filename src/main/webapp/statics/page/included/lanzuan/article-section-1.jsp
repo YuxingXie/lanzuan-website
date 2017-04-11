@@ -8,7 +8,7 @@
             </h4>
             <a ng-if="sortLink.image" target="_blank" href="{{sortLink.imageHref}}"><img ng-src="{{sortLink.image}}"
                                                                                          class="col-xs-12 p-t-1em"/></a>
-            <a href="#" class="col-xs-4 green-link" ng-if="sortLink.links">
+            <a href="/website/article/list" class="col-xs-4 green-link" ng-if="sortLink.links">
                 <span class="large-110">More</span>
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-1x"></i><i
@@ -20,8 +20,8 @@
 
         <ul class="text-primary m-l-10 p-l-0 small-90">
             <li ng-repeat="link in sortLink.links" class="m-t-sm md-down-text-small-80">
-                <a ng-href="{{link.href}}" class="color-black">
-                    <span class="label label-default label-pill pull-right" ng-bind="link.date|date:'shortDate'"></span>
+                <a ng-href="{{link.href}}">
+                    <span class="label bg-grey-2 label-pill pull-right" ng-bind="link.date|date:'shortDate'"></span>
                     <span ng-bind="link.text"></span>
                 </a>
 

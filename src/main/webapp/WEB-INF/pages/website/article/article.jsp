@@ -39,8 +39,8 @@
                             <div class="card-block p-a-0 m-a-0" >
                                 <ol class="breadcrumb m-a-0 p-a-xs">
                                     当前位置:
-                                    <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
-                                    <li class="small active"><a href="/website/article/article-list">文章中心</a></li>
+                                    <li class="small-90 fa fa-home color-grey"><a href="/"> 首页</a></li>
+                                    <li class="small active"><a href="/website/article/list">文章中心</a></li>
                                 </ol>
                             </div>
                             <a href="#content" class="list-group-item hidden-md-down">${article.title}</a>
@@ -53,20 +53,18 @@
                       <div class="col-xs-12">
                           <div class="col-md-7 col-md-push-4 col-xs-12"   >
                               <div class="col-xs-12 text-center p-a-0 m-a-0 ">
-                                  <h4>${article.title}</h4>
-                                  <div class="pull-left m-b-2em ">
-                                      <label class="label label-info p-t-xs p-b-xs">本文已被阅读：${article.readTimes}次</label>
+                                  <h4 class="color-grey" style="letter-spacing: 3px">${article.title}</h4>
+                                  <div class="pull-left">
+                                      <label class="label label-info p-t-xs p-b-xs">已阅读：${article.readTimes}次</label>
                                       <a href="#" ng-click="praise()">
                                           <i ng-class="{'animated bounceIn text-danger':animate}" class="fa fa-thumbs-o-up">({{praises}})</i></a>
                                   </div>
-                                  <div class="pull-right m-b-2em ">
-
-                                      <label class="label label-pill bg-grey-2">
+                                  <div class="pull-right">
+                                      <span class="small-70 color-grey">
                                           <c:if test="${not empty article.author}">作者:${article.author}</c:if>
                                           发布于:<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd"/>
-                                      </label>
+                                      </span>
                                   </div>
-
                               </div>
                               <div class="col-xs-12 bg-white ">
                               ${article.content}

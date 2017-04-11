@@ -16,7 +16,7 @@
 
     </div>
     <div class="row m-x-0 md-up-p-x-4em lg-m-b-2em" ng-repeat="block in ${param.var}.items"
-         ng-class="{'active in':$parent._active===$index,'collapse':$parent._active!==$index}">
+         ng-class="{'active in animated fadeIn':$parent._active===$index,'collapse':$parent._active!==$index}">
         <div class="col-xs-6 col-md-3 md-down-p-x-0" ng-repeat="imageTextItem in block.imageTextItems">
             <a ng-href="{{imageTextItem.link}}" class="with-text-img" ng-mouseover="show=true" ng-mouseleave="show=false">
                 <img class="md-down-img-thumbnail full-container img-responsive" ng-class="{'dark-07':show}"

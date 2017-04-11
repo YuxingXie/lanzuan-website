@@ -15,7 +15,9 @@
 .relative{position: relative;}
 .absolute{position:absolute;}
 .fixed{position:fixed;}
-
+.no-radius{
+    border-radius: 0;
+}
 .overflow-scroll{overflow: scroll}
 .overflow-hidden{overflow: hidden}
 .pictureWithWords img{
@@ -96,10 +98,9 @@
 .white-link:link,.white-link:visited {color: #fff}
 .blue-link:link,.blue-link:visited {color: #3a60b9
 }
-.green-link:visited{color: #666666}
-
-.green-link:link {color: rgba(0, 171, 0, 0.53)
-}
+.green-link:visited{color: #00db00}
+.green-link:hover{color: #9c9c9c}
+.green-link:link {color: #00db00;}
 .grey-link:link, .grey-link a:link{color: #969696}
 .black-link:link {color: #000000}
 /*.green-link:hover,.grey-link:hover,.black-link:hover{*/

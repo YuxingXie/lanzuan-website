@@ -38,7 +38,7 @@
                         <div class="card-block p-a-0 m-a-0" >
                             <ol class="breadcrumb m-a-0 p-a-xs">
                                 当前位置:
-                                <li class="small-90 fa fa-home"><a href="/"> 首页</a></li>
+                                <li class="small-90 fa fa-home color-grey"><a href="/"> 首页</a></li>
                                 <li class="small active">文章中心</li>
                             </ol>
                         </div>
@@ -62,9 +62,9 @@
                                     <span ng-bind-html="article.content| to_trusted"></span>
                                 </div>
                                 <div class="col-xs-12  small-90 text-right">
-                                    <span ng-if="article.author">作者:{{article.author}}</span>
-                                    <span ng-if="article.date">发布于:{{article.date|date:'yyyy-MM-dd'}}</span>
-                                    阅读：{{article.readTimes}}次 <a ng-href="/article/{{article.id}}" target="_blank">[详细]</a>
+                                    <i ng-if="article.author">作者:{{article.author}}</i>
+                                    <i ng-if="article.date">发布于:{{article.date|date:'yyyy-MM-dd'}}</i>
+                                    阅读:{{article.readTimes}}次 <a ng-href="/article/{{article.id}}" target="_blank">[详细]</a>
                                 </div>
 
                             </div>
