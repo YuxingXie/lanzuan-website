@@ -38,7 +38,7 @@
             </div>
         </div>
         <c:forEach var="canvas" items="${canvasList}">
-            <div class="row m-t-sm hover-bg-color-grey">
+            <div class="row m-t-sm hover-bg-grey">
                 <div class="col-xs-1">
                     ${canvas.name}
                 </div>

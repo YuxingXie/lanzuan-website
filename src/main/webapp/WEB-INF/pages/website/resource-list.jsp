@@ -61,7 +61,7 @@
                                         <div class="col-xs-4">下载路径(uri)</div>
                                     </div>
                                     <c:forEach var="resource" items="${webResourceList}">
-                                        <div class="col-xs-12 hover-bg-color-grey p-t p-b">
+                                        <div class="col-xs-12 hover-bg-grey p-t p-b">
                                             <div class="col-xs-4">
                                                     ${resource.name}
                                             </div>

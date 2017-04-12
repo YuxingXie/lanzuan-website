@@ -10,18 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>湖南蓝钻科技</title>
-    <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/statics/css/style.css"/>
     <link rel="stylesheet" href="${path}/statics/css/color.css"/>
     <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.min.css"/>
     <link rel="stylesheet" href="${path}/statics/css/bootstrap.custom.css"/>
     <link rel="stylesheet" href="${path}/statics/css/responsive.css3.css"/>
-    <style>
-        img {
-            max-width: 100%;
-        }
-    </style>
 </head>
 <body ng-app="app" class="bg-very-light-1">
 <div ng-controller="ArticleController" >
@@ -51,25 +46,25 @@
                     <div class="col-xs-12">
                         <div class="col-md-7 col-md-push-4 col-xs-12"   >
 
-                            <div class="row border-b-s-silver hover-bg-color-grey p-t p-b" ng-repeat="article in pagination.data">
+                            <div class="row border-b-s-silver hover-bg-grey p-t" ng-repeat="article in pagination.data" ng-class="{'border-t-s-silver':$first}">
 
-                                <div class="col-xs-12 large-110">
-                                    {{article.title}}
+                                <div class="col-xs-12 p-b-xs">
+                                    <a ng-href="/article/{{article.id}}" ng-bind="article.title"></a>
                                 </div>
 
-                                <div class="col-xs-12 img-hidden" style="height: 4em;overflow: hidden;text-indent: 2em">
-                                    <span ng-bind-html="article.content| to_trusted"></span>
+                                <div class="col-xs-12 img-hidden" style="height: 4em;overflow: hidden;">
+
+                                    <small ng-bind-html="article.content| to_trusted"></small>
                                 </div>
                                 <div class="col-xs-12  small-90 text-right">
-                                    <i ng-if="article.author">作者:{{article.author}}</i>
-                                    <i ng-if="article.date">发布于:{{article.date|date:'yyyy-MM-dd'}}</i>
+
+                                    <i ng-if="article.date">{{article.date|date:'yyyy-MM-dd'}}</i>
                                     阅读:{{article.readTimes}}次 <a ng-href="/article/{{article.id}}" target="_blank">[详细]</a>
                                 </div>
 
                             </div>
                             <nav class="pull-right">
                                 <ul class="pagination">
-                                    <%--<li ng-if="pagination.pages&&pagination.pages.length&&pagination.pages.length>pagination.displayable&&pagination.displayable*pagination.times<=pagination.pages.length">--%>
                                     <li ng-if="pagination.times>1">
                                         <a href="#" aria-label="Previous" ng-click="prevPage()">
                                             <span aria-hidden="true">&laquo;</span>
@@ -153,10 +148,7 @@
                 $scope.pagination.data=$scope.articles.slice($scope.pagination.size*firstDisplayable,$scope.pagination.size*(firstDisplayable+1));
                 $scope.pagination.active=firstDisplayable;
             }
-            $scope.showArticle=function(article){
-                $scope.article=article;
-                document.getElementById("content").innerHTML=article.content;
-            }
+
         }])
     })()
 

@@ -21,23 +21,22 @@
             <h6 class="color-blue text-center">关注我们</h6>
             <div class="col-xs-2" ng-init="showPic=1">
                 <div class="row p-a-0">
-
-                    <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="img-responsive" ng-click="showPic=1"/>
+                    <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="hover-cursor-hand img-responsive" ng-class="{'':showPic==1}" ng-click="showPic=1"/>
                 </div>
                 <div class="row p-a-0">
 
-                    <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif"  class="img-responsive"  ng-click="showPic=2"/>
+                    <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif"  class="hover-cursor-hand img-responsive" ng-class="{'':showPic==2}"  ng-click="showPic=2"/>
                 </div>
                 <div class="row p-a-0">
 
-                    <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="img-responsive" ng-click="showPic=3"/>
+                    <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="hover-cursor-hand img-responsive" ng-class="{'':showPic==3}" ng-click="showPic=3"/>
                 </div>
             </div>
 
             <div class="col-md-8 col-xs-9 p-a-0 border-a-s-silver">
                 <img src="/statics/image/icon/1489631134133.jpg" class="img-responsive animated zoomIn" ng-if="showPic==1"/>
-                <img src="/statics/image/icon/1490414980180.jpg" class="img-responsive animated fadeIn" ng-if="showPic==2"/>
-                <img src="/statics/image/icon/1490414985456.jpg" class="img-responsive animated slideInDown" ng-if="showPic==3"/>
+                <img src="/statics/image/icon/1490414980180.jpg" class="img-responsive animated zoomIn" ng-if="showPic==2"/>
+                <img src="/statics/image/icon/1490414985456.jpg" class="img-responsive animated zoomIn" ng-if="showPic==3"/>
             </div>
         </div>
     </div>

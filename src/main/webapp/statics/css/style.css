@@ -215,6 +215,10 @@ Misc tools
 .padding-30 {
     padding:30px;
 }
+.p-y-xs {
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
+}
 .p-t-xs{
     padding-top: .5rem !important;
 }
@@ -651,13 +655,31 @@ Misc tools
     background-color: #fff;
     color: #000;
 }
-.hover-bg-color-grey:hover{
+
+.hover-bg-grey:hover{
     background-color: #f6f6f6;
 }
-.hover-bg-color-dark-grey:hover{
+.hover-bg-dark-grey:hover{
     background-color: #e8e8e8;
 }
-
+.hover-bg-silver:hover{
+    background-color: #c0c0c0;
+}
+.hover-bg-silver-2:hover{
+    background-color: #d9d9d9;
+}
+.hover-bg-primary:hover{
+    color: #fff;
+    background-color: #0275d8;
+}
+.hover-bg-info:hover{
+    color: #fff;
+    background-color: #5bc0de;
+}
+.hover-bg-info-2:hover{
+    color: #fff;
+    background-color: #60d4f2;
+}
 .checkbox-list > label {
     display: block;
     font-weight: normal;

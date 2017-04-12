@@ -9,8 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>湖南蓝钻科技</title>
-        <script src="${path}/statics/js/pace.js"></script>
-        <link rel="stylesheet" href="${path}/statics/css/pace.css"/>
+        <%--<script src="${path}/statics/js/pace.js"></script>--%>
+        <%--<link rel="stylesheet" href="${path}/statics/css/pace.css"/>--%>
         <link rel="stylesheet" href="${path}/statics/plugin/bootstrap-4.0.0-alpha/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="${path}/statics/plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="${path}/statics/plugin/animate.css-master/animate.css"/>

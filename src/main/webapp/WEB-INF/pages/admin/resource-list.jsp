@@ -40,7 +40,7 @@
                 <c:if test="${empty webResourceList}">暂时没有资源</c:if>
                 <c:if test="${not empty webResourceList}">
                     <c:forEach var="resource" items="${webResourceList}">
-                    <div class=" hover-bg-color-grey p-t p-b">
+                    <div class=" hover-bg-grey p-t p-b">
                         <div class="col-xs-3">
                             ${resource.name}
                         </div>
