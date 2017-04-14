@@ -34,9 +34,9 @@
             </div>
 
             <div class="col-md-8 col-xs-9 p-a-0 border-a-s-silver">
-                <img src="/statics/image/icon/1489631134133.jpg" class="img-responsive animated zoomIn" ng-if="showPic==1"/>
-                <img src="/statics/image/icon/1490414980180.jpg" class="img-responsive animated zoomIn" ng-if="showPic==2"/>
-                <img src="/statics/image/icon/1490414985456.jpg" class="img-responsive animated zoomIn" ng-if="showPic==3"/>
+                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==1"/>
+                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==2"/>
+                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==3"/>
             </div>
         </div>
     </div>
