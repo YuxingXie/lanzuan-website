@@ -7,26 +7,27 @@
 
 /**依赖.dropdown-menu，置于.dropdown-menu之后，改变弹出菜单样式*/
 .dropdown-full-width {
-    /*position: relative;*/
-    /*top: 100%;*/
-    /*left: 0;*/
-    /*z-index: 1000;*/
-    /*width: 100%;*/
-    /*display: block;*/
-    /*float: left;*/
-    /*min-width: 360px;*/
-    /*padding: 5px 0;*/
-    /*margin: 2px 0 0;*/
-    /*font-size: 1rem;*/
-    /*text-align: left;*/
-    /*list-style: none;*/
-    /*background-color: #fff;*/
-    /*-webkit-background-clip: padding-box;*/
-    /*background-clip: padding-box;*/
-    /*border: 1px solid rgba(0, 0, 0, .15);*/
-    /*border: 1px solid #000;*/
-    /*border-radius: .25rem;*/
     overflow: scroll;
+}
+.dropdown-menu-top {
+    position: absolute;
+    bottom: 100%;
+    left: 33%;
+    right: auto;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 1rem;
+    text-align: left;
+    list-style: none;
+    /*background-color: #fff;*/
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*border: 1px solid rgba(0, 0, 0, .15);*/
+    border-radius: .25rem;
 }
 .dropdown-item-inline {
     display: inline-block;

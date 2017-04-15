@@ -17,26 +17,20 @@
             </ul>
 
         </div>
-        <div class="col-xs-12 col-md-4 md-down-m-y-20 padding-left-2em">
+        <div class="col-xs-12 col-md-4 md-down-m-y-20 p-l-2em p-t-md "  ng-init="showPic=0">
             <h6 class="color-blue text-center">关注我们</h6>
-            <div class="col-xs-2" ng-init="showPic=1">
-                <div class="row p-a-0">
-                    <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="hover-cursor-hand img-responsive" ng-class="{'':showPic==1}" ng-click="showPic=1"/>
+            <div class="col-xs-12 text-center">
+                <div class="dropdown-menu-top" ng-class="{'block':showPic==1||showPic==2||showPic==3}">
+                    <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive img-ico-lg animated zoomIn" ng-if="showPic==1"/>
+                    <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive img-ico-lg animated zoomIn" ng-if="showPic==2"/>
+                    <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive img-ico-lg animated zoomIn" ng-if="showPic==3"/>
                 </div>
-                <div class="row p-a-0">
-
-                    <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif"  class="hover-cursor-hand img-responsive" ng-class="{'':showPic==2}"  ng-click="showPic=2"/>
-                </div>
-                <div class="row p-a-0">
-
-                    <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="hover-cursor-hand img-responsive" ng-class="{'':showPic==3}" ng-click="showPic=3"/>
-                </div>
+                <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=1" ng-mouseleave="showPic=0"/>
+                <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=2" ng-mouseleave="showPic=0"/>
+                <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=3" ng-mouseleave="showPic=0"/>
             </div>
 
-            <div class="col-md-8 col-xs-9 p-a-0 border-a-s-silver">
-                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==1"/>
-                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==2"/>
-                <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive animated zoomIn" ng-if="showPic==3"/>
-            </div>
+
+
         </div>
     </div>
