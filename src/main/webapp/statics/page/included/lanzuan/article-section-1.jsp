@@ -17,7 +17,6 @@
             </a>
 
         </div>
-
         <ul class="text-primary m-l-10 p-l-0 small-90">
             <li ng-repeat="link in sortLink.links" class="m-t-sm md-down-text-small-80">
                 <a ng-href="{{link.href}}">
