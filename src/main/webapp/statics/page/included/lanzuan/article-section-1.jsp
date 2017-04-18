@@ -21,7 +21,7 @@
         <ul class="text-primary m-l-10 p-l-0 small-90">
             <li ng-repeat="link in sortLink.links" class="m-t-sm md-down-text-small-80">
                 <a ng-href="{{link.href}}">
-                    <span class="label bg-dark-grey color-grey label-pill pull-right" ng-bind="link.date|date:'yy-MM-dd'"></span>
+                    <span class="label bg-dark-grey color-grey-3  label-pill pull-right m-l-2em" ng-bind="link.date|date:'yy-MM-dd'"></span>
                     <span ng-bind="link.text"></span>
                 </a>
 

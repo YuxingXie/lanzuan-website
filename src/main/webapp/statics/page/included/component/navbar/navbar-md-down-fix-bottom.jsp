@@ -2,9 +2,9 @@
 
 <nav class="navbar md-down-fixed-top bg-white" ng-init="get${param.varU}();toggleNav=false;showNav=false;">
     <div class="hidden-md-up rotateIn" ng-click="toggleNav=true;showNav=!showNav;">
-        <span class="fa fa-navicon p-x-2 hover-cursor-hand" ng-class="{'animated rotateIn':toggleNav&&showNav}"></span>
         <img ng-if="${param.var}.navbarBrand&&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.type==='image' &&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.value"
-             ng-src="{{${param.var}.navbarBrand.value}}" class="img-ico-md m-l-5em">
+             ng-src="{{${param.var}.navbarBrand.value}}" class="img-ico-md text-center">
+        <span class="fa fa-navicon p-x-2 hover-cursor-hand pull-right p-t-5" ng-class="{'animated rotateIn':toggleNav&&showNav}"></span>
     </div>
     <div class="hidden-md-down " ng-class="{'block animated bounceInDown':toggleNav&&showNav}">
         <div class="navbar-brand hidden-md-down">
@@ -22,6 +22,7 @@
             </li>
         </ul>
     </div>
+
 </nav>
 <div class="md-down-m-y-46"></div>
 
