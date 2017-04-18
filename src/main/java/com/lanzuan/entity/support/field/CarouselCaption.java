@@ -14,10 +14,6 @@ public class CarouselCaption extends LeafItem {
     @FormAttributes(inputType = InputType.SELECT,optionValues ={"{value:\"link\",text:\"链接\"}","{value:\"text\",text:\"文字\"}"} )
     private String type;
 
-//    @Naming("显示文字")
-//    @Editable(inputType = InputType.TEXT)
-//    private String  value;
-
     @Naming("显示文字")
     @FormAttributes(inputType = InputType.TEXT)
     private String text;

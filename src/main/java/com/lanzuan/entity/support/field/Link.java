@@ -12,17 +12,15 @@ import java.util.Date;
  * Created by Administrator on 2017/3/15.
  */
 public class Link extends LeafItem {
-    @Naming("链接")
+    @Naming("链接到")
     @FormAttributes(inputType = InputType.URL)
     private String href;
     @Naming("链接文字")
     @FormAttributes
     private String text;
-//    @Naming("日期")
-//    @Editable(inputType = InputType.DATE)
+
     private Date date;
-//    @Naming("图片链接")
-//    @Editable(inputType = InputType.IMAGE)
+
     private String image;
     @Transient
     private SortLink parent;

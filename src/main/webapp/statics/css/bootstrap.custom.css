@@ -7,7 +7,8 @@
 
 /**依赖.dropdown-menu，置于.dropdown-menu之后，改变弹出菜单样式*/
 .dropdown-full-width {
-    overflow: scroll;
+    width: 100%;
+    margin-top: 0;
 }
 .dropdown-menu-top {
     position: absolute;

@@ -67,7 +67,7 @@
                               </div>
                               <div class="col-xs-12 text-center m-t-md">
 
-                                      <span class="fa-stack fa-2x" ng-class="{'hover-cursor-hand':!animate}"  ng-click="praise()">
+                                      <span class="fa-stack fa-2x" ng-class="{'hover-hand':!animate}"  ng-click="praise()">
                                           <i class="fa fa-circle fa-stack-2x" ng-class="{'text-danger':animate,' text-primary':!animate}" ></i>
                                           <i ng-class="{'animated bounceIn':animate}" class="fa fa-thumbs-o-up fa-stack-1x fa-inverse" ></i>
                                       </span>

@@ -229,6 +229,7 @@ public class AngularEntityEditorBuilder {
 
         return ret.toString();
     }
+
     private void printItem(int level) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         String context=pageComponent.getVar();
         boolean fieldInScope=true;
@@ -237,7 +238,6 @@ public class AngularEntityEditorBuilder {
         }
 
     }
-
     private void printField(String context,String absoluteContext,Field field,int level,boolean fieldInScope) throws ClassNotFoundException {
         if (field.isAnnotationPresent(Id.class)) return;
         if (field.isAnnotationPresent(Transient.class)) return;
@@ -269,7 +269,8 @@ public class AngularEntityEditorBuilder {
                     printField(context+"."+field.getName(),absoluteContext+"."+field.getName(), childItemField,level+1,true);
                 }
             }else if (List.class.isAssignableFrom(field.getType())) {
-                printItemListHeader(fieldNaming,fieldName,context,level);
+                String ng_if=getNgIfExpression(context,fieldInScope,fieldNaming);
+                printItemListHeader(fieldNaming,fieldName,ng_if,context,level);
                 Type typeCls = field.getGenericType();
                 ParameterizedType parameterizedType = (ParameterizedType) typeCls;
                 Type actualType = parameterizedType.getActualTypeArguments()[0];
@@ -278,7 +279,14 @@ public class AngularEntityEditorBuilder {
                 if(StringUtils.isBlank(ngRepeatVar)){
                     ngRepeatVar=StringUtils.firstLowerCase(clazz.getSimpleName());
                 }
-                editorHtml.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
+
+
+                if (ng_if!=null){
+                    editorHtml.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "' ng-if=\""+ng_if+"\">");
+                }else{
+                    editorHtml.append("<div class='row p-t-xs p-b-md'  ng-repeat='" + ngRepeatVar + " in " + context + "." + field.getName() + "'>");
+                }
+
 
                 String itemBorderCss="";
                 if (level==1)   itemBorderCss="border-a-s-silver p-a-lg";
@@ -350,13 +358,19 @@ public class AngularEntityEditorBuilder {
         editorHtml.append(fieldNaming.value());
         editorHtml.append(" </div>");
     }
-    private void printItemListHeader(Naming fieldNaming,String fieldName,String context,int level) {
+    private void printItemListHeader(Naming fieldNaming,String fieldName, String ng_if,String context,int level) {
         String fontSizeCss="";
         if(level==1) fontSizeCss="large-150";
         else fontSizeCss="large-120";
         String addItemFunctionName="add"+StringUtils.firstUpperCase(context)+"Item";
-//        System.out.println(addItemFunctionName);
-        editorHtml.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
+
+        System.out.println("printItemListHeader "+ng_if);
+        if (ng_if==null){
+            editorHtml.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md'> ");
+        }else {
+            editorHtml.append("<div class='text-left label label-info col-xs-12 " + fontSizeCss + " fa fa-list m-t-md m-b-md' ng-if=\""+ng_if+"\"> ");
+        }
+
         editorHtml.append(fieldNaming.value());
         editorHtml.append("<span ng-if='!" + context + "." + fieldName + "' class='label label-info label-pill'>暂无数据</span>");
         editorHtml.append("<button class='btn btn-info btn-sm  pull-right' ng-click='" + addItemFunctionName + "(" + context + ")'>增加一项 <i class='fa fa-plus-circle'></i></button>");
@@ -549,7 +563,26 @@ public class AngularEntityEditorBuilder {
                     ng_condition=context+"."+ng_field+"==='"+params[0]+"'";
                 }
 
-            }else if (Expression.NE==expression){
+            }else if (Expression.IN==expression){
+                if (params!=null&&params.length>0){
+                    if (params[0].trim().equals("")){
+                        ng_condition="!"+context+"."+ng_field;
+                    }else {
+                        ng_condition=context+"."+ng_field+"==='"+params[0]+"'";
+                    }
+
+                    for(int i=1;i<params.length;i++){
+                        if (params[i].trim().equals("")){
+                            ng_condition+="||!"+context+"."+ng_field;
+                        }else {
+                            ng_condition+="||"+context+"."+ng_field+"==='"+params[i]+"'";
+                        }
+
+                    }
+
+                }
+            }
+            else if (Expression.NE==expression){
                 if (params!=null&&params.length>0){
                     ng_condition=context+"."+ng_field+"!=='"+params[0]+"'";
                 }

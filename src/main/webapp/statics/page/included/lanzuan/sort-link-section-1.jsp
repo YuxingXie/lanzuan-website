@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
     <div class="row p-t-4em p-b-4em m-l-0 m-r-0 bg-very-light " ng-init="get${param.varU}();toggle=-1;startToggle=false;prevToggle=-1;prevDisplay=true;">
         <div class="col-md-2 text-center md-down-text-left md-dash-silver-right-border md-height-10em padding-left-2em" ng-repeat="sortLink in ${param.var}.items">
-            <div class="md-down-hover-cursor-hand"  ng-click="$parent.prevToggle=$parent.toggle;$parent.toggle=$index;$parent.prevDisplay=$parent.prevToggle===$parent.toggle?(!$parent.prevDisplay):false;$parent.startToggle=true;">
+            <div class="md-down-hover-hand"  ng-click="$parent.prevToggle=$parent.toggle;$parent.toggle=$index;$parent.prevDisplay=$parent.prevToggle===$parent.toggle?(!$parent.prevDisplay):false;$parent.startToggle=true;">
                 <span class="pull-right hidden-md-up p-r m-t-05em color-grey">+</span>
                 <h6 class="color-blue text-left p-l-2em p-t-05em md-down-solid-silver-border-top"
                     ng-class="{'md-down-p-b-05em md-down-solid-silver-border-bottom':$last&&!($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle!=$parent.toggle||($parent.startToggle&&$parent.toggle===$index&&$parent.prevToggle===$parent.toggle&&!$parent.prevDisplay))}"
@@ -25,9 +25,9 @@
                     <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive img-ico-lg animated zoomIn" ng-if="showPic==2"/>
                     <img src="/statics/image/lanzuan/home/ewm.jpg" class="img-responsive img-ico-lg animated zoomIn" ng-if="showPic==3"/>
                 </div>
-                <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=1" ng-mouseleave="showPic=0"/>
-                <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=2" ng-mouseleave="showPic=0"/>
-                <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="inline-block hover-cursor-hand img-responsive" ng-mouseover="showPic=3" ng-mouseleave="showPic=0"/>
+                <img title="微信" ng-src="/statics/image/lanzuan/icons/foll1.gif" class="inline-block hover-hand img-responsive" ng-mouseover="showPic=1" ng-mouseleave="showPic=0"/>
+                <img title="微博" ng-src="/statics/image/lanzuan/icons/foll2.gif" class="inline-block hover-hand img-responsive" ng-mouseover="showPic=2" ng-mouseleave="showPic=0"/>
+                <img title="社区" ng-src="/statics/image/lanzuan/icons/foll3.gif" class="inline-block hover-hand img-responsive" ng-mouseover="showPic=3" ng-mouseleave="showPic=0"/>
             </div>
 
 

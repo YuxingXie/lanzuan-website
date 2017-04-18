@@ -5,5 +5,5 @@ package com.lanzuan.common.code;
  */
 public enum Expression {
 
-    EQ,NE,GT,LT,GET,LET, IS_EMPTY, IS_NOT_EMPTY,WITH_LENGTH,WITHOUT_LENGTH
+    EQ,NE,GT,LT,GET,LET, IS_EMPTY, IS_NOT_EMPTY,WITH_LENGTH,WITHOUT_LENGTH,IN
 }

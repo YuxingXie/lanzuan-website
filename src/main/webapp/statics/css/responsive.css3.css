@@ -36,6 +36,7 @@
         left: 2%;
         width: 8%;
     }
+
     .md-height-10em{height:10em!important;}
     .md-dash-silver-right-border{
         border-right: dashed #c0c0c0 1px;
@@ -209,7 +210,7 @@
     .md-down-bg-medium-grey{
         background-color: #eeecec;
     }
-    .md-down-hover-cursor-hand{
+    .md-down-hover-hand{
         cursor: pointer;
     }
     .md-down-bg-primary{
