@@ -12,24 +12,24 @@
                  ng-src="{{${param.var}.navbarBrand.value}}" class="img-nav-brand p-x-2em">
             <a ng-if="${param.var}.navbarBrand&&${param.var}.navbarBrand.type&&${param.var}.navbarBrand.type==='text'"class="m-l-5em" ng-bind="${param.var}.navbarBrand.value"></a>
         </div>
-        <div class="nav navbar-nav p-t m-a-0 p-l-0 p-r-md">
-            <div class="nav-item" ng-init="navMenu={toggleIndex:-1,prevOpen:false,prevIndex:0}"></div>
-            <div class="nav-item dropdown md-p-x-1-5em lg-p-x-2em md-p-t-10 text-center md-down-block-item md-down-m-l-0 md-down-text-small-90" ng-repeat="navItem in ${param.var}.items" >
+        <div class="nav navbar-nav p-t m-a-0 p-l-0 p-r-md" ng-init="navMenu={toggleIndex:-1,prevOpen:false,prevIndex:0}">
+            <div class="nav-item" ></div>
+            <div class="nav-item md-dropdown p-l-0 p-r-lg md-down-p-r-0 md-p-t-10 text-left md-down-block-item md-down-m-l-0 md-down-text-small-90" ng-repeat="navItem in ${param.var}.items" >
                 <a class="nav-link" ng-href="{{navItem.link}}" ng-if="!navItem.navItemType||navItem.navItemType==='link'">
                     <hr class="hidden-md-up p-t-0 p-b-0 m-t-0" />
-                    <span ng-bind="navItem.name"></span>
+                    <span ng-bind="navItem.name" ></span>
                 </a>
-                <a class="nav-link" href="#" ng-if="navItem.navItemType==='menu'"
-                      ng-click="navMenu.prevIndex=navMenu.toggleIndex;navMenu.toggleIndex=$index;navMenu.prevOpen=navMenu.prevIndex===navMenu.toggleIndex?!navMenu.prevOpen:false">
+                <span class="nav-link hover-hand" href="#" ng-if="navItem.navItemType==='menu'"
+                      ng-mouseover="navMenu.prevIndex=navMenu.toggleIndex;navMenu.toggleIndex=$index;navMenu.prevOpen=navMenu.prevIndex===navMenu.toggleIndex?!navMenu.prevOpen:false">
                     <hr class="hidden-md-up p-t-0 p-b-0 m-t-0" />
                     <span class="fa pull-right hidden-md-up" ng-class="{'fa-minus ':navMenu.toggleIndex===$index&&(navMenu.toggleIndex!=navMenu.prevIndex||(!navMenu.prevOpen)),'fa-plus ':!(navMenu.toggleIndex===$index&&(navMenu.toggleIndex!=navMenu.prevIndex||(!navMenu.prevOpen)))}"></span>
-                    <span ng-bind="navItem.name"></span>
-                    <ul class="nav-item-dropdown md-down-text-small-80" ng-class="{'block':navMenu.toggleIndex===$parent.$index&&(navMenu.toggleIndex!=navMenu.prevIndex||(!navMenu.prevOpen))}">
-                        <li ng-repeat="menuItem in navItem.menuItems" class="md-down-p-y-5">
-                            <span ng-bind="menuItem.text" class="animated fadeIn"></span>
-                        </li>
-                    </ul>
-                </a>
+                    <span class="p-b-0 m-b-0" ng-bind="navItem.name" ></span>
+                    <div class="nav-item-dropdown md-down-text-small-80 p-t-0 m-t-0 md-down-p-x-10" ng-class="{'block':navMenu.toggleIndex===$parent.$index&&(navMenu.toggleIndex!=navMenu.prevIndex||(!navMenu.prevOpen))}">
+                        <div ng-repeat="menuItem in navItem.menuItems" class="md-down-p-y-5 md-p-x-10 p-t-sm">
+                            <span ng-bind="menuItem.text" class="animated fadeIn "></span>
+                        </div>
+                    </div>
+                </span>
             </div>
         </div>
     </div>

@@ -468,6 +468,9 @@ Misc tools
 .p-l-xl {
     padding-left: 5rem !important;
 }
+.p-l-sm {
+    padding-left: 1rem !important;
+}
 .p-r-2 {
     padding-right: 2px !important;
 }
@@ -730,6 +733,18 @@ Misc tools
 .border-b-s-silver{
     border-bottom: solid #c0c0c0 1px;
 }
+.border-t-r-l-s-silver{
+    border-top: solid #c0c0c0 1px;
+    border-right: solid #c0c0c0 1px;
+    border-left: solid #c0c0c0 1px;
+}
+.border-t-r-l-s-silver-round{
+    border-top: solid #c0c0c0 1px;
+    border-right: solid #c0c0c0 1px;
+    border-left: solid #c0c0c0 1px;
+    border-radius: .25rem .25rem 0 0;
+}
+
 .text-indent-1em{text-indent: 1em}
 .text-indent-5em{text-indent: 5em}
 .letter-spacing-0-2em{letter-spacing: .2em}
