@@ -5,7 +5,6 @@ import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.common.base.annotation.entity.ListColumn;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import com.lanzuan.entity.support.RootItem;
-import com.lanzuan.entity.support.field.ImageTextBlock;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;

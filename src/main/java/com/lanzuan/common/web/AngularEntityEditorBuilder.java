@@ -47,7 +47,6 @@ public class AngularEntityEditorBuilder {
         this.getterMethodsJavascript=new StringBuffer();
     }
     public AngularEntityEditorBuilder(List<PageComponent> pageComponents){
-        this.editorHtml=new StringBuffer();
         this.javaScript=new StringBuffer();
         this.pageComponents=pageComponents;
         this.getterMethodsJavascript=new StringBuffer();
@@ -59,7 +58,7 @@ public class AngularEntityEditorBuilder {
 
 
     private void buildAdminJavaScript() {
-        buildGetMethodMerged();
+        buildGetMethodMerged(true);
         buildResetMethod();
         buildGetMaterialMethod();
         buildUpdateMethod();
@@ -74,11 +73,21 @@ public class AngularEntityEditorBuilder {
         buildInitAdminMethod();
     }
 
-    private void buildGetMethodMerged() {
+    private void buildGetMethodMerged(boolean merge) {
         buildGetMethod();
-        merge(javaScript,getterMethodsJavascript);
+        if (merge)
+            merge(javaScript,getterMethodsJavascript);
     }
-
+    private void buildGetMethod() {
+        getterMethodsJavascript.append("\n;$scope.get" + pageComponent.getVarU() + "=function(){");
+        getterMethodsJavascript.append("\n $http.get('" + pageComponent.getDataUri() + "').success(function (data) {");
+        getterMethodsJavascript.append("\n$scope." + pageComponent.getVar() + "=data;");
+        getterMethodsJavascript.append("\n});");
+        getterMethodsJavascript.append("\n}");
+    }
+    private void merge(StringBuffer oldStringBuffer,StringBuffer newStringBuffer){
+        oldStringBuffer.append(newStringBuffer);
+    }
     private void buildInitAdminMethod() {
         javaScript.append("\n;$scope.initAdmin=function(){");
         javaScript.append("\n$scope.getMenu();");
@@ -181,18 +190,8 @@ public class AngularEntityEditorBuilder {
         javaScript.append("\n}");
     }
 
-    private void buildGetMethod() {
 
-        getterMethodsJavascript.append("\n;$scope.get" + pageComponent.getVarU() + "=function(){");
-        getterMethodsJavascript.append("\n $http.get('" + pageComponent.getDataUri() + "').success(function (data) {");
-        getterMethodsJavascript.append("\n$scope." + pageComponent.getVar() + "=data;");
-        getterMethodsJavascript.append("\n});");
-        getterMethodsJavascript.append("\n}");
 
-    }
-    private void merge(StringBuffer oldStringBuffer,StringBuffer newStringBuffer){
-        oldStringBuffer.append(newStringBuffer);
-    }
 
     public String getGetterMethodsJavascript(){
         buildGetMethod();
@@ -215,14 +214,13 @@ public class AngularEntityEditorBuilder {
     public String getWebsiteJavaScript() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         for(PageComponent pageComponent1:pageComponents){
             this.pageComponent=pageComponent1;
-            buildGetMethodMerged();
+            buildGetMethodMerged(false);
         }
-
         StringBuffer ret = new StringBuffer();
         ret.append("\n<script>")
                 .append("\n(function () {\"use strict\"; var app = angular.module('app', []);")
                 .append("\napp.controller('HomeController', [\"$rootScope\", \"$scope\", \"$http\", \"$location\",\"$window\",function ($rootScope, $scope, $http, $location, $window) {")
-                .append(javaScript)
+                .append(getterMethodsJavascript)
                 .append("\n}])")
                 .append("\n})()")
                 .append("\n</script>");
@@ -501,7 +499,7 @@ public class AngularEntityEditorBuilder {
 
         editorHtml.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
 //        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
-        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
+        editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换"+fieldNaming.value()+"</button>");
         editorHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
         editorHtml.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
         editorHtml.append("\n     </button>");

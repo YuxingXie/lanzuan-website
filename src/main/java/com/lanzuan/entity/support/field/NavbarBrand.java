@@ -16,7 +16,7 @@ public class NavbarBrand extends LeafItem{
 //    @Editable(inputType = InputType.SELECT,optionValues = {"image","text"})
     private String type;
 
-    @Naming("值")
+    @Naming("导航条标签图")
     @FormAttributes(inputType = InputType.IMAGE)
     private String value;
     @Transient

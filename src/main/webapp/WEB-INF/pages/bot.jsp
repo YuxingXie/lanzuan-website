@@ -26,7 +26,7 @@
     <div ng-controller="HomeController" >
         <div class="navbar navbar-sm-down-fix-bottom" role="navigation">
             <img src="/statics/image/lanzuan/icons/ico.jpg" class="img-ico-larger navbar-brand ">
-            <ul class="nav navbar-nav padding-top-1em">
+            <ul class="nav navbar-nav p-t-1em">
                 <li class="nav-item active  hidden-sm-down">
                     <a class="nav-link active " href="#">
                         <i class="fa fa-home hidden-sm-down"></i> 首页
@@ -56,7 +56,7 @@
             <div class="carousel-inner " role="listbox">
                 <div class="carousel-item active ">
                     <img class="center-block full-width" src="/statics/image/lanzuan/home/carousel1.jpg"/>
-                    <div class="carousel-caption margin-bottom-40 padding-left-2em" style="left: 5%">
+                    <div class="carousel-caption m-b-40 p-l-2em" style="left: 5%">
                         <button class="btn btn-primary">了解更多 <i class="fa fa-chevron-right right"></i></button>
                     </div>
                 </div>
@@ -85,15 +85,15 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <div class="card-group margin-left-right-0">
+        <div class="card-group m-x-0">
             <div class="card">
                 <div class="card-block padding-1  ">
                     <a href="/statics/page/business/b1.html">
                         <img src="/statics/image/lanzuan/bg/bg2.jpg" class="full-width "/>
-                        <div class="sticker sticker-bottom margin-bottom-40">
+                        <div class="sticker sticker-bottom m-b-40">
                             <img src="/statics/image/lanzuan/icons/ico2.png" class="img-ico-lg hidden-md-down"/>
                         </div>
-                        <div class="sticker sticker-bottom padding-bottom-05em large-110">智慧城市</div>
+                        <div class="sticker sticker-bottom p-b-05em large-110">智慧城市</div>
                     </a>
 
                 </div>
@@ -102,10 +102,10 @@
                 <div class="card-block padding-1  ">
                     <a href="/statics/page/business/b2.html">
                         <img src="/statics/image/lanzuan/bg/bg2.jpg" class="full-width "/>
-                        <div class="sticker sticker-bottom margin-bottom-40">
+                        <div class="sticker sticker-bottom m-b-40">
                             <img src="/statics/image/lanzuan/icons/ico2.png" class="img-ico-lg hidden-md-down"/>
                         </div>
-                        <div class="sticker sticker-bottom padding-bottom-05em large-110">三农服务</div>
+                        <div class="sticker sticker-bottom p-b-05em large-110">三农服务</div>
                     </a>
                 </div>
             </div>
@@ -113,19 +113,19 @@
                 <div class="card-block padding-1">
                     <a href="/statics/page/business/b3.html" alt="软件开发">
                         <img src="/statics/image/lanzuan/bg/bg2.jpg" class="full-width "/>
-                        <div class="sticker sticker-bottom margin-bottom-40">
+                        <div class="sticker sticker-bottom m-b-40">
                             <img src="/statics/image/lanzuan/icons/ico2.png" class="img-ico-lg hidden-md-down"/>
                         </div>
-                        <div class="sticker sticker-bottom padding-bottom-05em large-110">软件开发</div>
+                        <div class="sticker sticker-bottom p-b-05em large-110">软件开发</div>
                     </a>
                 </div>
             </div>
 
         </div>
 
-        <div class="row  margin-left-right-0 margin-top-1em padding-left-2em" ng-init="active=1">
-            <span class="col-xs-4 col-md-2 large-180 padding-bottom-1em sm-down-text-120-percent ">典型应用</span>
-            <div class=" sm-down-btn-group col-xs-8 col-md-10 padding-top-05em">
+        <div class="row  m-x-0 m-t-1em p-l-2em" ng-init="active=1">
+            <span class="col-xs-4 col-md-2 large-180 p-b-1em sm-down-text-120-percent ">典型应用</span>
+            <div class=" sm-down-btn-group col-xs-8 col-md-10 p-t-05em">
                 <a ng-mouseover="active=1" ng-class="{'large-110 label label-pill  label-primary sm-down-btn':true,'active label-danger':active===1}">
                     智慧城市
                 </a>
@@ -139,34 +139,34 @@
                 </a>
             </div>
         </div>
-        <div class="row margin-left-right-0">
+        <div class="row m-x-0">
             <div ng-class="{'hidden':false,'active in':active===1,'collapse':active!==1}">
-                <div class="row margin-left-right-0">
-                    <div class="col-xs-12 col-md-3 margin-bottom-10 ">
+                <div class="row m-x-0">
+                    <div class="col-xs-12 col-md-3 m-b-10 ">
                         <a ng-init='show1=false' href="/statics/page/business/b1.html" class="with-text-img" ng-mouseover="show1=true" ng-mouseleave="show1=false">
                             <img ng-class="{'full-container img-responsive':true,'dark-07':show1}"
                                  src="/statics/image/lanzuan/280-180/zfdl.jpg"/>
 
                             <div ng-class="{'absolute-center small-90':true,'block':show1,'hidden':!show1}">
                                 <div class="text-indent-1em">宁乡县政府WIFI覆盖应用</div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a>
 
                         <p class="text-center">宁乡县政府</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10 ">
+                    <div class="col-xs-12 col-md-3 m-b-10 ">
                         <a ng-init='show2=false' href="/statics/page/business/b1.html" class="with-text-img" ng-mouseover="show2=true" ng-mouseleave="show2=false">
                             <img ng-class="{'full-container':true,'dark-07':show2}" src="/statics/image/lanzuan/280-180/cydl.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show2,'hidden':!show2}">
                                 <div class="text-indent-1em">金州开发区创业大楼WIFI覆盖应用</div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a>
 
                         <p class="text-center">金州开发区创业大楼</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10 ">
+                    <div class="col-xs-12 col-md-3 m-b-10 ">
                         <a ng-init='show3=false' href="/statics/page/business/b1.html" class="with-text-img" ng-mouseover="show3=true"
                            ng-mouseleave="show3=false">
                             <img ng-class="{'full-container':true,'dark-07':show3}"
@@ -174,19 +174,19 @@
 
                             <div ng-class="{'absolute-center small-90':true,'block':show3,'hidden':!show3}">
                                 <div class="text-indent-1em">宁乡县市民之家WIFI应用</div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a>
 
                         <p class="text-center">宁乡县市民之家</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10 ">
+                    <div class="col-xs-12 col-md-3 m-b-10 ">
                         <a ng-init='show4=false' href="/statics/page/business/b1.html" class="with-text-img" ng-mouseover="show4=true" ng-mouseleave="show4=false">
                             <img ng-class="{'full-width':true,'dark-07':show4}"
                                  src="/statics/image/lanzuan/280-180/nxxgaj.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show4,'hidden':!show4}">
                                 <div class="text-indent-1em">宁乡县公安局WIFI覆盖应用</div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a>
                         <p class="text-center">宁乡县公安局</p>
@@ -194,78 +194,78 @@
                 </div>
             </div>
             <div ng-class="{'hidden':false,'active in':active===2,'collapse':active!==2}">
-                <div class="row margin-left-right-0">
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                <div class="row m-x-0">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show1=false' href="/statics/page/business/b2.html" class="with-text-img" ng-mouseover="show1=true" ng-mouseleave="show1=false">
                             <img ng-class="{'full-container':true,'dark-07':show1}"
                                  src="/statics/image/lanzuan/280-180/putao.jpg">
                             <div ng-class="{'absolute-center small-90':true,'block':show1,'hidden':!show1}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">有机肥基地</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show2=false' href="/statics/page/business/b2.html" class="with-text-img" ng-mouseover="show2=true" ng-mouseleave="show2=false">
                             <img ng-class="{'full-container':true,'dark-07':show2}"
                                  src="/statics/image/lanzuan/280-180/putao2.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show2,'hidden':!show2}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">有机肥农业成果</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show3=false' href="/statics/page/business/b2.html" class="with-text-img" ng-mouseover="show3=true" ng-mouseleave="show3=false">
                             <img ng-class="{'full-container':true,'dark-07':show3}"
                                  src="/statics/image/lanzuan/280-180/putaoyuan5.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show3,'hidden':!show3}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">有机肥农业成果</p>
                     </div>
                 </div>
             </div>
             <div ng-class="{'hidden':false,'active in':active===3,'collapse':active!==3}">
-                <div class="row margin-left-right-0">
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                <div class="row m-x-0">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show1=false' href="/statics/page/business/b3.html" class="with-text-img" ng-mouseover="show1=true" ng-mouseleave="show1=false">
                             <img ng-class="{'full-container':true,'dark-07':show1}"
                                  src="/statics/image/lanzuan/280-180/app1.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show1,'hidden':!show1}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">宁乡县公安局公众号</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show2=false' href="/statics/page/business/b3.html" class="with-text-img" ng-mouseover="show2=true" ng-mouseleave="show2=false">
                             <img ng-class="{'full-container':true,'dark-07':show2}"
                                  src="/statics/image/lanzuan/280-180/app2.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show2,'hidden':!show2}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">宁乡县公安局交警大队公众号</p>
                     </div>
-                    <div class="col-xs-12 col-md-3 margin-bottom-10">
+                    <div class="col-xs-12 col-md-3 m-b-10">
                         <a ng-init='show3=false' href="/statics/page/business/b3.html" class="with-text-img" ng-mouseover="show3=true" ng-mouseleave="show3=false">
                             <img ng-class="{'full-container':true,'dark-07':show3}"
                                  src="/statics/image/lanzuan/280-180/smzj.jpg"/>
                             <div ng-class="{'absolute-center small-90':true,'block':show3,'hidden':!show3}">
                                 <div class="text-indent-1em"></div>
-                                <button class="btn btn-primary margin-top-05em">了解详情</button>
+                                <button class="btn btn-primary m-t-05em">了解详情</button>
                             </div>
                         </a><p class="text-center">警民互动平台</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row margin-left-right-0 margin-top-1em padding-left-2em small-90">
+        <div class="row m-x-0 m-t p-l-2em small-90">
             <div class="col-xs-12 col-md-4">
                 <div class="row">
-                    <div class="col-xs-8"><h4 class="padding-bottom-1em text-center ">新闻动态</h4></div>
+                    <div class="col-xs-8"><h4 class="p-b-1em text-center ">新闻动态</h4></div>
                     <div class="col-xs-4">
                         <a href="#" class="green-link"><i class="large-110">More</i>
                         <span class="fa-stack">
@@ -283,7 +283,7 @@
             </div>
             <div class="col-xs-12 col-md-4">
                 <div class="row">
-                    <div class="col-xs-8"><h4 class="padding-bottom-05em text-center ">企业文化</h4></div>
+                    <div class="col-xs-8"><h4 class="p-b-05em text-center ">企业文化</h4></div>
                     <div class="col-xs-4">
                         <a href="#" class="green-link"><i class="large-110">More</i>
                         <span class="fa-stack">
@@ -300,18 +300,18 @@
 
             </div>
             <div class="col-xs-12 col-md-3">
-                <div class="lg-margin-right-5em">
-                    <h4 class="list-group-item-heading text-center padding-top-05em">活动专题</h4>
+                <div class="lg-m-r-5em">
+                    <h4 class="list-group-item-heading text-center p-t-05em">活动专题</h4>
                     <img src="/statics/image/lanzuan/home/huodongzhuanti.png" class="full-width height-10em">
                 </div>
 
             </div>
             <div class="col-md-1 hidden-md-down"></div>
         </div>
-        <div class="row margin-left-right-0 padding-top-1em">
+        <div class="row m-x-0 p-t-1em">
             <img class="full-width img-responsive" style="height: 376px" src="/statics/image/lanzuan/home/cloud.jpg"/>
         </div>
-        <div class="row margin-top-1em margin-left-right-0">
+        <div class="row m-t-1em m-x-0">
             <div class="col-xs-6 col-md-2 text-center dash-sliver-right-border">
                 <h5>关于我们</h5>
                 <div class="small-90">

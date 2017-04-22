@@ -54,24 +54,43 @@ public class IndexController extends BaseRestSpringController {
 
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        String uri=request.getRequestURI();
+        if (RequestUtil.isRobotRequest(request)){
+            return "bot";
+        }
+        String agent=request.getHeader("User-Agent").toLowerCase();
+        String browser= RequestUtil.getBrowserName(agent);
+        if (browser.equals("ie7")||browser.equals("ie8")||browser.equals("ie9") ){
+            map.addAttribute("browser",browser);
+            return "browser";
+        }
         WebPage webPage=webPageService.findByUri("/home");
+        List<PageComponent> pageComponents=webPage.getPageComponents();
+
+//        pageComponents.remove(2);
+        PageComponent pageComponent=pageComponents.get(2);
+        pageComponent.setDataUri(pageComponents.get(3).getDataUri());
+        pageComponent.setVar("services");
+        pageComponent.setVarU("Services");
+        pageComponent.setWebsiteUri("/statics/page/included/lanzuan/image-title-text-block1.jsp");
+        PageComponent pageComponent4=pageComponents.get(3);
+        pageComponent4.setWebsiteUri("/statics/page/included/lanzuan/articles-and-images-1.jsp");
+        pageComponent4.setDataUri("/articles-images/home/data");
+        pageComponent4.setVar("articlesAndImages");
+        pageComponent4.setVarU("ArticlesAndImages");
+        pageComponents.remove(4);
+        PageComponent icoComponent=new PageComponent();
+        icoComponent.setWebsiteUri("/statics/page/included/lanzuan/brand-icons.jsp");
+        pageComponents.add(icoComponent);
+        webPage.setPageComponents(pageComponents);
         map.addAttribute("webPage",webPage);
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(webPage.getPageComponents());
         String js=builder.getWebsiteJavaScript();
         map.addAttribute("js",js);
-        if (RequestUtil.isRobotRequest(request)){
-            return "bot";
 
-        }else{
-            String agent=request.getHeader("User-Agent").toLowerCase();
-            String browser= RequestUtil.getBrowserName(agent);
-            if (browser.equals("ie7")||browser.equals("ie8")||browser.equals("ie9") ){
-                map.addAttribute("browser",browser);
-                return "browser";
-            }
-            return "index";
-        }
+
+
+        return "index";
+
     }
     @RequestMapping(value = "/component/{componentId}")
     public String pageComponent(@PathVariable String componentId,ModelMap modelMap){
@@ -83,6 +102,13 @@ public class IndexController extends BaseRestSpringController {
     public ResponseEntity<Navbar> getNavbar(){
         Navbar navbar=navbarService.findByUri("/home");
         return new ResponseEntity<Navbar>(navbar, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/articles-images/home/data")
+    public ResponseEntity<ArticlesAndImages> getArticlesAndImages(){
+        ArticlesAndImages articlesAndImages=new ArticlesAndImages();
+        articlesAndImages.setArticles(sortLinkGroupService.findByUri("/home").getItems().get(0));
+        articlesAndImages.setImages(imageTextBlockGroupService.findByUri("/home").getItems().get(0));
+        return new ResponseEntity<ArticlesAndImages>(articlesAndImages, HttpStatus.OK);
     }
     @RequestMapping(value = "/full-width-image/home/data")
     public ResponseEntity<FullWidthImage> getFullWidthImage(){

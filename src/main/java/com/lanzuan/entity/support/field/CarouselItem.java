@@ -22,7 +22,7 @@ public class CarouselItem implements Item {
 //    @Editable(inputType = InputType.IMAGE)
 //    private String value;
 
-    @Naming("图片链接")
+    @Naming("轮播图")
     @FormAttributes(inputType = InputType.IMAGE)
     private String imageLink;
     @Naming(value = "轮播项标题")

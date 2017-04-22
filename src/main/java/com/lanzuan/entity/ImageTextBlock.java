@@ -1,14 +1,17 @@
-package com.lanzuan.entity.support.field;
+package com.lanzuan.entity;
 
 import com.lanzuan.entity.ImageTextBlockGroup;
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
 import com.lanzuan.entity.support.Item;
 import com.lanzuan.common.base.annotation.entity.Naming;
+import com.lanzuan.entity.support.field.ImageTextItem;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Naming(value = "图文块")
+@Document(collection = "imageTextBlock")
 public class ImageTextBlock implements Item {
     @Naming(value = "块标题")
     @FormAttributes()

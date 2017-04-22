@@ -18,6 +18,7 @@
 .no-radius{
     border-radius: 0;
 }
+.under-line{text-decoration: underline}
 .overflow-scroll{overflow: scroll}
 .overflow-hidden{overflow: hidden}
 .pictureWithWords img{
@@ -559,7 +560,10 @@ Misc tools
 }
 .p-x-2em{padding:0 2em!important;}
 .p-x-4em{padding:0 4em!important;}
-
+.p-x-sm {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
 .height-50px{height:50px!important;}
 .height-260px{height:260px!important;}
 .height-265px{height:265px!important;}
@@ -720,6 +724,12 @@ Misc tools
 }
 .border-a-s-dark{
     border: solid #000 4px;
+}
+.border-a-s-white{
+    border: solid #fff 1px;
+}
+.border-b-s-white{
+    border-bottom: solid #fff 1px;
 }
 .border-a-s-silver{
     border: solid #c0c0c0 1px;

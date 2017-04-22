@@ -39,7 +39,7 @@
                 <div class="col-xs-9 m-a-0 p-a-0">
                     <h5>组件效果</h5>
                 </div>
-                <div class="col-xs-34 m-a-0 padding-left-2em" >
+                <div class="col-xs-34 m-a-0 p-l-2em" >
                      <h5>管理组件</h5>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         </jsp:include>
                     </div>
 
-                    <div class="col-xs-3 m-a-0 padding-left-2em small-90" >
+                    <div class="col-xs-3 m-a-0 p-l-2em small-90" >
                         <div>这是一个${pageComponent.name}</div>
                         <div>${pageComponent.remark}</div>
 

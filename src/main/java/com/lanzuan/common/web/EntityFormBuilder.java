@@ -274,7 +274,7 @@ public class EntityFormBuilder {
 
         formHtml.append("\n <div class=\"btn-group col-xs-12  p-l-0 m-l-0\" >");
 //        formHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-times\" ng-click=\""+clearImageFunction+"("+context+")\">清除图片</button>");
-        formHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换图片</button>");
+        formHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary btn-sm m-l-0 fa fa-image\">更换"+fieldNaming.value()+"</button>");
         formHtml.append("\n     <button type=\"button\" class=\"btn btn-secondary dropdown-toggle btn-sm\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
         formHtml.append("\n         <span class=\"sr-only\">Toggle Dropdown</span>");
         formHtml.append("\n     </button>");

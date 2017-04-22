@@ -20,7 +20,8 @@ public class Link extends LeafItem {
     private String text;
 
     private Date date;
-
+    @Naming("链接图片(用作封面)")
+    @FormAttributes(inputType = InputType.IMAGE)
     private String image;
     @Transient
     private SortLink parent;

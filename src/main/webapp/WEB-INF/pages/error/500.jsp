@@ -50,7 +50,7 @@
               <div class="alert alert-info p-t-lg p-b-lg m-t-xl m-b-xl"><h4>感谢您的参与，我们会努力改进!</h4></div>
           </c:when>
           <c:otherwise>
-            <i class="fa fa-bolt fa-2x p-t-2em p-b-2em padding-left-2em text-warning">出错了，快呼叫攻城狮吧</i>
+            <i class="fa fa-bolt fa-2x p-t-2em p-b-2em p-l-2em text-warning">出错了，快呼叫攻城狮吧</i>
             <div ng-init="showErr=false">
               <button class="btn btn-info btn-sm m-a-md" ng-click="showErr=!showErr"><i class="fa fa-question"></i>
                 好奇 <i class="fa" ng-class="{'fa-angle-double-right':!showErr,'fa-angle-double-down':showErr}"> </i></button>

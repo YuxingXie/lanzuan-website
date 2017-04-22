@@ -6,9 +6,9 @@
   <div class="navbar-brand">
     <c:choose>
       <c:when test="${empty sessionScope.administrator.sex or sessionScope.administrator.sex eq 'male'}">
-        <i class="fa fa-male padding-left-2em"></i>
+        <i class="fa fa-male p-l-2em"></i>
       </c:when>
-      <c:otherwise><i class="fa fa-female padding-left-2em"></i></c:otherwise>
+      <c:otherwise><i class="fa fa-female p-l-2em"></i></c:otherwise>
     </c:choose>
     欢迎您，${sessionScope.administrator.name}
     <c:choose>

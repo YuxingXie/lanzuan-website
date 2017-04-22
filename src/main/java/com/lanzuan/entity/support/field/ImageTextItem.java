@@ -2,6 +2,7 @@ package com.lanzuan.entity.support.field;
 
 import com.lanzuan.common.code.InputType;
 import com.lanzuan.common.base.annotation.entity.FormAttributes;
+import com.lanzuan.entity.ImageTextBlock;
 import com.lanzuan.entity.support.LeafItem;
 import com.lanzuan.common.base.annotation.entity.Naming;
 import org.springframework.data.annotation.Transient;

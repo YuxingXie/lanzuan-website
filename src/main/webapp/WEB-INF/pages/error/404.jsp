@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-9">
-                    <i class="fa fa-warning fa-5x p-t-2em p-b-2em padding-left-2em text-warning">页面找不到了</i>
+                    <i class="fa fa-warning fa-5x p-t-2em p-b-2em p-l-2em text-warning">页面找不到了</i>
                 </div>
         </div>
         </div>

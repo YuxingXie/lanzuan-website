@@ -12,7 +12,7 @@
                 <span class="large-110">More</span>
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-1x"></i><i
-                        class="fa fa-angle-right fa-stack-1x fa-inverse padding-left-2"></i>
+                        class="fa fa-angle-right fa-stack-1x fa-inverse p-l-2"></i>
                 </span>
             </a>
         </div>
