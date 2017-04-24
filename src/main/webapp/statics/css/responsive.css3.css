@@ -44,6 +44,10 @@
         left: 2%;
         width: 8%;
     }
+    .brand-ico{
+        width: 110px;
+        height: 110px;
+    }
 
     .md-height-10em{height:10em!important;}
     .md-dash-silver-right-border{
@@ -225,6 +229,10 @@
 
     .img-caption {
         padding-bottom: 20px;
+    }
+    .brand-ico{
+        width: 70px;
+        height: 70px;
     }
     .md-down-white-link:link,.md-down-white-link:visited,.md-down-white-link:active {color: #fff}
     .md-down-block-item {

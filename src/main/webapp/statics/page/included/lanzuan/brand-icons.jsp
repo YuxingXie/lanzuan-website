@@ -6,58 +6,58 @@
         </div>
 
     </div>
-    <div class="col-xs-12 m-t-lg">
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+    <div class="col-xs-12 m-t-sm">
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico.jpg" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/foll1.gif" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/foll2.gif" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/foll3.gif" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
-        <div class="col-xs-4 col-md-2">
-            <img src="/statics/image/lanzuan/icons/ico2.png" class="full-width" />
-            <p class="text-center hidden-md-down">蓝钻科技</p>
+        <div class="col-xs-4 col-md-2 p-t-sm text-center">
+            <img src="/statics/image/lanzuan/icons/ico2.png" class="brand-ico" />
+            <p class="">蓝钻科技</p>
         </div>
     </div>
 

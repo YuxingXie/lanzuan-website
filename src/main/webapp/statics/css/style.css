@@ -12,6 +12,7 @@
     /*border: solid 1px #000000;*/
     /*background-color: #003300;*/
 }
+
 .relative{position: relative;}
 .absolute{position:absolute;}
 .fixed{position:fixed;}
