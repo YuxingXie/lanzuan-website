@@ -16,6 +16,10 @@ import java.util.List;
  * 本类用于生成网页模板，并且模板与渲染的数据结合的契入点就是它们有共同的uri
  *
  */
+
+/*
+db.webPage.update({"uri":"/home"},{"$push":{"pageComponents":DBRef("pageComponent",ObjectId("5901656935e11e8e08ad5e14"))}},false,true)
+ */
 @Document(collection = "webPage")
 public class WebPage {
     @Id

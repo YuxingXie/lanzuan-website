@@ -556,6 +556,13 @@ public class StartOnLoadService {
             PageComponent pageComponent5=new PageComponent();
             PageComponent pageComponent6=new PageComponent();
             PageComponent pageComponent7=new PageComponent();
+            PageComponent pageComponent8=new PageComponent();
+            PageComponent pageComponent9=new PageComponent();
+
+
+
+            PageComponent icoComponent=new PageComponent();
+            icoComponent.setWebsiteUri("/statics/page/included/lanzuan/brand-icons.jsp");
             pageComponent1.setName("响应式导航条模板1");
             pageComponent2.setName("响应式轮播图");
             pageComponent3.setName("图文卡片组模板1");
@@ -563,6 +570,8 @@ public class StartOnLoadService {
             pageComponent5.setName("文章块组件1");
             pageComponent6.setName("全屏宽度图片模板1");
             pageComponent7.setName("分类链接模板1");
+            pageComponent8.setName("新闻及图片展示模板");
+            pageComponent9.setName("品牌图标组模板");
 
             pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
             pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
@@ -571,6 +580,8 @@ public class StartOnLoadService {
             pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
             pageComponent6.setRemark("简单的全屏宽度图片。");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
+            pageComponent8.setRemark("一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。");
+            pageComponent9.setRemark("一组图标，多用于展示多个企业");
 
             pageComponent1.setPreviewUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
             pageComponent2.setPreviewUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
@@ -587,6 +598,8 @@ public class StartOnLoadService {
             pageComponent5.setWebsiteUri("/statics/page/included/lanzuan/article-section-1.jsp");
             pageComponent6.setWebsiteUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
             pageComponent7.setWebsiteUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
+            pageComponent8.setWebsiteUri("/statics/page/included/lanzuan/image-title-text-block1.jsp");
+            pageComponent9.setWebsiteUri("/statics/page/included/lanzuan/articles-and-images-1.jsp");
 
             pageComponent1.setTemplateUri("/statics/page/included/component/template/navbar-md-down-fix-bottom.html");
             pageComponent2.setTemplateUri("/statics/page/included/component/template/carousel-full-width-1.html");
@@ -611,6 +624,8 @@ public class StartOnLoadService {
             pageComponent5.setVar("sortLinkGroup");
             pageComponent6.setVar("fullWidthImage");
             pageComponent7.setVar("bottomSortLinkGroup");
+            pageComponent8.setVar("services");
+            pageComponent9.setVar("articlesAndImages");
 
             pageComponent1.setDataUri("/navbar/home/data");
             pageComponent2.setDataUri("/carousel/home/data");
@@ -619,6 +634,8 @@ public class StartOnLoadService {
             pageComponent5.setDataUri("/sort-link-group/data");
             pageComponent6.setDataUri("/full-width-image/home/data");
             pageComponent7.setDataUri("/sort-link-group/bottom/data");
+            pageComponent8.setDataUri(pageComponent4.getDataUri());
+            pageComponent9.setDataUri("/articles-images/home/data");
 
             pageComponent1.setToggleUri("/admin/navbar/status-change");
             pageComponent2.setToggleUri("/admin/carousel/update");
@@ -693,6 +710,8 @@ public class StartOnLoadService {
             pageComponentList.add(pageComponent5);
             pageComponentList.add(pageComponent6);
             pageComponentList.add(pageComponent7);
+            pageComponentList.add(pageComponent8);
+            pageComponentList.add(pageComponent9);
             webPage.setPageComponents(pageComponentList);
             webPage.setUri("/home");
             webPage.setActive(true);
@@ -704,6 +723,8 @@ public class StartOnLoadService {
             pageComponent5.setData(articleSectionData());
             pageComponent6.setData(fullWidthImage());
             pageComponent7.setData(sortLinkGroup());
+//            pageComponent8.setData(sortLinkGroup());
+//            pageComponent9.setData(sortLinkGroup());
 
             pageComponentService.insertAll(pageComponentList);
             webPageService.insert(webPage);

@@ -167,7 +167,6 @@ public class MongoDbUtil {
             if (fieldValue.toString().trim().equals("")) continue;
             if (field.isAnnotationPresent(Id.class)) {
                 String key = "_id";
-                criteria = null;
                 criteria = Criteria.where(key).is(fieldValue);
                 break;
             } else {

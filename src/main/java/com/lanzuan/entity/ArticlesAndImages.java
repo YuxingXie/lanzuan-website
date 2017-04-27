@@ -11,7 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
-
+/*
+db.articlesAndImages.insert({"_class":"com.lanzuan.entity.articlesAndImages","articles":{"sortName":"sortName","links":[{"href":"","text":"text"}]},"images":{"name":"name","imageTextItems":[{"image":"/xxx","text":"text"}]}})
+> db.articlesAndImages.update({},{"$set":{"_class":"com.lanzuan.entity.ArticlesAndImages"}},false,true)
+ */
 @Naming(value = "文章及图片")
 @Document(collection = "articlesAndImages")
 public class ArticlesAndImages extends RootItem {
@@ -28,7 +31,6 @@ public class ArticlesAndImages extends RootItem {
     private int indexOfPage;//如果页面有多个同类组件，用此字段分别
     private String uri;
 
-    //约定字段
     @Naming(value = "文章列表")
     @ListColumn(columnName = "文章列表")
     private SortLink articles;

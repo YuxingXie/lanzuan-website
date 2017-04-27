@@ -16,15 +16,16 @@
     <link href="${path}/statics/css/style.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/color.css" rel="stylesheet" type="text/css">
     <link href="${path}/statics/css/lanzuan.css" rel="stylesheet" type="text/css">
+    <link href="${path}/statics/css/responsive.css3.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app" >
-    <div class="" ng-controller="AdminController">
+    <div ng-controller="AdminController">
         <jsp:include page="${path}/admin/admin-navbar"></jsp:include>
         <div class="alert alert-info m-t-md">
             <h5 class="text-center">网站首页管理</h5>
         </div>
 
-        <div class="container">
+        <div class="">
             <div class="alert alert-warning m-t-md small-90">
                 <ul class="list-unstyled ">
                     <li class="">

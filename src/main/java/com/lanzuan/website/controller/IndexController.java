@@ -64,24 +64,6 @@ public class IndexController extends BaseRestSpringController {
             return "browser";
         }
         WebPage webPage=webPageService.findByUri("/home");
-        List<PageComponent> pageComponents=webPage.getPageComponents();
-
-//        pageComponents.remove(2);
-        PageComponent pageComponent=pageComponents.get(2);
-        pageComponent.setDataUri(pageComponents.get(3).getDataUri());
-        pageComponent.setVar("services");
-        pageComponent.setVarU("Services");
-        pageComponent.setWebsiteUri("/statics/page/included/lanzuan/image-title-text-block1.jsp");
-        PageComponent pageComponent4=pageComponents.get(3);
-        pageComponent4.setWebsiteUri("/statics/page/included/lanzuan/articles-and-images-1.jsp");
-        pageComponent4.setDataUri("/articles-images/home/data");
-        pageComponent4.setVar("articlesAndImages");
-        pageComponent4.setVarU("ArticlesAndImages");
-        pageComponents.remove(4);
-        PageComponent icoComponent=new PageComponent();
-        icoComponent.setWebsiteUri("/statics/page/included/lanzuan/brand-icons.jsp");
-        pageComponents.add(icoComponent);
-        webPage.setPageComponents(pageComponents);
         map.addAttribute("webPage",webPage);
         AngularEntityEditorBuilder builder=new AngularEntityEditorBuilder(webPage.getPageComponents());
         String js=builder.getWebsiteJavaScript();

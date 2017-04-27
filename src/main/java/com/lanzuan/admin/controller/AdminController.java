@@ -179,7 +179,10 @@ public class AdminController extends BaseRestSpringController {
 
     @RequestMapping(value = "/page-component/edit/{pageComponentId}")
     public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
+        PageComponent s=new PageComponent();
+        s.setVar("articlesAndImages");
+        s.setWebsiteUri("");
+        PageComponent pageComponent=pageComponentService.findOne(s);
         model.addAttribute("pageComponent", pageComponent);
 
         AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);

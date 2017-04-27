@@ -1,6 +1,7 @@
 package com.lanzuan.website.dao;
 
 import com.lanzuan.common.base.BaseMongoDao;
+import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.WebPage;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -28,9 +29,6 @@ public class WebPageDao extends BaseMongoDao<WebPage>  {
         dbObject.put("uri",uri);
         dbObject.put("active",true);
         List<WebPage> list=findAll(dbObject);
-//        query.fields().include("_id");
-//        query.fields().include("domain");
-//        query.fields().include("count");
         return list==null||list.size()!=1?null:list.get(0);
     }
 }

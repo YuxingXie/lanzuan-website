@@ -7,6 +7,21 @@ db.pageComponent.update({"name":"蓝钻鼠标掠过类似手风琴模板1"},{"$s
 db.pageComponent.update({"name":"文章块组件1"},{"$set":{"materialUri":"/admin/sort-link-group/image/data"}},false,true)
 db.pageComponent.update({"name":"全屏宽度图片模板1"},{"$set":{"materialUri":"/admin/full-width-image//image/data"}},false,true)
 db.pageComponent.update({"name":"分类链接模板1"},{"$set":{"materialUri":"/admin/sort-link-group/image/data"}},false,true)
+db.pageComponent.insert({"uri":"/home","name":"新闻及图片展示模板","remark":"一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。","websiteUri":"/statics/page/included/lanzuan/image-title-text-block1.jsp","var":"services"，"dataUri":"/image-text-block-group/home/data"})
+db.pageComponent.insert({"uri":"/home","var":"services"})
+db.pageComponent.update({"var":"services"},{"$set":{"remark":"一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。"}},false,true)
+db.pageComponent.update({"var":"services"},{"$set":{"websiteUri":"/statics/page/included/lanzuan/image-title-text-block1.jsp","dataUri":"/image-text-block-group/home/data"}},false,true)
+
+db.pageComponent.insert({"uri":"/home","name":"品牌图标组模板","var":"articlesAndImages"})
+db.pageComponent.update({"var":"articlesAndImages"},{"$set":{"websiteUri":"/statics/page/included/lanzuan/articles-and-images-1.jsp"}},false,true)
+db.pageComponent.update({"var":"articlesAndImages"},{"$set":{"jsonVariableName":"articlesAndImages"}},false,true)
+db.pageComponent.update({"var":"articlesAndImages"},{"$set":{"dataUri":"/articles-images/home/data"}},false,true)
+db.pageComponent.update({"var":"articlesAndImages"},{"$set":{"remark":"多用于展示多个企业的一组图标"}},false,true)
+db.pageComponent.update({"var":"articlesAndImages"},{"$set":{"articles":{},"images":{}}},false,true)
+db.articlesAndImages.insert({"createDate":new Date()})
+db.pageComponent.update({"jsonVariableName":"articlesAndImages"},{"$set":{"data":DBRef("articlesAndImages",ObjectId("590185a0cbab43aa1cbe9176"))}},false,true)
+db.pageComponent.update({"jsonVariableName":"articlesAndImages"},{"$set":{"_class":"com.lanzuan.entity.PageComponent"}},false,true)
+ db.pageComponent.remove({"jsonVariableName":"articlesAndImages"})
  */
 
 import com.lanzuan.common.util.StringUtils;
