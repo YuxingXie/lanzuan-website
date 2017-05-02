@@ -143,7 +143,11 @@ public class IndexController extends BaseRestSpringController {
     @RequestMapping(value = "/article/{id}")
     public String article(@PathVariable String id,ModelMap modelMap){
         Article article=articleService.increaseReadTimes(id);
+        PageComponent<Navbar> cond=new PageComponent<Navbar>();
+        cond.setVar("navbar");
+        PageComponent<Navbar> pageComponent=pageComponentService.findOne(cond);
         modelMap.addAttribute("article",article);
+        modelMap.addAttribute("pageComponent",pageComponent);
         return "website/article/article";
     }
     @RequestMapping(value = "/article/list")

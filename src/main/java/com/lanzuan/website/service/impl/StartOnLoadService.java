@@ -39,6 +39,8 @@ public class StartOnLoadService {
     private IFullWidthImageService fullWidthImageService;
     @Resource(name = "userService")
     private IUserService userService;
+    @Resource(name = "articlesAndImagesService")
+    private IArticlesAndImagesService articlesAndImagesService;
     /**
      * Spring 容器初始化时加载
      */
@@ -195,7 +197,217 @@ public class StartOnLoadService {
         sortLinkGroupService.insert(sortLinkGroup);
         return sortLinkGroup;
     }
+    private ImageTextBlockGroup services() {
+        logger.info("初始化图文块。。。");
+        ImageTextBlockGroup group=new ImageTextBlockGroup();
+        group.setUri("/home");
+        group.setName("ImageTextBlockGroup One");
+        group.setText("典型应用");
+        group.setEnabled(true);
 
+        List<ImageTextBlock> imageTextBlocks=new ArrayList<ImageTextBlock>();
+        ImageTextBlock block1=new ImageTextBlock();
+
+        block1.setName("智慧城市");
+
+        List<ImageTextItem> imageTextItems1=new ArrayList<ImageTextItem>();
+
+        ImageTextItem imageTextItem1_1=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_2=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_3=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_4=new ImageTextItem();
+
+        imageTextItem1_1.setText("宁乡县政府WIFI覆盖应用");
+        imageTextItem1_1.setImage("/statics/image/lanzuan/280-180/zfdl.jpg");
+        imageTextItem1_1.setTitle("宁乡县政府");
+        imageTextItem1_1.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_2.setText("金州开发区创业大楼WIFI覆盖应用");
+        imageTextItem1_2.setImage("/statics/image/lanzuan/280-180/cydl.jpg");
+        imageTextItem1_2.setTitle("金州开发区创业大楼");
+        imageTextItem1_2.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_3.setText("宁乡县市民之家WIFI应用");
+        imageTextItem1_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
+        imageTextItem1_3.setTitle("宁乡县市民之家");
+        imageTextItem1_3.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_4.setText("宁乡县公安局WIFI覆盖应用");
+        imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
+        imageTextItem1_4.setTitle("宁乡县公安局");
+        imageTextItem1_4.setLink("/statics/page/business/b1.html");
+
+
+
+        imageTextItems1.add(imageTextItem1_1);
+        imageTextItems1.add(imageTextItem1_2);
+        imageTextItems1.add(imageTextItem1_3);
+        imageTextItems1.add(imageTextItem1_4);
+
+
+
+
+        block1.setImageTextItems(imageTextItems1);
+
+
+        imageTextBlocks.add(block1);
+
+        group.setItems(imageTextBlocks);
+
+        imageTextBlockGroupService.insert(group);
+        return  group;
+    }
+    private ArticlesAndImages articlesAndImages() {
+        Date now=new Date();
+        String _now=DateUtil.getCurrentYMD();
+        ArticlesAndImages articlesAndImages=new ArticlesAndImages();
+        SortLink sortLink1=new SortLink();
+
+        sortLink1.setSortName("新闻动态");
+
+        List<Link> links1=new ArrayList<Link>();
+        List<Link> links2=new ArrayList<Link>();
+        List<Link> links3=new ArrayList<Link>();
+        List<Link> links4=new ArrayList<Link>();
+        Link link1_1=new Link();
+        Link link1_2=new Link();
+        Link link1_3=new Link();
+        Link link1_4=new Link();
+        link1_1.setHref("/statics/page/building.html");
+        link1_1.setText("荣誉奖项");
+        link1_1.setDate(now);
+        link1_2.setHref("/statics/page/building.html");
+        link1_2.setText("新闻报道");
+        link1_2.setDate(now);
+        link1_3.setHref("/statics/page/building.html");
+        link1_3.setText("活动专题");
+        link1_3.setDate(now);
+        link1_4.setHref("/statics/page/building.html");
+        link1_4.setText("人才招聘");
+        link1_4.setDate(now);
+        links1.add(link1_1);
+        links1.add(link1_2);
+        links1.add(link1_3);
+        links1.add(link1_4);
+
+
+        Link link2_1=new Link();
+        Link link2_2=new Link();
+        Link link2_3=new Link();
+        Link link2_4=new Link();
+        link2_1.setHref("/statics/page/building.html");
+        link2_1.setText("在线咨询（售后）");
+        link2_1.setDate(now);
+        link2_2.setHref("/statics/page/building.html");
+        link2_2.setText("资料库");
+        link2_2.setDate(now);
+        link2_3.setHref("/statics/page/building.html");
+        link2_3.setText("软件下载");
+        link2_3.setDate(now);
+        link2_4.setHref("/statics/page/building.html");
+        link2_4.setText("建议反馈");
+        link2_4.setDate(now);
+        links2.add(link2_1);
+        links2.add(link2_2);
+        links2.add(link2_3);
+        links2.add(link2_4);
+
+        Link link3_1=new Link();
+        Link link3_2=new Link();
+        Link link3_3=new Link();
+
+        link3_1.setHref("/statics/page/building.html");
+        link3_1.setText("在线咨询（售前）");
+        link3_1.setDate(now);
+        link3_2.setHref("/statics/page/building.html");
+        link3_2.setText("申请试用");
+        link3_2.setDate(now);
+        link3_3.setHref("/statics/page/building.html");
+        link3_3.setText("联系我们");
+        link3_3.setDate(now);
+
+        links3.add(link3_1);
+        links3.add(link3_2);
+        links3.add(link3_3);
+
+
+        Link link4_1=new Link();
+        Link link4_2=new Link();
+        Link link4_3=new Link();
+        Link link4_4=new Link();
+        Link link4_5=new Link();
+        link4_1.setHref("/statics/page/building.html");
+        link4_1.setText("渠道政策");
+        link4_1.setDate(now);
+        link4_2.setHref("/statics/page/building.html");
+        link4_2.setText("合作申请");
+        link4_2.setDate(now);
+        link4_3.setHref("/statics/page/building.html");
+        link4_3.setText("渠道公告");
+        link4_3.setDate(now);
+        link4_4.setHref("/statics/page/building.html");
+        link4_4.setText("英博智能");
+        link4_4.setDate(now);
+        link4_5.setHref("/statics/page/building.html");
+        link4_5.setText("培训公告");
+        link4_5.setDate(now);
+        links4.add(link4_1);
+        links4.add(link4_2);
+        links4.add(link4_3);
+        links4.add(link4_4);
+        links4.add(link4_5);
+        List<SortLink> sortLinks=new ArrayList<SortLink>();
+
+        sortLink1.setLinks(links1);
+
+        sortLinks.add(sortLink1);
+        articlesAndImages.setArticles(sortLink1);
+        ImageTextBlock images=new ImageTextBlock();
+        images.setName("图片S");
+        List<ImageTextItem> imageTextItems1=new ArrayList<ImageTextItem>();
+
+        ImageTextItem imageTextItem1_1=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_2=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_3=new ImageTextItem();
+
+        ImageTextItem imageTextItem1_4=new ImageTextItem();
+
+        imageTextItem1_1.setText("宁乡县政府WIFI覆盖应用");
+        imageTextItem1_1.setImage("/statics/image/lanzuan/280-180/zfdl.jpg");
+        imageTextItem1_1.setTitle("宁乡县政府");
+        imageTextItem1_1.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_2.setText("金州开发区创业大楼WIFI覆盖应用");
+        imageTextItem1_2.setImage("/statics/image/lanzuan/280-180/cydl.jpg");
+        imageTextItem1_2.setTitle("金州开发区创业大楼");
+        imageTextItem1_2.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_3.setText("宁乡县市民之家WIFI应用");
+        imageTextItem1_3.setImage("/statics/image/lanzuan/280-180/smzj.jpg");
+        imageTextItem1_3.setTitle("宁乡县市民之家");
+        imageTextItem1_3.setLink("/statics/page/business/b1.html");
+
+        imageTextItem1_4.setText("宁乡县公安局WIFI覆盖应用");
+        imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
+        imageTextItem1_4.setTitle("宁乡县公安局");
+        imageTextItem1_4.setLink("/statics/page/business/b1.html");
+
+
+
+        imageTextItems1.add(imageTextItem1_1);
+        imageTextItems1.add(imageTextItem1_2);
+        imageTextItems1.add(imageTextItem1_3);
+        imageTextItems1.add(imageTextItem1_4);
+        images.setImageTextItems(imageTextItems1);
+        articlesAndImages.setImages(images);
+        articlesAndImagesService.insert(articlesAndImages);
+        return articlesAndImages;
+    }
     private FullWidthImage fullWidthImage() {
         logger.info("初始化全屏宽度图片。。。");
         FullWidthImage fullWidthImage=new FullWidthImage();
@@ -570,8 +782,8 @@ public class StartOnLoadService {
             pageComponent5.setName("文章块组件1");
             pageComponent6.setName("全屏宽度图片模板1");
             pageComponent7.setName("分类链接模板1");
-            pageComponent8.setName("新闻及图片展示模板");
-            pageComponent9.setName("品牌图标组模板");
+            pageComponent8.setName("图文卡片组模板2");
+            pageComponent9.setName("文章及图片");
 
             pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
             pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
@@ -581,7 +793,7 @@ public class StartOnLoadService {
             pageComponent6.setRemark("简单的全屏宽度图片。");
             pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
             pageComponent8.setRemark("一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。");
-            pageComponent9.setRemark("一组图标，多用于展示多个企业");
+            pageComponent9.setRemark("文章及图片");
 
             pageComponent1.setPreviewUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
             pageComponent2.setPreviewUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
@@ -705,13 +917,16 @@ public class StartOnLoadService {
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);
             pageComponentList.add(pageComponent2);
-            pageComponentList.add(pageComponent3);
-            pageComponentList.add(pageComponent4);
-            pageComponentList.add(pageComponent5);
-            pageComponentList.add(pageComponent6);
-            pageComponentList.add(pageComponent7);
+//            pageComponentList.add(pageComponent3);
+//            pageComponentList.add(pageComponent4);
+//            pageComponentList.add(pageComponent5);
+
+
             pageComponentList.add(pageComponent8);
             pageComponentList.add(pageComponent9);
+            pageComponentList.add(pageComponent6);
+            pageComponentList.add(pageComponent7);
+
             webPage.setPageComponents(pageComponentList);
             webPage.setUri("/home");
             webPage.setActive(true);
@@ -723,8 +938,8 @@ public class StartOnLoadService {
             pageComponent5.setData(articleSectionData());
             pageComponent6.setData(fullWidthImage());
             pageComponent7.setData(sortLinkGroup());
-//            pageComponent8.setData(sortLinkGroup());
-//            pageComponent9.setData(sortLinkGroup());
+            pageComponent8.setData(services());
+            pageComponent9.setData(articlesAndImages());
 
             pageComponentService.insertAll(pageComponentList);
             webPageService.insert(webPage);
