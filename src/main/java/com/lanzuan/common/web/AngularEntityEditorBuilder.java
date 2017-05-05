@@ -360,7 +360,8 @@ public class AngularEntityEditorBuilder {
         String fontSizeCss="";
         if(level==1) fontSizeCss="large-150";
         else fontSizeCss="large-120";
-        String addItemFunctionName="add"+StringUtils.firstUpperCase(context)+"Item";
+        String addItemFunctionName = genAddItemFunctionName(context);
+
 
         System.out.println("printItemListHeader "+ng_if);
         if (ng_if==null){
@@ -378,13 +379,39 @@ public class AngularEntityEditorBuilder {
 
     }
 
+    private String genAddItemFunctionName(String context) {
+        //当上下文被点号隔断，表示是属性的属性的时候，函数名中不能出现点号
+
+
+        return "add"+StringUtils.firstUpperCase(genContextCamelU(context))+"Item";
+    }
+    //点号隔开的上下文用驼峰表示法
+    private String genContextCamelU(String context) {
+        if (context.indexOf(".")==-1) return context;
+            String[] contexts=context.split("\\.");
+            String camel="";
+            for (String str:contexts){
+                camel+= StringUtils.firstUpperCase(str);
+            }
+            return camel;
+    }
+    private String genContextCamelL(String context) {
+        if (context.indexOf(".")==-1) return context;
+        String[] contexts=context.split("\\.");
+        String camel="";
+        for (String str:contexts){
+            camel+= StringUtils.firstUpperCase(str);
+        }
+        return StringUtils.firstLowerCase(camel);
+    }
     private void buildAddItemFunction(String fieldName, String context, String addItemFunctionName) {
-        javaScript.append("\n$scope."+addItemFunctionName+"=function("+context+"){");
-        javaScript.append("\n   if(!"+context+"."+fieldName+"){");
-        javaScript.append("\n       "+context+"."+fieldName+"=[]");
+        String fnArgument=genContextCamelL(context);
+        javaScript.append("\n$scope."+addItemFunctionName+"=function("+fnArgument+"){");
+        javaScript.append("\n   if(!"+fnArgument+"."+fieldName+"){");
+        javaScript.append("\n       "+fnArgument+"."+fieldName+"=[]");
         javaScript.append("\n   }");
         javaScript.append("\n var item={}");
-        javaScript.append("\n "+context+"."+fieldName+".splice(0,0,item);");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(0,0,item);");
         javaScript.append("\n}");
     }
 
@@ -399,12 +426,12 @@ public class AngularEntityEditorBuilder {
         String deleteFunctionName="";
         String forwardFunctionName="";
         String backwardFunctionName="";
-        String toggleVarName="show"+StringUtils.firstUpperCase(context)+"Items";
+        String toggleVarName="show"+ genContextCamelU(context)+"Items";
         if(level==1) {
             deleteText="删除整块";
-            deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item($index)";
-            forwardFunctionName="forward"+StringUtils.firstUpperCase(context)+"Item($index)";
-            backwardFunctionName="backward"+StringUtils.firstUpperCase(context)+"Item($index)";
+            deleteFunctionName="remove"+ genContextCamelU(context)+"Item($index)";
+            forwardFunctionName="forward"+ genContextCamelU(context)+"Item($index)";
+            backwardFunctionName="backward"+ genContextCamelU(context)+"Item($index)";
             forwardText="整块前移";
             backwardText="整块后移";
             paddingRightCss="p-r-0";
@@ -416,9 +443,10 @@ public class AngularEntityEditorBuilder {
             paddingRightCss="p-r-xl";
             btnCss="btn-info";
             btnGroupCss="btn-group-sm";
-            deleteFunctionName="remove"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
-            forwardFunctionName="forward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
-            backwardFunctionName="backward"+StringUtils.firstUpperCase(context)+"Item("+context+",$index)";
+            String fnArgument=genContextCamelL(context);
+            deleteFunctionName="remove"+ genContextCamelU(context)+"Item("+context+",$index)";
+            forwardFunctionName="forward"+ genContextCamelU(context)+"Item("+context+",$index)";
+            backwardFunctionName="backward"+ genContextCamelU(context)+"Item("+context+",$index)";
             buildForwardSubItemMethod(context,fieldName);
             buildBackwardSubItemMethod(context, fieldName);
             buildRemoveSubItemMethod(context, fieldName);
@@ -434,26 +462,28 @@ public class AngularEntityEditorBuilder {
         return toggleVarName;
     }
     private void buildForwardSubItemMethod(String context, String fieldName) {
-
-        javaScript.append("\n$scope.forward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
-        javaScript.append("\n var item="+context+"."+fieldName+"[index];");
-        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
-        javaScript.append("\n "+context+"."+fieldName+".splice(index-1,0,item);");
+        String fnArgument=genContextCamelL(context);
+        javaScript.append("\n$scope.forward"+ genContextCamelU(context)+"Item=function("+fnArgument+",index){");
+        javaScript.append("\n var item="+fnArgument+"."+fieldName+"[index];");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index-1,0,item);");
         javaScript.append("\n}");
 
 
     }
     private void buildRemoveSubItemMethod(String context, String fieldName) {
-        javaScript.append("\n$scope.remove"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
-        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
+        String fnArgument=genContextCamelL(context);
+        javaScript.append("\n$scope.remove"+ genContextCamelU(context)+"Item=function("+fnArgument+",index){");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index,1);");
         javaScript.append("\n}");
     }
 
     private void buildBackwardSubItemMethod(String context, String fieldName) {
-        javaScript.append("\n$scope.backward"+StringUtils.firstUpperCase(context)+"Item=function("+context+",index){");
-        javaScript.append("\n var item="+context+"."+fieldName+"[index];");
-        javaScript.append("\n "+context+"."+fieldName+".splice(index,1);");
-        javaScript.append("\n "+context+"."+fieldName+".splice(index+1,0,item);");
+        String fnArgument=genContextCamelL(context);
+        javaScript.append("\n$scope.backward"+ genContextCamelU(context)+"Item=function("+fnArgument+",index){");
+        javaScript.append("\n var item="+fnArgument+"."+fieldName+"[index];");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index,1);");
+        javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index+1,0,item);");
         javaScript.append("\n}");
     }
 
@@ -490,7 +520,7 @@ public class AngularEntityEditorBuilder {
     private void printImageChooserDiv(String context, String absoluteContext, Field field, boolean fieldInScope,Naming fieldNaming) {
         String ng_condition = getNgIfExpression(context,fieldInScope,fieldNaming);
 
-        String clearImageFunction="clear"+StringUtils.firstUpperCase(context)+StringUtils.firstUpperCase(field.getName());
+        String clearImageFunction="clear"+ genContextCamelU(context)+StringUtils.firstUpperCase(field.getName());
         if (ng_condition==null){
             editorHtml.append("\n<div class='col-xs-12 p-b-xs'>");
         }else {

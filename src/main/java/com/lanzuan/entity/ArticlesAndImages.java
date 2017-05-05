@@ -34,6 +34,7 @@ public class ArticlesAndImages extends RootItem {
     @Naming(value = "文章列表")
     @ListColumn(columnName = "文章列表")
     private SortLink articles;
+    @Naming(value = "图片列表")
     private ImageTextBlock images;
     @ListColumn(columnName = "最后修改日期")
     private Date lastModifyDate;
