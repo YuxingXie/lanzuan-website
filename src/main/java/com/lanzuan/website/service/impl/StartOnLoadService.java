@@ -203,6 +203,7 @@ public class StartOnLoadService {
         logger.info("初始化图文块。。。");
         ImageTextBlockGroup group=new ImageTextBlockGroup();
         group.setUri("/home");
+
         group.setName("ImageTextBlockGroup One");
         group.setText("典型应用");
         group.setEnabled(true);
