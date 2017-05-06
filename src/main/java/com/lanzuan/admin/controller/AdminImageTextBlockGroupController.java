@@ -52,7 +52,7 @@ public class AdminImageTextBlockGroupController extends BaseRestSpringController
         imageTextBlockGroup.setLastModifyDate(now);
         imageTextBlockGroup.setLastModifyUser(user);
 
-        imageTextBlockGroupService.update(imageTextBlockGroup);
+        imageTextBlockGroupService.upsert(imageTextBlockGroup);
         message.setSuccess(true);
         message.setData(imageTextBlockGroup);
         return new ResponseEntity<Message>(message,HttpStatus.OK);

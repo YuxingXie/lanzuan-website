@@ -41,6 +41,8 @@ public class StartOnLoadService {
     private IUserService userService;
     @Resource(name = "articlesAndImagesService")
     private IArticlesAndImagesService articlesAndImagesService;
+//    private String[] componentVars={"navBar","carousel","cardGroup","imageTextBlockGroup","sortLinkGroup","fullWidthImage","bottomSortLinkGroup","services","articlesAndImages"};
+    private String[] componentVars={"navBar","carousel","services","articlesAndImages","fullWidthImage","bottomSortLinkGroup"};
     /**
      * Spring 容器初始化时加载
      */
@@ -239,39 +241,24 @@ public class StartOnLoadService {
         imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
         imageTextItem1_4.setTitle("宁乡县公安局");
         imageTextItem1_4.setLink("/statics/page/business/b1.html");
-
-
-
         imageTextItems1.add(imageTextItem1_1);
         imageTextItems1.add(imageTextItem1_2);
         imageTextItems1.add(imageTextItem1_3);
         imageTextItems1.add(imageTextItem1_4);
-
-
-
-
         block1.setImageTextItems(imageTextItems1);
-
-
         imageTextBlocks.add(block1);
-
         group.setItems(imageTextBlocks);
-
         imageTextBlockGroupService.insert(group);
         return  group;
     }
     private ArticlesAndImages articlesAndImages() {
         Date now=new Date();
-        String _now=DateUtil.getCurrentYMD();
         ArticlesAndImages articlesAndImages=new ArticlesAndImages();
+        articlesAndImages.setUri("/home");
+        articlesAndImages.setEnabled(true);
         SortLink sortLink1=new SortLink();
-
         sortLink1.setSortName("新闻动态");
-
         List<Link> links1=new ArrayList<Link>();
-        List<Link> links2=new ArrayList<Link>();
-        List<Link> links3=new ArrayList<Link>();
-        List<Link> links4=new ArrayList<Link>();
         Link link1_1=new Link();
         Link link1_2=new Link();
         Link link1_3=new Link();
@@ -293,77 +280,8 @@ public class StartOnLoadService {
         links1.add(link1_3);
         links1.add(link1_4);
 
-
-        Link link2_1=new Link();
-        Link link2_2=new Link();
-        Link link2_3=new Link();
-        Link link2_4=new Link();
-        link2_1.setHref("/statics/page/building.html");
-        link2_1.setText("在线咨询（售后）");
-        link2_1.setDate(now);
-        link2_2.setHref("/statics/page/building.html");
-        link2_2.setText("资料库");
-        link2_2.setDate(now);
-        link2_3.setHref("/statics/page/building.html");
-        link2_3.setText("软件下载");
-        link2_3.setDate(now);
-        link2_4.setHref("/statics/page/building.html");
-        link2_4.setText("建议反馈");
-        link2_4.setDate(now);
-        links2.add(link2_1);
-        links2.add(link2_2);
-        links2.add(link2_3);
-        links2.add(link2_4);
-
-        Link link3_1=new Link();
-        Link link3_2=new Link();
-        Link link3_3=new Link();
-
-        link3_1.setHref("/statics/page/building.html");
-        link3_1.setText("在线咨询（售前）");
-        link3_1.setDate(now);
-        link3_2.setHref("/statics/page/building.html");
-        link3_2.setText("申请试用");
-        link3_2.setDate(now);
-        link3_3.setHref("/statics/page/building.html");
-        link3_3.setText("联系我们");
-        link3_3.setDate(now);
-
-        links3.add(link3_1);
-        links3.add(link3_2);
-        links3.add(link3_3);
-
-
-        Link link4_1=new Link();
-        Link link4_2=new Link();
-        Link link4_3=new Link();
-        Link link4_4=new Link();
-        Link link4_5=new Link();
-        link4_1.setHref("/statics/page/building.html");
-        link4_1.setText("渠道政策");
-        link4_1.setDate(now);
-        link4_2.setHref("/statics/page/building.html");
-        link4_2.setText("合作申请");
-        link4_2.setDate(now);
-        link4_3.setHref("/statics/page/building.html");
-        link4_3.setText("渠道公告");
-        link4_3.setDate(now);
-        link4_4.setHref("/statics/page/building.html");
-        link4_4.setText("英博智能");
-        link4_4.setDate(now);
-        link4_5.setHref("/statics/page/building.html");
-        link4_5.setText("培训公告");
-        link4_5.setDate(now);
-        links4.add(link4_1);
-        links4.add(link4_2);
-        links4.add(link4_3);
-        links4.add(link4_4);
-        links4.add(link4_5);
-        List<SortLink> sortLinks=new ArrayList<SortLink>();
-
         sortLink1.setLinks(links1);
 
-        sortLinks.add(sortLink1);
         articlesAndImages.setArticles(sortLink1);
         ImageTextBlock images=new ImageTextBlock();
         images.setName("图片S");
@@ -396,9 +314,6 @@ public class StartOnLoadService {
         imageTextItem1_4.setImage("/statics/image/lanzuan/280-180/nxxgaj.jpg");
         imageTextItem1_4.setTitle("宁乡县公安局");
         imageTextItem1_4.setLink("/statics/page/business/b1.html");
-
-
-
         imageTextItems1.add(imageTextItem1_1);
         imageTextItems1.add(imageTextItem1_2);
         imageTextItems1.add(imageTextItem1_3);
@@ -761,158 +676,16 @@ public class StartOnLoadService {
         if (webPage==null){
             logger.info("没有找到 /home 页面定义，应用默认定义......");
             webPage=new WebPage();
-            PageComponent pageComponent1=new PageComponent();
-            PageComponent pageComponent2=new PageComponent();
-            PageComponent pageComponent3=new PageComponent();
-            PageComponent pageComponent4=new PageComponent();
-            PageComponent pageComponent5=new PageComponent();
-            PageComponent pageComponent6=new PageComponent();
-            PageComponent pageComponent7=new PageComponent();
-            PageComponent pageComponent8=new PageComponent();
-            PageComponent pageComponent9=new PageComponent();
 
-
-
-            PageComponent icoComponent=new PageComponent();
-            icoComponent.setWebsiteUri("/statics/page/included/lanzuan/brand-icons.jsp");
-            pageComponent1.setName("响应式导航条模板1");
-            pageComponent2.setName("响应式轮播图");
-            pageComponent3.setName("图文卡片组模板1");
-            pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
-            pageComponent5.setName("文章块组件1");
-            pageComponent6.setName("全屏宽度图片模板1");
-            pageComponent7.setName("分类链接模板1");
-            pageComponent8.setName("图文卡片组模板2");
-            pageComponent9.setName("文章及图片");
-
-            pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
-            pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
-            pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
-            pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
-            pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
-            pageComponent6.setRemark("简单的全屏宽度图片。");
-            pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
-            pageComponent8.setRemark("一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。");
-            pageComponent9.setRemark("文章及图片");
-
-            pageComponent1.setPreviewUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
-            pageComponent2.setPreviewUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
-            pageComponent3.setPreviewUri("/statics/page/included/component/card-group/img-card-group-1.preview.jsp");
-            pageComponent4.setPreviewUri("/statics/page/included/lanzuan/collapse-image-title-text-1.preview.jsp");
-            pageComponent5.setPreviewUri("/statics/page/included/lanzuan/article-section-1.preview.jsp");
-            pageComponent6.setPreviewUri("/statics/page/included/lanzuan/full-width-image-1.preview.jsp");
-            pageComponent7.setPreviewUri("/statics/page/included/lanzuan/sort-link-section-1.preview.jsp");
-
-            pageComponent1.setWebsiteUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
-            pageComponent2.setWebsiteUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
-            pageComponent3.setWebsiteUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
-            pageComponent4.setWebsiteUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
-            pageComponent5.setWebsiteUri("/statics/page/included/lanzuan/article-section-1.jsp");
-            pageComponent6.setWebsiteUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
-            pageComponent7.setWebsiteUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
-            pageComponent8.setWebsiteUri("/statics/page/included/lanzuan/image-title-text-block1.jsp");
-            pageComponent9.setWebsiteUri("/statics/page/included/lanzuan/articles-and-images-1.jsp");
-
-            pageComponent1.setTemplateUri("/statics/page/included/component/template/navbar-md-down-fix-bottom.html");
-            pageComponent2.setTemplateUri("/statics/page/included/component/template/carousel-full-width-1.html");
-            pageComponent3.setTemplateUri("/statics/page/included/component/template/img-card-group-1.html");
-            pageComponent4.setTemplateUri("/statics/page/included/component/template/collapse-image-title-text-1.html");
-            pageComponent5.setTemplateUri("/statics/page/included/component/template/article-section-1.html");
-            pageComponent6.setTemplateUri("/statics/page/included/component/template/full-width-image-1.html");
-            pageComponent7.setTemplateUri("/statics/page/included/component/template/sort-link-section-1.html");
-
-            pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
-            pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
-            pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
-            pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
-            pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
-            pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
-            pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
-
-            pageComponent1.setVar("navbar");
-            pageComponent2.setVar("carousel");
-            pageComponent3.setVar("cardGroup");
-            pageComponent4.setVar("imageTextBlockGroup");
-            pageComponent5.setVar("sortLinkGroup");
-            pageComponent6.setVar("fullWidthImage");
-            pageComponent7.setVar("bottomSortLinkGroup");
-            pageComponent8.setVar("services");
-            pageComponent9.setVar("articlesAndImages");
-
-            pageComponent1.setDataUri("/navbar/home/data");
-            pageComponent2.setDataUri("/carousel/home/data");
-            pageComponent3.setDataUri("/card-group/home/data");
-            pageComponent4.setDataUri("/image-text-block-group/home/data");
-            pageComponent5.setDataUri("/sort-link-group/data");
-            pageComponent6.setDataUri("/full-width-image/home/data");
-            pageComponent7.setDataUri("/sort-link-group/bottom/data");
-            pageComponent8.setDataUri(pageComponent4.getDataUri());
-            pageComponent9.setDataUri("/articles-images/home/data");
-
-            pageComponent1.setToggleUri("/admin/navbar/status-change");
-            pageComponent2.setToggleUri("/admin/carousel/update");
-            pageComponent3.setToggleUri("/admin/card-group/status-change");
-            pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
-            pageComponent5.setToggleUri("/admin/sort-link-group/status-change");
-            pageComponent6.setToggleUri("/admin/full-width-image/status-change");
-            pageComponent7.setToggleUri("/admin/sort-link-group/status-change");
-
-            pageComponent1.setDeleteUri("/admin/navbar/delete/");
-            pageComponent2.setDeleteUri("/admin/carousel/delete/");
-            pageComponent3.setDeleteUri("/admin/card-group/delete/");
-            pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
-            pageComponent5.setDeleteUri("/admin/sort-link-group/delete/");
-            pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
-            pageComponent7.setDeleteUri("/admin/full-width-image/delete/");
-
-            pageComponent1.setSaveUri("/admin/navbar/update");
-            pageComponent2.setSaveUri("/admin/carousel/insert-all");
-            pageComponent3.setSaveUri("/admin/card-group/update");
-            pageComponent4.setSaveUri("/admin/image-text-block-group/update");
-            pageComponent5.setSaveUri("/admin/sort-link-group/update");
-            pageComponent6.setSaveUri("/admin/full-width-image/update");
-            pageComponent7.setSaveUri("/admin/sort-link-group/update");
-
-            pageComponent1.setListOperationUri("/admin/list-page/");
-            pageComponent2.setListOperationUri("/admin/list-page/");
-            pageComponent3.setListOperationUri("/admin/list-page/");
-            pageComponent4.setListOperationUri("/admin/list-page/");
-            pageComponent5.setListOperationUri("/admin/list-page/");
-            pageComponent6.setListOperationUri("/admin/list-page/");
-            pageComponent7.setListOperationUri("/admin/list-page/");
-
-            pageComponent1.setListDataUri("/admin/navbar/list/data");
-            pageComponent2.setListDataUri("/admin/carousel/list/data");
-            pageComponent3.setListDataUri("/admin/card-group/list/data");
-            pageComponent4.setListDataUri("/admin/image-text-block-group/list/data");
-            pageComponent5.setListDataUri("/admin/sort-link-group/list/data");
-            pageComponent6.setListDataUri("/admin/full-width-image/list/data");
-            pageComponent7.setListDataUri("/admin/sort-link-group/list/bottom/data");
-
-            pageComponent1.setSaveAsUri("/admin/navbar/save-as");
-            pageComponent2.setSaveAsUri("/admin/carousel/save-as");
-            pageComponent3.setSaveAsUri("/admin/card-group/save-as");
-            pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
-            pageComponent5.setSaveAsUri("/admin/sort-link-group/save-as");
-            pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
-            pageComponent7.setSaveAsUri("/admin/sort-link-group/save-as");
-
-            pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
-            pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
-            pageComponent3.setMaterialUploadUri("/admin/card-group/image/upload-input");
-            pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
-            pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
-            pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
-            pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
-
-            pageComponent1.setMaterialUri("/admin/icons/data");
-            pageComponent2.setMaterialUri("/admin/carousel-images/data");
-            pageComponent3.setMaterialUri("/admin/card-group/images/data");
-            pageComponent4.setMaterialUri("/admin/image-text-block-group/image/data");
-            pageComponent5.setMaterialUri("/admin/sort-link-group/image/data");
-            pageComponent6.setMaterialUri("/admin/full-width-image/image/data");
-            pageComponent7.setMaterialUri("/admin/sort-link-group/image/data");
-
+            PageComponent pageComponent1 = instanceByVar("navBar");
+            PageComponent pageComponent2 = instanceByVar("carousel");
+//            PageComponent pageComponent3 = instanceByVar("cardGroup");
+//            PageComponent pageComponent4 = instanceByVar("imageTextBlockGroup");
+//            PageComponent pageComponent5 = instanceByVar("sortLinkGroup");
+            PageComponent pageComponent6 = instanceByVar("fullWidthImage");
+            PageComponent pageComponent7 = instanceByVar("bottomSortLinkGroup");
+            PageComponent pageComponent8 = instanceByVar("services");
+            PageComponent pageComponent9 = instanceByVar("articlesAndImages");
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
             pageComponentList.add(pageComponent1);
@@ -920,8 +693,6 @@ public class StartOnLoadService {
 //            pageComponentList.add(pageComponent3);
 //            pageComponentList.add(pageComponent4);
 //            pageComponentList.add(pageComponent5);
-
-
             pageComponentList.add(pageComponent8);
             pageComponentList.add(pageComponent9);
             pageComponentList.add(pageComponent6);
@@ -933,9 +704,9 @@ public class StartOnLoadService {
 
             pageComponent1.setData(navbar());
             pageComponent2.setData(carousel());
-            pageComponent3.setData(cardGroup());
-            pageComponent4.setData(imageTextBlockGroup());
-            pageComponent5.setData(articleSectionData());
+//            pageComponent3.setData(cardGroup());
+//            pageComponent4.setData(imageTextBlockGroup());
+//            pageComponent5.setData(articleSectionData());
             pageComponent6.setData(fullWidthImage());
             pageComponent7.setData(sortLinkGroup());
             pageComponent8.setData(services());
@@ -943,8 +714,262 @@ public class StartOnLoadService {
 
             pageComponentService.insertAll(pageComponentList);
             webPageService.insert(webPage);
+        }else{
+            rebuildComponents(webPage);
         }
 
+    }
+
+    private void rebuildComponents( WebPage webPage) {
+        if (componentVars==null||componentVars.length==0) return;
+        List<PageComponent> components=webPage.getPageComponents();
+        List<PageComponent> rebuildComponents=new ArrayList<PageComponent>();
+        int index=0;
+        for (String var:componentVars){
+            index++;
+            PageComponent component=getByVar(var,components);
+            if (component!=null){
+                logger.info("现有组件 "+var+" 重新排序为"+index);
+
+            }else{
+                logger.info("新的组件 "+var+" 排序为"+index);
+                component=instanceByVar(var);
+                pageComponentService.insert(component);
+            }
+            rebuildComponents.add(component);
+        }
+        webPage.setPageComponents(rebuildComponents);
+        webPageService.upsert(webPage);
+    }
+
+    private PageComponent instanceByVar(String var) {
+        //"navBar","carousel","cardGroup","imageTextBlockGroup","sortLinkGroup","fullWidthImage","bottomSortLinkGroup","services","articlesAndImages"
+        for (String currentVar:componentVars){
+            if (var.equals(currentVar)){
+                if (currentVar.equals("navBar")){
+                    return instanceNavbarComponent();
+                }else if(currentVar.equals("carousel")){
+                    return instanceCarouselComponent();
+                }else if(currentVar.equals("cardGroup")){
+                    return instanceImageCardGroupComponent();
+                }else if(currentVar.equals("imageTextBlockGroup")){
+                    return instanceImageTextBlockGroupComponent();
+                }else if(currentVar.equals("sortLinkGroup")){
+                    return instanceSortLinkGroupComponent();
+                }else if(currentVar.equals("fullWidthImage")){
+                    return instanceFullWidthImageComponent();
+                }else if(currentVar.equals("bottomSortLinkGroup")){
+                    return instanceBottomSortLinkGroupComponent();
+                }else if(currentVar.equals("services")){
+                    return instanceServicesComponent();
+                }else if(currentVar.equals("articlesAndImages")){
+                    return instanceArticlesAndImagesComponent();
+                }else {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    private PageComponent instanceArticlesAndImagesComponent() {
+        PageComponent pageComponent9=new PageComponent();
+        pageComponent9.setWebsiteUri("/statics/page/included/lanzuan/articles-and-images-1.jsp");
+        pageComponent9.setName("文章及图片");
+        pageComponent9.setRemark("文章及图片");
+
+        pageComponent9.setVar("articlesAndImages");
+        pageComponent9.setDataUri("/articles-images/home/data");
+        pageComponent9.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
+        pageComponent9.setMaterialUri("/admin/image-text-block-group/image/data");
+        pageComponent9.setSaveAsUri("/admin/articles-images/save-as");
+        pageComponent9.setSaveUri("/admin/articles-images/update");
+        pageComponent9.setData(articlesAndImages());
+        return pageComponent9;
+    }
+
+    private PageComponent instanceServicesComponent() {
+        PageComponent pageComponent8=new PageComponent();
+        pageComponent8.setName("图文卡片组模板2");
+        pageComponent8.setRemark("一组新闻(第一条带图片)及一组图片，中等以上设备左右排列，中等以下设备上下排列。");
+        pageComponent8.setDataUri("/image-text-block-group/home/data");
+
+        pageComponent8.setToggleUri("/admin/image-text-block-group/status-change");
+        pageComponent8.setDeleteUri("/admin/image-text-block-group/delete/");
+        pageComponent8.setSaveUri("/admin/image-text-block-group/update");
+        pageComponent8.setSaveAsUri("/admin/image-text-block-group/save-as");
+        pageComponent8.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
+        pageComponent8.setMaterialUri("/admin/image-text-block-group/image/data");
+        pageComponent8.setVar("services");
+        pageComponent8.setWebsiteUri("/statics/page/included/lanzuan/image-title-text-block1.jsp");
+        List<String> notes=new ArrayList<String>();
+        notes.add("这个模块使用的是以前的多块图文项的第一块，这个可能会带来困惑但不会影响使用，所以编辑的时候请忽略后面的块。");
+        pageComponent8.setEditNotes(notes);
+        pageComponent8.setData(services());
+        return pageComponent8;
+    }
+
+    private PageComponent instanceBottomSortLinkGroupComponent() {
+        PageComponent pageComponent7=new PageComponent();
+        pageComponent7.setName("分类链接模板1");
+        pageComponent7.setRemark("分类链接模板，将许多链接分为多列排列，每列有个分类名称。在中等及以下屏幕每行显示2列；中等以上每行显示5列。");
+        pageComponent7.setPreviewUri("/statics/page/included/lanzuan/sort-link-section-1.preview.jsp");
+        pageComponent7.setWebsiteUri("/statics/page/included/lanzuan/sort-link-section-1.jsp");
+        pageComponent7.setTemplateUri("/statics/page/included/component/template/sort-link-section-1.html");
+        pageComponent7.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
+        pageComponent7.setVar("bottomSortLinkGroup");
+        pageComponent7.setDataUri("/sort-link-group/bottom/data");
+        pageComponent7.setToggleUri("/admin/sort-link-group/status-change");
+        pageComponent7.setDeleteUri("/admin/full-width-image/delete/");
+        pageComponent7.setSaveUri("/admin/sort-link-group/update");
+        pageComponent7.setListOperationUri("/admin/list-page/");
+        pageComponent7.setListDataUri("/admin/sort-link-group/list/bottom/data");
+        pageComponent7.setSaveAsUri("/admin/sort-link-group/save-as");
+        pageComponent7.setMaterialUploadUri("/admin/sort-link-group/image/input");
+        pageComponent7.setMaterialUri("/admin/sort-link-group/image/data");
+        pageComponent7.setData(articleSectionData());
+        return pageComponent7;
+    }
+
+    private PageComponent instanceFullWidthImageComponent() {
+        PageComponent pageComponent6=new PageComponent();
+        pageComponent6.setName("全屏宽度图片模板1");
+        pageComponent6.setRemark("简单的全屏宽度图片。");
+        pageComponent6.setPreviewUri("/statics/page/included/lanzuan/full-width-image-1.preview.jsp");
+        pageComponent6.setWebsiteUri("/statics/page/included/lanzuan/full-width-image-1.jsp");
+        pageComponent6.setTemplateUri("/statics/page/included/component/template/full-width-image-1.html");
+        pageComponent6.setEditUri("/statics/page/included/lanzuan/full-width-image-1-edit.jsp");
+        pageComponent6.setVar("fullWidthImage");
+        pageComponent6.setDataUri("/full-width-image/home/data");
+        pageComponent6.setToggleUri("/admin/full-width-image/status-change");
+        pageComponent6.setDeleteUri("/admin/full-width-image/delete/");
+        pageComponent6.setMaterialUri("/admin/full-width-image/image/data");
+        pageComponent6.setListOperationUri("/admin/list-page/");
+        pageComponent6.setListDataUri("/admin/full-width-image/list/data");
+        pageComponent6.setSaveAsUri("/admin/full-width-image/save-as");
+        pageComponent6.setMaterialUploadUri("/admin/full-width-image/image/upload-input");
+        pageComponent6.setSaveUri("/admin/full-width-image/update");
+        pageComponent6.setData(fullWidthImage());
+        return pageComponent6;
+    }
+
+    private PageComponent instanceSortLinkGroupComponent() {
+        PageComponent pageComponent5=new PageComponent();
+        pageComponent5.setName("文章块组件1");
+        pageComponent5.setRemark("文章块组件，中等及以下屏幕每行显示一列文字；中等以上每行显示3列新闻。");
+        pageComponent5.setPreviewUri("/statics/page/included/lanzuan/article-section-1.preview.jsp");
+        pageComponent5.setWebsiteUri("/statics/page/included/lanzuan/article-section-1.jsp");
+        pageComponent5.setSaveAsUri("/admin/sort-link-group/save-as");
+        pageComponent5.setMaterialUploadUri("/admin/sort-link-group/image/input");
+        pageComponent5.setTemplateUri("/statics/page/included/component/template/article-section-1.html");
+        pageComponent5.setEditUri("/statics/page/included/lanzuan/article-section-1-edit.jsp");
+        pageComponent5.setVar("sortLinkGroup");
+        pageComponent5.setDataUri("/sort-link-group/data");
+        pageComponent5.setToggleUri("/admin/sort-link-group/status-change");
+        pageComponent5.setDeleteUri("/admin/sort-link-group/delete/");
+        pageComponent5.setSaveUri("/admin/sort-link-group/update");
+        pageComponent5.setListOperationUri("/admin/list-page/");
+        pageComponent5.setListDataUri("/admin/sort-link-group/list/data");
+        pageComponent5.setMaterialUri("/admin/sort-link-group/image/data");
+        pageComponent5.setData(sortLinkGroup());
+        return pageComponent5;
+    }
+
+    private PageComponent instanceImageTextBlockGroupComponent() {
+        PageComponent pageComponent4=new PageComponent();
+        pageComponent4.setName("蓝钻鼠标掠过类似手风琴模板1");
+        pageComponent4.setRemark("非标准bootstrap组件，需要依赖angularjs，效果为鼠标掠过按钮，在下方显示相应系列图片。在中等及以上屏幕每行显示4张图片，图片无边框效果；中等以下显示2张图片，图片带圆角相框效果。");
+        pageComponent4.setListOperationUri("/admin/list-page/");
+        pageComponent4.setListDataUri("/admin/image-text-block-group/list/data");
+        pageComponent4.setPreviewUri("/statics/page/included/lanzuan/collapse-image-title-text-1.preview.jsp");
+        pageComponent4.setWebsiteUri("/statics/page/included/lanzuan/collapse-image-title-text-1.jsp");
+        pageComponent4.setTemplateUri("/statics/page/included/component/template/collapse-image-title-text-1.html");
+        pageComponent4.setEditUri("/statics/page/included/lanzuan/collapse-image-title-text-1-edit.jsp");
+        pageComponent4.setVar("imageTextBlockGroup");
+        pageComponent4.setDataUri("/image-text-block-group/home/data");
+        pageComponent4.setToggleUri("/admin/image-text-block-group/status-change");
+        pageComponent4.setDeleteUri("/admin/image-text-block-group/delete/");
+        pageComponent4.setSaveUri("/admin/image-text-block-group/update");
+        pageComponent4.setSaveAsUri("/admin/image-text-block-group/save-as");
+        pageComponent4.setMaterialUploadUri("/admin/image-text-block-group/image/upload-input");
+        pageComponent4.setMaterialUri("/admin/image-text-block-group/image/data");
+        pageComponent4.setData(imageTextBlockGroup());
+        return pageComponent4;
+    }
+
+    private PageComponent instanceImageCardGroupComponent() {
+        PageComponent pageComponent3=new PageComponent();
+        pageComponent3.setName("图文卡片组模板1");
+        pageComponent3.setRemark("一组带文字的图标组，在任何尺寸屏幕下皆保持一行。");
+        pageComponent3.setPreviewUri("/statics/page/included/component/card-group/img-card-group-1.preview.jsp");
+        pageComponent3.setWebsiteUri("/statics/page/included/component/card-group/img-card-group-1.jsp");
+        pageComponent3.setTemplateUri("/statics/page/included/component/template/img-card-group-1.html");
+        pageComponent3.setEditUri("/statics/page/included/component/card-group/img-card-group-1-edit.jsp");
+        pageComponent3.setVar("cardGroup");
+        pageComponent3.setSaveUri("/admin/card-group/update");
+        pageComponent3.setDataUri("/card-group/home/data");
+        pageComponent3.setToggleUri("/admin/card-group/status-change");
+        pageComponent3.setDeleteUri("/admin/card-group/delete/");
+        pageComponent3.setListOperationUri("/admin/list-page/");
+        pageComponent3.setListDataUri("/admin/card-group/list/data");
+        pageComponent3.setSaveAsUri("/admin/card-group/save-as");
+        pageComponent3.setMaterialUploadUri("/admin/card-group/image/upload-input");
+        pageComponent3.setMaterialUri("/admin/card-group/images/data");
+        pageComponent3.setData(cardGroup());
+        return pageComponent3;
+    }
+
+    private PageComponent instanceCarouselComponent() {
+        PageComponent pageComponent2=new PageComponent();
+        pageComponent2.setName("响应式轮播图");
+        pageComponent2.setRemark("任何设备及屏幕都为全屏宽度。");
+        pageComponent2.setPreviewUri("/statics/page/included/component/carousel/carousel-full-width-1.preview.jsp");
+        pageComponent2.setWebsiteUri("/statics/page/included/component/carousel/carousel-full-width-1.jsp");
+        pageComponent2.setTemplateUri("/statics/page/included/component/template/carousel-full-width-1.html");
+        pageComponent2.setEditUri("/statics/page/included/component/carousel/carousel-full-width-1-edit.jsp");
+        pageComponent2.setVar("carousel");
+        pageComponent2.setDataUri("/carousel/home/data");
+        pageComponent2.setToggleUri("/admin/carousel/update");
+        pageComponent2.setDeleteUri("/admin/carousel/delete/");
+        pageComponent2.setSaveUri("/admin/carousel/insert-all");
+        pageComponent2.setListOperationUri("/admin/list-page/");
+        pageComponent2.setListDataUri("/admin/carousel/list/data");
+        pageComponent2.setSaveAsUri("/admin/carousel/save-as");
+        pageComponent2.setMaterialUploadUri("/admin/carousel/image/input");
+        pageComponent2.setMaterialUri("/admin/carousel-images/data");
+        pageComponent2.setData(carousel());
+        return pageComponent2;
+    }
+
+    private PageComponent instanceNavbarComponent() {
+        PageComponent pageComponent1=new PageComponent();
+        pageComponent1.setName("响应式导航条模板1");
+        pageComponent1.setRemark("在中等及更小屏幕上会固定底部显示。");
+        pageComponent1.setPreviewUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.preview.jsp");
+        pageComponent1.setWebsiteUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom.jsp");
+        pageComponent1.setTemplateUri("/statics/page/included/component/template/navbar-md-down-fix-bottom.html");
+        pageComponent1.setEditUri("/statics/page/included/component/navbar/navbar-md-down-fix-bottom-edit.jsp");
+        pageComponent1.setDataUri("/navbar/home/data");
+        pageComponent1.setVar("navBar");
+        pageComponent1.setToggleUri("/admin/navbar/status-change");
+        pageComponent1.setDeleteUri("/admin/navbar/delete/");
+        pageComponent1.setSaveUri("/admin/navbar/update");
+        pageComponent1.setListOperationUri("/admin/list-page/");
+        pageComponent1.setListDataUri("/admin/navbar/list/data");
+        pageComponent1.setSaveAsUri("/admin/navbar/save-as");
+        pageComponent1.setMaterialUploadUri("/admin/icon/upload-input");
+        pageComponent1.setMaterialUri("/admin/icons/data");
+        pageComponent1.setData(navbar());
+        return pageComponent1;
+    }
+
+    private PageComponent getByVar(String var, List<PageComponent> components) {
+        for (PageComponent component:components){
+            if (component.getVar()!=null&&component.getVar().equals(var)){
+                return component;
+            }
+        }
+        return null;
     }
 
 

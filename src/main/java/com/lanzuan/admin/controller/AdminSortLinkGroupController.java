@@ -60,7 +60,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
         if (article.getId()!=null&&!article.getId().trim().equals("")){
             article.setLastModifyDate(now);
 //            article.setLastModifyUser(getLoginUser(session));
-            articleService.update(article);
+            articleService.upsert(article);
         }else {
             article.setId(null);
             article.setDate(now);
@@ -220,7 +220,7 @@ public class AdminSortLinkGroupController extends BaseRestSpringController {
                 }
             }
         }
-        sortLinkGroupService.update(sortLinkGroup);
+        sortLinkGroupService.upsert(sortLinkGroup);
         message.setSuccess(true);
         message.setData(sortLinkGroup);
 

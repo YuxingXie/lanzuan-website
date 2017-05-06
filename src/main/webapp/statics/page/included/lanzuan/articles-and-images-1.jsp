@@ -22,7 +22,7 @@
         <ul class="text-primary m-l-10 p-l-0 small-90">
             <li ng-repeat="link in ${param.var}.articles.links" class="m-t-sm md-down-text-small-80">
                 <a ng-href="{{link.href}}">
-                    <img src="/statics/image/lanzuan/280-180/caomei.jpg" class="full-width" ng-if="link.image"/>
+                    <img ng-src="{{link.image}}" class="full-width" ng-if="link.image&&$first"/>
                     <span class="label bg-dark-grey color-grey-3  label-pill pull-right m-l-2em" ng-bind="link.date|date:'yy-MM-dd'"></span>
                     <span ng-bind="link.text"></span>
                 </a>

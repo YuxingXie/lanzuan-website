@@ -142,7 +142,7 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
         return getEntityDao().findPage(pageIndex);
     }
     @Override
-    public void update(E e){
+    public void upsert(E e){
         getEntityDao().upsert(e);
     }
     @Override

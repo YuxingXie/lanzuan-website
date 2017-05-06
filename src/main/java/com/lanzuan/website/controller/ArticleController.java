@@ -135,7 +135,7 @@ public class ArticleController extends BaseRestSpringController {
         article.setLastModifyDate(now);
         article.setByEditor(true);
         article.setUploader(getLoginAdministrator(session));
-        articleService.update(article);
+        articleService.upsert(article);
 
         return "redirect:/admin/article/list";
     }

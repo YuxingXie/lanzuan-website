@@ -25,4 +25,8 @@ public class ArticlesAndImagesService extends BaseEntityManager<ArticlesAndImage
         return this.articlesAndImagesDao;
     }
 
+    @Override
+    public ArticlesAndImages findByUri(String s) {
+        return articlesAndImagesDao.findByUri(s);
+    }
 }

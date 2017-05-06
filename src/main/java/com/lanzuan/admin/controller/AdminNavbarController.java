@@ -38,7 +38,7 @@ public class AdminNavbarController extends BaseRestSpringController {
         navbar.setLastModifyDate(new Date());
         if(navbar.getId()==null)
             navbar.setCreator(getLoginUser(session));
-        navbarService.update(navbar);
+        navbarService.upsert(navbar);
         message.setSuccess(true);
         message.setData(navbar);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
@@ -62,7 +62,7 @@ public class AdminNavbarController extends BaseRestSpringController {
         if (StringUtils.isNotBlank(navbar.getId())){
             Navbar old=navbarService.findById(navbar.getId());
 //            old.setEnabled(false);
-            navbarService.update(old);
+            navbarService.upsert(old);
             navbar.setEnabled(false);
             navbar.setId(null);
             navbarService.insert(navbar);

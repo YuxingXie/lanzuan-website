@@ -51,7 +51,7 @@ public class AdminCardGroupController extends BaseRestSpringController {
         }
         cardGroup.setLastModifyDate(now);
         cardGroup.setLastModifyUser(user);
-        cardGroupService.update(cardGroup);
+        cardGroupService.upsert(cardGroup);
         message.setSuccess(true);
         message.setData(cardGroup);
 

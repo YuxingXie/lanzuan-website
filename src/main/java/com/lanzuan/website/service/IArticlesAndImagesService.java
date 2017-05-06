@@ -12,4 +12,5 @@ import java.util.List;
 public interface IArticlesAndImagesService extends IBaseEntityManager<ArticlesAndImages> {
 
 
+    ArticlesAndImages findByUri(String s);
 }

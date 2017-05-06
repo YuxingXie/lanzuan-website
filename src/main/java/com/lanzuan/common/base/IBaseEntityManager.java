@@ -46,7 +46,7 @@ public interface IBaseEntityManager<E> {
 
    Page<E> findPage(int pageIndex);
 
-   void update(E e);
+   void upsert(E e);
    void update(E e,boolean ignoreNullValue);
 
    CommandResult runCommand(String s);

@@ -3,7 +3,9 @@ package com.lanzuan.website.dao;
 import com.lanzuan.common.base.BaseMongoDao;
 import com.lanzuan.entity.Article;
 import com.lanzuan.entity.ArticlesAndImages;
+import com.lanzuan.entity.Navbar;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
@@ -27,4 +29,10 @@ public class ArticlesAndImagesDao extends BaseMongoDao<ArticlesAndImages>  {
     @Resource
     private MongoOperations mongoTemplate;
 
+    public ArticlesAndImages findByUri(String uri) {
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("uri",uri);
+        dbObject.put("enabled",true);
+        return findOne(dbObject);
+    }
 }

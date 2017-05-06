@@ -63,7 +63,7 @@ public class AdminCanvasController extends BaseRestSpringController {
         }
         canvas.setLastModifyDate(now);
         canvas.setLastModifyUser(user);
-        canvasService.update(canvas);
+        canvasService.upsert(canvas);
         message.setSuccess(true);
         message.setData(canvas);
 

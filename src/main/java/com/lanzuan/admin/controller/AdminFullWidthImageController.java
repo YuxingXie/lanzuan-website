@@ -53,7 +53,7 @@ public class AdminFullWidthImageController extends BaseRestSpringController {
         }
         fullWidthImage.setLastModifyDate(now);
         fullWidthImage.setLastModifyUser(user);
-        fullWidthImageService.update(fullWidthImage);
+        fullWidthImageService.upsert(fullWidthImage);
         message.setSuccess(true);
         message.setData(fullWidthImage);
         return new ResponseEntity<Message>(message,HttpStatus.OK);

@@ -8,6 +8,7 @@ import com.lanzuan.common.util.StringUtils;
 import com.lanzuan.common.web.AngularEntityEditorBuilder;
 import com.lanzuan.common.web.CookieTool;
 import com.lanzuan.common.web.EntityFormBuilder;
+import com.lanzuan.entity.ArticlesAndImages;
 import com.lanzuan.entity.PageComponent;
 import com.lanzuan.entity.User;
 import com.lanzuan.entity.WebPage;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +56,8 @@ public class AdminController extends BaseRestSpringController {
     IArticleService articleService;
     @Resource(name = "webPageService")
     IWebPageService webPageService;
+    @Resource
+    IArticlesAndImagesService articlesAndImagesService;
 
 
 
@@ -102,6 +106,35 @@ public class AdminController extends BaseRestSpringController {
 
         return "redirect:/admin";
 
+    }
+    @RequestMapping(value = "/articles-images/save-as")
+    public ResponseEntity<Message> saveAs(@RequestBody ArticlesAndImages articlesAndImages,HttpSession session){
+        ArticlesAndImages old=articlesAndImagesService.findById(articlesAndImages.getId());
+        Message message=new Message();
+        articlesAndImages.setId(null);
+        articlesAndImages.setEnabled(false);
+//        cardGroup.setCreator(getLoginAdministrator(session));
+        articlesAndImages.setCreateDate(new Date());
+        articlesAndImagesService.insert(articlesAndImages);
+        message.setSuccess(true);
+        message.setData(old);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/articles-images/update")
+    public ResponseEntity<Message> update(@RequestBody ArticlesAndImages articlesAndImages,HttpSession session){
+        Message message=new Message();
+        Date now=new Date();
+        User user=getLoginUser(session);
+        if (articlesAndImages.getId()==null){
+            articlesAndImages.setCreator(user);
+        }
+        articlesAndImages.setLastModifyDate(now);
+        articlesAndImages.setLastModifyUser(user);
+        articlesAndImagesService.upsert(articlesAndImages);
+        message.setSuccess(true);
+        message.setData(articlesAndImages);
+
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/icons/data")
     public ResponseEntity<List<String>> getIcons(HttpServletRequest request) throws IOException {
@@ -179,10 +212,8 @@ public class AdminController extends BaseRestSpringController {
 
     @RequestMapping(value = "/page-component/edit/{pageComponentId}")
     public String editPageComponent(@PathVariable String pageComponentId,ModelMap model,HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        PageComponent s=new PageComponent();
-        s.setVar("articlesAndImages");
-        s.setWebsiteUri("");
-        PageComponent pageComponent=pageComponentService.findOne(s);
+
+        PageComponent pageComponent=pageComponentService.findById(pageComponentId);
         model.addAttribute("pageComponent", pageComponent);
 
         AngularEntityEditorBuilder angularEntityEditorBuilder=new AngularEntityEditorBuilder(pageComponent);

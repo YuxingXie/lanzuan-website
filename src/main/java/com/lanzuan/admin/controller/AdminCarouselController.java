@@ -67,7 +67,7 @@ public class AdminCarouselController extends BaseRestSpringController {
         }
         carousel.setLastModifyDate(now);
         carousel.setLastModifyUser(user);
-        carouselService.update(carousel);
+        carouselService.upsert(carousel);
 
         message.setSuccess(true);
         message.setData(carousel);

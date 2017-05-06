@@ -51,6 +51,8 @@ public class IndexController extends BaseRestSpringController {
     IFullWidthImageService fullWidthImageService;
     @Resource(name = "pageComponentService")
     private IPageComponentService pageComponentService;
+    @Resource
+    private IArticlesAndImagesService articlesAndImagesService;
 
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
@@ -87,9 +89,7 @@ public class IndexController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/articles-images/home/data")
     public ResponseEntity<ArticlesAndImages> getArticlesAndImages(){
-        ArticlesAndImages articlesAndImages=new ArticlesAndImages();
-        articlesAndImages.setArticles(sortLinkGroupService.findByUri("/home").getItems().get(0));
-        articlesAndImages.setImages(imageTextBlockGroupService.findByUri("/home").getItems().get(0));
+        ArticlesAndImages articlesAndImages=articlesAndImagesService.findByUri("/home");
         return new ResponseEntity<ArticlesAndImages>(articlesAndImages, HttpStatus.OK);
     }
     @RequestMapping(value = "/full-width-image/home/data")
