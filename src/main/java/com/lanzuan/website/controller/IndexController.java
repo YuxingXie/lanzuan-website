@@ -53,6 +53,8 @@ public class IndexController extends BaseRestSpringController {
     private IPageComponentService pageComponentService;
     @Resource
     private IArticlesAndImagesService articlesAndImagesService;
+    @Resource
+    private IBrandIconGroupService brandIconGroupService;
 
     @RequestMapping(value = "/home")
     public String  index(ModelMap map,HttpServletRequest request) throws ServletException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
@@ -140,6 +142,7 @@ public class IndexController extends BaseRestSpringController {
         Carousel carousel=carouselService.findCarouselByUri("/home");
         return new ResponseEntity<Carousel>(carousel, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/article/{id}")
     public String article(@PathVariable String id,ModelMap modelMap){
         Article article=articleService.increaseReadTimes(id);

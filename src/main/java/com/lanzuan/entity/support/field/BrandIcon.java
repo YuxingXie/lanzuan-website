@@ -11,8 +11,8 @@ public class BrandIcon {
     @Naming("品牌名称")
     @FormAttributes()
     private String brandName;
-    @Naming("品牌图标")
-    @FormAttributes()
+    @Naming("品牌链接(可能是外部链接)")
+    @FormAttributes(inputType = InputType.URL)
     private String brandUri;
     @Naming("品牌图标")
     @FormAttributes(inputType = InputType.IMAGE)

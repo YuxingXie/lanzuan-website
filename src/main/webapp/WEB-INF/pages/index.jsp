@@ -30,7 +30,7 @@
                     <c:param name="varU" value="${pageComponent.varU}"/>
                 </c:import>
             </c:forEach>
-            <jsp:include page="/statics/page/included/lanzuan/brand-icons.jsp"></jsp:include>
+            <%--<jsp:include page="/statics/page/included/lanzuan/brand-icons.jsp"></jsp:include>--%>
         </div>
 
         <div ng-include="'/statics/page/included/footer.jsp'"></div>

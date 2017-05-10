@@ -41,8 +41,10 @@ public class StartOnLoadService {
     private IUserService userService;
     @Resource(name = "articlesAndImagesService")
     private IArticlesAndImagesService articlesAndImagesService;
+    @Resource
+    private IBrandIconGroupService brandIconGroupService;
 //    private String[] componentVars={"navBar","carousel","cardGroup","imageTextBlockGroup","sortLinkGroup","fullWidthImage","bottomSortLinkGroup","services","articlesAndImages"};
-    private String[] componentVars={"navBar","carousel","services","articlesAndImages","fullWidthImage","bottomSortLinkGroup"};
+    private String[] componentVars={"navBar","carousel","services","articlesAndImages","fullWidthImage","brandIconGroup","bottomSortLinkGroup"};
     /**
      * Spring 容器初始化时加载
      */
@@ -198,6 +200,32 @@ public class StartOnLoadService {
 
         sortLinkGroupService.insert(sortLinkGroup);
         return sortLinkGroup;
+    }
+    private BrandIconGroup brandIconGroup() {
+        Date now=new Date();
+
+        BrandIconGroup brandIconGroup=new BrandIconGroup();
+        List<BrandIcon> brandIcons=new ArrayList<BrandIcon>();
+        BrandIcon brandIcon1=new BrandIcon();
+        brandIcon1.setBrandName("新浪科技");
+        brandIcon1.setBrandUri("http://www.sina.com");
+        brandIcon1.setIconUri("/statics/image/lanzuan/icons/foll2.gif");
+
+        BrandIcon brandIcon2=new BrandIcon();
+        brandIcon2.setBrandName("腾讯科技");
+        brandIcon2.setBrandUri("http://www.tencent.com");
+        brandIcon2.setIconUri("/statics/image/lanzuan/icons/foll1.gif");
+        brandIcons.add(brandIcon1);
+        brandIcons.add(brandIcon2);
+        brandIconGroup.setItems(brandIcons);
+        brandIconGroup.setUri("/home");
+        brandIconGroup.setCreateDate(now);
+        brandIconGroup.setName("默认方案");
+
+        brandIconGroup.setEnabled(true);
+
+        brandIconGroupService.insert(brandIconGroup);
+        return brandIconGroup;
     }
     private ImageTextBlockGroup services() {
         logger.info("初始化图文块。。。");
@@ -685,7 +713,10 @@ public class StartOnLoadService {
 //            PageComponent pageComponent5 = instanceByVar("sortLinkGroup");
             PageComponent pageComponent6 = instanceByVar("fullWidthImage");
             PageComponent pageComponent7 = instanceByVar("bottomSortLinkGroup");
+            PageComponent pageComponent10 = instanceByVar("brandIconGroup");
+
             PageComponent pageComponent8 = instanceByVar("services");
+
             PageComponent pageComponent9 = instanceByVar("articlesAndImages");
 
             List<PageComponent> pageComponentList=new ArrayList<PageComponent>();
@@ -698,6 +729,7 @@ public class StartOnLoadService {
             pageComponentList.add(pageComponent9);
             pageComponentList.add(pageComponent6);
             pageComponentList.add(pageComponent7);
+            pageComponentList.add(pageComponent10);
 
             webPage.setPageComponents(pageComponentList);
             webPage.setUri("/home");
@@ -710,6 +742,7 @@ public class StartOnLoadService {
 //            pageComponent5.setData(articleSectionData());
             pageComponent6.setData(fullWidthImage());
             pageComponent7.setData(sortLinkGroup());
+            pageComponent10.setData(brandIconGroup());
             pageComponent8.setData(services());
             pageComponent9.setData(articlesAndImages());
 
@@ -735,6 +768,9 @@ public class StartOnLoadService {
             }else{
                 logger.info("新的组件 "+var+" 排序为"+index);
                 component=instanceByVar(var);
+                if (component==null){
+                    continue;
+                }
                 pageComponentService.insert(component);
             }
             rebuildComponents.add(component);
@@ -765,12 +801,30 @@ public class StartOnLoadService {
                     return instanceServicesComponent();
                 }else if(currentVar.equals("articlesAndImages")){
                     return instanceArticlesAndImagesComponent();
+                }else if(currentVar.equals("brandIconGroup")){
+                    return instanceBrandIconGroupComponent();
                 }else {
                     return null;
                 }
             }
         }
         return null;
+    }
+
+    private PageComponent instanceBrandIconGroupComponent() {
+        PageComponent pageComponent9=new PageComponent();
+        pageComponent9.setWebsiteUri("/statics/page/included/lanzuan/brand-icons.jsp");
+        pageComponent9.setName("品牌图标组");
+        pageComponent9.setRemark("多用作企业宣传");
+
+        pageComponent9.setVar("brandIconGroup");
+        pageComponent9.setDataUri("/api/website/brand-icon-group");
+        pageComponent9.setMaterialUploadUri("/admin/brand-icon-group/image/upload-input");
+        pageComponent9.setMaterialUri("/admin/brand-icon-group/image/data");
+        pageComponent9.setSaveAsUri("/admin/brand-icon-group/save-as");
+        pageComponent9.setSaveUri("/admin/brand-icon-group/update");
+        pageComponent9.setData(brandIconGroup());
+        return pageComponent9;
     }
 
     private PageComponent instanceArticlesAndImagesComponent() {

@@ -33,6 +33,7 @@ public class BrandIconGroup extends RootItem{
     private boolean enabled;
 
     private Date lastModifyDate;
+    private String uri;
     @DBRef
     private User creator;
     @DBRef
@@ -42,7 +43,7 @@ public class BrandIconGroup extends RootItem{
     private List<BrandIcon> items;
     @DBRef
     private PageComponent pageComponent;
-
+    private Date createDate;
     @Override
     public List<String> remarks() {
         return null;
@@ -123,6 +124,22 @@ public class BrandIconGroup extends RootItem{
 
     public void setItems(List<BrandIcon> items) {
         this.items = items;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     @Override

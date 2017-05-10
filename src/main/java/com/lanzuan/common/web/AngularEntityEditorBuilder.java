@@ -79,8 +79,8 @@ public class AngularEntityEditorBuilder {
             merge(javaScript,getterMethodsJavascript);
     }
     private void buildGetMethod() {
-        getterMethodsJavascript.append("\n;$scope.get" + pageComponent.getVarU() + "=function(){");
-        getterMethodsJavascript.append("\n $http.get('" + pageComponent.getDataUri() + "').success(function (data) {");
+        getterMethodsJavascript.append("\n$scope.get" + pageComponent.getVarU() + "=function(){");
+        getterMethodsJavascript.append("\n$http.get('" + pageComponent.getDataUri() + "').success(function (data) {");
         getterMethodsJavascript.append("\n$scope." + pageComponent.getVar() + "=data;");
         getterMethodsJavascript.append("\n});");
         getterMethodsJavascript.append("\n}");
@@ -89,7 +89,7 @@ public class AngularEntityEditorBuilder {
         oldStringBuffer.append(newStringBuffer);
     }
     private void buildInitAdminMethod() {
-        javaScript.append("\n;$scope.initAdmin=function(){");
+        javaScript.append("\n$scope.initAdmin=function(){");
         javaScript.append("\n$scope.getMenu();");
         javaScript.append("\n$scope.editable=false;");
         javaScript.append("\n}");
@@ -101,7 +101,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildDeleteItemMethod() {
-        javaScript.append("\n;$scope.delete"+pageComponent.getVarU()+"=function(component){");
+        javaScript.append("\n$scope.delete"+pageComponent.getVarU()+"=function(component){");
         javaScript.append("\nif(!confirm(\"确定删除?\")) return ;");
         javaScript.append("\n$http.post(\""+pageComponent.getDeleteUri()+"\"+component.id,JSON.stringify(component)).success(function (data) {");
         javaScript.append("\n$scope."+pageComponent.getVar()+"List=data;");
@@ -109,14 +109,14 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildToggleMethod() {
-        javaScript.append("\n;$scope."+pageComponent.getVar()+"Toggle=function(component){");
+        javaScript.append("\n$scope."+pageComponent.getVar()+"Toggle=function(component){");
         javaScript.append("\n $http.post(\""+pageComponent.getToggleUri()+"\",JSON.stringify(component)).success(function (data) {");
         javaScript.append("\n $scope."+pageComponent.getVar()+"List=data;");
         javaScript.append("\n}); }");
     }
 
     private void buildGetListMethod() {
-        javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"List=function(){");
+        javaScript.append("\n$scope.get"+pageComponent.getVarU()+"List=function(){");
         javaScript.append("\n $http.get(\""+pageComponent.getListDataUri()+"\").success(function (data) {");
         javaScript.append("\n $scope."+pageComponent.getVar()+"List=data;");
         javaScript.append("\n});}");
@@ -124,19 +124,20 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildRemoveItemMethod() {
-        javaScript.append("\n;$scope.remove"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\n$scope.remove"+pageComponent.getVarU()+"Item=function(index){");
         javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,1);");
+        javaScript.append("\nconsole.log(index);");
         javaScript.append("\n}");
     }
 
     private void buildInsertItemTopMethod() {
-        javaScript.append("\n;$scope.insert"+pageComponent.getVarU()+"ItemBefore=function(index){");
+        javaScript.append("\n$scope.insert"+pageComponent.getVarU()+"ItemBefore=function(index){");
         javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,0,{});");
         javaScript.append("\n}");
     }
 
     private void buildBackwardItemMethod() {
-        javaScript.append("\n;$scope.backward"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\n$scope.backward"+pageComponent.getVarU()+"Item=function(index){");
         javaScript.append("\nvar item=$scope."+pageComponent.getVar()+".items[index];");
         javaScript.append("\n $scope."+pageComponent.getVar()+".items.splice(index,1);");
         javaScript.append("\n $scope."+pageComponent.getVar()+".items.splice(index+1,0,item);");
@@ -144,7 +145,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildForwardItemMethod() {
-        javaScript.append("\n;$scope.forward"+pageComponent.getVarU()+"Item=function(index){");
+        javaScript.append("\n$scope.forward"+pageComponent.getVarU()+"Item=function(index){");
         javaScript.append("\nvar item=$scope."+pageComponent.getVar()+".items[index];");
         javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index,1);");
         javaScript.append("\n$scope."+pageComponent.getVar()+".items.splice(index-1,0,item);");
@@ -152,7 +153,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildSaveAsMethod() {
-        javaScript.append("\n;$scope.new"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n$scope.new"+pageComponent.getVarU()+"=function(){");
         javaScript.append("\nvar name = window.prompt(\"请给方案命名\",\"新方案名\");");
         javaScript.append("\nif(!name) return;");
         javaScript.append("\n$scope."+pageComponent.getVar()+".name=name;");
@@ -165,7 +166,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildUpdateMethod() {
-        javaScript.append("\n;$scope.save"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n$scope.save"+pageComponent.getVarU()+"=function(){");
 //        javaScript.append("\n$http.post(\""+pageComponent.getSaveUri()+"\",JSON.stringify($scope."+pageComponent.getVar()+")).success(function (message) {");
         javaScript.append("\n$http.post(\""+pageComponent.getSaveUri()+"\",JSON.stringify($scope."+pageComponent.getVar()+")).success(function (message) {");
         javaScript.append("\n$scope."+pageComponent.getVar()+"=message.data;");
@@ -177,7 +178,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildGetMaterialMethod() {
-        javaScript.append("\n;$scope.get"+pageComponent.getVarU()+"Material=function(){");
+        javaScript.append("\n$scope.get"+pageComponent.getVarU()+"Material=function(){");
         javaScript.append("\n $http.get('"+pageComponent.getMaterialUri()+"').success(function (data) {");
         javaScript.append("\n $scope."+pageComponent.getVar()+"Images=data;");
         javaScript.append("\n});");
@@ -185,7 +186,7 @@ public class AngularEntityEditorBuilder {
     }
 
     private void buildResetMethod() {
-        javaScript.append("\n;$scope.reset"+pageComponent.getVarU()+"=function(){");
+        javaScript.append("\n$scope.reset"+pageComponent.getVarU()+"=function(){");
         javaScript.append("\n $scope.get"+pageComponent.getVarU()+"();");
         javaScript.append("\n}");
     }
@@ -387,16 +388,16 @@ public class AngularEntityEditorBuilder {
     }
     //点号隔开的上下文用驼峰表示法
     private String genContextCamelU(String context) {
-        if (context.indexOf(".")==-1) return context;
+        if (context.indexOf(".")==-1) return StringUtils.firstUpperCase(context);
             String[] contexts=context.split("\\.");
             String camel="";
             for (String str:contexts){
                 camel+= StringUtils.firstUpperCase(str);
             }
-            return camel;
+            return StringUtils.firstUpperCase(camel);
     }
     private String genContextCamelL(String context) {
-        if (context.indexOf(".")==-1) return context;
+        if (context.indexOf(".")==-1) return StringUtils.firstLowerCase(context);
         String[] contexts=context.split("\\.");
         String camel="";
         for (String str:contexts){
@@ -474,6 +475,7 @@ public class AngularEntityEditorBuilder {
     private void buildRemoveSubItemMethod(String context, String fieldName) {
         String fnArgument=genContextCamelL(context);
         javaScript.append("\n$scope.remove"+ genContextCamelU(context)+"Item=function("+fnArgument+",index){");
+
         javaScript.append("\n "+fnArgument+"."+fieldName+".splice(index,1);");
         javaScript.append("\n}");
     }

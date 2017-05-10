@@ -12,6 +12,7 @@ public class Constant {
     public static final String FULL_WIDTH_IMAGE_DIR ="/statics/image/upload/lanzuan/full-width";
     public static final String CAROUSEL_IMAGE_DIR ="/statics/image/upload/carousel";
     public static final String CARD_GROUP_IMAGE_DIR ="/statics/image/upload/cardGroup";
+    public static final String BRAND_ICON_GROUP_IMAGE_DIR = "/statics/image/upload/brandIconGroup";
     public static final String ARTICLE_COVER_IMAGE_DIR ="/statics/image/upload/articleCover";
     public static final String U_EDITOR_FILE_UPLOAD_DIR ="/statics/ue/upload/file";
     public static final String U_EDITOR_IMAGE_UPLOAD_DIR ="/statics/ue/upload/image";
