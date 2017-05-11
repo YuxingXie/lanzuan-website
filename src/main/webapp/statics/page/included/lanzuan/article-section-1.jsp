@@ -8,7 +8,7 @@
             </h4>
             <a ng-if="sortLink.image" target="_blank" href="{{sortLink.imageHref}}"><img ng-src="{{sortLink.image}}"
                                                                                          class="col-xs-12 p-t-1em"/></a>
-            <a href="/website/article/list" class="col-xs-4 green-link" ng-if="sortLink.links">
+            <a href="/article/list" class="col-xs-4 green-link" ng-if="sortLink.links">
                 <span class="large-110">More</span>
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-1x"></i><i

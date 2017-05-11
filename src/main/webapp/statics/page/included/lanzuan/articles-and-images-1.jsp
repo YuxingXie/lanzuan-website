@@ -7,7 +7,7 @@
             <div class="large-120 inline xl-large-180 lg-large-165 md-large-150 sm-large-135">
                 <span ng-bind="${param.var}.articles.sortName"></span>
             </div>
-            <a href="/website/article/list" class="green-link md-down-pull-right p-r-sm" ng-if="${param.var}.articles.links">
+            <a href="/article/list" class="green-link md-down-pull-right p-r-sm" ng-if="${param.var}.articles.links">
                 <span class="large-110">More</span>
             <span class="fa-stack">
                 <i class="fa fa-circle fa-stack-1x"></i>

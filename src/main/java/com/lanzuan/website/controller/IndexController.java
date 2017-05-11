@@ -154,9 +154,11 @@ public class IndexController extends BaseRestSpringController {
         return "website/article/article";
     }
     @RequestMapping(value = "/article/list")
-    public String articleList(){
+    public String articleList(ModelMap map){
 
-        return "website/article/article-list";
+        PageComponent<Navbar> pageComponent=pageComponentService.findByRegex("var","navBar").get(0);
+        map.addAttribute("pageComponent",pageComponent);
+        return "website/article/list";
     }
     @RequestMapping(value = "/article/list/data")
     public ResponseEntity<List<Article>> getAllArts(){

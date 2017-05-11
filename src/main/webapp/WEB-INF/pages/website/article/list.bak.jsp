@@ -71,104 +71,104 @@
     </ol>
     <div class="container-fluid " ng-init="getArticles()">
         <div class="row p-a-0">
-            <div class="col-xs-12 col-md-10 col-md-push-1">
-                <div class="col-xs-12">
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/zfdl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <ul class="tabs p-a-sm">
-                        <li>
-                            <label>热点新闻</label>
-
-                        </li>
-
-                        <li>
-
-                            <label>公司通告</label>
-
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="list-group">
-                    <div class="col-xs-12 list-group-item">
-                        <div class="col-md-4 col-xs-12">
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="img-responsive"/>
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/zfdl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
                         </div>
-                        <div class="col-md-8 col-xs-12">
-                            <div class="card">
-                                <div class="card-header"><a href="/">乔布斯会见谢建</a></div>
-                                <div class="card-block">
-                                    <div class="card-text">
-                                        乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    <span class="">2012-05-05</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 list-group-item">
-                        <div class="col-md-4 col-xs-12">
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-xs-12">
-                            <div class="card">
-                                <div class="card-header">乔布斯会见谢建</div>
-                                <div class="card-block">
-                                    乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                                </div>
-                                <div class="card-footer">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    <span class="">2012-05-05</span>
-                                </div>
-                            </div>
-
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
                         </div>
                     </div>
                 </div>
-
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
+                        </div>
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="col-xs-12">
+                <ul class="tabs p-a-sm">
+                    <li>
+                        <label>热点新闻</label>
+
+                    </li>
+
+                    <li>
+
+                        <label>公司通告</label>
+
+                    </li>
+                </ul>
+                <div class="tab-content active in">
+                    <div class="row border-b-s-silver hover-bg-grey p-t" ng-repeat="article in pagination.data" ng-class="{'border-t-s-silver':$first}">
+                        <div class="col-xs-12 p-b-xs">
+                            <a ng-href="/article/{{article.id}}" ng-bind="article.title"></a>
+                        </div>
+
+                        <div class="col-xs-12 img-hidden" style="height: 4em;overflow: hidden;">
+
+                            <small ng-bind-html="article.content| to_trusted"></small>
+                        </div>
+                        <div class="col-xs-12  small-90 text-right">
+
+                            <i ng-if="article.date">{{article.date|date:'yyyy-MM-dd'}}</i>
+                            阅读:{{article.readTimes}}次 <a ng-href="/article/{{article.id}}" target="_blank">[详细]</a>
+                        </div>
+
+                    </div>
+                    <nav class="pull-right">
+                        <ul class="pagination">
+                            <li ng-if="pagination.times>1">
+                                <a href="#" aria-label="Previous" ng-click="prevPage()">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li  ng-class="{'active':($index)+(pagination.times-1)*pagination.displayable===pagination.active}" ng-if="$index+1<=pagination.displayable&&($index+1)+(pagination.times-1)*pagination.displayable<=pagination.totalPage" ng-repeat="page in pagination.pages track by $index">
+                                <a href="#" ng-bind="($index+1)+(pagination.times-1)*pagination.displayable" ng-click="toPage(($index+1)+(pagination.times-1)*pagination.displayable)"></a>
+                            </li>
+                            <li ng-if="pagination.pages&&pagination.pages.length&&pagination.pages.length>pagination.displayable&&pagination.displayable*pagination.times<=pagination.pages.length">
+                                <a href="#" aria-label="Next" ng-click="nextPage()">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+
+
+
+
 
 
         </div>

@@ -1,5 +1,7 @@
 package com.lanzuan.entity;
 
+import com.lanzuan.entity.support.Item;
+import com.lanzuan.entity.support.LeafItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 @Document(collection = "article")
-public class Article {
+public class Article extends LeafItem {
     @Id
     private String id;
     private String title;
@@ -15,6 +17,8 @@ public class Article {
     private String content;
     private int praises;
     private int readTimes;
+    private String synopsis;//摘要
+    private boolean sticky;//置顶
     /**
      * 可能某些文章不使用文字标题，而可能是一张图片作为封面
      * 如果仅仅为了展示封面图片，此文章可以没有内容、标题等等其它属性
@@ -122,5 +126,15 @@ public class Article {
 
     public void setByEditor(boolean byEditor) {
         this.byEditor = byEditor;
+    }
+
+    @Override
+    public Integer repeatLimit() {
+        return null;
+    }
+
+    @Override
+    public Item parent() {
+        return null;
     }
 }
