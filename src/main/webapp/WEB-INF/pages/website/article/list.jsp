@@ -65,56 +65,57 @@
         <c:param name="var" value="${pageComponent.var}" />
         <c:param name="varU" value="${pageComponent.varU}"/>
     </c:import>
-    <ol class="breadcrumb hidden-md-down">
+    <ol class="breadcrumb hidden-md-down p-l-xl">
         <li class="small">蓝钻科技</li>
         <li class="small active">新闻中心</li>
     </ol>
     <div class="container-fluid " ng-init="getArticles()">
-        <div class="row p-a-0">
-            <div class="col-xs-12 col-md-10 col-md-push-1">
-                <div class="col-xs-12">
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-md-10 col-md-push-1 bg-white">
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
+                        </div>
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/zfdl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/zfdl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
+                        </div>
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="card">
-                            <div class="card-header">乔布斯会见谢建</div>
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
-                            <div class="card-block">
-                                乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                            </div>
-                            <div class="card-footer">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="">2012-05-05</span>
-                            </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">乔布斯会见谢建</div>
+                        <img src="/statics/image/lanzuan/cydl.jpg" class="card-img full-width"/>
+                        <div class="card-block">
+                            乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
+                        </div>
+                        <div class="card-footer">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="">2012-05-05</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <ul class="tabs p-a-sm">
+                    <ul class="tabs p-a-0">
                         <li>
                             <label>热点新闻</label>
 
@@ -128,32 +129,31 @@
                     </ul>
 
                 </div>
-                <div class="list-group">
-                    <div class="col-xs-12 list-group-item">
-                        <div class="col-md-4 col-xs-12">
-                            <img src="/statics/image/lanzuan/cydl.jpg" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-xs-12">
-                            <div class="card">
-                                <div class="card-header"><a href="/">乔布斯会见谢建</a></div>
-                                <div class="card-block">
-                                    <div class="card-text">
-                                        乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
-                                    </div>
+                <div class="col-xs-12 border-t-s-silver p-y-md">
+                    <div class="col-md-4 col-xs-12">
+                        <img src="/statics/image/lanzuan/cydl.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+                        <div class="card m-t-xs">
+                            <div class="card-header"><a href="/">乔布斯会见谢建</a></div>
+                            <div class="card-block">
+                                <div class="card-text">
+                                    乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
                                 </div>
-                                <div class="card-footer">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    <span class="">2012-05-05</span>
-                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-thumbs-up"></i>
+                                <span class="">2012-05-05</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 list-group-item">
+                </div>
+                <div class="col-xs-12 border-t-s-silver p-y-md">
                         <div class="col-md-4 col-xs-12">
                             <img src="/statics/image/lanzuan/cydl.jpg" class="img-responsive"/>
                         </div>
                         <div class="col-md-8 col-xs-12">
-                            <div class="card">
+                            <div class="card m-t-xs">
                                 <div class="card-header">乔布斯会见谢建</div>
                                 <div class="card-block">
                                     乔布斯会见谢建乔布斯会见谢建,乔布斯会见谢建，乔布斯会见谢建，乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建乔布斯会见谢建。
@@ -166,7 +166,7 @@
 
                         </div>
                     </div>
-                </div>
+
 
             </div>
 
