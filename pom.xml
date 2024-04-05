@@ -31,6 +31,13 @@
         </snapshotRepository>
     </distributionManagement>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>javax</groupId>-->
+<!--            <artifactId>javaee-api</artifactId>-->
+<!--            <version>1.4</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -319,16 +326,16 @@
         <!--<version>3.0-JBoss-4.0.2</version>-->
         <!--</dependency>-->
         <!--baidu ueditor begin-->
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>json</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>ueditor</artifactId>
-            <version>1.1.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baidu</groupId>-->
+<!--            <artifactId>json</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.baidu</groupId>-->
+<!--            <artifactId>ueditor</artifactId>-->
+<!--            <version>1.1.2</version>-->
+<!--        </dependency>-->
         <!--baidu ueditor end-->
         <dependency>
             <groupId>avalon-framework</groupId>
@@ -346,6 +353,12 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
         </dependency>
         <!-- 支付宝依赖end-->
     </dependencies>
